@@ -151,3 +151,20 @@ def test_exact_qp_matches_bruteforce():
             assert np.linalg.norm(u - u_nom) <= np.linalg.norm(best - u_nom) + 1e-4
         n_feasible_cases = locals().get("n_feasible_cases", 0) + (t == 0.0)
     assert n_feasible_cases >= 5
+
+
+def test_exact_qp_near_parallel_rows_finite():
+    """Regression (smoke attempt 2 NaN): near-duplicate neighbour rows must not produce NaN."""
+    from control.cbf import solve_exact
+    f = jax.jit(lambda a, l, u: solve_exact(a, l, u, PRM))
+    rng = np.random.default_rng(1)
+    for _ in range(200):
+        base = rng.normal(size=2)
+        A = base[None] + rng.normal(size=(14, 2)) * 10.0 ** rng.uniform(-8, -3)
+        A /= np.linalg.norm(A, axis=1, keepdims=True)
+        A[8:] = rng.normal(size=(6, 2))
+        A[8:] /= np.linalg.norm(A[8:], axis=1, keepdims=True)
+        lo = rng.uniform(-3, 1, size=14)
+        u, t, _ = f(jnp.asarray(A, jnp.float32), jnp.asarray(lo, jnp.float32),
+                    jnp.asarray(rng.uniform(-6, 6, 2), jnp.float32))
+        assert np.all(np.isfinite(np.asarray(u))) and np.isfinite(float(t))

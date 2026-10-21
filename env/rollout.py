@@ -101,6 +101,8 @@ def summarize(logs, scenario, dt_exec, c_w=1.0):
     slack = np.asarray(logs["slack_max"])
     p5 = np.asarray(logs["p5_sep_pairs"])
     out = {
+        "nan_position_entries": int(np.isnan(pos).sum()),
+        "qp_nan_fallbacks": int((np.asarray(logs["qp_iters"]) < 0).sum()),
         "completeness_final": float(frac[-1]),
         "arrived_frac_max": float(frac.max()),
         "t_first_90pct": float(t[np.argmax(frac >= 0.9)]) if (frac >= 0.9).any() else None,

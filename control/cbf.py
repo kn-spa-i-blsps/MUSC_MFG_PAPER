@@ -167,9 +167,18 @@ import itertools
 
 import numpy as _np
 
+DET_EPS = 1e-6
+
 
 def _combos(n, r):
     return jnp.asarray(_np.array(list(itertools.combinations(range(n), r)), dtype=_np.int32))
+
+
+def _finite(c):
+    """Sanitize enumerated candidates: non-finite / huge -> sentinel far outside the box (never
+    feasible, never NaN-producing: a NaN candidate would otherwise win jnp.argmin)."""
+    ok = jnp.all(jnp.isfinite(c) & (jnp.abs(c) < LOOSE), axis=-1, keepdims=True)
+    return jnp.where(ok, c, LOOSE)
 
 
 def solve_exact(A_c, lo_c, u_nom, prm: CBFParams):
@@ -186,18 +195,18 @@ def solve_exact(A_c, lo_c, u_nom, prm: CBFParams):
     # ---- phase 1 ----
     tri = _combos(C, 3)
     M3 = jnp.concatenate([A_c[tri], jnp.ones(tri.shape + (1,))], -1)         # (T,3,3)
-    ok3 = (jnp.abs(jnp.linalg.det(M3)) > 1e-9) & jnp.all(active[tri], -1)
+    ok3 = (jnp.abs(jnp.linalg.det(M3)) > DET_EPS) & jnp.all(active[tri], -1)
     sol3 = jnp.linalg.solve(jnp.where(ok3[:, None, None], M3, jnp.eye(3)), lo_c[tri][..., None])[..., 0]
     pr = _combos(C, 2)
-    cands = [jnp.where(ok3[:, None], sol3[:, :2], 0.0)]
+    cands = [_finite(jnp.where(ok3[:, None], sol3[:, :2], 0.0))]
     for f in range(4):
         M2 = jnp.concatenate([jnp.concatenate([A_c[pr], jnp.ones(pr.shape + (1,))], -1),
                               jnp.broadcast_to(jnp.concatenate([box_a[f], jnp.zeros(1)])[None, None],
                                                (pr.shape[0], 1, 3))], 1)    # (P,3,3)
         rhs = jnp.concatenate([lo_c[pr], jnp.full((pr.shape[0], 1), box_b[f])], 1)
-        okf = (jnp.abs(jnp.linalg.det(M2)) > 1e-9) & jnp.all(active[pr], -1)
+        okf = (jnp.abs(jnp.linalg.det(M2)) > DET_EPS) & jnp.all(active[pr], -1)
         s = jnp.linalg.solve(jnp.where(okf[:, None, None], M2, jnp.eye(3)), rhs[..., None])[..., 0]
-        cands.append(jnp.where(okf[:, None], s[:, :2], 0.0))
+        cands.append(_finite(jnp.where(okf[:, None], s[:, :2], 0.0)))
     cands.append(jnp.array([[ub, ub], [ub, -ub], [-ub, ub], [-ub, -ub]]))
     cands.append(jnp.clip(u_nom, -ub, ub)[None])
     U1 = jnp.clip(jnp.concatenate(cands, 0), -ub, ub)
@@ -211,13 +220,15 @@ def solve_exact(A_c, lo_c, u_nom, prm: CBFParams):
     proj = u_nom[None] + (Lb - La @ u_nom)[:, None] * La                    # |a| = 1 rows
     pp = _combos(C + 4, 2)
     M = La[pp]                                                              # (P,2,2)
-    okv = (jnp.abs(jnp.linalg.det(M)) > 1e-9) & jnp.all(Lact[pp], -1)
+    okv = (jnp.abs(jnp.linalg.det(M)) > DET_EPS) & jnp.all(Lact[pp], -1)
     vert = jnp.linalg.solve(jnp.where(okv[:, None, None], M, jnp.eye(2)), Lb[pp][..., None])[..., 0]
-    U2 = jnp.concatenate([u_nom[None], jnp.where(Lact[:, None], proj, 1e9),
-                          jnp.where(okv[:, None], vert, 1e9)], 0)
+    U2 = _finite(jnp.concatenate([u_nom[None], jnp.where(Lact[:, None], proj, LOOSE),
+                                  jnp.where(okv[:, None], vert, LOOSE)], 0))
     tol = 1e-5
     feas = (jnp.all((U2 @ La.T - Lb[None] >= -tol) | ~Lact[None], axis=1))
     dist = jnp.where(feas, jnp.sum((U2 - u_nom[None]) ** 2, -1), jnp.inf)
     best = jnp.argmin(dist)
     u = jnp.where(jnp.isfinite(dist[best]), U2[best], U1[jnp.argmin(viol(U1))])
-    return u, t_star, jnp.sum(feas)
+    bad = ~jnp.all(jnp.isfinite(u))                       # last line of defence; logged
+    u = jnp.where(bad, jnp.clip(u_nom, -ub, ub), u)
+    return u, t_star, jnp.where(bad, -1, jnp.sum(feas))
