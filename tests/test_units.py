@@ -122,3 +122,32 @@ def test_single_agent_reaches_and_holds_goal():
     assert first * 0.01 < 0.5 * grid.horizon
     assert np.all(series["r_goal_dist"][first:, 0] <= sc.r_goal), "left the goal region after arrival"
     assert m["completeness_final"] == 1.0
+
+
+def test_exact_qp_matches_bruteforce():
+    """Exact 2-D solver vs dense grid search on random QPs (feasible and infeasible)."""
+    from control.cbf import solve_exact, LOOSE
+    rng = np.random.default_rng(0)
+    g = np.linspace(-PRM.u_box, PRM.u_box, 801)
+    G = np.stack(np.meshgrid(g, g, indexing="ij"), -1).reshape(-1, 2)
+    f = jax.jit(lambda a, l, u: solve_exact(a, l, u, PRM))
+    for trial in range(30):
+        C = 14
+        A = rng.normal(size=(C, 2))
+        A /= np.linalg.norm(A, axis=1, keepdims=True)
+        lo = rng.uniform(-4.0, 1.5 if trial % 3 else 4.0, size=C)
+        A[10:] = 0.0
+        lo[10:] = -LOOSE
+        u_nom = rng.uniform(-6, 6, size=2)
+        u, t, _ = f(jnp.asarray(A), jnp.asarray(lo), jnp.asarray(u_nom))
+        u, t = np.asarray(u), float(t)
+        v = np.max(np.maximum(lo[None, :10] - G @ A[:10].T, 0.0), axis=1)
+        assert t <= v.min() + 1e-3                              # minimal uniform violation
+        assert np.all(A[:10] @ u >= lo[:10] - t - 1e-4)          # feasible for relaxed rows
+        assert np.all(np.abs(u) <= PRM.u_box + 1e-6)
+        if t == 0.0:                                             # hard QP feasible: exact projection
+            ok = v == 0.0
+            best = G[ok][np.argmin(np.sum((G[ok] - u_nom) ** 2, 1))]
+            assert np.linalg.norm(u - u_nom) <= np.linalg.norm(best - u_nom) + 1e-4
+        n_feasible_cases = locals().get("n_feasible_cases", 0) + (t == 0.0)
+    assert n_feasible_cases >= 5
