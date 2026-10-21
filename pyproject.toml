@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "musc-mfg-paper"
+version = "0.1.0"
+description = "Project A: decentralized MFG routing + hard CBF for a TDMA swarm, with delay compensation"
+requires-python = ">=3.10"
+dependencies = [
+    "jax",
+    "jaxlib",
+    "numpy",
+    "matplotlib",
+    "imageio",
+    "pyyaml",
+    "pytest",
+    "jaxopt",
+]
+
+[tool.setuptools.packages.find]
+include = ["mfg*", "control*", "compensation*", "env*", "experiments*", "viz*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
