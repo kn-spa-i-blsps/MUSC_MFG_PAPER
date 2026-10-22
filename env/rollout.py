@@ -55,12 +55,19 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
         d = dfull[iu] if N > 1 else jnp.full((1,), jnp.inf)                     # unique pairs
         nn = jnp.min(jnp.where(jnp.eye(N, dtype=bool), jnp.inf, dfull), axis=1)  # per-agent NN dist
         rho_true, _ = local_density_and_grad(positions, jnp.broadcast_to(positions[None], (N, N, 2)), N)
+        # estimation error of x_hat (TRUE positions), safety-relevant pairs (true d < 1 m) and all pairs
+        e2 = jnp.sum((x_hat - positions[None]) ** 2, -1)
+        offd = ~jnp.eye(N, dtype=bool)
+        near = offd & (dfull < 1.0)
+        xhat_err_near = jnp.sum(jnp.where(near, e2, 0.0)) / jnp.maximum(jnp.sum(near), 1)
+        xhat_err_all = jnp.sum(jnp.where(offd, e2, 0.0)) / (N * (N - 1))
         y = {"pos": positions, "u": u, "u_nom": u_nom,
              "n_coll_pairs": jnp.sum(d < D_COLLISION), "min_sep": jnp.min(d),
              "p5_sep_pairs": jnp.percentile(nn, 5.0),
              "slack_max": info["slack_max"], "slack_hard": info["slack_hard"], "intervention": info["intervention"],
              "qp_iters": info["qp_iters"], "row_violation": info["row_violation"],
-             "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true}
+             "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true,
+             "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all}
         return (positions_new, history, key, warm), y
 
     def run_arrays(key, arrays, dt, step):
@@ -125,6 +132,8 @@ def summarize(logs, scenario, dt_exec, c_w=1.0):
         "qp_aux_max": int(np.asarray(logs["qp_iters"]).max()),
         "row_violation_max": float(np.asarray(logs["row_violation"]).max()),
         "mean_speed_mps": float(np.linalg.norm(np.asarray(logs["u"]), axis=-1).mean()),
+        "closedloop_xhat_mse_near": float(np.mean(logs["xhat_err_near"])) if "xhat_err_near" in logs else None,
+        "closedloop_xhat_mse_all": float(np.mean(logs["xhat_err_all"])) if "xhat_err_all" in logs else None,
         "integral_W_true": float(np.sum(np.mean(c_w * np.asarray(logs["rho_true"]) ** 2, 1)) * dt_exec),
     }
     return out, {"t": t, "arrived_frac": frac, "r_goal_dist": r, "first_arrival_idx": first}

@@ -132,7 +132,8 @@ def _sample_timefield_nearest(field: jnp.ndarray, t_idx: jnp.ndarray, positions_
 
 def smith_predict(positions_now: jnp.ndarray, x_hat_real: jnp.ndarray, age: jnp.ndarray, N: int,
                    t_sim: float, dt_exec: float, *, phi_grad_field, grid_step,
-                   m_star=None, m_star_grad_field=None, m_star_dt=None, c_dens=None) -> jnp.ndarray:
+                   m_star=None, m_star_grad_field=None, m_star_dt=None, c_dens=None,
+                   field_dt=None) -> jnp.ndarray:
     """Forward-integrates each neighbour's last stale (noisy) position under the controller's
     ROUTING FIELD ONLY, -grad Phi(x) (a static, agent-independent field, well-defined at ANY
     position). CORRECTED (prereg_phase2d_smith.md amendment, sha256 853424b0...): the original
@@ -164,15 +165,22 @@ def smith_predict(positions_now: jnp.ndarray, x_hat_real: jnp.ndarray, age: jnp.
     T_frame = t_frame(N)
     max_steps = int(math.ceil(T_frame / dt_exec)) + 1  # static python int (N is static under jit)
 
-    def velocity_flat(x_flat):
-        return sample_field_nearest(phi_grad_field, x_flat, grid_step)  # (M,2) -- routing only
+    time_indexed = phi_grad_field.ndim == 4   # (T+1,nx,nz,2): Project A's time-dependent Phi (amend6)
+
+    def velocity_flat(x_flat, t_j):
+        if not time_indexed:
+            return sample_field_nearest(phi_grad_field, x_flat, grid_step)  # (M,2) -- routing only
+        # routing field at each neighbour-slot's own integration instant (nearest time / cell)
+        t_idx = jnp.clip(jnp.round(t_j / field_dt).astype(int), 0, phi_grad_field.shape[0] - 1)
+        t_flat = jnp.broadcast_to(t_idx[None, :], (N, N)).reshape(-1)
+        return _sample_timefield_nearest(phi_grad_field, t_flat, x_flat, grid_step)
 
     def scan_body(carry, s):
         x_ij, t_j = carry  # x_ij: (N_i,N_j,2); t_j: (N_j,) current integration time per slot j (unused
                             # now that velocity is time-independent, kept for interface symmetry/future use)
         active = (s < age_steps).astype(jnp.float32)  # (N_j,)
         x_flat = x_ij.reshape(-1, 2)
-        v_flat = velocity_flat(x_flat)
+        v_flat = velocity_flat(x_flat, t_j)
         v_norm = jnp.linalg.norm(v_flat, axis=-1, keepdims=True)
         v_flat = v_flat * jnp.minimum(1.0, V_MAX / jnp.maximum(v_norm, 1e-9))  # same clip as real dynamics
         v_ij = v_flat.reshape(N, N, 2)
