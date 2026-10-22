@@ -63,6 +63,13 @@ class SingleGateA:
     def waypoint(self, xz):
         self._waypoint = (float(xz[0]), float(xz[1]))
 
+    def path_length_to_goal(self) -> float:
+        """amend5: farthest start-box corner -> gate centre -> farthest point of the goal disc."""
+        x0, x1, z0, z1 = self.start_box
+        gate = (self.wall_x, self.gate_z)
+        far = max(((x0, z0), (x0, z1)), key=lambda c: math.dist(c, gate))
+        return math.dist(far, gate) + math.dist(gate, self.goal) + self.r_goal
+
     def source_area(self) -> float:
         """Source chamber (left of the wall): density-constant reference on the source side."""
         return self.wall_x * self.arena[1]

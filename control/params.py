@@ -34,3 +34,8 @@ def r_goal_for_N(N: int) -> float:
 
 def horizon_for_N(N: int) -> float:
     return HORIZON_MULT * arena_for_N(N)[0] / V_NOM
+
+
+def horizon_for_path(L: float) -> float:
+    """amend5: horizon from the actual path length L to the goal (far-goal geometry)."""
+    return HORIZON_MULT * L / V_NOM

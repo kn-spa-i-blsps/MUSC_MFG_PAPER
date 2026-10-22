@@ -22,7 +22,7 @@ import numpy as np
 import yaml
 
 from control.law import local_density_and_grad
-from control.params import horizon_for_N, RHO_GOAL
+from control.params import horizon_for_N, horizon_for_path, RHO_GOAL
 from env.base import Grid
 from env.rollout import make_rollout, summarize
 from env.scenarios import SingleGateA
@@ -60,12 +60,21 @@ def density_sweep(cfg):
     return out
 
 
+def horizon_for(cfg, sc):
+    """Default: HORIZON_MULT * W0 / V_NOM. cfg horizon: path -> amend5 (path length to the goal)."""
+    if cfg.get("horizon") == "path":
+        return horizon_for_path(sc.path_length_to_goal())
+    return horizon_for_N(sc.N)
+
+
 def get_macro(cfg, sc, grid, c_w, cache_dir):
     mc = cfg["macro_cost"]
     cost = MacroCost(c_w, mc["w_bar"], mc["m_bar"], mc["f_cap"])
     fp = cfg["fp"]
-    tag = json.dumps({"N": sc.N, "scenario": cfg["scenario"], "cost": cost.__dict__, "fp": fp,
-                      "step": cfg["grid_step"]}, sort_keys=True)
+    tag = {"N": sc.N, "scenario": cfg["scenario"], "cost": cost.__dict__, "fp": fp, "step": cfg["grid_step"]}
+    if "horizon" in cfg:                     # only non-default horizons enter the key (old keys stay valid)
+        tag["horizon"] = [cfg["horizon"], grid.horizon]
+    tag = json.dumps(tag, sort_keys=True)
     key = f"macro_N{sc.N}_cw{c_w:g}_{hashlib.sha1(tag.encode()).hexdigest()[:10]}"
     path = os.path.join(cache_dir, key + ".npz")
     if os.path.exists(path):
@@ -140,7 +149,7 @@ def main():
 
     N = cfg["N"]
     sc = build_scenario(cfg, N)
-    grid = Grid.build(sc.arena, cfg["grid_step"], horizon_for_N(N))
+    grid = Grid.build(sc.arena, cfg["grid_step"], horizon_for(cfg, sc))
     assert grid.arena == sc.arena            # same arena feeds solve and rollout
     n_steps = int(round(grid.horizon / cfg["dt_exec"]))
     report["geometry"] = {"arena": sc.arena, "gate_width": sc.gate_width, "goal": sc.goal,
@@ -199,7 +208,8 @@ def main():
                 nfr = render.animate(os.path.join(viz_dir, f"anim_{tag}.gif"), sc, logs, series, sol,
                                      dt_exec=cfg["dt_exec"], title=title)
                 render.snapshots(os.path.join(viz_dir, f"snapshots_{tag}.png"), sc, logs, series,
-                                 [0, 2, 4, 6, 8, 12, 20, grid.horizon], dt_exec=cfg["dt_exec"])
+                                 cfg.get("snapshot_times", [0, 2, 4, 6, 8, 12, 20]) + [grid.horizon],
+                                 dt_exec=cfg["dt_exec"])
                 metrics["anim_frames"] = nfr
         report[f"variant_{label}"] = per_seed
         json.dump(report, open(os.path.join(out_dir, "report.json"), "w"), indent=1, default=float)
