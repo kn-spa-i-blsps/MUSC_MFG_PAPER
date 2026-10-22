@@ -13,5 +13,6 @@
 | prereg_projectA_amend8_dsafe_revert.md | a46ee261a50af158c6a18ef5330fa606b10b207994e274a3e65fafe20c2d2790 | ablation of amend7: d_safe 0.55 -> 0.40 only; flat V_goal + hold-on-arrival kept; learned arm, far goal |
 | prereg_projectA_amend9_sparse_goal.md | d8eab51fde996cb811d563a42f4a8a98a16cfa4818e98d0c434d83d953902e13 | sparse goal: spacing 0.80 (RHO_GOAL 1.80, r_goal 4.20), taller downstream chamber, d_safe 0.55; conical V_goal, no hold; learned arm |
 | prereg_projectA_amend10_far_backstop.md | 03e895c339c89091667e68c0e85195bdd1e55cdc78565c21bce3ae8b25c47db4 | far backstop: V_goal cone attractor at the far disc edge (x_goal + r_goal); region, hold step, obs, CBF priority unchanged; else amend9; learned arm |
+| prereg_projectA_amend11_ladder_safe.md | 39188e89f4939e3d8616787a8877c06f7f01feba3534ea84c3af6d0d68818ce1 | full ladder {real,cv,learned,smith} on the amend9 safe config (locked); open-loop MSE on datagen test seeds 110-111 of this config; best/worst-arm viz rule |
 
 Amendments take precedence over the original for the items they name; the original is never edited.
