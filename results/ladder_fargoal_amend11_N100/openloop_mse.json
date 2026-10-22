@@ -1,0 +1,36 @@
+{
+ "fresh": {
+  "mse_near1m_m2": 0.0,
+  "mse_all_m2": 0.0,
+  "n_near_pairs": 232282
+ },
+ "real": {
+  "mse_near1m_m2": 0.6863505244255066,
+  "mse_all_m2": 0.8126412630081177,
+  "n_near_pairs": 232282
+ },
+ "cv": {
+  "mse_near1m_m2": 1.124680519104004,
+  "mse_all_m2": 1.3362689018249512,
+  "n_near_pairs": 232282
+ },
+ "learned": {
+  "mse_near1m_m2": 0.35739216208457947,
+  "mse_all_m2": 0.4615150988101959,
+  "n_near_pairs": 232282
+ },
+ "smith": {
+  "mse_near1m_m2": 1.1168146133422852,
+  "mse_all_m2": 1.3178980350494385,
+  "n_near_pairs": 232282
+ },
+ "_meta": {
+  "test_seeds": [
+   110,
+   111
+  ],
+  "steps_per_seed": 400,
+  "k_min": 200,
+  "weights": "results/ladder_fargoal_N100/predictor_weights.npz"
+ }
+}
