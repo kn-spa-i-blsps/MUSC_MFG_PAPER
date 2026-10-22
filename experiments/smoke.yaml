@@ -45,7 +45,7 @@ cbf:
   u_box: 5.656854249492381       # V_MAX / sqrt(2)
   tol: 1.0e-5
   maxiter: 2000
-  qp_solver: exact               # exact 2-D enumeration; "boxosqp" kept as reference (did not converge in attempt 1)
+  qp_solver: exact_hard          # P1 fix: walls/arena own slack; "exact" = legacy shared slack (smoke attempt 3)
 
 variants:                        # label -> overrides; 'main' is gated, the rest are facts
   main:        {cbf_on: true,  nu: 0.0,   c_w: 1.0}

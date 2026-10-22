@@ -168,3 +168,114 @@ def test_exact_qp_near_parallel_rows_finite():
         u, t, _ = f(jnp.asarray(A, jnp.float32), jnp.asarray(lo, jnp.float32),
                     jnp.asarray(rng.uniform(-6, 6, 2), jnp.float32))
         assert np.all(np.isfinite(np.asarray(u))) and np.isfinite(float(t))
+
+
+# ---------- P1 regression: walls get their own slack ----------
+GATE_WALL = np.array([[[3.0, 0.0], [3.0, 1.0]], [[3.0, 2.0], [3.0, 3.0]]])   # gate z in (1, 2)
+ADVERSARIAL = np.array([[0.0, 0.0], [-0.05, 0.0], [0.0, 0.30], [0.0, -0.30], [-0.30, 0.05]])
+
+
+def _seg_dist(p):
+    a, b = GATE_WALL[:, 0], GATE_WALL[:, 1]
+    t = np.clip(np.sum((p - a) * (b - a), -1) / np.sum((b - a) ** 2, -1), 0, 1)
+    return np.min(np.linalg.norm(p - (a + t[:, None] * (b - a)), axis=-1))
+
+
+def _push_into_wall(solver, steps=300, dt=0.01):
+    """Agent 0 beside the lower wall segment, u_nom straight into it, and neighbour ESTIMATES glued
+    to it (stale/noisy-estimate worst case) so its neighbour rows are infeasible every step."""
+    prm = PRM._replace(qp_solver=solver)
+    f = jax.jit(cbf_filter, static_argnames=("arena", "prm"))
+    p0 = np.array([2.75, 0.5])
+    others = np.array([[0.5, 2.5], [1.0, 2.5], [1.5, 2.5], [2.0, 2.5]])
+    u_nom = jnp.zeros((5, 2)).at[0].set(jnp.array([5.0, 0.0]))
+    traj, nb_slack, hard_slack = [p0.copy()], [], []
+    for _ in range(steps):
+        pos = np.vstack([p0, others])
+        x_hat = np.broadcast_to(pos[None], (5, 5, 2)).copy()
+        x_hat[0] = p0 + ADVERSARIAL
+        u, info, _ = f(jnp.asarray(pos), jnp.asarray(x_hat), u_nom, jnp.array([5.0, 1.5]), (6.0, 3.0),
+                       GATE_WALL, init_warm_start(5, prm, 2), prm)
+        nb_slack.append(float(info["slack_max"][0]))
+        hard_slack.append(float(info["slack_hard"][0]))
+        p0 = p0 + dt * np.asarray(u[0])
+        traj.append(p0.copy())
+    return np.array(traj), np.array(nb_slack), np.array(hard_slack)
+
+
+def test_wall_never_crossed_when_neighbour_qp_infeasible():
+    traj, nb_slack, hard_slack = _push_into_wall("exact_hard")
+    assert (nb_slack > 1e-3).mean() > 0.9                   # neighbour rows really infeasible
+    assert hard_slack.max() == 0.0                          # walls never relaxed
+    assert (traj[:, 0] < 3.0).all()                         # never through the wall
+    assert min(_seg_dist(p) for p in traj) >= PRM.r_wall - 1e-4
+
+
+def test_legacy_shared_slack_breaches_wall_clearance():
+    """Documents the P1 bug (smoke attempt 3): with one slack for all rows the shared slack loosens the
+    wall row and the same agent is driven into the wall body (in the smoke, with 8 m/s steps, through)."""
+    traj, _, hard_slack = _push_into_wall("exact")
+    assert hard_slack.max() > 1.0
+    assert min(_seg_dist(p) for p in traj) < 0.05
+
+
+def test_exact_hard_matches_lp():
+    """Lexicographic solver vs scipy LP (phase 0 / phase 1 optimal slacks) and vs grid-search projection
+    when everything is feasible."""
+    from scipy.optimize import linprog
+    from control.cbf import solve_exact_hard, LOOSE
+    rng = np.random.default_rng(2)
+    k, ub = 8, PRM.u_box
+    f = jax.jit(lambda a, l, u: solve_exact_hard(a, l, u, PRM, k))
+    g = np.linspace(-ub, ub, 801)
+    G = np.stack(np.meshgrid(g, g, indexing="ij"), -1).reshape(-1, 2)
+
+    def lp(Amin, lomin, Ahold, lohold):        # min t s.t. Amin u + t >= lomin, Ahold u >= lohold
+        A_ub = np.vstack([np.hstack([-Amin, -np.ones((len(Amin), 1))]),
+                          np.hstack([-Ahold, np.zeros((len(Ahold), 1))])])
+        b_ub = np.concatenate([-lomin, -lohold])
+        r = linprog([0, 0, 1], A_ub=A_ub, b_ub=b_ub, bounds=[(-ub, ub), (-ub, ub), (0, None)])
+        return r.fun
+
+    n_both_feasible = 0
+    for trial in range(40):
+        A = rng.normal(size=(14, 2))
+        A /= np.linalg.norm(A, axis=1, keepdims=True)
+        lo = rng.uniform(-4.0, 1.5 if trial % 3 else 4.0, size=14)
+        A[6:8] = 0.0
+        lo[6:8] = -LOOSE                                    # padded neighbour rows
+        u_nom = rng.uniform(-6, 6, size=2)
+        u, s, _ = f(jnp.asarray(A), jnp.asarray(lo), jnp.asarray(u_nom))
+        u, s = np.asarray(u), np.asarray(s)
+        t_s, t_h = float(s[0]), float(s[k])
+        t_h_ref = lp(A[k:], lo[k:], np.zeros((0, 2)), np.zeros(0))
+        assert t_h == pytest.approx(t_h_ref, abs=1e-3)
+        t_s_ref = lp(A[:6], lo[:6], A[k:], lo[k:] - t_h_ref - 1e-6)
+        assert t_s == pytest.approx(t_s_ref, abs=1e-3)
+        assert np.all(A[k:] @ u >= lo[k:] - t_h - 1e-4)
+        assert np.all(A[:6] @ u >= lo[:6] - t_s - 1e-4)
+        assert np.all(np.abs(u) <= ub + 1e-6)
+        if t_h == 0.0 and t_s == 0.0:
+            n_both_feasible += 1
+            ok = np.all(G @ A[np.r_[0:6, k:14]].T >= lo[np.r_[0:6, k:14]], axis=1)
+            best = G[ok][np.argmin(np.sum((G[ok] - u_nom) ** 2, 1))]
+            assert np.linalg.norm(u - u_nom) <= np.linalg.norm(best - u_nom) + 1e-4
+    assert n_both_feasible >= 3
+
+
+def test_exact_hard_near_parallel_rows_finite():
+    """Same NaN regression as smoke attempt 2, for the exact_hard solver."""
+    from control.cbf import solve_exact_hard
+    f = jax.jit(lambda a, l, u: solve_exact_hard(a, l, u, PRM, 8))
+    rng = np.random.default_rng(1)
+    for _ in range(200):
+        base = rng.normal(size=2)
+        A = base[None] + rng.normal(size=(14, 2)) * 10.0 ** rng.uniform(-8, -3)
+        A /= np.linalg.norm(A, axis=1, keepdims=True)
+        A[8:] = rng.normal(size=(6, 2))
+        A[8:] /= np.linalg.norm(A[8:], axis=1, keepdims=True)
+        lo = rng.uniform(-3, 1, size=14)
+        u, s, n = f(jnp.asarray(A, jnp.float32), jnp.asarray(lo, jnp.float32),
+                    jnp.asarray(rng.uniform(-6, 6, 2), jnp.float32))
+        assert np.all(np.isfinite(np.asarray(u))) and np.all(np.isfinite(np.asarray(s)))
+        assert int(n) >= 0

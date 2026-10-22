@@ -45,7 +45,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
         else:
             u = jnp.clip(u_nom, -prm.u_box, prm.u_box)
             z = jnp.zeros(N)
-            info = {"slack_max": z, "intervention": z, "qp_iters": jnp.zeros(N, jnp.int32),
+            info = {"slack_max": z, "slack_hard": z, "intervention": z, "qp_iters": jnp.zeros(N, jnp.int32),
                     "row_violation": z}
         key, nk = jax.random.split(key)
         noise = jax.random.normal(nk, positions.shape) * jnp.sqrt(2.0 * nu * dt_exec)
@@ -58,7 +58,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
         y = {"pos": positions, "u": u, "u_nom": u_nom,
              "n_coll_pairs": jnp.sum(d < D_COLLISION), "min_sep": jnp.min(d),
              "p5_sep_pairs": jnp.percentile(nn, 5.0),
-             "slack_max": info["slack_max"], "intervention": info["intervention"],
+             "slack_max": info["slack_max"], "slack_hard": info["slack_hard"], "intervention": info["intervention"],
              "qp_iters": info["qp_iters"], "row_violation": info["row_violation"],
              "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true}
         return (positions_new, history, key, warm), y
@@ -120,6 +120,7 @@ def summarize(logs, scenario, dt_exec, c_w=1.0):
         "cbf_intervention_mean_mps": float(interv.mean()),
         "slack_active_rate": float((slack > 1e-4).mean()),
         "slack_max": float(slack.max()),
+        "slack_hard_max": float(np.asarray(logs["slack_hard"]).max()) if "slack_hard" in logs else None,
         "qp_aux_mean": float(np.asarray(logs["qp_iters"]).mean()),
         "qp_aux_max": int(np.asarray(logs["qp_iters"]).max()),
         "row_violation_max": float(np.asarray(logs["row_violation"]).max()),

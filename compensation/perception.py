@@ -200,6 +200,8 @@ def perceive(condition: str, history: jnp.ndarray, k_now: int, dt_exec: float, N
     T_frame_steps = max(1, int(round(T_frame / dt_exec)))
     t_sim = k_now * dt_exec
     age = tdma_age(t_sim, N)                              # (N,) -- age of neighbour-slot j
+    if condition == "noise_only":                         # DIAGNOSTIC: perfect delay compensation,
+        age = jnp.zeros_like(age)                         # sensor noise kept (same key use as real)
     age_steps = jnp.round(age / dt_exec).astype(jnp.int32)  # (N,)
     k_then = jnp.maximum(k_now - age_steps, 0)             # (N,) -- per-neighbour-j lookup step
 
@@ -212,7 +214,7 @@ def perceive(condition: str, history: jnp.ndarray, k_now: int, dt_exec: float, N
     rel_now_ij = jnp.transpose(rel_now, (1, 0, 2))           # (N_i, N_j, 2)
     x_hat_real = positions_now[:, None, :] + rel_now_ij       # (N, N, 2)
 
-    if condition == "real":
+    if condition in ("real", "noise_only"):
         return x_hat_real
 
     if condition in ("cv", "pred"):

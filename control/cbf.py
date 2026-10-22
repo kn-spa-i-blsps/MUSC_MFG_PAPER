@@ -12,7 +12,10 @@ barrier rate; a_ij + a_ji = 1). Liveness: goal-biased priority — the agent nea
 larger share a_ij (more freedom), the one behind yields. Fallback: soft slack s (never an emergency
 stop) — a QP whose hard version is infeasible returns the minimum-violation control. For h=|d|^2-r^2
 the Euler step only adds dt^2|du|^2 >= 0 to h, so the linear constraint is conservative in discrete
-time. Solved with jaxopt BoxOSQP, vmapped over agents, warm-started from the previous step.
+time. Solvers (prm.qp_solver): "exact_hard" (default) -- lexicographic: walls/arena rows get their own
+slack (zero unless the geometry alone is infeasible), neighbour rows share one slack, so an infeasible
+neighbour set never loosens a wall; "exact" (legacy, smoke attempt 3) -- ONE slack shared by all rows
+(the P1 wall-penetration bug); "boxosqp" -- the per-row-slack QP above via jaxopt (reference).
 """
 from __future__ import annotations
 
@@ -40,7 +43,8 @@ class CBFParams(NamedTuple):
     u_box: float       # per-axis velocity bound
     tol: float
     maxiter: int
-    qp_solver: str = "exact"   # "exact" (default) | "boxosqp" (jaxopt; reference)
+    qp_solver: str = "exact_hard"  # "exact_hard" (default; walls/boundaries own slack) |
+                                   # "exact" (legacy: one slack shared by ALL rows) | "boxosqp" (reference)
 
 
 def _closest_on_segments(p, segs):
@@ -126,7 +130,11 @@ def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams)
     rows = jax.vmap(lambda p, xh, i: build_rows(p, xh, i, goal, arena, segs, prm))(
         positions, x_hat, jnp.arange(N))
     A_c, lo_c = rows[0], rows[1]
-    if prm.qp_solver == "exact":
+    if prm.qp_solver == "exact_hard":
+        u, s, iters = jax.vmap(lambda a, l, un: solve_exact_hard(a, l, un, prm, prm.k_nb))(
+            A_c, lo_c, u_nom_box)
+        kkt = init
+    elif prm.qp_solver == "exact":
         u, t_star, n_feas = jax.vmap(lambda a, l, un: solve_exact(a, l, un, prm))(A_c, lo_c, u_nom_box)
         kkt = init
         s = jnp.broadcast_to(t_star[:, None], lo_c.shape)
@@ -138,6 +146,7 @@ def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams)
         s = jnp.maximum(z[:, 2:], 0.0)
     residual = jnp.einsum("ncd,nd->nc", A_c, u) + s - lo_c            # >= 0 when satisfied
     info = {"slack_max": jnp.max(s, axis=1),
+            "slack_hard": jnp.max(s[:, prm.k_nb:], axis=1),          # walls + arena rows
             "intervention": jnp.linalg.norm(u - u_nom_box, axis=-1),
             "qp_iters": iters,
             "row_violation": jnp.maximum(-jnp.min(residual, axis=1), 0.0)}
@@ -232,3 +241,79 @@ def solve_exact(A_c, lo_c, u_nom, prm: CBFParams):
     bad = ~jnp.all(jnp.isfinite(u))                       # last line of defence; logged
     u = jnp.where(bad, jnp.clip(u_nom, -ub, ub), u)
     return u, t_star, jnp.where(bad, -1, jnp.sum(feas))
+
+
+# ---------------------------------------------------------------------------------------------
+# "exact_hard" (P1 fix): static-geometry rows (walls + arena boundaries) get their OWN slack, never
+# shared with the neighbour rows. Lexicographic, exact by vertex enumeration in (u, t):
+#   phase 0: t_h = min_{u in box} max_hard (lo - a.u)_+           (0 unless geometry alone infeasible)
+#   phase 1: t_s = min max_nb (lo - a.u)_+ s.t. u in box, hard rows relaxed by t_h only
+#   phase 2: u = argmin |u - u_nom| s.t. nb rows relaxed by t_s, hard rows by t_h, u in box
+# An infeasible neighbour set therefore can never loosen a wall (smoke: shared t* reached 994).
+# LP vertices: 3 active lines with a t-column on the minimized rows (triples) or t = 0 active
+# (2-D vertices of two lines, pairs); box faces are lines of the must-hold set.
+# ---------------------------------------------------------------------------------------------
+_BOX_A = jnp.array([[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1.0]])
+
+
+def _min_max_violation(La, Lb, Lact, minimize, must, u_nom, ub):
+    """min_u max_{minimize rows} (Lb - La.u)_+ s.t. must rows hold. Returns (t*, u at t*)."""
+    L = La.shape[0]
+    tri = _combos(L, 3)
+    tcol = minimize.astype(La.dtype)
+    M3 = jnp.concatenate([La[tri], tcol[tri][..., None]], -1)
+    ok3 = (jnp.abs(jnp.linalg.det(M3)) > DET_EPS) & jnp.all(Lact[tri], -1)
+    s3 = jnp.linalg.solve(jnp.where(ok3[:, None, None], M3, jnp.eye(3)), Lb[tri][..., None])[..., 0]
+    pr = _combos(L, 2)
+    M2 = La[pr]
+    ok2 = (jnp.abs(jnp.linalg.det(M2)) > DET_EPS) & jnp.all(Lact[pr], -1)
+    s2 = jnp.linalg.solve(jnp.where(ok2[:, None, None], M2, jnp.eye(2)), Lb[pr][..., None])[..., 0]
+    U = jnp.concatenate([_finite(jnp.where(ok3[:, None], s3[:, :2], LOOSE)),
+                         _finite(jnp.where(ok2[:, None], s2, LOOSE)),
+                         jnp.array([[ub, ub], [ub, -ub], [-ub, ub], [-ub, -ub]]),
+                         jnp.clip(u_nom, -ub, ub)[None]], 0)
+    res = U @ La.T - Lb[None]                                           # >= 0 when satisfied
+    t = jnp.max(jnp.where((minimize & Lact)[None], -res, 0.0), axis=1, initial=0.0)
+    ok = jnp.all((res >= -1e-5) | ~(must & Lact)[None], axis=1)
+    t = jnp.where(ok, t, jnp.inf)
+    b = jnp.argmin(t)
+    return t[b], U[b]
+
+
+def solve_exact_hard(A_c, lo_c, u_nom, prm: CBFParams, n_soft: int):
+    """Rows [0, n_soft) are neighbour rows (soft, shared slack); the rest are hard static rows.
+    Returns (u, per-row slack (C,), n_feasible_candidates or -1 on non-finite fallback)."""
+    C = A_c.shape[0]
+    ub = prm.u_box
+    soft = jnp.arange(C) < n_soft
+    active = jnp.any(A_c != 0.0, axis=-1)
+    La = jnp.concatenate([A_c, _BOX_A], 0)
+    Lact = jnp.concatenate([active, jnp.ones(4, bool)])
+    is_box = jnp.arange(C + 4) >= C
+    hard = jnp.concatenate([~soft, jnp.zeros(4, bool)])
+    nb = jnp.concatenate([soft, jnp.zeros(4, bool)])
+    Lb0 = jnp.concatenate([lo_c, -ub * jnp.ones(4)])
+
+    t_h, _ = _min_max_violation(La, Lb0, Lact, hard, is_box, u_nom, ub)            # phase 0
+    t_h = jnp.where(jnp.isfinite(t_h), t_h, LOOSE)
+    Lb1 = Lb0 - jnp.where(hard, t_h + 1e-6 * (t_h > 0), 0.0)
+    t_s, u1 = _min_max_violation(La, Lb1, Lact, nb, is_box | hard, u_nom, ub)       # phase 1
+    t_s = jnp.where(jnp.isfinite(t_s), t_s, LOOSE)
+
+    Lb = Lb1 - jnp.where(nb, t_s + 1e-6 * (t_s > 0), 0.0)                           # phase 2
+    Lb = jnp.where(Lact, Lb, -LOOSE)
+    proj = u_nom[None] + (Lb - La @ u_nom)[:, None] * La
+    pp = _combos(C + 4, 2)
+    M = La[pp]
+    okv = (jnp.abs(jnp.linalg.det(M)) > DET_EPS) & jnp.all(Lact[pp], -1)
+    vert = jnp.linalg.solve(jnp.where(okv[:, None, None], M, jnp.eye(2)), Lb[pp][..., None])[..., 0]
+    U2 = _finite(jnp.concatenate([u_nom[None], jnp.where(Lact[:, None], proj, LOOSE),
+                                  jnp.where(okv[:, None], vert, LOOSE)], 0))
+    feas = jnp.all((U2 @ La.T - Lb[None] >= -1e-5) | ~Lact[None], axis=1)
+    dist = jnp.where(feas, jnp.sum((U2 - u_nom[None]) ** 2, -1), jnp.inf)
+    best = jnp.argmin(dist)
+    u = jnp.where(jnp.isfinite(dist[best]), U2[best], u1)
+    bad = ~jnp.all(jnp.isfinite(u))
+    u = jnp.where(bad, jnp.clip(u_nom, -ub, ub), u)
+    s = jnp.where(soft, t_s, t_h)
+    return u, s, jnp.where(bad, -1, jnp.sum(feas))
