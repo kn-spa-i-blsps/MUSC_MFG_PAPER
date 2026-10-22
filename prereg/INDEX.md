@@ -11,5 +11,6 @@
 | prereg_projectA_amend6_ladder.md | 8e88e0dc3f87926232351feefbaa02b6ff523f8d8b690efee7a3c196780c6300 | ladder {real,cv,learned,smith} on delayed perception, far goal; claim + go/no-go; NN retrain full-horizon |
 | prereg_projectA_amend7_safety_margin_goalshape.md | a2fa24dca74c5cb89dfee1345a7a5aad6ff2ab72dfa2b500fbbe02070855e315 | d_safe 0.40 -> 0.55; flat-bottomed V_goal + hold-on-arrival; x_hat logging; learned arm, far goal |
 | prereg_projectA_amend8_dsafe_revert.md | a46ee261a50af158c6a18ef5330fa606b10b207994e274a3e65fafe20c2d2790 | ablation of amend7: d_safe 0.55 -> 0.40 only; flat V_goal + hold-on-arrival kept; learned arm, far goal |
+| prereg_projectA_amend9_sparse_goal.md | d8eab51fde996cb811d563a42f4a8a98a16cfa4818e98d0c434d83d953902e13 | sparse goal: spacing 0.80 (RHO_GOAL 1.80, r_goal 4.20), taller downstream chamber, d_safe 0.55; conical V_goal, no hold; learned arm |
 
 Amendments take precedence over the original for the items they name; the original is never edited.

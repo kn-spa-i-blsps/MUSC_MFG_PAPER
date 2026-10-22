@@ -22,6 +22,10 @@ class SingleGateA:
       goal_gap_mult=None (amend1 note): goal disc centred in the post-gate chamber at (0.75W0, H/2).
       goal_gap_mult=k (amend4): downstream chamber -- goal waypoint at (wall_x + k*r_goal, H/2), arena
         extended to W = x_goal + r_goal + (H - 2 r_goal)/2; source chamber and gate unchanged.
+    goal_spacing=s (amend9): r_goal from the hex-packing density 2/(sqrt3 s^2) instead of RHO_GOAL (D_STAR).
+    goal_clearance=c (amend9, with goal_gap_mult): clearance c from the goal disc to the top, bottom and
+      right walls; the arena height becomes max(H0, 2 r_goal + 2c), the source chamber (W0/2 x H0) and
+      the gate are kept, centred, and closed off from the extra height by two horizontal hard walls.
     goal_shape (amend7): "conical" (default) -- V_goal = cone to the waypoint + tanh hold step at r_goal;
       "flat" -- flat-bottomed: both terms act on relu(r - r_goal) only, so grad V_goal = 0 inside the
       disc and (up to the 0.05 m cone rounding) equals the conical gradient outside it.
@@ -33,7 +37,8 @@ class SingleGateA:
                  edge_softness: float = 0.25, start_margin: float = 0.4,
                  start_wall_gap: float = 0.6, start_softness: float = 0.2,
                  n_agents: int | None = None, goal_gap_mult: float | None = None,
-                 goal_shape: str = "conical"):
+                 goal_shape: str = "conical", goal_spacing: float | None = None,
+                 goal_clearance: float | None = None):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
@@ -41,21 +46,28 @@ class SingleGateA:
         W, H = arena_for_N(N)
         self.gate_width = gate_width_for_N(N)
         self.wall_x = W / 2.0
-        self.gate_z = H / 2.0
-        self.r_goal = r_goal_for_N(N)
+        self.H0 = H
+        self.r_goal = r_goal_for_N(N) if goal_spacing is None else \
+            math.sqrt(N / (math.pi * 2.0 / (math.sqrt(3.0) * goal_spacing ** 2)))
+        self.z_off = 0.0                                   # source chamber spans z in [z_off, z_off + H0]
         if goal_gap_mult is None:
             self.arena = (W, H)
             self.waypoint = (0.75 * W, H / 2.0)
         else:
             x_goal = self.wall_x + goal_gap_mult * self.r_goal
-            self.arena = (x_goal + self.r_goal + (H - 2.0 * self.r_goal) / 2.0, H)
-            self.waypoint = (x_goal, H / 2.0)
+            m = (H - 2.0 * self.r_goal) / 2.0 if goal_clearance is None else goal_clearance
+            Ha = max(H, 2.0 * self.r_goal + 2.0 * m)
+            self.z_off = (Ha - H) / 2.0
+            self.arena = (x_goal + self.r_goal + m, Ha)
+            self.waypoint = (x_goal, Ha / 2.0)
+        self.gate_z = self.arena[1] / 2.0
         self.w_goal, self.w_hold, self.goal_softness = w_goal, w_hold, goal_softness
         if goal_shape not in ("conical", "flat"):
             raise ValueError(goal_shape)
         self.goal_shape = goal_shape
         self.obs_penalty, self.wall_thickness, self.edge_softness = obs_penalty, wall_thickness, edge_softness
-        self.start_box = (start_margin, self.wall_x - start_wall_gap, start_margin, H - start_margin)
+        self.start_box = (start_margin, self.wall_x - start_wall_gap,
+                          self.z_off + start_margin, self.z_off + H - start_margin)
         self.start_softness = start_softness
 
     @property
@@ -79,7 +91,7 @@ class SingleGateA:
 
     def source_area(self) -> float:
         """Source chamber (left of the wall): density-constant reference on the source side."""
-        return self.wall_x * self.arena[1]
+        return self.wall_x * self.H0
 
     def domain(self) -> tuple[float, float]:
         return self.arena
@@ -89,12 +101,16 @@ class SingleGateA:
         """(n_seg, 2, 2) wall centre-line segments [[x0,z0],[x1,z1]]."""
         H = self.arena[1]
         wx, gz, half = self.wall_x, self.gate_z, self.gate_width / 2.0
-        return np.array([[[wx, 0.0], [wx, gz - half]], [[wx, gz + half], [wx, H]]])
+        segs = [[[wx, 0.0], [wx, gz - half]], [[wx, gz + half], [wx, H]]]
+        if self.z_off > 0:                                 # amend9: source chamber top / bottom walls
+            zl, zh = self.z_off, self.z_off + self.H0
+            segs += [[[0.0, zl], [wx, zl]], [[0.0, zh], [wx, zh]]]
+        return np.array(segs)
 
     def free_area(self) -> float:
         """Arena area minus the hard wall footprint."""
         W, H = self.arena
-        return W * H - 2.0 * WALL_HALF_THICKNESS * (H - self.gate_width)
+        return W * H - 2.0 * self.wall_x * self.z_off - 2.0 * WALL_HALF_THICKNESS * (H - self.gate_width)
 
     # --- soft macro potentials ---
     def goal_distance(self, x, z):
@@ -106,6 +122,10 @@ class SingleGateA:
         blocked = 0.5 * (jnp.tanh((jnp.abs(z - self.gate_z) - self.gate_width / 2.0)
                                   / self.edge_softness) + 1.0)
         v_obs = wall_profile * blocked
+        if self.z_off > 0:                                 # amend9: source chamber top / bottom walls
+            src = 0.5 * (jnp.tanh((self.wall_x - x) / self.edge_softness) + 1.0)
+            for zw in (self.z_off, self.z_off + self.H0):
+                v_obs = v_obs + self.obs_penalty * jnp.exp(-((z - zw) / self.wall_thickness) ** 2) * src
         r = self.goal_distance(x, z)
         if self.goal_shape == "flat":                           # amend7: flat bottom inside r_goal
             e = jnp.maximum(r - self.r_goal, 0.0)
