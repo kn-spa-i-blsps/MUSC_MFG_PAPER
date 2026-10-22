@@ -28,6 +28,9 @@ def _draw_scene(ax, sc):
     for seg in sc.wall_segments():
         ax.plot(seg[:, 0], seg[:, 1], color="k", lw=3)
     ax.add_patch(plt.Circle(sc.goal, sc.r_goal, fill=False, ls="--", color="tab:green", lw=1.5))
+    att = getattr(sc, "attractor", sc.goal)
+    if tuple(att) != tuple(sc.goal):                       # amend10: V_goal attractor off the disc centre
+        ax.plot(*att, marker="x", color="tab:red", ms=8, mew=2)
     ax.set_xlim(0, W)
     ax.set_ylim(0, H)
     ax.set_aspect("equal")

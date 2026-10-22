@@ -26,6 +26,10 @@ class SingleGateA:
     goal_clearance=c (amend9, with goal_gap_mult): clearance c from the goal disc to the top, bottom and
       right walls; the arena height becomes max(H0, 2 r_goal + 2c), the source chamber (W0/2 x H0) and
       the gate are kept, centred, and closed off from the extra height by two horizontal hard walls.
+    goal_attractor_shift=k (amend10): the cone (progress) term of V_goal pulls to an attractor point
+      k*r_goal downstream (+x) of the disc centre (k=1: far edge of the disc); the tanh hold step at
+      r_goal, the success region, the local goal observation and the CBF priority keep the disc centre.
+      None (default) = attractor at the disc centre (amend1-9).
     goal_shape (amend7): "conical" (default) -- V_goal = cone to the waypoint + tanh hold step at r_goal;
       "flat" -- flat-bottomed: both terms act on relu(r - r_goal) only, so grad V_goal = 0 inside the
       disc and (up to the 0.05 m cone rounding) equals the conical gradient outside it.
@@ -38,7 +42,7 @@ class SingleGateA:
                  start_wall_gap: float = 0.6, start_softness: float = 0.2,
                  n_agents: int | None = None, goal_gap_mult: float | None = None,
                  goal_shape: str = "conical", goal_spacing: float | None = None,
-                 goal_clearance: float | None = None):
+                 goal_clearance: float | None = None, goal_attractor_shift: float | None = None):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
@@ -61,6 +65,8 @@ class SingleGateA:
             self.arena = (x_goal + self.r_goal + m, Ha)
             self.waypoint = (x_goal, Ha / 2.0)
         self.gate_z = self.arena[1] / 2.0
+        k = 0.0 if goal_attractor_shift is None else goal_attractor_shift
+        self.attractor = (self.waypoint[0] + k * self.r_goal, self.waypoint[1])
         self.w_goal, self.w_hold, self.goal_softness = w_goal, w_hold, goal_softness
         if goal_shape not in ("conical", "flat"):
             raise ValueError(goal_shape)
@@ -132,7 +138,8 @@ class SingleGateA:
             progress = self.w_goal * jnp.sqrt(e ** 2 + 0.05 ** 2)
             hold = self.w_hold * 0.5 * jnp.tanh(e / self.goal_softness)
             return progress + hold, v_obs
-        progress = self.w_goal * jnp.sqrt(r ** 2 + 0.05 ** 2)  # conical: non-vanishing pull
+        ra = jnp.sqrt((x - self.attractor[0]) ** 2 + (z - self.attractor[1]) ** 2)  # amend10: = r by default
+        progress = self.w_goal * jnp.sqrt(ra ** 2 + 0.05 ** 2)  # conical: non-vanishing pull
         hold = self.w_hold * 0.5 * (jnp.tanh((r - self.r_goal) / self.goal_softness) + 1.0)
         return progress + hold, v_obs
 
