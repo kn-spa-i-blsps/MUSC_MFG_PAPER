@@ -17,29 +17,55 @@ WALL_HALF_THICKNESS = 0.05  # m, physical (hard) wall half-thickness seen by the
 
 
 class SingleGateA:
-    """Vertical wall at x=W/2 with one centred gate of width GATE_RATIO*W. Start region left of
-    the wall, goal disc centred in the post-gate chamber at (0.75W, H/2) (amend1 note)."""
+    """Vertical wall at x=W0/2 with one centred gate of width GATE_RATIO*W0, (W0, H) = arena_for_N(N).
+    Start region left of the wall. Goal placement:
+      goal_gap_mult=None (amend1 note): goal disc centred in the post-gate chamber at (0.75W0, H/2).
+      goal_gap_mult=k (amend4): downstream chamber -- goal waypoint at (wall_x + k*r_goal, H/2), arena
+        extended to W = x_goal + r_goal + (H - 2 r_goal)/2; source chamber and gate unchanged.
+    The goal is a settable waypoint (static in A), read by V_goal, the local goal observation and the
+    CBF priority."""
 
     def __init__(self, N: int, *, w_goal: float, w_hold: float, goal_softness: float = 0.25,
                  obs_penalty: float = 200.0, wall_thickness: float = 0.3,
                  edge_softness: float = 0.25, start_margin: float = 0.4,
                  start_wall_gap: float = 0.6, start_softness: float = 0.2,
-                 n_agents: int | None = None):
+                 n_agents: int | None = None, goal_gap_mult: float | None = None):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
         self.N = N if n_agents is None else n_agents
-        self.arena = arena_for_N(N)
-        W, H = self.arena
+        W, H = arena_for_N(N)
         self.gate_width = gate_width_for_N(N)
         self.wall_x = W / 2.0
         self.gate_z = H / 2.0
-        self.goal = (0.75 * W, H / 2.0)
         self.r_goal = r_goal_for_N(N)
+        if goal_gap_mult is None:
+            self.arena = (W, H)
+            self.waypoint = (0.75 * W, H / 2.0)
+        else:
+            x_goal = self.wall_x + goal_gap_mult * self.r_goal
+            self.arena = (x_goal + self.r_goal + (H - 2.0 * self.r_goal) / 2.0, H)
+            self.waypoint = (x_goal, H / 2.0)
         self.w_goal, self.w_hold, self.goal_softness = w_goal, w_hold, goal_softness
         self.obs_penalty, self.wall_thickness, self.edge_softness = obs_penalty, wall_thickness, edge_softness
         self.start_box = (start_margin, self.wall_x - start_wall_gap, start_margin, H - start_margin)
         self.start_softness = start_softness
+
+    @property
+    def goal(self):
+        return self._waypoint
+
+    @property
+    def waypoint(self):
+        return self._waypoint
+
+    @waypoint.setter
+    def waypoint(self, xz):
+        self._waypoint = (float(xz[0]), float(xz[1]))
+
+    def source_area(self) -> float:
+        """Source chamber (left of the wall): density-constant reference on the source side."""
+        return self.wall_x * self.arena[1]
 
     def domain(self) -> tuple[float, float]:
         return self.arena

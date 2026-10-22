@@ -38,7 +38,7 @@ def build_scenario(cfg, N):
     s = cfg["scenario"]
     return SingleGateA(N, w_goal=s["w_goal"], w_hold=s["w_hold"], goal_softness=s["goal_softness"],
                        obs_penalty=s["obs_penalty"], wall_thickness=s["wall_thickness"],
-                       edge_softness=s["edge_softness"])
+                       edge_softness=s["edge_softness"], goal_gap_mult=s.get("goal_gap_mult"))
 
 
 def density_sweep(cfg):
@@ -54,6 +54,7 @@ def density_sweep(cfg):
                   "gate_over_W": sc.gate_width / W, "r_goal": sc.r_goal,
                   "goal_usable_area_m2": sc.goal_capacity_area(),
                   "goal_capacity_at_RHO_GOAL": sc.goal_capacity_area() * RHO_GOAL,
+                  "N_over_source_chamber": N / sc.source_area(),
                   "start_box_density": N / ((x1 - x0) * (z1 - z0)),
                   "kde_mean_density_t0": float(jnp.mean(rho0))}
     return out
