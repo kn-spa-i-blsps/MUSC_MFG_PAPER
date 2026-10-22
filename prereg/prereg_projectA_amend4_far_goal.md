@@ -7,9 +7,10 @@ edited. No official smoke (§9) or factorial run is made under this amendment.
 **Status:** written before any far-goal run (no outcome of this geometry observed).
 
 ## Reason
-Clogging at the gate exit: with the goal disc centred at (0.75 W, H/2) its near edge lies ~0.3 m
-behind the gate plane (2.89 m chamber half-width minus r_goal = 3.15 m -> the disc reaches the wall),
-so agents that have just passed the gate stop in the throat and block it. Evidence: snapshots of
+Clogging at the gate exit: with the goal disc centred at (0.75 W, H/2) the centre is 2.89 m behind
+the wall plane while r_goal = 3.15 m, so the disc already begins at the gate (its near edge is 0.26 m
+on the source side of the wall plane); agents that have just passed the gate are "arrived", stop in
+the throat and block it. Evidence: snapshots of
 results/diag_cdens0_N100_fresh (and diag_singlegate_N100_fresh) show a dense column jammed through and
 directly behind the gate while the far part of the post-gate chamber stays empty.
 
