@@ -165,7 +165,8 @@ def main():
             continue
         sol, cost = macros[var["c_w"]]
         rcfg = dict(dt_exec=cfg["dt_exec"], n_steps=n_steps, nu=var["nu"], cbf_on=var["cbf_on"],
-                    c_w=cost.c_w, w_bar=cost.w_bar, m_bar=cost.m_bar, c_dens=cfg["control"]["c_dens"],
+                    c_w=cost.c_w, w_bar=cost.w_bar, m_bar=cost.m_bar,
+                    c_dens=var.get("c_dens", cfg["control"]["c_dens"]),
                     cbf={**copy.deepcopy(cfg["cbf"]), **var.get("cbf", {})})
         run = make_rollout(cfg["condition"], sc, rcfg)
         fields = {k: sol[k] for k in ("phi_grad", "m_star", "m_star_grad")}
