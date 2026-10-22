@@ -35,7 +35,8 @@ def setup(cfg):
     n_steps = int(round(grid.horizon / cfg["dt_exec"]))
     rcfg = dict(dt_exec=cfg["dt_exec"], n_steps=n_steps, nu=0.0, cbf_on=True, c_w=cost.c_w,
                 w_bar=cost.w_bar, m_bar=cost.m_bar, c_dens=cfg["control"]["c_dens"],
-                cbf=copy.deepcopy(cfg["cbf"]))
+                cbf=copy.deepcopy(cfg["cbf"]), hold_on_arrival=cfg["control"].get("hold_on_arrival", False),
+                log_xhat=cfg.get("log_xhat", False))
     return sc, grid, sol, rcfg, path
 
 

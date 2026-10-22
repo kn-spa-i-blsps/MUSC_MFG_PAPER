@@ -22,6 +22,9 @@ class SingleGateA:
       goal_gap_mult=None (amend1 note): goal disc centred in the post-gate chamber at (0.75W0, H/2).
       goal_gap_mult=k (amend4): downstream chamber -- goal waypoint at (wall_x + k*r_goal, H/2), arena
         extended to W = x_goal + r_goal + (H - 2 r_goal)/2; source chamber and gate unchanged.
+    goal_shape (amend7): "conical" (default) -- V_goal = cone to the waypoint + tanh hold step at r_goal;
+      "flat" -- flat-bottomed: both terms act on relu(r - r_goal) only, so grad V_goal = 0 inside the
+      disc and (up to the 0.05 m cone rounding) equals the conical gradient outside it.
     The goal is a settable waypoint (static in A), read by V_goal, the local goal observation and the
     CBF priority."""
 
@@ -29,7 +32,8 @@ class SingleGateA:
                  obs_penalty: float = 200.0, wall_thickness: float = 0.3,
                  edge_softness: float = 0.25, start_margin: float = 0.4,
                  start_wall_gap: float = 0.6, start_softness: float = 0.2,
-                 n_agents: int | None = None, goal_gap_mult: float | None = None):
+                 n_agents: int | None = None, goal_gap_mult: float | None = None,
+                 goal_shape: str = "conical"):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
@@ -47,6 +51,9 @@ class SingleGateA:
             self.arena = (x_goal + self.r_goal + (H - 2.0 * self.r_goal) / 2.0, H)
             self.waypoint = (x_goal, H / 2.0)
         self.w_goal, self.w_hold, self.goal_softness = w_goal, w_hold, goal_softness
+        if goal_shape not in ("conical", "flat"):
+            raise ValueError(goal_shape)
+        self.goal_shape = goal_shape
         self.obs_penalty, self.wall_thickness, self.edge_softness = obs_penalty, wall_thickness, edge_softness
         self.start_box = (start_margin, self.wall_x - start_wall_gap, start_margin, H - start_margin)
         self.start_softness = start_softness
@@ -100,6 +107,11 @@ class SingleGateA:
                                   / self.edge_softness) + 1.0)
         v_obs = wall_profile * blocked
         r = self.goal_distance(x, z)
+        if self.goal_shape == "flat":                           # amend7: flat bottom inside r_goal
+            e = jnp.maximum(r - self.r_goal, 0.0)
+            progress = self.w_goal * jnp.sqrt(e ** 2 + 0.05 ** 2)
+            hold = self.w_hold * 0.5 * jnp.tanh(e / self.goal_softness)
+            return progress + hold, v_obs
         progress = self.w_goal * jnp.sqrt(r ** 2 + 0.05 ** 2)  # conical: non-vanishing pull
         hold = self.w_hold * 0.5 * (jnp.tanh((r - self.r_goal) / self.goal_softness) + 1.0)
         return progress + hold, v_obs

@@ -129,7 +129,7 @@ def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams)
     u_nom_box = jnp.clip(u_nom, -prm.u_box, prm.u_box)
     rows = jax.vmap(lambda p, xh, i: build_rows(p, xh, i, goal, arena, segs, prm))(
         positions, x_hat, jnp.arange(N))
-    A_c, lo_c = rows[0], rows[1]
+    A_c, lo_c, nb_idx = rows[0], rows[1], rows[2]
     if prm.qp_solver == "exact_hard":
         u, s, iters = jax.vmap(lambda a, l, un: solve_exact_hard(a, l, un, prm, prm.k_nb))(
             A_c, lo_c, u_nom_box)
@@ -149,7 +149,8 @@ def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams)
             "slack_hard": jnp.max(s[:, prm.k_nb:], axis=1),          # walls + arena rows
             "intervention": jnp.linalg.norm(u - u_nom_box, axis=-1),
             "qp_iters": iters,
-            "row_violation": jnp.maximum(-jnp.min(residual, axis=1), 0.0)}
+            "row_violation": jnp.maximum(-jnp.min(residual, axis=1), 0.0),
+            "nb_idx": nb_idx}
     return u, info, kkt
 
 

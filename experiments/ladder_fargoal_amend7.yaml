@@ -1,0 +1,56 @@
+# AMEND7 (safety margin + goal shape) on the amend6 ladder setup: identical to ladder_fargoal.yaml except
+# cbf.d_safe 0.40 -> 0.55, scenario.goal_shape flat, control.hold_on_arrival, log_xhat. Arm learned only.
+run_name: ladder_fargoal_amend7_N100
+log_xhat: true                   # amend7: per-pair x_hat (relative to own position, float16) + CBF neighbour idx
+horizon: path                    # amend5: T = HORIZON_MULT * path_length_to_goal / V_NOM
+snapshot_times: [0, 5, 10, 15, 20, 30, 40, 50]   # viz only
+N: 100
+condition: real                 # unused by ladder.py (arm from --arm)
+seeds: [0]
+density_sweep_N: [25, 50, 100, 150, 200]
+
+grid_step: 0.2
+dt_exec: 0.01
+
+scenario:
+  w_goal: 2.0                    # conical goal-progress weight
+  w_hold: 8.0                    # running penalty for being outside r_goal (goal-holding term)
+  goal_softness: 0.25
+  obs_penalty: 200.0             # soft macro wall
+  wall_thickness: 0.3
+  edge_softness: 0.25
+  goal_gap_mult: 3.0              # amend4: goal waypoint 3 r_goal behind the wall, downstream chamber
+  goal_shape: flat                # amend7: grad V_goal = 0 inside r_goal
+
+macro_cost:
+  c_w: 1.0                       # W(m) = c_w m^2  (c_w=0 -> "W off", §9 (1))
+  w_bar: 10.0                    # soft collision barrier
+  m_bar: 6.25                    # = 1/R_BARRIER^2, agents/m^2
+  f_cap: 300.0                   # solver safeguard (inactive at m*: reported)
+
+fp:
+  damping: 0.02
+  max_iters: 800
+  burn_in: 200
+  tol: 0.005
+
+control:
+  c_dens: 1.0                    # C_DENS, prereg §3
+  hold_on_arrival: true          # amend7: u_nom = 0 inside r_goal when nearest estimated neighbour >= d_safe
+
+cbf:
+  d_safe: 0.55                   # amend7: D_COLLISION 0.30 + 0.25 m margin (was 0.40)
+  r_wall: 0.20                   # wall half-thickness 0.05 + R_D 0.15
+  r_body: 0.15
+  gamma: 20.0
+  rho: 1.0
+  slack_lin: 100.0
+  k_nb: 8
+  r_sense: 5.0
+  prio_gain: 2.0
+  prio_min: 0.25
+  u_box: 5.656854249492381       # V_MAX / sqrt(2)
+  tol: 1.0e-5
+  maxiter: 2000
+  qp_solver: exact_hard          # P1 fix: walls/arena own slack; "exact" = legacy shared slack (smoke attempt 3)
+

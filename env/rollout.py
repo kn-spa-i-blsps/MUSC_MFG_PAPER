@@ -18,7 +18,9 @@ from control.params import D_COLLISION, V_MAX
 
 def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_params=None):
     """Returns run(key, macro) -> logs; macro = {phi_grad, m_star, m_star_grad} (passed to jit as
-    arguments) + python floats dt, step. cfg keys: dt_exec, n_steps, nu, cbf_on, c_w, w_bar, m_bar, c_dens, cbf (dict of CBFParams)."""
+    arguments) + python floats dt, step. cfg keys: dt_exec, n_steps, nu, cbf_on, c_w, w_bar, m_bar, c_dens, cbf (dict of CBFParams);
+    optional (amend7): hold_on_arrival (bool; d_hold = cbf d_safe), log_xhat (bool: log x_hat - own
+    position per ordered pair as float16, the CBF neighbour indices and the hold flag)."""
     N = scenario.N
     W, H = scenario.arena
     arena_arr = jnp.array([W, H])
@@ -27,6 +29,8 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     prm = CBFParams(**cfg["cbf"])
     dt_exec, n_steps, nu = cfg["dt_exec"], cfg["n_steps"], cfg["nu"]
     cbf_on = cfg["cbf_on"]
+    hold = (goal, scenario.r_goal, prm.d_safe) if cfg.get("hold_on_arrival", False) else None
+    log_xhat = cfg.get("log_xhat", False)
     iu = jnp.triu_indices(N, 1)
 
     def step_fn(carry, k, macro):
@@ -37,7 +41,8 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
                          predictor_params=predictor_params, field_params=field_params)
         t_sim = k * dt_exec
         u_nom, mdiag = nominal_control(positions, x_hat, t_sim, N, macro, c_w=cfg["c_w"],
-                                       w_bar=cfg["w_bar"], m_bar=cfg["m_bar"], c_dens=cfg["c_dens"])
+                                       w_bar=cfg["w_bar"], m_bar=cfg["m_bar"], c_dens=cfg["c_dens"],
+                                       hold=hold)
         nrm = jnp.linalg.norm(u_nom, axis=-1, keepdims=True)
         u_nom = u_nom * jnp.minimum(1.0, V_MAX / jnp.maximum(nrm, 1e-9))
         if cbf_on:
@@ -46,7 +51,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
             u = jnp.clip(u_nom, -prm.u_box, prm.u_box)
             z = jnp.zeros(N)
             info = {"slack_max": z, "slack_hard": z, "intervention": z, "qp_iters": jnp.zeros(N, jnp.int32),
-                    "row_violation": z}
+                    "row_violation": z, "nb_idx": jnp.zeros((N, prm.k_nb), jnp.int32)}
         key, nk = jax.random.split(key)
         noise = jax.random.normal(nk, positions.shape) * jnp.sqrt(2.0 * nu * dt_exec)
         positions_new = jnp.clip(positions + dt_exec * u + noise, jnp.zeros(2), arena_arr)
@@ -68,6 +73,10 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
              "qp_iters": info["qp_iters"], "row_violation": info["row_violation"],
              "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true,
              "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all}
+        if log_xhat:
+            y["xhat_rel"] = (x_hat - positions[:, None]).astype(jnp.float16)   # (N,N,2) estimate - own pos
+            y["cbf_nb_idx"] = info["nb_idx"].astype(jnp.int8)
+            y["held"] = mdiag["held"]
         return (positions_new, history, key, warm), y
 
     def run_arrays(key, arrays, dt, step):

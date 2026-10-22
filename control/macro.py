@@ -9,6 +9,9 @@ Density is emergent: there is no attraction towards m* (the excess term is one-s
 the realized local density is at or below the equilibrium's). The local goal observation
 (range, bearing) is computed from the agent's own position, independently of Phi (prereg §4, §10);
 the CBF uses it for goal-biased priority.
+
+Hold-on-arrival (amend7, optional): an agent inside r_goal whose nearest ESTIMATED neighbour is at
+least d_hold away gets u_nom = 0; otherwise u_nom is unchanged (the density term can still separate).
 """
 import jax.numpy as jnp
 
@@ -29,9 +32,9 @@ def goal_observation(positions, goal):
     return rng, bearing
 
 
-def nominal_control(positions, x_hat, t_sim, N, macro, *, c_w, w_bar, m_bar, c_dens):
+def nominal_control(positions, x_hat, t_sim, N, macro, *, c_w, w_bar, m_bar, c_dens, hold=None):
     """macro: dict with phi_grad (T+1,nx,nz,2), m_star (T+1,nx,nz), m_star_grad (T+1,nx,nz,2),
-    dt, step. Returns (u_nom (N,2), diag)."""
+    dt, step. hold: None or (goal (2,), r_goal, d_hold) for hold-on-arrival. Returns (u_nom (N,2), diag)."""
     dt, step = macro["dt"], macro["step"]
     route = sample_time_field(macro["phi_grad"], positions, t_sim, dt, step)
     m_hat, grad_m_hat = local_density_and_grad(positions, x_hat, N)
@@ -42,5 +45,13 @@ def nominal_control(positions, x_hat, t_sim, N, macro, *, c_w, w_bar, m_bar, c_d
     grad_local = (2.0 * c_w * excess[:, None] * (grad_m_hat - grad_m_star)
                   + 2.0 * w_bar * over[:, None] * grad_m_hat)
     u = route - c_dens * grad_local
+    held = jnp.zeros(positions.shape[0], bool)
+    if hold is not None:
+        goal, r_goal, d_hold = hold
+        d_hat = jnp.linalg.norm(positions[:, None] - x_hat, axis=-1)
+        d_hat = jnp.where(jnp.eye(N, dtype=bool), jnp.inf, d_hat)
+        held = (jnp.linalg.norm(positions - jnp.asarray(goal)[None], axis=-1) <= r_goal) & \
+               (jnp.min(d_hat, axis=1) >= d_hold)
+        u = jnp.where(held[:, None], 0.0, u)
     return u, {"m_hat": m_hat, "m_star": m_star, "route_mag": jnp.linalg.norm(route, axis=-1),
-               "local_mag": c_dens * jnp.linalg.norm(grad_local, axis=-1)}
+               "local_mag": c_dens * jnp.linalg.norm(grad_local, axis=-1), "held": held}
