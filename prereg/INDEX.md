@@ -7,5 +7,6 @@
 | prereg_projectA_amend2_process_noise.md | 4c5015a3a10776e821e492b86f61facff2fbd638773dddd2f69f95d528b57ae4 | §3 process noise NU; §9 run spec |
 | prereg_projectA_amend3_cdens_ablation.md | 54edaa364fa8b7f04679da3fa3226312178ecfeb922d81fa8b461c1ea13d1f50 | §2/§3 C_DENS = 0 diagnostic ablation |
 | prereg_projectA_amend4_far_goal.md | 0869f717d89cfb8364ae4e9f13817e5dee05c0aae5923f0bd88e62ecbabec087 | single-gate downstream chamber, goal waypoint 3 r_goal behind the gate |
+| prereg_projectA_amend5_horizon.md | 4a9c86b91e458d1df3b690ad5506fee4b44190f21a6b6fc80af3942866fca24e | horizon = HORIZON_MULT * path length to goal / V_NOM (far goal) |
 
 Amendments take precedence over the original for the items they name; the original is never edited.
