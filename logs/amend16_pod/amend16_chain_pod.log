@@ -1,0 +1,174 @@
+2026-10-23 18:51:18 chain start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-23 18:51:18 aneks sha256 e6ec2088c0b9ba137d13080cd7140c28c3003b5a7983479cb01cfd4fb60ad780 HEAD 58280252176b631d2098aeb29b43f4ea7a501774
+2026-10-23 18:51:18 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-23 18:51:18 DEVIATION: s=1.05 cache results/cache/macro_N100_cw1_f770143b36.npz missing on this pod -> re-solve (same key)
+2026-10-23 18:57:34 re-solve exit=0 "cache": "results/cache/macro_N100_cw1_f770143b36.npz" "solve_seconds": 348.7137224674225 "nan": false 
+2026-10-23 18:57:44 s=1.05 cache present: results/cache/macro_N100_cw1_f770143b36.npz sha256 683f490f6ec82ea0
+2026-10-23 18:57:59 start p1_d0.55 real 0
+2026-10-23 18:57:59 start p1_d0.55 real 1
+2026-10-23 18:58:35 done p1_d0.55 real 0 exit=0 [real seed=0] 20s compl=0.860 coll=35433 minsep=0.001 p5=0.032 interv=0.675 slack=0.1446
+2026-10-23 18:58:35 start p1_d0.55 real 2
+2026-10-23 18:58:36 done p1_d0.55 real 1 exit=0 [real seed=1] 20s compl=0.870 coll=34527 minsep=0.002 p5=0.022 interv=0.680 slack=0.1390
+2026-10-23 18:58:36 start p1_d0.55 real 3
+2026-10-23 18:59:10 done p1_d0.55 real 2 exit=0 [real seed=2] 19s compl=0.840 coll=34774 minsep=0.002 p5=0.019 interv=0.680 slack=0.1386
+2026-10-23 18:59:11 start p1_d0.55 real 4
+2026-10-23 18:59:11 done p1_d0.55 real 3 exit=0 [real seed=3] 20s compl=0.830 coll=35184 minsep=0.001 p5=0.033 interv=0.685 slack=0.1421
+2026-10-23 18:59:39 done p1_d0.55 real 4 exit=0 [real seed=4] 12s compl=0.900 coll=34814 minsep=0.002 p5=0.039 interv=0.682 slack=0.1423
+2026-10-23 18:59:39 start p1_d0.90 real 0
+2026-10-23 18:59:39 start p1_d0.90 real 1
+2026-10-23 19:00:15 done p1_d0.90 real 0 exit=0 [real seed=0] 19s compl=0.530 coll=36447 minsep=0.001 p5=0.024 interv=0.809 slack=0.3333
+2026-10-23 19:00:16 start p1_d0.90 real 2
+2026-10-23 19:00:16 done p1_d0.90 real 1 exit=0 [real seed=1] 19s compl=0.550 coll=38636 minsep=0.001 p5=0.017 interv=0.807 slack=0.3325
+2026-10-23 19:00:16 start p1_d0.90 real 3
+2026-10-23 19:00:49 done p1_d0.90 real 2 exit=0 [real seed=2] 17s compl=0.440 coll=36836 minsep=0.001 p5=0.015 interv=0.814 slack=0.3381
+2026-10-23 19:00:49 start p1_d0.90 real 4
+2026-10-23 19:00:51 done p1_d0.90 real 3 exit=0 [real seed=3] 18s compl=0.470 coll=37343 minsep=0.000 p5=0.019 interv=0.815 slack=0.3343
+2026-10-23 19:01:18 done p1_d0.90 real 4 exit=0 [real seed=4] 11s compl=0.480 coll=35025 minsep=0.000 p5=0.026 interv=0.817 slack=0.3333
+2026-10-23 19:01:18 start p1_d1.30 real 0
+2026-10-23 19:01:18 start p1_d1.30 real 1
+2026-10-23 19:01:54 done p1_d1.30 real 1 exit=0 [real seed=1] 18s compl=0.320 coll=32070 minsep=0.001 p5=0.032 interv=0.897 slack=0.5311
+2026-10-23 19:01:55 start p1_d1.30 real 2
+2026-10-23 19:01:55 done p1_d1.30 real 0 exit=0 [real seed=0] 19s compl=0.280 coll=34591 minsep=0.003 p5=0.028 interv=0.902 slack=0.5423
+2026-10-23 19:01:56 start p1_d1.30 real 3
+2026-10-23 19:02:28 done p1_d1.30 real 2 exit=0 [real seed=2] 17s compl=0.320 coll=36020 minsep=0.000 p5=0.023 interv=0.897 slack=0.5499
+2026-10-23 19:02:28 start p1_d1.30 real 4
+2026-10-23 19:02:30 done p1_d1.30 real 3 exit=0 [real seed=3] 18s compl=0.340 coll=37122 minsep=0.000 p5=0.016 interv=0.895 slack=0.5460
+2026-10-23 19:02:58 done p1_d1.30 real 4 exit=0 [real seed=4] 12s compl=0.330 coll=35089 minsep=0.001 p5=0.031 interv=0.897 slack=0.5335
+2026-10-23 19:02:58 start p1_d1.90 real 0
+2026-10-23 19:02:58 start p1_d1.90 real 1
+2026-10-23 19:03:35 done p1_d1.90 real 1 exit=0 [real seed=1] 20s compl=0.240 coll=36076 minsep=0.001 p5=0.021 interv=0.966 slack=0.8130
+2026-10-23 19:03:35 start p1_d1.90 real 2
+2026-10-23 19:03:36 done p1_d1.90 real 0 exit=0 [real seed=0] 20s compl=0.240 coll=38372 minsep=0.000 p5=0.014 interv=0.966 slack=0.8115
+2026-10-23 19:03:36 start p1_d1.90 real 3
+2026-10-23 19:04:09 done p1_d1.90 real 2 exit=0 [real seed=2] 18s compl=0.240 coll=35108 minsep=0.001 p5=0.028 interv=0.965 slack=0.8120
+2026-10-23 19:04:09 start p1_d1.90 real 4
+2026-10-23 19:04:11 done p1_d1.90 real 3 exit=0 [real seed=3] 19s compl=0.270 coll=34549 minsep=0.001 p5=0.017 interv=0.966 slack=0.8141
+2026-10-23 19:05:00 done p1_d1.90 real 4 exit=0 [real seed=4] 11s compl=0.230 coll=34931 minsep=0.000 p5=0.031 interv=0.965 slack=0.8102
+2026-10-23 19:05:00 part1 done: 20/20 metrics
+2026-10-23 19:05:00 part1 cache: 20  "macro_cache": "results/cache/macro_N100_cw1_f770143b36.npz",
+2026-10-23 19:05:40 part3 rollout real exit=0 [real seed=0] 13s compl=0.860 coll=35433 minsep=0.001 p5=0.032 interv=0.675 slack=0.1446
+2026-10-23 19:06:23 part3 rollout real_robust_d1.90 exit=0 [real seed=0] 13s compl=0.240 coll=38372 minsep=0.000 p5=0.014 interv=0.966 slack=0.8115
+2026-10-23 19:07:08 part3 rollout learned exit=0 [learned seed=0] 18s compl=0.680 coll=1699 minsep=0.026 p5=0.220 interv=0.739 slack=0.0195
+2026-10-23 19:07:43 cbf-check exit=0
+2026-10-23 19:07:43 CBF: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2026-10-23 19:07:43 CBF: !!! CBF NOT ENGAGED / BYPASSED in ['real', 'learned'] -> WIRING ARTIFACT: amend15 baseline rows must be quarantined (prereg amend16 §3)
+2026-10-23 19:07:43 CBF: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+2026-10-23 19:09:58 render exit=0
+2026-10-23 19:09:58 solve start gate=1.50
+2026-10-23 19:16:13 solve done gate=1.50 exit=0 "solve_seconds": 348.3385624885559
+2026-10-23 19:16:13 start p2_g1.50 learned 0
+2026-10-23 19:16:13 start p2_g1.50 real 0
+2026-10-23 19:17:04 done p2_g1.50 real 0 exit=0 [real seed=0] 17s compl=0.860 coll=40493 minsep=0.003 p5=0.027 interv=0.695 slack=0.1608
+2026-10-23 19:17:04 start p2_g1.50 real 1
+2026-10-23 19:17:07 done p2_g1.50 learned 0 exit=0 [learned seed=0] 22s compl=0.630 coll=2784 minsep=0.010 p5=0.218 interv=0.772 slack=0.0255
+2026-10-23 19:17:08 start p2_g1.50 learned 1
+2026-10-23 19:17:35 done p2_g1.50 real 1 exit=0 [real seed=1] 12s compl=0.810 coll=39904 minsep=0.001 p5=0.025 interv=0.704 slack=0.1606
+2026-10-23 19:17:36 start p2_g1.50 real 2
+2026-10-23 19:17:44 done p2_g1.50 learned 1 exit=0 [learned seed=1] 18s compl=0.670 coll=2702 minsep=0.011 p5=0.204 interv=0.779 slack=0.0287
+2026-10-23 19:17:44 start p2_g1.50 learned 2
+2026-10-23 19:18:04 done p2_g1.50 real 2 exit=0 [real seed=2] 12s compl=0.790 coll=41066 minsep=0.001 p5=0.023 interv=0.712 slack=0.1580
+2026-10-23 19:18:05 start p2_g1.50 real 3
+2026-10-23 19:18:21 done p2_g1.50 learned 2 exit=0 [learned seed=2] 18s compl=0.610 coll=1538 minsep=0.001 p5=0.271 interv=0.781 slack=0.0266
+2026-10-23 19:18:21 start p2_g1.50 learned 3
+2026-10-23 19:18:35 done p2_g1.50 real 3 exit=0 [real seed=3] 12s compl=0.860 coll=41062 minsep=0.001 p5=0.029 interv=0.707 slack=0.1623
+2026-10-23 19:18:35 start p2_g1.50 real 4
+2026-10-23 19:18:57 done p2_g1.50 learned 3 exit=0 [learned seed=3] 17s compl=0.630 coll=2154 minsep=0.023 p5=0.249 interv=0.782 slack=0.0267
+2026-10-23 19:18:57 start p2_g1.50 learned 4
+2026-10-23 19:19:08 done p2_g1.50 real 4 exit=0 [real seed=4] 12s compl=0.840 coll=39933 minsep=0.001 p5=0.018 interv=0.707 slack=0.1609
+2026-10-23 19:19:31 done p2_g1.50 learned 4 exit=0 [learned seed=4] 17s compl=0.630 coll=1522 minsep=0.058 p5=0.258 interv=0.781 slack=0.0300
+2026-10-23 19:19:31 part2 gate=1.50: 10/10 metrics
+2026-10-23 19:19:31 solve start gate=2.30
+2026-10-23 19:25:46 solve done gate=2.30 exit=0 "solve_seconds": 348.4379463195801
+2026-10-23 19:25:47 start p2_g2.30 real 0
+2026-10-23 19:25:47 start p2_g2.30 learned 0
+2026-10-23 19:26:38 done p2_g2.30 real 0 exit=0 [real seed=0] 17s compl=0.790 coll=34517 minsep=0.001 p5=0.042 interv=0.675 slack=0.1402
+2026-10-23 19:26:38 start p2_g2.30 real 1
+2026-10-23 19:26:41 done p2_g2.30 learned 0 exit=0 [learned seed=0] 21s compl=0.620 coll=1495 minsep=0.008 p5=0.204 interv=0.753 slack=0.0176
+2026-10-23 19:26:41 start p2_g2.30 learned 1
+2026-10-23 19:27:09 done p2_g2.30 real 1 exit=0 [real seed=1] 13s compl=0.820 coll=33603 minsep=0.002 p5=0.028 interv=0.681 slack=0.1361
+2026-10-23 19:27:09 start p2_g2.30 real 2
+2026-10-23 19:27:17 done p2_g2.30 learned 1 exit=0 [learned seed=1] 18s compl=0.650 coll=1557 minsep=0.015 p5=0.241 interv=0.750 slack=0.0191
+2026-10-23 19:27:17 start p2_g2.30 learned 2
+2026-10-23 19:27:40 done p2_g2.30 real 2 exit=0 [real seed=2] 12s compl=0.830 coll=31993 minsep=0.002 p5=0.025 interv=0.670 slack=0.1341
+2026-10-23 19:27:40 start p2_g2.30 real 3
+2026-10-23 19:27:54 done p2_g2.30 learned 2 exit=0 [learned seed=2] 17s compl=0.640 coll=1920 minsep=0.010 p5=0.201 interv=0.753 slack=0.0169
+2026-10-23 19:27:54 start p2_g2.30 learned 3
+2026-10-23 19:28:12 done p2_g2.30 real 3 exit=0 [real seed=3] 12s compl=0.790 coll=33817 minsep=0.001 p5=0.025 interv=0.672 slack=0.1391
+2026-10-23 19:28:12 start p2_g2.30 real 4
+2026-10-23 19:28:30 done p2_g2.30 learned 3 exit=0 [learned seed=3] 17s compl=0.650 coll=703 minsep=0.021 p5=0.215 interv=0.759 slack=0.0150
+2026-10-23 19:28:30 start p2_g2.30 learned 4
+2026-10-23 19:28:45 done p2_g2.30 real 4 exit=0 [real seed=4] 13s compl=0.830 coll=32189 minsep=0.002 p5=0.049 interv=0.674 slack=0.1342
+2026-10-23 19:29:05 done p2_g2.30 learned 4 exit=0 [learned seed=4] 17s compl=0.640 coll=1841 minsep=0.029 p5=0.245 interv=0.747 slack=0.0179
+2026-10-23 19:29:05 part2 gate=2.30: 10/10 metrics
+2026-10-23 19:29:05 solve start gate=3.50
+2026-10-23 19:35:18 solve done gate=3.50 exit=0 "solve_seconds": 347.7726676464081
+2026-10-23 19:35:18 start p2_g3.50 learned 0
+2026-10-23 19:35:18 start p2_g3.50 real 0
+2026-10-23 19:36:22 done p2_g3.50 real 0 exit=0 [real seed=0] 14s compl=0.900 coll=33280 minsep=0.001 p5=0.022 interv=0.661 slack=0.1364
+2026-10-23 19:36:22 start p2_g3.50 real 1
+2026-10-23 19:36:27 done p2_g3.50 learned 0 exit=0 [learned seed=0] 19s compl=0.760 coll=530 minsep=0.041 p5=0.311 interv=0.710 slack=0.0106
+2026-10-23 19:36:27 start p2_g3.50 learned 1
+2026-10-23 19:37:22 done p2_g3.50 real 1 exit=0 [real seed=1] 16s compl=0.860 coll=29086 minsep=0.002 p5=0.036 interv=0.663 slack=0.1239
+2026-10-23 19:37:22 start p2_g3.50 real 2
+2026-10-23 19:37:27 done p2_g3.50 learned 1 exit=0 [learned seed=1] 21s compl=0.710 coll=849 minsep=0.016 p5=0.203 interv=0.710 slack=0.0119
+2026-10-23 19:37:27 start p2_g3.50 learned 2
+2026-10-23 19:37:53 done p2_g3.50 real 2 exit=0 [real seed=2] 12s compl=0.860 coll=29640 minsep=0.002 p5=0.031 interv=0.663 slack=0.1262
+2026-10-23 19:37:53 start p2_g3.50 real 3
+2026-10-23 19:38:02 done p2_g3.50 learned 2 exit=0 [learned seed=2] 17s compl=0.690 coll=397 minsep=0.008 p5=0.330 interv=0.715 slack=0.0096
+2026-10-23 19:38:02 start p2_g3.50 learned 3
+2026-10-23 19:38:20 done p2_g3.50 real 3 exit=0 [real seed=3] 11s compl=0.870 coll=30879 minsep=0.000 p5=0.030 interv=0.661 slack=0.1255
+2026-10-23 19:38:21 start p2_g3.50 real 4
+2026-10-23 19:38:35 done p2_g3.50 learned 3 exit=0 [learned seed=3] 16s compl=0.720 coll=740 minsep=0.011 p5=0.242 interv=0.712 slack=0.0100
+2026-10-23 19:38:35 start p2_g3.50 learned 4
+2026-10-23 19:38:52 done p2_g3.50 real 4 exit=0 [real seed=4] 12s compl=0.880 coll=30596 minsep=0.002 p5=0.034 interv=0.667 slack=0.1291
+2026-10-23 19:39:08 done p2_g3.50 learned 4 exit=0 [learned seed=4] 16s compl=0.730 coll=757 minsep=0.010 p5=0.272 interv=0.712 slack=0.0111
+2026-10-23 19:39:08 part2 gate=3.50: 10/10 metrics
+2026-10-23 19:39:08 solve start gate=5.00
+2026-10-23 19:45:22 solve done gate=5.00 exit=0 "solve_seconds": 348.168080329895
+2026-10-23 19:45:22 start p2_g5.00 real 0
+2026-10-23 19:45:22 start p2_g5.00 learned 0
+2026-10-23 19:46:12 done p2_g5.00 real 0 exit=0 [real seed=0] 17s compl=0.830 coll=30222 minsep=0.001 p5=0.018 interv=0.679 slack=0.1264
+2026-10-23 19:46:12 start p2_g5.00 real 1
+2026-10-23 19:46:15 done p2_g5.00 learned 0 exit=0 [learned seed=0] 21s compl=0.660 coll=466 minsep=0.015 p5=0.291 interv=0.717 slack=0.0067
+2026-10-23 19:46:15 start p2_g5.00 learned 1
+2026-10-23 19:46:44 done p2_g5.00 real 1 exit=0 [real seed=1] 14s compl=0.850 coll=28184 minsep=0.000 p5=0.038 interv=0.660 slack=0.1205
+2026-10-23 19:46:44 start p2_g5.00 real 2
+2026-10-23 19:46:51 done p2_g5.00 learned 1 exit=0 [learned seed=1] 18s compl=0.660 coll=289 minsep=0.071 p5=0.283 interv=0.721 slack=0.0081
+2026-10-23 19:46:51 start p2_g5.00 learned 2
+2026-10-23 19:47:15 done p2_g5.00 real 2 exit=0 [real seed=2] 12s compl=0.810 coll=28315 minsep=0.002 p5=0.047 interv=0.663 slack=0.1225
+2026-10-23 19:47:15 start p2_g5.00 real 3
+2026-10-23 19:47:26 done p2_g5.00 learned 2 exit=0 [learned seed=2] 17s compl=0.710 coll=389 minsep=0.081 p5=0.286 interv=0.721 slack=0.0064
+2026-10-23 19:47:27 start p2_g5.00 learned 3
+2026-10-23 19:47:45 done p2_g5.00 real 3 exit=0 [real seed=3] 12s compl=0.800 coll=30296 minsep=0.001 p5=0.020 interv=0.660 slack=0.1246
+2026-10-23 19:47:46 start p2_g5.00 real 4
+2026-10-23 19:48:02 done p2_g5.00 learned 3 exit=0 [learned seed=3] 17s compl=0.620 coll=449 minsep=0.005 p5=0.286 interv=0.722 slack=0.0063
+2026-10-23 19:48:02 start p2_g5.00 learned 4
+2026-10-23 19:48:17 done p2_g5.00 real 4 exit=0 [real seed=4] 12s compl=0.800 coll=27182 minsep=0.002 p5=0.040 interv=0.662 slack=0.1211
+2026-10-23 19:48:37 done p2_g5.00 learned 4 exit=0 [learned seed=4] 16s compl=0.650 coll=379 minsep=0.009 p5=0.272 interv=0.721 slack=0.0069
+2026-10-23 19:48:37 part2 gate=5.00: 10/10 metrics
+2026-10-23 19:48:37 solve start gate=7.00
+2026-10-23 19:54:47 solve done gate=7.00 exit=0 "solve_seconds": 347.2075819969177
+2026-10-23 19:54:48 start p2_g7.00 learned 0
+2026-10-23 19:54:48 start p2_g7.00 real 0
+2026-10-23 19:56:00 done p2_g7.00 real 0 exit=0 [real seed=0] 15s compl=0.860 coll=26983 minsep=0.001 p5=0.033 interv=0.638 slack=0.1148
+2026-10-23 19:56:00 start p2_g7.00 real 1
+2026-10-23 19:56:03 done p2_g7.00 learned 0 exit=0 [learned seed=0] 19s compl=0.740 coll=383 minsep=0.022 p5=0.303 interv=0.681 slack=0.0044
+2026-10-23 19:56:04 start p2_g7.00 learned 1
+2026-10-23 19:56:40 done p2_g7.00 real 1 exit=0 [real seed=1] 12s compl=0.820 coll=25633 minsep=0.002 p5=0.037 interv=0.645 slack=0.1125
+2026-10-23 19:56:40 start p2_g7.00 real 2
+2026-10-23 19:56:47 done p2_g7.00 learned 1 exit=0 [learned seed=1] 17s compl=0.740 coll=333 minsep=0.052 p5=0.207 interv=0.662 slack=0.0049
+2026-10-23 19:56:47 start p2_g7.00 learned 2
+2026-10-23 19:57:14 done p2_g7.00 real 2 exit=0 [real seed=2] 11s compl=0.890 coll=23538 minsep=0.002 p5=0.062 interv=0.633 slack=0.1080
+2026-10-23 19:57:14 start p2_g7.00 real 3
+2026-10-23 19:57:24 done p2_g7.00 learned 2 exit=0 [learned seed=2] 15s compl=0.740 coll=445 minsep=0.046 p5=0.279 interv=0.666 slack=0.0041
+2026-10-23 19:57:25 start p2_g7.00 learned 3
+2026-10-23 19:57:51 done p2_g7.00 real 3 exit=0 [real seed=3] 12s compl=0.850 coll=26748 minsep=0.001 p5=0.023 interv=0.642 slack=0.1137
+2026-10-23 19:57:51 start p2_g7.00 real 4
+2026-10-23 19:57:58 done p2_g7.00 learned 3 exit=0 [learned seed=3] 16s compl=0.750 coll=378 minsep=0.009 p5=0.231 interv=0.677 slack=0.0039
+2026-10-23 19:57:58 start p2_g7.00 learned 4
+2026-10-23 19:58:18 done p2_g7.00 real 4 exit=0 [real seed=4] 11s compl=0.820 coll=26478 minsep=0.004 p5=0.030 interv=0.650 slack=0.1165
+2026-10-23 19:58:37 done p2_g7.00 learned 4 exit=0 [learned seed=4] 15s compl=0.760 coll=605 minsep=0.009 p5=0.196 interv=0.669 slack=0.0047
+2026-10-23 19:58:37 part2 gate=7.00: 10/10 metrics
+2026-10-23 20:02:51 report exit=0
+2026-10-23 20:02:51 chain end
+2026-10-23 20:02:51 finish status=DONE

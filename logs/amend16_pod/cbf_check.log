@@ -1,0 +1,100 @@
+{
+ "cell": "real",
+ "arm": "real",
+ "d_safe_config": 0.55,
+ "steps": 8613,
+ "N": 100,
+ "frac_agent_steps_neighbour_set_nonempty": 1.0,
+ "mean_valid_neighbour_rows": 7.987191454777662,
+ "frac_agent_steps_est_neighbour_inside_d_safe": 0.3892128178335075,
+ "cbf_intervention_rate": 0.674831069313828,
+ "qp_nan_fallbacks": 0,
+ "row_violation_max": 0.0038123130798339844,
+ "replay": {
+  "n_steps": 200,
+  "intervened_agent_steps": 13536,
+  "mean_err_vs_logged_u_own_d_safe": 2.03381700418702,
+  "alt_d_safe": 1.9,
+  "mean_err_vs_logged_u_alt_d_safe": 5.772857501409775,
+  "mean_err_vs_logged_u_no_cbf(u_nom_box)": 5.092563954410073,
+  "max_err_own_all_agents": 14.692844720996902
+ },
+ "collision_agent_steps": {
+  "n": 70866,
+  "frac_partner_in_neighbour_set": 0.8318657748426608,
+  "frac_partner_valid_row": 0.8318657748426608,
+  "frac_est_dist_ge_d_safe": 0.7837891231338018,
+  "true_d_median": 0.2151804921714643,
+  "est_d_median": 1.036146560775276,
+  "est_minus_true_median": 0.8347410941934479
+ },
+ "cbf_engaged": false
+}
+{
+ "cell": "real_robust_d1.90",
+ "arm": "real",
+ "d_safe_config": 1.9,
+ "steps": 8613,
+ "N": 100,
+ "frac_agent_steps_neighbour_set_nonempty": 0.9999419482178102,
+ "mean_valid_neighbour_rows": 7.880638569604087,
+ "frac_agent_steps_est_neighbour_inside_d_safe": 0.9136212701729943,
+ "cbf_intervention_rate": 0.9664774178567282,
+ "qp_nan_fallbacks": 0,
+ "row_violation_max": 0.0035017728805541992,
+ "replay": {
+  "n_steps": 200,
+  "intervened_agent_steps": 19311,
+  "mean_err_vs_logged_u_own_d_safe": 0.42950942505402284,
+  "alt_d_safe": 0.55,
+  "mean_err_vs_logged_u_alt_d_safe": 5.688966339441911,
+  "mean_err_vs_logged_u_no_cbf(u_nom_box)": 7.5110364677489905,
+  "max_err_own_all_agents": 13.641186947691114
+ },
+ "collision_agent_steps": {
+  "n": 76744,
+  "frac_partner_in_neighbour_set": 0.7843740227249035,
+  "frac_partner_valid_row": 0.7842958407171896,
+  "frac_est_dist_ge_d_safe": 0.35512873970603565,
+  "true_d_median": 0.19784276493069347,
+  "est_d_median": 1.4410245461358908,
+  "est_minus_true_median": 1.2597571986286553
+ },
+ "cbf_engaged": true
+}
+{
+ "cell": "learned",
+ "arm": "learned",
+ "d_safe_config": 0.55,
+ "steps": 8613,
+ "N": 100,
+ "frac_agent_steps_neighbour_set_nonempty": 0.9999814234296993,
+ "mean_valid_neighbour_rows": 7.979050272843376,
+ "frac_agent_steps_est_neighbour_inside_d_safe": 0.0974503657262278,
+ "cbf_intervention_rate": 0.7386961569720191,
+ "qp_nan_fallbacks": 0,
+ "row_violation_max": 0.0017521381378173828,
+ "replay": {
+  "n_steps": 200,
+  "intervened_agent_steps": 14743,
+  "mean_err_vs_logged_u_own_d_safe": 2.801585906488428,
+  "alt_d_safe": 1.9,
+  "mean_err_vs_logged_u_alt_d_safe": 5.684410277402996,
+  "mean_err_vs_logged_u_no_cbf(u_nom_box)": 4.689230390058789,
+  "max_err_own_all_agents": 15.168778789725039
+ },
+ "collision_agent_steps": {
+  "n": 3398,
+  "frac_partner_in_neighbour_set": 1.0,
+  "frac_partner_valid_row": 1.0,
+  "frac_est_dist_ge_d_safe": 0.3805179517363155,
+  "true_d_median": 0.25080814537054974,
+  "est_d_median": 0.5084517498060048,
+  "est_minus_true_median": 0.26594739545451485
+ },
+ "cbf_engaged": false
+}
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! CBF NOT ENGAGED / BYPASSED in ['real', 'learned'] -> WIRING ARTIFACT: amend15 baseline rows must be quarantined (prereg amend16 §3)
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
