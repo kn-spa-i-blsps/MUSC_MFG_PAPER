@@ -68,6 +68,10 @@ def main():
     ap.add_argument("--weights", default=None)
     a = ap.parse_args()
     cfg = yaml.safe_load(open(a.config))
+    if cfg.get("matmul_precision"):    # amend20: global matmul precision (e.g. "highest"), before anything is traced
+        jax.config.update("jax_default_matmul_precision", cfg["matmul_precision"])
+    precision = jax.config.jax_default_matmul_precision
+    print(f"[ladder] jax_default_matmul_precision = {precision!r}", flush=True)
     sc, grid, sol, rcfg, path = setup(cfg)
     fields = {k: sol[k] for k in ("phi_grad", "m_star", "m_star_grad")}
     fields.update(dt=sol["dt"], step=sol["step"])
@@ -87,7 +91,7 @@ def main():
         metrics, series = summarize(logs, sc, cfg["dt_exec"], c_w=1.0)
         gz, _ = goal_zone_facts(series, logs, sc, cfg)
         metrics.update(gz, seed=seed, arm=arm, wall_seconds=wall, macro_cache=os.path.relpath(path, ROOT),
-                       weights=a.weights)
+                       weights=a.weights, matmul_precision=precision)
         np.savez_compressed(os.path.join(out_dir, f"logs_seed{seed}.npz"),
                             **{k: np.asarray(v) for k, v in logs.items()},
                             t=series["t"], arrived_frac=series["arrived_frac"])
