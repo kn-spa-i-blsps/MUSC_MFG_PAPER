@@ -1,0 +1,49 @@
+2026-10-23 22:23:31 chain start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-23 22:23:31 aneks sha256 e8c59edf818719dde588989fb753eacb85e33585ee03b218aff3c7e24411d465 HEAD 921c0318fec5dcb723efe6af2218980be1e19be6
+2026-10-23 22:23:31 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-23 22:23:42 s=1.05 cache present: results/cache/macro_N100_cw1_f770143b36.npz sha256 6fdff1341db7124c
+2026-10-23 22:23:42 start d0.55 learned 1
+2026-10-23 22:23:42 start d0.55 learned 0
+2026-10-23 22:24:29 done d0.55 learned 0 exit=0 [learned seed=0] 26s compl=0.680 coll=1565 minsep=0.025 p5=0.212 interv=0.737 slack=0.0187
+2026-10-23 22:24:29 start d0.55 learned 2
+2026-10-23 22:24:30 done d0.55 learned 1 exit=0 [learned seed=1] 27s compl=0.670 coll=828 minsep=0.044 p5=0.260 interv=0.741 slack=0.0190
+2026-10-23 22:24:30 start d0.55 learned 3
+2026-10-23 22:25:13 done d0.55 learned 2 exit=0 [learned seed=2] 25s compl=0.660 coll=1336 minsep=0.010 p5=0.258 interv=0.738 slack=0.0173
+2026-10-23 22:25:13 start d0.55 learned 4
+2026-10-23 22:25:15 done d0.55 learned 3 exit=0 [learned seed=3] 26s compl=0.680 coll=791 minsep=0.012 p5=0.272 interv=0.739 slack=0.0154
+2026-10-23 22:25:49 done d0.55 learned 4 exit=0 [learned seed=4] 17s compl=0.670 coll=1607 minsep=0.016 p5=0.258 interv=0.739 slack=0.0199
+2026-10-23 22:25:49 start d0.70 learned 0
+2026-10-23 22:25:49 start d0.70 learned 1
+2026-10-23 22:26:33 done d0.70 learned 0 exit=0 [learned seed=0] 26s compl=0.440 coll=1220 minsep=0.007 p5=0.262 interv=0.852 slack=0.0688
+2026-10-23 22:26:33 start d0.70 learned 2
+2026-10-23 22:26:34 done d0.70 learned 1 exit=0 [learned seed=1] 26s compl=0.460 coll=811 minsep=0.046 p5=0.253 interv=0.849 slack=0.0676
+2026-10-23 22:26:34 start d0.70 learned 3
+2026-10-23 22:27:19 done d0.70 learned 2 exit=0 [learned seed=2] 27s compl=0.410 coll=866 minsep=0.014 p5=0.278 interv=0.857 slack=0.0715
+2026-10-23 22:27:19 start d0.70 learned 4
+2026-10-23 22:27:19 done d0.70 learned 3 exit=0 [learned seed=3] 27s compl=0.420 coll=984 minsep=0.033 p5=0.283 interv=0.856 slack=0.0700
+2026-10-23 22:27:54 done d0.70 learned 4 exit=0 [learned seed=4] 17s compl=0.440 coll=1142 minsep=0.083 p5=0.231 interv=0.851 slack=0.0728
+2026-10-23 22:27:54 start d0.85 learned 1
+2026-10-23 22:27:54 start d0.85 learned 0
+2026-10-23 22:28:40 done d0.85 learned 0 exit=0 [learned seed=0] 27s compl=0.360 coll=404 minsep=0.178 p5=0.320 interv=0.881 slack=0.1347
+2026-10-23 22:28:41 start d0.85 learned 2
+2026-10-23 22:28:41 done d0.85 learned 1 exit=0 [learned seed=1] 27s compl=0.360 coll=431 minsep=0.009 p5=0.243 interv=0.878 slack=0.1281
+2026-10-23 22:28:41 start d0.85 learned 3
+2026-10-23 22:29:23 done d0.85 learned 2 exit=0 [learned seed=2] 25s compl=0.330 coll=1151 minsep=0.125 p5=0.232 interv=0.883 slack=0.1266
+2026-10-23 22:29:23 start d0.85 learned 4
+2026-10-23 22:29:25 done d0.85 learned 3 exit=0 [learned seed=3] 25s compl=0.360 coll=513 minsep=0.014 p5=0.320 interv=0.878 slack=0.1335
+2026-10-23 22:29:58 done d0.85 learned 4 exit=0 [learned seed=4] 17s compl=0.370 coll=233 minsep=0.094 p5=0.306 interv=0.877 slack=0.1293
+2026-10-23 22:29:58 start d1.00 learned 0
+2026-10-23 22:29:58 start d1.00 learned 1
+2026-10-23 22:30:42 done d1.00 learned 1 exit=0 [learned seed=1] 26s compl=0.290 coll=280 minsep=0.140 p5=0.325 interv=0.894 slack=0.2199
+2026-10-23 22:30:43 start d1.00 learned 2
+2026-10-23 22:30:43 done d1.00 learned 0 exit=0 [learned seed=0] 27s compl=0.300 coll=167 minsep=0.145 p5=0.359 interv=0.895 slack=0.1954
+2026-10-23 22:30:43 start d1.00 learned 3
+2026-10-23 22:31:27 done d1.00 learned 2 exit=0 [learned seed=2] 26s compl=0.280 coll=394 minsep=0.183 p5=0.298 interv=0.898 slack=0.2066
+2026-10-23 22:31:27 start d1.00 learned 4
+2026-10-23 22:31:28 done d1.00 learned 3 exit=0 [learned seed=3] 27s compl=0.290 coll=313 minsep=0.079 p5=0.319 interv=0.900 slack=0.2226
+2026-10-23 22:32:03 done d1.00 learned 4 exit=0 [learned seed=4] 17s compl=0.320 coll=505 minsep=0.155 p5=0.302 interv=0.889 slack=0.1922
+2026-10-23 22:32:03 rollouts done: 20/20 metrics
+2026-10-23 22:32:03 cache: 20  "macro_cache": "results/cache/macro_N100_cw1_f770143b36.npz",
+2026-10-23 22:33:04 report exit=0
+2026-10-23 22:33:04 chain end
+2026-10-23 22:33:04 finish status=DONE
