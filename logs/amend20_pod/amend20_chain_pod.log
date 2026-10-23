@@ -1,0 +1,130 @@
+2026-10-23 23:15:36 chain start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-23 23:15:36 aneks sha256 228968c4acdaba49599c984f9eb1fff2c588e75721adb79daee90a20709fde5d HEAD 95400c5994f5fd7dbd97ff78b5623c857b29f4ae
+2026-10-23 23:15:36 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-23 23:15:41 s=1.05 cache present: results/cache/macro_N100_cw1_f770143b36.npz sha256 ce48624e401a25f1
+2026-10-23 23:15:41 start closing_k0.25 learned 0
+2026-10-23 23:15:41 start closing_k0.25 learned 1
+2026-10-23 23:16:43 done closing_k0.25 learned 1 exit=0 [learned seed=1] 41s compl=0.850 coll=736 minsep=0.033 p5=0.278 interv=0.669 slack=0.0456
+2026-10-23 23:16:43 start closing_k0.25 learned 2
+2026-10-23 23:16:44 done closing_k0.25 learned 0 exit=0 [learned seed=0] 41s compl=0.830 coll=1142 minsep=0.074 p5=0.245 interv=0.676 slack=0.0463
+2026-10-23 23:16:44 start closing_k0.25 learned 3
+2026-10-23 23:17:44 done closing_k0.25 learned 3 exit=0 [learned seed=3] 40s compl=0.840 coll=583 minsep=0.089 p5=0.275 interv=0.669 slack=0.0452
+2026-10-23 23:17:44 start closing_k0.25 learned 4
+2026-10-23 23:17:44 done closing_k0.25 learned 2 exit=0 [learned seed=2] 41s compl=0.850 coll=971 minsep=0.062 p5=0.254 interv=0.675 slack=0.0466
+2026-10-23 23:17:44 start closing_k0.25 learned 5
+2026-10-23 23:18:42 done closing_k0.25 learned 4 exit=0 [learned seed=4] 41s compl=0.830 coll=942 minsep=0.078 p5=0.235 interv=0.679 slack=0.0464
+2026-10-23 23:18:42 start closing_k0.25 learned 6
+2026-10-23 23:18:43 done closing_k0.25 learned 5 exit=0 [learned seed=5] 41s compl=0.850 coll=699 minsep=0.084 p5=0.289 interv=0.667 slack=0.0448
+2026-10-23 23:18:43 start closing_k0.25 learned 7
+2026-10-23 23:19:40 done closing_k0.25 learned 6 exit=0 [learned seed=6] 41s compl=0.840 coll=945 minsep=0.045 p5=0.221 interv=0.669 slack=0.0453
+2026-10-23 23:19:40 start closing_k0.25 learned 8
+2026-10-23 23:19:42 done closing_k0.25 learned 7 exit=0 [learned seed=7] 41s compl=0.860 coll=914 minsep=0.033 p5=0.173 interv=0.680 slack=0.0464
+2026-10-23 23:19:42 start closing_k0.25 learned 9
+2026-10-23 23:20:40 done closing_k0.25 learned 8 exit=0 [learned seed=8] 42s compl=0.830 coll=842 minsep=0.021 p5=0.263 interv=0.675 slack=0.0450
+2026-10-23 23:20:41 done closing_k0.25 learned 9 exit=0 [learned seed=9] 42s compl=0.830 coll=669 minsep=0.108 p5=0.269 interv=0.673 slack=0.0452
+2026-10-23 23:20:42 start closing_k0.50 learned 1
+2026-10-23 23:20:43 start closing_k0.50 learned 0
+2026-10-23 23:21:44 done closing_k0.50 learned 0 exit=0 [learned seed=0] 42s compl=0.840 coll=901 minsep=0.070 p5=0.270 interv=0.675 slack=0.0507
+2026-10-23 23:21:44 start closing_k0.50 learned 2
+2026-10-23 23:21:45 done closing_k0.50 learned 1 exit=0 [learned seed=1] 43s compl=0.840 coll=634 minsep=0.093 p5=0.327 interv=0.671 slack=0.0516
+2026-10-23 23:21:45 start closing_k0.50 learned 3
+2026-10-23 23:22:44 done closing_k0.50 learned 2 exit=0 [learned seed=2] 41s compl=0.820 coll=964 minsep=0.074 p5=0.270 interv=0.672 slack=0.0494
+2026-10-23 23:22:44 start closing_k0.50 learned 4
+2026-10-23 23:22:45 done closing_k0.50 learned 3 exit=0 [learned seed=3] 41s compl=0.840 coll=833 minsep=0.115 p5=0.278 interv=0.674 slack=0.0505
+2026-10-23 23:22:46 start closing_k0.50 learned 5
+2026-10-23 23:23:44 done closing_k0.50 learned 4 exit=0 [learned seed=4] 41s compl=0.840 coll=918 minsep=0.101 p5=0.243 interv=0.677 slack=0.0529
+2026-10-23 23:23:44 start closing_k0.50 learned 6
+2026-10-23 23:23:45 done closing_k0.50 learned 5 exit=0 [learned seed=5] 41s compl=0.820 coll=918 minsep=0.020 p5=0.276 interv=0.666 slack=0.0497
+2026-10-23 23:23:45 start closing_k0.50 learned 7
+2026-10-23 23:24:42 done closing_k0.50 learned 6 exit=0 [learned seed=6] 40s compl=0.840 coll=602 minsep=0.016 p5=0.273 interv=0.671 slack=0.0530
+2026-10-23 23:24:42 start closing_k0.50 learned 8
+2026-10-23 23:24:45 done closing_k0.50 learned 7 exit=0 [learned seed=7] 40s compl=0.830 coll=767 minsep=0.076 p5=0.279 interv=0.683 slack=0.0542
+2026-10-23 23:24:45 start closing_k0.50 learned 9
+2026-10-23 23:25:43 done closing_k0.50 learned 8 exit=0 [learned seed=8] 41s compl=0.830 coll=876 minsep=0.019 p5=0.241 interv=0.682 slack=0.0536
+2026-10-23 23:25:45 done closing_k0.50 learned 9 exit=0 [learned seed=9] 41s compl=0.830 coll=736 minsep=0.116 p5=0.262 interv=0.674 slack=0.0525
+2026-10-23 23:25:45 start closing_k0.75 learned 1
+2026-10-23 23:25:46 start closing_k0.75 learned 0
+2026-10-23 23:26:46 done closing_k0.75 learned 1 exit=0 [learned seed=1] 41s compl=0.860 coll=945 minsep=0.021 p5=0.293 interv=0.809 slack=0.5186
+2026-10-23 23:26:46 start closing_k0.75 learned 2
+2026-10-23 23:26:47 done closing_k0.75 learned 0 exit=0 [learned seed=0] 41s compl=0.830 coll=1306 minsep=0.031 p5=0.302 interv=0.813 slack=0.5316
+2026-10-23 23:26:47 start closing_k0.75 learned 3
+2026-10-23 23:27:49 done closing_k0.75 learned 2 exit=0 [learned seed=2] 43s compl=0.850 coll=734 minsep=0.093 p5=0.280 interv=0.808 slack=0.5155
+2026-10-23 23:27:49 start closing_k0.75 learned 4
+2026-10-23 23:27:50 done closing_k0.75 learned 3 exit=0 [learned seed=3] 43s compl=0.840 coll=2396 minsep=0.096 p5=0.284 interv=0.807 slack=0.5185
+2026-10-23 23:27:50 start closing_k0.75 learned 5
+2026-10-23 23:28:46 done closing_k0.75 learned 4 exit=0 [learned seed=4] 39s compl=0.860 coll=2634 minsep=0.191 p5=0.298 interv=0.816 slack=0.5260
+2026-10-23 23:28:46 start closing_k0.75 learned 6
+2026-10-23 23:28:47 done closing_k0.75 learned 5 exit=0 [learned seed=5] 39s compl=0.840 coll=1725 minsep=0.114 p5=0.306 interv=0.808 slack=0.5264
+2026-10-23 23:28:47 start closing_k0.75 learned 7
+2026-10-23 23:29:41 done closing_k0.75 learned 6 exit=0 [learned seed=6] 37s compl=0.830 coll=2735 minsep=0.078 p5=0.281 interv=0.808 slack=0.5178
+2026-10-23 23:29:41 start closing_k0.75 learned 8
+2026-10-23 23:29:43 done closing_k0.75 learned 7 exit=0 [learned seed=7] 37s compl=0.880 coll=1193 minsep=0.096 p5=0.290 interv=0.811 slack=0.5222
+2026-10-23 23:29:43 start closing_k0.75 learned 9
+2026-10-23 23:30:43 done closing_k0.75 learned 8 exit=0 [learned seed=8] 41s compl=0.840 coll=753 minsep=0.121 p5=0.273 interv=0.812 slack=0.5131
+2026-10-23 23:30:44 done closing_k0.75 learned 9 exit=0 [learned seed=9] 41s compl=0.840 coll=767 minsep=0.148 p5=0.334 interv=0.813 slack=0.5328
+2026-10-23 23:30:44 start fixed0.55 learned 1
+2026-10-23 23:30:45 start fixed0.55 learned 0
+2026-10-23 23:31:39 done fixed0.55 learned 1 exit=0 [learned seed=1] 36s compl=0.840 coll=1178 minsep=0.053 p5=0.250 interv=0.664 slack=0.0427
+2026-10-23 23:31:39 start fixed0.55 learned 2
+2026-10-23 23:31:40 done fixed0.55 learned 0 exit=0 [learned seed=0] 36s compl=0.860 coll=1185 minsep=0.038 p5=0.146 interv=0.675 slack=0.0461
+2026-10-23 23:31:40 start fixed0.55 learned 3
+2026-10-23 23:32:31 done fixed0.55 learned 2 exit=0 [learned seed=2] 35s compl=0.850 coll=1004 minsep=0.009 p5=0.218 interv=0.673 slack=0.0463
+2026-10-23 23:32:31 start fixed0.55 learned 4
+2026-10-23 23:32:32 done fixed0.55 learned 3 exit=0 [learned seed=3] 34s compl=0.870 coll=1112 minsep=0.008 p5=0.169 interv=0.675 slack=0.0437
+2026-10-23 23:32:32 start fixed0.55 learned 5
+2026-10-23 23:33:20 done fixed0.55 learned 4 exit=0 [learned seed=4] 32s compl=0.860 coll=1012 minsep=0.012 p5=0.238 interv=0.674 slack=0.0449
+2026-10-23 23:33:20 start fixed0.55 learned 6
+2026-10-23 23:33:21 done fixed0.55 learned 5 exit=0 [learned seed=5] 32s compl=0.850 coll=816 minsep=0.008 p5=0.233 interv=0.674 slack=0.0463
+2026-10-23 23:33:21 start fixed0.55 learned 7
+2026-10-23 23:34:11 done fixed0.55 learned 6 exit=0 [learned seed=6] 35s compl=0.830 coll=1587 minsep=0.021 p5=0.195 interv=0.671 slack=0.0455
+2026-10-23 23:34:12 start fixed0.55 learned 8
+2026-10-23 23:34:12 done fixed0.55 learned 7 exit=0 [learned seed=7] 34s compl=0.840 coll=1056 minsep=0.035 p5=0.171 interv=0.677 slack=0.0461
+2026-10-23 23:34:12 start fixed0.55 learned 9
+2026-10-23 23:35:01 done fixed0.55 learned 9 exit=0 [learned seed=9] 33s compl=0.830 coll=989 minsep=0.075 p5=0.259 interv=0.670 slack=0.0445
+2026-10-23 23:35:01 done fixed0.55 learned 8 exit=0 [learned seed=8] 34s compl=0.840 coll=891 minsep=0.123 p5=0.281 interv=0.670 slack=0.0430
+2026-10-23 23:35:02 start fixed0.70 learned 1
+2026-10-23 23:35:02 start fixed0.70 learned 0
+2026-10-23 23:35:58 done fixed0.70 learned 0 exit=0 [learned seed=0] 37s compl=0.520 coll=101 minsep=0.142 p5=0.373 interv=0.895 slack=0.1591
+2026-10-23 23:35:58 start fixed0.70 learned 2
+2026-10-23 23:35:59 done fixed0.70 learned 1 exit=0 [learned seed=1] 38s compl=0.510 coll=56 minsep=0.174 p5=0.403 interv=0.898 slack=0.1657
+2026-10-23 23:35:59 start fixed0.70 learned 3
+2026-10-23 23:36:49 done fixed0.70 learned 3 exit=0 [learned seed=3] 33s compl=0.530 coll=75 minsep=0.167 p5=0.442 interv=0.898 slack=0.1569
+2026-10-23 23:36:49 start fixed0.70 learned 4
+2026-10-23 23:36:50 done fixed0.70 learned 2 exit=0 [learned seed=2] 34s compl=0.530 coll=171 minsep=0.104 p5=0.412 interv=0.895 slack=0.1585
+2026-10-23 23:36:50 start fixed0.70 learned 5
+2026-10-23 23:37:39 done fixed0.70 learned 5 exit=0 [learned seed=5] 33s compl=0.510 coll=130 minsep=0.161 p5=0.390 interv=0.900 slack=0.1567
+2026-10-23 23:37:39 start fixed0.70 learned 6
+2026-10-23 23:37:40 done fixed0.70 learned 4 exit=0 [learned seed=4] 33s compl=0.550 coll=93 minsep=0.191 p5=0.415 interv=0.893 slack=0.1592
+2026-10-23 23:37:40 start fixed0.70 learned 7
+2026-10-23 23:38:28 done fixed0.70 learned 7 exit=0 [learned seed=7] 32s compl=0.530 coll=93 minsep=0.210 p5=0.415 interv=0.896 slack=0.1555
+2026-10-23 23:38:28 start fixed0.70 learned 8
+2026-10-23 23:38:29 done fixed0.70 learned 6 exit=0 [learned seed=6] 33s compl=0.530 coll=107 minsep=0.170 p5=0.395 interv=0.899 slack=0.1600
+2026-10-23 23:38:29 start fixed0.70 learned 9
+2026-10-23 23:39:18 done fixed0.70 learned 8 exit=0 [learned seed=8] 33s compl=0.540 coll=162 minsep=0.112 p5=0.391 interv=0.894 slack=0.1620
+2026-10-23 23:39:18 done fixed0.70 learned 9 exit=0 [learned seed=9] 32s compl=0.540 coll=147 minsep=0.104 p5=0.424 interv=0.893 slack=0.1588
+2026-10-23 23:39:18 start real_fixed0.55 real 0
+2026-10-23 23:39:19 start real_fixed0.55 real 1
+2026-10-23 23:39:57 done real_fixed0.55 real 1 exit=0 [real seed=1] 22s compl=0.900 coll=40831 minsep=0.001 p5=0.035 interv=0.642 slack=0.1856
+2026-10-23 23:39:57 start real_fixed0.55 real 2
+2026-10-23 23:39:58 done real_fixed0.55 real 0 exit=0 [real seed=0] 23s compl=0.870 coll=37696 minsep=0.002 p5=0.038 interv=0.629 slack=0.1794
+2026-10-23 23:39:58 start real_fixed0.55 real 3
+2026-10-23 23:40:37 done real_fixed0.55 real 3 exit=0 [real seed=3] 23s compl=0.930 coll=41359 minsep=0.000 p5=0.023 interv=0.649 slack=0.1900
+2026-10-23 23:40:37 start real_fixed0.55 real 4
+2026-10-23 23:40:38 done real_fixed0.55 real 2 exit=0 [real seed=2] 23s compl=0.920 coll=42019 minsep=0.000 p5=0.037 interv=0.647 slack=0.1892
+2026-10-23 23:40:38 start real_fixed0.55 real 5
+2026-10-23 23:41:15 done real_fixed0.55 real 4 exit=0 [real seed=4] 22s compl=0.920 coll=41431 minsep=0.001 p5=0.029 interv=0.646 slack=0.1902
+2026-10-23 23:41:16 start real_fixed0.55 real 6
+2026-10-23 23:41:16 done real_fixed0.55 real 5 exit=0 [real seed=5] 22s compl=0.910 coll=42314 minsep=0.001 p5=0.018 interv=0.654 slack=0.1924
+2026-10-23 23:41:17 start real_fixed0.55 real 7
+2026-10-23 23:41:53 done real_fixed0.55 real 6 exit=0 [real seed=6] 21s compl=0.950 coll=40294 minsep=0.001 p5=0.034 interv=0.644 slack=0.1851
+2026-10-23 23:41:53 start real_fixed0.55 real 8
+2026-10-23 23:41:55 done real_fixed0.55 real 7 exit=0 [real seed=7] 22s compl=0.980 coll=40630 minsep=0.000 p5=0.036 interv=0.640 slack=0.1867
+2026-10-23 23:41:55 start real_fixed0.55 real 9
+2026-10-23 23:42:27 done real_fixed0.55 real 8 exit=0 [real seed=8] 18s compl=0.920 coll=41405 minsep=0.003 p5=0.032 interv=0.637 slack=0.1838
+2026-10-23 23:42:31 done real_fixed0.55 real 9 exit=0 [real seed=9] 19s compl=0.930 coll=40843 minsep=0.001 p5=0.038 interv=0.637 slack=0.1869
+2026-10-23 23:42:31 rollouts done: 60/60 metrics
+2026-10-23 23:42:31 precision: 60  "matmul_precision": "highest"
+2026-10-23 23:42:31 cache: 60  "macro_cache": "results/cache/macro_N100_cw1_f770143b36.npz",
+2026-10-23 23:44:46 report exit=0
+2026-10-23 23:44:46 chain end
+2026-10-23 23:44:46 finish status=DONE
