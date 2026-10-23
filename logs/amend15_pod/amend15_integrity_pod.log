@@ -1,0 +1,22 @@
+{
+ "source": "results/ladder_fargoal_amend11_N100/learned",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "d_collision": 0.3,
+ "per_seed": [
+  0.1,
+  0.15,
+  0.12,
+  0.2,
+  0.27
+ ],
+ "mean": 0.168,
+ "reference": 0.168,
+ "abs_diff": 0.0,
+ "pass": true
+}

@@ -1,0 +1,217 @@
+2026-10-23 14:02:22 chain start gpu=NVIDIA A40 jax=0.12.0.1 [CudaDevice(id=0)]
+2026-10-23 14:02:22 solve s=1.05 reused ("solve_seconds": 349.54694962501526)
+2026-10-23 14:02:22 start 1.05 real 0
+2026-10-23 14:02:22 start 1.05 cv 0
+2026-10-23 14:02:52 done 1.05 real 0 exit=0
+2026-10-23 14:02:52 skip 1.05 learned 0 (exists)
+2026-10-23 14:02:52 start 1.05 smith 0
+2026-10-23 14:02:57 done 1.05 cv 0 exit=0
+2026-10-23 14:02:57 start 1.05 real 1
+2026-10-23 14:03:27 done 1.05 real 1 exit=0
+2026-10-23 14:03:27 start 1.05 cv 1
+2026-10-23 14:03:42 done 1.05 smith 0 exit=0
+2026-10-23 14:03:42 start 1.05 learned 1
+2026-10-23 14:03:56 done 1.05 cv 1 exit=0
+2026-10-23 14:03:56 start 1.05 smith 1
+2026-10-23 14:04:16 done 1.05 learned 1 exit=0
+2026-10-23 14:04:16 start 1.05 real 2
+2026-10-23 14:04:54 done 1.05 smith 1 exit=0
+2026-10-23 14:04:54 start 1.05 cv 2
+2026-10-23 14:04:54 done 1.05 real 2 exit=0
+2026-10-23 14:04:54 start 1.05 learned 2
+2026-10-23 14:05:28 done 1.05 cv 2 exit=0
+2026-10-23 14:05:28 start 1.05 smith 2
+2026-10-23 14:05:33 done 1.05 learned 2 exit=0
+2026-10-23 14:05:33 start 1.05 real 3
+2026-10-23 14:06:04 done 1.05 real 3 exit=0
+2026-10-23 14:06:04 start 1.05 cv 3
+2026-10-23 14:06:18 done 1.05 smith 2 exit=0
+2026-10-23 14:06:18 start 1.05 learned 3
+2026-10-23 14:06:34 done 1.05 cv 3 exit=0
+2026-10-23 14:06:34 start 1.05 smith 3
+2026-10-23 14:06:54 done 1.05 learned 3 exit=0
+2026-10-23 14:06:54 start 1.05 real 4
+2026-10-23 14:07:33 done 1.05 real 4 exit=0
+2026-10-23 14:07:33 start 1.05 cv 4
+2026-10-23 14:07:34 done 1.05 smith 3 exit=0
+2026-10-23 14:07:34 start 1.05 learned 4
+2026-10-23 14:08:06 done 1.05 cv 4 exit=0
+2026-10-23 14:08:06 start 1.05 smith 4
+2026-10-23 14:08:12 done 1.05 learned 4 exit=0
+2026-10-23 14:08:54 done 1.05 smith 4 exit=0
+2026-10-23 14:08:54 cell 1.05 rollouts done: 20/20 metrics
+2026-10-23 14:08:54 solve start s=0.90
+2026-10-23 14:15:02 solve done s=0.90 exit=0 "solve_seconds": 349.2544791698456
+2026-10-23 14:15:02 start 0.90 cv 0
+2026-10-23 14:15:02 start 0.90 real 0
+2026-10-23 14:15:44 done 0.90 real 0 exit=0
+2026-10-23 14:15:44 start 0.90 learned 0
+2026-10-23 14:15:45 done 0.90 cv 0 exit=0
+2026-10-23 14:15:45 start 0.90 smith 0
+2026-10-23 14:16:17 done 0.90 learned 0 exit=0
+2026-10-23 14:16:17 start 0.90 real 1
+2026-10-23 14:16:36 done 0.90 smith 0 exit=0
+2026-10-23 14:16:36 start 0.90 cv 1
+2026-10-23 14:16:46 done 0.90 real 1 exit=0
+2026-10-23 14:16:46 start 0.90 learned 1
+2026-10-23 14:17:06 done 0.90 cv 1 exit=0
+2026-10-23 14:17:06 start 0.90 smith 1
+2026-10-23 14:17:22 done 0.90 learned 1 exit=0
+2026-10-23 14:17:22 start 0.90 real 2
+2026-10-23 14:17:53 done 0.90 real 2 exit=0
+2026-10-23 14:17:53 start 0.90 cv 2
+2026-10-23 14:18:02 done 0.90 smith 1 exit=0
+2026-10-23 14:18:02 start 0.90 learned 2
+2026-10-23 14:18:23 done 0.90 cv 2 exit=0
+2026-10-23 14:18:23 start 0.90 smith 2
+2026-10-23 14:18:38 done 0.90 learned 2 exit=0
+2026-10-23 14:18:38 start 0.90 real 3
+2026-10-23 14:19:11 done 0.90 real 3 exit=0
+2026-10-23 14:19:11 start 0.90 cv 3
+2026-10-23 14:19:19 done 0.90 smith 2 exit=0
+2026-10-23 14:19:19 start 0.90 learned 3
+2026-10-23 14:19:44 done 0.90 cv 3 exit=0
+2026-10-23 14:19:44 start 0.90 smith 3
+2026-10-23 14:19:55 done 0.90 learned 3 exit=0
+2026-10-23 14:19:55 start 0.90 real 4
+2026-10-23 14:20:24 done 0.90 real 4 exit=0
+2026-10-23 14:20:24 start 0.90 cv 4
+2026-10-23 14:20:35 done 0.90 smith 3 exit=0
+2026-10-23 14:20:35 start 0.90 learned 4
+2026-10-23 14:20:55 done 0.90 cv 4 exit=0
+2026-10-23 14:20:55 start 0.90 smith 4
+2026-10-23 14:21:10 done 0.90 learned 4 exit=0
+2026-10-23 14:21:46 done 0.90 smith 4 exit=0
+2026-10-23 14:21:46 cell 0.90 rollouts done: 20/20 metrics
+2026-10-23 14:21:46 solve start s=0.75
+2026-10-23 14:27:53 solve done s=0.75 exit=0 "solve_seconds": 349.01623582839966
+2026-10-23 14:27:53 start 0.75 cv 0
+2026-10-23 14:27:53 start 0.75 real 0
+2026-10-23 14:28:34 done 0.75 real 0 exit=0
+2026-10-23 14:28:34 start 0.75 learned 0
+2026-10-23 14:28:36 done 0.75 cv 0 exit=0
+2026-10-23 14:28:36 start 0.75 smith 0
+2026-10-23 14:29:10 done 0.75 learned 0 exit=0
+2026-10-23 14:29:10 start 0.75 real 1
+2026-10-23 14:29:29 done 0.75 smith 0 exit=0
+2026-10-23 14:29:29 start 0.75 cv 1
+2026-10-23 14:29:41 done 0.75 real 1 exit=0
+2026-10-23 14:29:41 start 0.75 learned 1
+2026-10-23 14:30:01 done 0.75 cv 1 exit=0
+2026-10-23 14:30:01 start 0.75 smith 1
+2026-10-23 14:30:18 done 0.75 learned 1 exit=0
+2026-10-23 14:30:18 start 0.75 real 2
+2026-10-23 14:30:55 done 0.75 real 2 exit=0
+2026-10-23 14:30:55 start 0.75 cv 2
+2026-10-23 14:30:59 done 0.75 smith 1 exit=0
+2026-10-23 14:30:59 start 0.75 learned 2
+2026-10-23 14:31:27 done 0.75 cv 2 exit=0
+2026-10-23 14:31:27 start 0.75 smith 2
+2026-10-23 14:31:35 done 0.75 learned 2 exit=0
+2026-10-23 14:31:35 start 0.75 real 3
+2026-10-23 14:32:06 done 0.75 real 3 exit=0
+2026-10-23 14:32:06 start 0.75 cv 3
+2026-10-23 14:32:18 done 0.75 smith 2 exit=0
+2026-10-23 14:32:18 start 0.75 learned 3
+2026-10-23 14:32:36 done 0.75 cv 3 exit=0
+2026-10-23 14:32:36 start 0.75 smith 3
+2026-10-23 14:32:53 done 0.75 learned 3 exit=0
+2026-10-23 14:32:53 start 0.75 real 4
+2026-10-23 14:33:29 done 0.75 real 4 exit=0
+2026-10-23 14:33:29 start 0.75 cv 4
+2026-10-23 14:33:35 done 0.75 smith 3 exit=0
+2026-10-23 14:33:35 start 0.75 learned 4
+2026-10-23 14:34:02 done 0.75 cv 4 exit=0
+2026-10-23 14:34:02 start 0.75 smith 4
+2026-10-23 14:34:11 done 0.75 learned 4 exit=0
+2026-10-23 14:34:50 done 0.75 smith 4 exit=0
+2026-10-23 14:34:50 cell 0.75 rollouts done: 20/20 metrics
+2026-10-23 14:34:50 solve start s=0.60
+2026-10-23 14:40:57 solve done s=0.60 exit=0 "solve_seconds": 348.89075231552124
+2026-10-23 14:40:57 start 0.60 real 0
+2026-10-23 14:40:57 start 0.60 cv 0
+2026-10-23 14:41:34 done 0.60 real 0 exit=0
+2026-10-23 14:41:34 start 0.60 learned 0
+2026-10-23 14:41:38 done 0.60 cv 0 exit=0
+2026-10-23 14:41:38 start 0.60 smith 0
+2026-10-23 14:42:09 done 0.60 learned 0 exit=0
+2026-10-23 14:42:09 start 0.60 real 1
+2026-10-23 14:42:30 done 0.60 smith 0 exit=0
+2026-10-23 14:42:30 start 0.60 cv 1
+2026-10-23 14:42:41 done 0.60 real 1 exit=0
+2026-10-23 14:42:41 start 0.60 learned 1
+2026-10-23 14:43:03 done 0.60 cv 1 exit=0
+2026-10-23 14:43:03 start 0.60 smith 1
+2026-10-23 14:43:19 done 0.60 learned 1 exit=0
+2026-10-23 14:43:19 start 0.60 real 2
+2026-10-23 14:43:52 done 0.60 real 2 exit=0
+2026-10-23 14:43:52 start 0.60 cv 2
+2026-10-23 14:43:59 done 0.60 smith 1 exit=0
+2026-10-23 14:43:59 start 0.60 learned 2
+2026-10-23 14:44:23 done 0.60 cv 2 exit=0
+2026-10-23 14:44:23 start 0.60 smith 2
+2026-10-23 14:44:36 done 0.60 learned 2 exit=0
+2026-10-23 14:44:36 start 0.60 real 3
+2026-10-23 14:45:07 done 0.60 real 3 exit=0
+2026-10-23 14:45:07 start 0.60 cv 3
+2026-10-23 14:45:16 done 0.60 smith 2 exit=0
+2026-10-23 14:45:16 start 0.60 learned 3
+2026-10-23 14:45:37 done 0.60 cv 3 exit=0
+2026-10-23 14:45:37 start 0.60 smith 3
+2026-10-23 14:45:52 done 0.60 learned 3 exit=0
+2026-10-23 14:45:52 start 0.60 real 4
+2026-10-23 14:46:21 done 0.60 real 4 exit=0
+2026-10-23 14:46:21 start 0.60 cv 4
+2026-10-23 14:46:31 done 0.60 smith 3 exit=0
+2026-10-23 14:46:31 start 0.60 learned 4
+2026-10-23 14:46:49 done 0.60 cv 4 exit=0
+2026-10-23 14:46:49 start 0.60 smith 4
+2026-10-23 14:47:04 done 0.60 learned 4 exit=0
+2026-10-23 14:47:40 done 0.60 smith 4 exit=0
+2026-10-23 14:47:40 cell 0.60 rollouts done: 20/20 metrics
+2026-10-23 14:47:40 solve start s=0.45
+2026-10-23 14:53:47 solve done s=0.45 exit=0 "solve_seconds": 348.72237849235535
+2026-10-23 14:53:47 start 0.45 real 0
+2026-10-23 14:53:47 start 0.45 cv 0
+2026-10-23 14:54:27 done 0.45 real 0 exit=0
+2026-10-23 14:54:27 start 0.45 learned 0
+2026-10-23 14:54:29 done 0.45 cv 0 exit=0
+2026-10-23 14:54:29 start 0.45 smith 0
+2026-10-23 14:55:01 done 0.45 learned 0 exit=0
+2026-10-23 14:55:01 start 0.45 real 1
+2026-10-23 14:55:20 done 0.45 smith 0 exit=0
+2026-10-23 14:55:20 start 0.45 cv 1
+2026-10-23 14:55:32 done 0.45 real 1 exit=0
+2026-10-23 14:55:32 start 0.45 learned 1
+2026-10-23 14:55:53 done 0.45 cv 1 exit=0
+2026-10-23 14:55:53 start 0.45 smith 1
+2026-10-23 14:56:09 done 0.45 learned 1 exit=0
+2026-10-23 14:56:09 start 0.45 real 2
+2026-10-23 14:56:47 done 0.45 real 2 exit=0
+2026-10-23 14:56:47 start 0.45 cv 2
+2026-10-23 14:56:52 done 0.45 smith 1 exit=0
+2026-10-23 14:56:52 start 0.45 learned 2
+2026-10-23 14:57:20 done 0.45 cv 2 exit=0
+2026-10-23 14:57:20 start 0.45 smith 2
+2026-10-23 14:57:28 done 0.45 learned 2 exit=0
+2026-10-23 14:57:28 start 0.45 real 3
+2026-10-23 14:57:58 done 0.45 real 3 exit=0
+2026-10-23 14:57:58 start 0.45 cv 3
+2026-10-23 14:58:10 done 0.45 smith 2 exit=0
+2026-10-23 14:58:10 start 0.45 learned 3
+2026-10-23 14:58:27 done 0.45 cv 3 exit=0
+2026-10-23 14:58:27 start 0.45 smith 3
+2026-10-23 14:58:41 done 0.45 learned 3 exit=0
+2026-10-23 14:58:41 start 0.45 real 4
+2026-10-23 14:59:16 done 0.45 real 4 exit=0
+2026-10-23 14:59:16 start 0.45 cv 4
+2026-10-23 14:59:23 done 0.45 smith 3 exit=0
+2026-10-23 14:59:23 start 0.45 learned 4
+2026-10-23 14:59:52 done 0.45 cv 4 exit=0
+2026-10-23 14:59:52 start 0.45 smith 4
+2026-10-23 14:59:59 done 0.45 learned 4 exit=0
+2026-10-23 15:00:37 done 0.45 smith 4 exit=0
+2026-10-23 15:00:37 cell 0.45 rollouts done: 20/20 metrics
+2026-10-23 15:00:37 all cells done: 100/100 metrics
+2026-10-23 15:04:32 report exit=0
+2026-10-23 15:04:32 chain end
