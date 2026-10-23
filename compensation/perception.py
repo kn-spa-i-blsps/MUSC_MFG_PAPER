@@ -219,6 +219,22 @@ def staleness_and_rel_velocity(history: jnp.ndarray, k_now: int, dt_exec: float,
     return age, v_hat
 
 
+def neighbour_abs_velocity(history: jnp.ndarray, k_now: int, dt_exec: float, N: int,
+                           key: jax.Array) -> jnp.ndarray:
+    """amend19 (closure-gated margin): v_hat (N_i, N_j, 2) = finite difference of i's last two HEARD ABSOLUTE positions
+    of j over one frame: ((p_i(k_then_j) + rel_now) - (p_i(k_prev_j) + rel_prev)) / T_frame, i.e. the amend17 relative
+    estimator plus i's own (known) displacement between the two broadcast instants. Same key splits as perceive() ->
+    rel_now / rel_prev are the observations every arm already received. Read-only."""
+    T_frame = t_frame(N)
+    _, v_rel = staleness_and_rel_velocity(history, k_now, dt_exec, N, key)
+    T_frame_steps = max(1, int(round(T_frame / dt_exec)))
+    age = tdma_age(k_now * dt_exec, N)
+    k_then = jnp.maximum(k_now - jnp.round(age / dt_exec).astype(jnp.int32), 0)
+    k_prev = jnp.maximum(k_then - T_frame_steps, 0)
+    own_disp = jnp.transpose(history[k_then] - history[k_prev], (1, 0, 2))   # (N_i, N_j, 2): i's own move, j's instants
+    return v_rel + own_disp / T_frame
+
+
 def perceive(condition: str, history: jnp.ndarray, k_now: int, dt_exec: float, N: int,
              key: jax.Array, predictor_params: dict = None, field_params: dict = None) -> jnp.ndarray:
     """Returns x_hat: (N, N, 2), x_hat[i, j] = agent i's estimate of agent j's CURRENT position.

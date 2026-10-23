@@ -1,0 +1,14 @@
+amend19 k=0 sanity (pod 8thhi6wqzzclov, 2026-10-23, before the aneks commit). Both cells seed 0, XLA autotuning OFF.
+real    k0 vs fixed0.55: 19/19 logged arrays bit-equal; metrics also equal to amend16 p1_d0.55 real seed 0.
+learned k0 vs fixed0.55: NOT bit-equal. k0 d_safe = 0.55 on 100% of valid rows (0 rows off the 0.55 bin). First
+  difference: u_nom at step 1, 1.19e-07 (1 ulp, upstream of the CBF); u at step 7 (4.8e-07); pos at step 24 (1.5e-08);
+  then chaotic growth. Metrics k0/fixed: compl 0.66/0.66, collision pair-steps 2000/1179, p5 0.210/0.256.
+Diagnostics (not used for the run):
+  (a) both cells with JAX_DEFAULT_MATMUL_PRECISION=highest + autotuning off: still not bit-equal (1064 vs 1240 pair-steps;
+      side observation: highest precision itself moves learned seed 0 to compl 0.84/0.83 vs 0.66 at the default TF32).
+  (b) additional optimization_barrier on (x_hat, positions) in the closing branch: still not bit-equal (u_nom first
+      diff at step 6, 1 ulp) -> reverted; the run uses the code the sanity above ran on.
+Reading: the controller logic at k=0 reduces exactly to fixed 0.55 (real bit-equal; learned d_safe 0.55 everywhere). The
+learned mismatch is float-level compilation noise in the learned perception path (MLP matmul), amplified by the closed
+loop -- the same mechanism as the amend18 post-hoc run-to-run nondeterminism (seed 1: 1469 vs 828 pair-steps in two
+identical runs). The amend17 learned "bit-equal after optimization_barrier" result was therefore most likely luck.

@@ -9,7 +9,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from compensation.perception import perceive, staleness_and_rel_velocity
+from compensation.perception import neighbour_abs_velocity, perceive, staleness_and_rel_velocity
 from control.cbf import CBFParams, cbf_filter, init_warm_start
 from control.law import local_density_and_grad
 from control.macro import nominal_control
@@ -32,6 +32,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     hold = (goal, scenario.r_goal, prm.d_safe) if cfg.get("hold_on_arrival", False) else None
     log_xhat = cfg.get("log_xhat", False)
     adaptive = prm.margin_k is not None                                # amend17 staleness-aware margin
+    closing = adaptive and prm.margin_mode == "closing"                # amend19 closure-gated margin
     iu = jnp.triu_indices(N, 1)
 
     def step_fn(carry, k, macro):
@@ -46,8 +47,16 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
                                        hold=hold)
         nrm = jnp.linalg.norm(u_nom, axis=-1, keepdims=True)
         u_nom = u_nom * jnp.minimum(1.0, V_MAX / jnp.maximum(nrm, 1e-9))
-        d_safe_pair = None
-        if adaptive:   # d_safe_ij = min(D_COLLISION + k * |v_hat_ij| * age_j, d_max); same key -> same draws as perceive
+        d_safe_pair = v_closing = None
+        if adaptive and closing:   # amend19: d_safe_ij = max(floor, D_COLLISION + k * max(0, v_closing_ij) * h)
+            hb, pkb = jax.lax.optimization_barrier((history, pk))
+            v_hat_j = neighbour_abs_velocity(hb, k, dt_exec, N, pkb)            # (N_i,N_j,2) heard abs velocity of j
+            v_i = jnp.where(k > 0, history[k] - history[jnp.maximum(k - 1, 0)], 0.0) / dt_exec   # own velocity (N,2)
+            e = x_hat - positions[:, None]                                       # direction i -> j (the CBF's x_hat)
+            e = e / jnp.maximum(jnp.linalg.norm(e, axis=-1, keepdims=True), 1e-9)
+            v_closing = jnp.maximum(jnp.sum((v_i[:, None] - v_hat_j) * e, -1), 0.0)
+            d_safe_pair = jnp.maximum(prm.margin_floor, D_COLLISION + prm.margin_k * v_closing * prm.margin_h)
+        elif adaptive:   # d_safe_ij = min(D_COLLISION + k * |v_hat_ij| * age_j, d_max); same key -> same draws as perceive
             hb, pkb = jax.lax.optimization_barrier((history, pk))   # identity; keeps XLA from fusing into perceive()
             age, v_hat = staleness_and_rel_velocity(hb, k, dt_exec, N, pkb)
             sigma = jnp.linalg.norm(v_hat, axis=-1) * age[None, :]
@@ -86,6 +95,12 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
             y["d_safe_hist"] = jnp.zeros(DSAFE_NBINS, jnp.int32).at[b.reshape(-1)].add(ok.reshape(-1).astype(jnp.int32))
             y["d_safe_sum"] = jnp.sum(jnp.where(ok, ds, 0.0))
             y["d_safe_n"] = jnp.sum(ok)
+            if closing:   # amend19: v_closing on the same valid neighbour rows, 0.05 m/s histogram + exact sum
+                vc = jnp.take_along_axis(v_closing, info["nb_idx"], axis=1)
+                bv = jnp.clip(jnp.round(vc / VCLOSE_BIN).astype(jnp.int32), 0, VCLOSE_NBINS - 1)
+                y["v_closing_hist"] = jnp.zeros(VCLOSE_NBINS, jnp.int32).at[bv.reshape(-1)].add(
+                    ok.reshape(-1).astype(jnp.int32))
+                y["v_closing_sum"] = jnp.sum(jnp.where(ok, vc, 0.0))
         if log_xhat:
             y["xhat_rel"] = (x_hat - positions[:, None]).astype(jnp.float32)   # (N,N,2) estimate - own pos (float32 since amend16 post-hoc; float16 before)
             y["cbf_nb_idx"] = info["nb_idx"].astype(jnp.int8)
@@ -113,7 +128,9 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     return run
 
 
-DSAFE_BIN, DSAFE_NBINS = 0.01, 241    # amend17 realized-d_safe histogram: bins D_COLLISION + 0.01 b, b = 0..240
+DSAFE_BIN, DSAFE_NBINS = 0.01, 1001   # realized-d_safe histogram: bins D_COLLISION + 0.01 b, b = 0..1000
+                                      # (241 bins in amend17; widened in amend19, closing margins reach ~10 m)
+VCLOSE_BIN, VCLOSE_NBINS = 0.05, 341  # amend19 v_closing histogram: bins 0.05 b m/s, b = 0..340 (top bin = clip)
 
 
 def dsafe_stats(logs):
@@ -125,7 +142,23 @@ def dsafe_stats(logs):
     c = np.cumsum(h) / h.sum()
     centres = D_COLLISION + DSAFE_BIN * np.arange(DSAFE_NBINS)
     return {"d_safe_mean": float(np.sum(np.asarray(logs["d_safe_sum"], np.float64)) / np.sum(logs["d_safe_n"])),
-            "d_safe_p50": float(centres[np.searchsorted(c, 0.50)]), "d_safe_p95": float(centres[np.searchsorted(c, 0.95)])}
+            "d_safe_p50": float(centres[np.searchsorted(c, 0.50)]), "d_safe_p95": float(centres[np.searchsorted(c, 0.95)]),
+            **vclosing_stats(logs)}
+
+
+def vclosing_stats(logs):
+    """amend19: mean / p50 / p95 of v_closing over the valid neighbour rows (mean exact; percentiles at 0.05 m/s) + the
+    summed histogram. Empty for runs without the closing margin."""
+    if "v_closing_hist" not in logs:
+        return {}
+    h = np.asarray(logs["v_closing_hist"]).sum(0).astype(np.int64)
+    c = np.cumsum(h) / h.sum()
+    centres = VCLOSE_BIN * np.arange(VCLOSE_NBINS)
+    return {"v_closing_mean": float(np.sum(np.asarray(logs["v_closing_sum"], np.float64)) / np.sum(logs["d_safe_n"])),
+            "v_closing_p50": float(centres[np.searchsorted(c, 0.50)]),
+            "v_closing_p95": float(centres[np.searchsorted(c, 0.95)]),
+            "v_closing_frac_zero_bin": float(h[0] / h.sum()), "v_closing_hist": h.tolist(),
+            "v_closing_hist_bin_mps": VCLOSE_BIN}
 
 
 def summarize(logs, scenario, dt_exec, c_w=1.0):

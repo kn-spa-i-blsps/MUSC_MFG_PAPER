@@ -48,6 +48,10 @@ class CBFParams(NamedTuple):
     margin_k: float | None = None  # amend17: None = constant d_safe (unchanged); else staleness-aware per-pair
                                    # d_safe_ij = min(D_COLLISION + margin_k * v_hat_ij * age_j, margin_d_max)
     margin_d_max: float = 1.5      # amend17: cap of the adaptive per-pair d_safe
+    margin_mode: str = "staleness"  # amend17 "staleness" (above) | amend19 "closing": d_safe_ij =
+                                    # max(margin_floor, D_COLLISION + margin_k * max(0, v_closing_ij) * margin_h), no cap
+    margin_floor: float = 0.55     # amend19 floor
+    margin_h: float = 0.3          # amend19 look-ahead horizon (s)
 
 
 def _closest_on_segments(p, segs):
