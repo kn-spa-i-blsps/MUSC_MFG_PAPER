@@ -34,6 +34,7 @@ class SingleGateA:
       (length, height, clearance) and the path length (hence the amend5 horizon) are sized by
       r_geom = r_goal(s_g) instead of r_goal; only the disc (hold step, success region) uses r_goal from
       goal_spacing. None (default) = r_geom = r_goal (amend4-11 unchanged).
+    gate_width=w (amend16): gate opening width override (default None = GATE_RATIO * W0); wall_x and gate_z unchanged.
     goal_shape (amend7): "conical" (default) -- V_goal = cone to the waypoint + tanh hold step at r_goal;
       "flat" -- flat-bottomed: both terms act on relu(r - r_goal) only, so grad V_goal = 0 inside the
       disc and (up to the 0.05 m cone rounding) equals the conical gradient outside it.
@@ -47,13 +48,13 @@ class SingleGateA:
                  n_agents: int | None = None, goal_gap_mult: float | None = None,
                  goal_shape: str = "conical", goal_spacing: float | None = None,
                  goal_clearance: float | None = None, goal_attractor_shift: float | None = None,
-                 goal_geometry_spacing: float | None = None):
+                 goal_geometry_spacing: float | None = None, gate_width: float | None = None):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
         self.N = N if n_agents is None else n_agents
         W, H = arena_for_N(N)
-        self.gate_width = gate_width_for_N(N)
+        self.gate_width = gate_width_for_N(N) if gate_width is None else float(gate_width)   # amend16 override
         self.wall_x = W / 2.0
         self.H0 = H
         self.r_goal = r_goal_for_N(N) if goal_spacing is None else \
