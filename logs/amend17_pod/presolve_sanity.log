@@ -1,0 +1,11 @@
+2026-10-23 21:47:34 start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-23 21:53:50 solve exit=0 {"cell": "p1_d0.55", "cache": "results/cache/macro_N100_cw1_f770143b36.npz", "wall_s_this_call": 366.714421749115, "solve_seconds": 348.8096718788147, "horizon_s": 86.12681071587357, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-23 21:53:59 cache sha256 6fdff1341db7124c
+2026-10-23 21:54:34 san_const real exit=0 [real seed=0] 13s compl=0.990 coll=35339 minsep=0.002 p5=0.044 interv=0.445 slack=0.0322
+2026-10-23 21:55:08 san_const learned exit=0 [learned seed=0] 17s compl=0.960 coll=44173 minsep=0.003 p5=0.096 interv=0.321 slack=0.0001
+2026-10-23 21:55:39 san_k0 real exit=0 [real seed=0] 15s compl=0.990 coll=35339 minsep=0.002 p5=0.044 interv=0.445 slack=0.0322
+2026-10-23 21:56:12 san_k0 learned exit=0 [learned seed=0] 17s compl=0.960 coll=41714 minsep=0.003 p5=0.123 interv=0.329 slack=0.0001
+2026-10-23 21:56:22 sanity exit=0
+real {"arrays_compared": 19, "only_in_k0": ["d_safe_hist", "d_safe_n", "d_safe_sum"], "all_common_arrays_bit_equal": true, "metrics_[k0,const]": {"completeness_final": [0.99, 0.99], "collision_pair_steps": [35339, 35339], "min_sep_overall_m": [0.0015507539501413703, 0.0015507539501413703], "p5_sep_worst_step_m": [0.04353008419275284, 0.04353008419275284], "cbf_intervention_rate": [0.4453988157436433, 0.4453988157436433], "slack_active_rate": [0.032243120863810516, 0.032243120863810516]}, "k0_d_safe_rows_off_0.30_bin": 0, "k0_d_safe_mean_p50_p95": [0.29999996440157417, 0.3, 0.3]}
+learned {"arrays_compared": 19, "only_in_k0": ["d_safe_hist", "d_safe_n", "d_safe_sum"], "all_common_arrays_bit_equal": false, "metrics_[k0,const]": {"completeness_final": [0.96, 0.96], "collision_pair_steps": [41714, 44173], "min_sep_overall_m": [0.0031894666608422995, 0.0025994167663156986], "p5_sep_worst_step_m": [0.12332695722579956, 0.09646358340978622], "cbf_intervention_rate": [0.3287646580750029, 0.3213189364913503], "slack_active_rate": [0.0001277139208173691, 0.00012306977824219203]}, "k0_d_safe_rows_off_0.30_bin": 0, "k0_d_safe_mean_p50_p95": [0.2999999644836898, 0.3, 0.3]}
+2026-10-23 21:56:22 end

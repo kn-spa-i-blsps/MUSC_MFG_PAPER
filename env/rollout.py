@@ -9,7 +9,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from compensation.perception import perceive
+from compensation.perception import perceive, staleness_and_rel_velocity
 from control.cbf import CBFParams, cbf_filter, init_warm_start
 from control.law import local_density_and_grad
 from control.macro import nominal_control
@@ -31,6 +31,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     cbf_on = cfg["cbf_on"]
     hold = (goal, scenario.r_goal, prm.d_safe) if cfg.get("hold_on_arrival", False) else None
     log_xhat = cfg.get("log_xhat", False)
+    adaptive = prm.margin_k is not None                                # amend17 staleness-aware margin
     iu = jnp.triu_indices(N, 1)
 
     def step_fn(carry, k, macro):
@@ -45,8 +46,14 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
                                        hold=hold)
         nrm = jnp.linalg.norm(u_nom, axis=-1, keepdims=True)
         u_nom = u_nom * jnp.minimum(1.0, V_MAX / jnp.maximum(nrm, 1e-9))
+        d_safe_pair = None
+        if adaptive:   # d_safe_ij = min(D_COLLISION + k * |v_hat_ij| * age_j, d_max); same key -> same draws as perceive
+            hb, pkb = jax.lax.optimization_barrier((history, pk))   # identity; keeps XLA from fusing into perceive()
+            age, v_hat = staleness_and_rel_velocity(hb, k, dt_exec, N, pkb)
+            sigma = jnp.linalg.norm(v_hat, axis=-1) * age[None, :]
+            d_safe_pair = jnp.minimum(D_COLLISION + prm.margin_k * sigma, prm.margin_d_max)
         if cbf_on:
-            u, info, warm = cbf_filter(positions, x_hat, u_nom, goal, (W, H), segs, warm, prm)
+            u, info, warm = cbf_filter(positions, x_hat, u_nom, goal, (W, H), segs, warm, prm, d_safe_pair)
         else:
             u = jnp.clip(u_nom, -prm.u_box, prm.u_box)
             z = jnp.zeros(N)
@@ -73,6 +80,12 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
              "qp_iters": info["qp_iters"], "row_violation": info["row_violation"],
              "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true,
              "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all}
+        if adaptive and cbf_on:   # realized margin on the valid neighbour rows: exact sum/count + 0.01 m histogram
+            ds, ok = info["nb_d_safe"], info["nb_valid"]
+            b = jnp.clip(jnp.round((ds - D_COLLISION) / DSAFE_BIN).astype(jnp.int32), 0, DSAFE_NBINS - 1)
+            y["d_safe_hist"] = jnp.zeros(DSAFE_NBINS, jnp.int32).at[b.reshape(-1)].add(ok.reshape(-1).astype(jnp.int32))
+            y["d_safe_sum"] = jnp.sum(jnp.where(ok, ds, 0.0))
+            y["d_safe_n"] = jnp.sum(ok)
         if log_xhat:
             y["xhat_rel"] = (x_hat - positions[:, None]).astype(jnp.float32)   # (N,N,2) estimate - own pos (float32 since amend16 post-hoc; float16 before)
             y["cbf_nb_idx"] = info["nb_idx"].astype(jnp.int8)
@@ -98,6 +111,21 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
         return jitted(key, arrays, dt=float(macro["dt"]), step=float(macro["step"]))
 
     return run
+
+
+DSAFE_BIN, DSAFE_NBINS = 0.01, 241    # amend17 realized-d_safe histogram: bins D_COLLISION + 0.01 b, b = 0..240
+
+
+def dsafe_stats(logs):
+    """amend17: mean / p50 / p95 of the realized adaptive d_safe over all valid neighbour rows x agents x steps
+    (mean exact; percentiles at the 0.01 m bin resolution). None for constant-d_safe runs."""
+    if "d_safe_hist" not in logs:
+        return {"d_safe_mean": None, "d_safe_p50": None, "d_safe_p95": None}
+    h = np.asarray(logs["d_safe_hist"]).sum(0).astype(np.float64)
+    c = np.cumsum(h) / h.sum()
+    centres = D_COLLISION + DSAFE_BIN * np.arange(DSAFE_NBINS)
+    return {"d_safe_mean": float(np.sum(np.asarray(logs["d_safe_sum"], np.float64)) / np.sum(logs["d_safe_n"])),
+            "d_safe_p50": float(centres[np.searchsorted(c, 0.50)]), "d_safe_p95": float(centres[np.searchsorted(c, 0.95)])}
 
 
 def summarize(logs, scenario, dt_exec, c_w=1.0):
@@ -144,5 +172,6 @@ def summarize(logs, scenario, dt_exec, c_w=1.0):
         "closedloop_xhat_mse_near": float(np.mean(logs["xhat_err_near"])) if "xhat_err_near" in logs else None,
         "closedloop_xhat_mse_all": float(np.mean(logs["xhat_err_all"])) if "xhat_err_all" in logs else None,
         "integral_W_true": float(np.sum(np.mean(c_w * np.asarray(logs["rho_true"]) ** 2, 1)) * dt_exec),
+        **dsafe_stats(logs),
     }
     return out, {"t": t, "arrived_frac": frac, "r_goal_dist": r, "first_arrival_idx": first}

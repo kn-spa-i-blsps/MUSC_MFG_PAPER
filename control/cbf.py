@@ -45,6 +45,9 @@ class CBFParams(NamedTuple):
     maxiter: int
     qp_solver: str = "exact_hard"  # "exact_hard" (default; walls/boundaries own slack) |
                                    # "exact" (legacy: one slack shared by ALL rows) | "boxosqp" (reference)
+    margin_k: float | None = None  # amend17: None = constant d_safe (unchanged); else staleness-aware per-pair
+                                   # d_safe_ij = min(D_COLLISION + margin_k * v_hat_ij * age_j, margin_d_max)
+    margin_d_max: float = 1.5      # amend17: cap of the adaptive per-pair d_safe
 
 
 def _closest_on_segments(p, segs):
@@ -54,11 +57,14 @@ def _closest_on_segments(p, segs):
     return a + t[:, None] * ab                                         # (S,2)
 
 
-def build_rows(p_i, x_hat_i, self_idx, goal, arena, segs, prm: CBFParams):
-    """Constraint rows (a (C,2), lower (C,)) for agent i: k_nb neighbours, S walls, 4 boundaries."""
+def build_rows(p_i, x_hat_i, self_idx, goal, arena, segs, prm: CBFParams, d_safe_i=None):
+    """Constraint rows (a (C,2), lower (C,)) for agent i: k_nb neighbours, S walls, 4 boundaries.
+    d_safe_i (N,) (amend17): per-neighbour safe distance; None = the constant prm.d_safe."""
     if x_hat_i.shape[0] < prm.k_nb:                                    # pad with never-valid rows
         pad = prm.k_nb - x_hat_i.shape[0]
         x_hat_i = jnp.concatenate([x_hat_i, jnp.full((pad, 2), BIG)], 0)
+        if d_safe_i is not None:
+            d_safe_i = jnp.concatenate([d_safe_i, jnp.full((pad,), prm.d_safe)], 0)
     N = x_hat_i.shape[0]
     rel = p_i[None] - x_hat_i                                          # (N,2)
     d2 = jnp.sum(rel ** 2, -1)
@@ -67,7 +73,8 @@ def build_rows(p_i, x_hat_i, self_idx, goal, arena, segs, prm: CBFParams):
     d2_k = -neg
     rel_k = rel[idx]
     valid = d2_k < prm.r_sense ** 2                                    # (inf / padded -> False)
-    h = d2_k - prm.d_safe ** 2
+    d_safe_k = prm.d_safe if d_safe_i is None else d_safe_i[idx]
+    h = d2_k - d_safe_k ** 2
     r_i = jnp.linalg.norm(goal - p_i)
     r_j = jnp.linalg.norm(goal[None] - x_hat_i[idx], axis=-1)
     share = jax.nn.sigmoid(prm.prio_gain * (r_j - r_i))
@@ -95,7 +102,7 @@ def build_rows(p_i, x_hat_i, self_idx, goal, arena, segs, prm: CBFParams):
     na = jnp.maximum(jnp.linalg.norm(A, axis=-1), 1e-9)
     A = jnp.where(active[:, None], A / na[:, None], 0.0)
     lo = jnp.where(active, jnp.clip(lo / na, -LOOSE, LOOSE), -LOOSE)
-    return A, lo, idx, valid
+    return A, lo, idx, valid, jnp.broadcast_to(d_safe_k, idx.shape)
 
 
 def _qp_matrices(A_c, lo_c, u_nom, prm: CBFParams):
@@ -120,15 +127,20 @@ def solve_one(A_c, lo_c, u_nom, init, prm: CBFParams):
     return sol.params, sol.state.iter_num
 
 
-def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams):
+def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams, d_safe_pair=None):
     """positions (N,2), x_hat (N,N,2), u_nom (N,2). init: batched BoxOSQP KKTSolution or None.
+    d_safe_pair (N,N) (amend17): per-pair safe distance d_safe[i, j]; None = the constant prm.d_safe.
     Returns (u (N,2), info dict, kkt for warm start)."""
     N = positions.shape[0]
     goal = jnp.asarray(goal)
     segs = jnp.asarray(segs)
     u_nom_box = jnp.clip(u_nom, -prm.u_box, prm.u_box)
-    rows = jax.vmap(lambda p, xh, i: build_rows(p, xh, i, goal, arena, segs, prm))(
-        positions, x_hat, jnp.arange(N))
+    if d_safe_pair is None:
+        rows = jax.vmap(lambda p, xh, i: build_rows(p, xh, i, goal, arena, segs, prm))(
+            positions, x_hat, jnp.arange(N))
+    else:
+        rows = jax.vmap(lambda p, xh, i, ds: build_rows(p, xh, i, goal, arena, segs, prm, ds))(
+            positions, x_hat, jnp.arange(N), d_safe_pair)
     A_c, lo_c, nb_idx = rows[0], rows[1], rows[2]
     if prm.qp_solver == "exact_hard":
         u, s, iters = jax.vmap(lambda a, l, un: solve_exact_hard(a, l, un, prm, prm.k_nb))(
@@ -150,7 +162,7 @@ def cbf_filter(positions, x_hat, u_nom, goal, arena, segs, init, prm: CBFParams)
             "intervention": jnp.linalg.norm(u - u_nom_box, axis=-1),
             "qp_iters": iters,
             "row_violation": jnp.maximum(-jnp.min(residual, axis=1), 0.0),
-            "nb_idx": nb_idx}
+            "nb_idx": nb_idx, "nb_valid": rows[3], "nb_d_safe": rows[4]}
     return u, info, kkt
 
 

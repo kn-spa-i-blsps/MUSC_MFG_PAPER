@@ -1,0 +1,240 @@
+{
+ "real": {
+  "arrays_compared": 19,
+  "only_in_k0": [
+   "d_safe_hist",
+   "d_safe_n",
+   "d_safe_sum"
+  ],
+  "all_common_arrays_bit_equal": true,
+  "arrays": {
+   "arrived_frac": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "intervention": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "m_hat": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "m_star_at": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "min_sep": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "n_coll_pairs": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "p5_sep_pairs": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "pos": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "pos_final": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "qp_iters": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "rho_true": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "row_violation": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "slack_hard": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "slack_max": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "t": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "u": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "u_nom": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "xhat_err_all": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "xhat_err_near": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   }
+  },
+  "metrics_[k0,const]": {
+   "completeness_final": [
+    0.99,
+    0.99
+   ],
+   "collision_pair_steps": [
+    35339,
+    35339
+   ],
+   "min_sep_overall_m": [
+    0.0015507539501413703,
+    0.0015507539501413703
+   ],
+   "p5_sep_worst_step_m": [
+    0.04353008419275284,
+    0.04353008419275284
+   ],
+   "cbf_intervention_rate": [
+    0.4453988157436433,
+    0.4453988157436433
+   ],
+   "slack_active_rate": [
+    0.032243120863810516,
+    0.032243120863810516
+   ]
+  },
+  "k0_d_safe_rows_off_0.30_bin": 0,
+  "k0_d_safe_mean_p50_p95": [
+   0.29999996440157417,
+   0.3,
+   0.3
+  ]
+ },
+ "learned": {
+  "arrays_compared": 19,
+  "only_in_k0": [
+   "d_safe_hist",
+   "d_safe_n",
+   "d_safe_sum"
+  ],
+  "all_common_arrays_bit_equal": true,
+  "arrays": {
+   "arrived_frac": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "intervention": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "m_hat": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "m_star_at": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "min_sep": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "n_coll_pairs": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "p5_sep_pairs": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "pos": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "pos_final": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "qp_iters": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "rho_true": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "row_violation": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "slack_hard": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "slack_max": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "t": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "u": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "u_nom": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "xhat_err_all": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   },
+   "xhat_err_near": {
+    "bit_equal": true,
+    "max_abs_diff": 0.0
+   }
+  },
+  "metrics_[k0,const]": {
+   "completeness_final": [
+    0.96,
+    0.96
+   ],
+   "collision_pair_steps": [
+    44173,
+    44173
+   ],
+   "min_sep_overall_m": [
+    0.0025994167663156986,
+    0.0025994167663156986
+   ],
+   "p5_sep_worst_step_m": [
+    0.09646358340978622,
+    0.09646358340978622
+   ],
+   "cbf_intervention_rate": [
+    0.3213189364913503,
+    0.3213189364913503
+   ],
+   "slack_active_rate": [
+    0.00012306977824219203,
+    0.00012306977824219203
+   ]
+  },
+  "k0_d_safe_rows_off_0.30_bin": 0,
+  "k0_d_safe_mean_p50_p95": [
+   0.2999999642470626,
+   0.3,
+   0.3
+  ]
+ }
+}

@@ -1,0 +1,11 @@
+amend17 k=0 sanity diagnosis (pod k9nrewd0bhycsu, 2026-10-23, before the aneks commit)
+1st pass (code without optimization_barrier): real k0 vs const0.30 -> 19/19 logged arrays bit-equal.
+  learned k0 vs const0.30 -> NOT bit-equal: u_nom differs at step 0 by 9.18e-06 (upstream of the CBF; k0 d_safe = 0.30 on
+  100% of valid rows, 0 rows off the 0.30 bin), amplified by the QP/closed loop (step-0 u diff 3.57, pos diff 0.036 at step 1).
+  metrics k0/const: compl 0.96/0.96, coll pair-steps 41714/44173, p5 0.123/0.096.
+Checks: (a) standalone jit of perceive(learned) alone vs perceive+staleness_and_rel_velocity at k=0/500/3000 -> x_hat
+  bit-equal; (b) const0.30 learned seed 0 re-run -> bit-equal to the first run (run-to-run deterministic).
+  => in the full scan graph XLA compiled the learned perceive branch differently once the staleness ops were present
+  (float-level x_hat change, not a margin effect).
+Fix: env/rollout.py feeds staleness_and_rel_velocity through jax.lax.optimization_barrier((history, pk)) (identity op).
+  learned k0(barrier) vs const0.30 -> 19/19 arrays bit-equal. Final sanity below re-runs san_k0 real+learned on this code.

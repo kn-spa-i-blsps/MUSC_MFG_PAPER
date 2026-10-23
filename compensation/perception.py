@@ -194,6 +194,31 @@ def smith_predict(positions_now: jnp.ndarray, x_hat_real: jnp.ndarray, age: jnp.
     return x_final
 
 
+def staleness_and_rel_velocity(history: jnp.ndarray, k_now: int, dt_exec: float, N: int,
+                               key: jax.Array) -> tuple[jnp.ndarray, jnp.ndarray]:
+    """amend17 (adaptive CBF margin): (age (N_j,), v_hat (N_i, N_j, 2)). age[j] = time since neighbour j's last TDMA
+    broadcast (tdma_age, the schedule perceive() uses); v_hat[i, j] = finite difference of i's last two heard
+    relative observations of j over one frame, (rel_now - rel_prev) / T_frame. Called with the SAME key as perceive():
+    the key splits reproduce perceive()'s draws exactly, so rel_now is the m=0 observation every arm uses and rel_prev
+    is cv's previous-frame observation = the m=1 block of the learned window. Read-only: x_hat is unaffected."""
+    T_frame = t_frame(N)
+    T_frame_steps = max(1, int(round(T_frame / dt_exec)))
+    age = tdma_age(k_now * dt_exec, N)
+    age_steps = jnp.round(age / dt_exec).astype(jnp.int32)
+    k_then = jnp.maximum(k_now - age_steps, 0)
+    H_then = history[k_then]
+    true_rel_now = H_then[jnp.arange(N), jnp.arange(N)][:, None, :] - H_then
+    key, k_now_noise = jax.random.split(key)
+    rel_now = _noisy_rel_vec(jnp.zeros_like(true_rel_now), true_rel_now, k_now_noise)
+    k_prev = jnp.maximum(k_then - T_frame_steps, 0)
+    H_prev = history[k_prev]
+    true_rel_prev = H_prev[jnp.arange(N), jnp.arange(N)][:, None, :] - H_prev
+    key, k_prev_noise = jax.random.split(key)
+    rel_prev = _noisy_rel_vec(jnp.zeros_like(true_rel_prev), true_rel_prev, k_prev_noise)
+    v_hat = jnp.transpose(rel_now - rel_prev, (1, 0, 2)) / T_frame     # (N_i, N_j, 2)
+    return age, v_hat
+
+
 def perceive(condition: str, history: jnp.ndarray, k_now: int, dt_exec: float, N: int,
              key: jax.Array, predictor_params: dict = None, field_params: dict = None) -> jnp.ndarray:
     """Returns x_hat: (N, N, 2), x_hat[i, j] = agent i's estimate of agent j's CURRENT position.
