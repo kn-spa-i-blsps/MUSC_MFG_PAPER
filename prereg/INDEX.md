@@ -16,5 +16,6 @@
 | prereg_projectA_amend11_ladder_safe.md | 39188e89f4939e3d8616787a8877c06f7f01feba3534ea84c3af6d0d68818ce1 | full ladder {real,cv,learned,smith} on the amend9 safe config (locked); open-loop MSE on datagen test seeds 110-111 of this config; best/worst-arm viz rule |
 | prereg_projectA_amend12_safe_success.md | 426d4c3aa3a559486b5a296b6bf279cd3e24f5707fd4cbf3d94f548969e434b1 | re-analysis only (no runs) of amend11 logs: per-agent safe success = in r_goal at end AND never true d < D_COLLISION; 4-way breakdown, distinct agents ever collided, old completeness |
 | prereg_projectA_amend13_threshold_curve.md | ecf853c9761cd8094779fe869ef1ba91004ee001c27fe4db9708436734227a20 | re-analysis only (no runs) of amend11 logs: amend12 safe success vs crash threshold c in {0.30,0.25,0.20,0.15,0.10} m; ever-collided(c); 0.5 / 0.9 crossings (grid + continuous) |
+| prereg_projectA_amend15_density_sweep.md | 9f5d92168ebc0b08a97644c832a0c35707ee06e8d3617d7ea93cac223cdaf1a6 | density sweep safe-success vs spacing, c=0.30, geometria pinowana stała, 4 ramiona |
 
 Amendments take precedence over the original for the items they name; the original is never edited.

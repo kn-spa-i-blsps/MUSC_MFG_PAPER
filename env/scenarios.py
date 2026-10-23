@@ -30,6 +30,10 @@ class SingleGateA:
       k*r_goal downstream (+x) of the disc centre (k=1: far edge of the disc); the tanh hold step at
       r_goal, the success region, the local goal observation and the CBF priority keep the disc centre.
       None (default) = attractor at the disc centre (amend1-9).
+    goal_geometry_spacing=s_g (amend15, with goal_gap_mult): pinned geometry -- the goal x-offset, the arena
+      (length, height, clearance) and the path length (hence the amend5 horizon) are sized by
+      r_geom = r_goal(s_g) instead of r_goal; only the disc (hold step, success region) uses r_goal from
+      goal_spacing. None (default) = r_geom = r_goal (amend4-11 unchanged).
     goal_shape (amend7): "conical" (default) -- V_goal = cone to the waypoint + tanh hold step at r_goal;
       "flat" -- flat-bottomed: both terms act on relu(r - r_goal) only, so grad V_goal = 0 inside the
       disc and (up to the 0.05 m cone rounding) equals the conical gradient outside it.
@@ -42,7 +46,8 @@ class SingleGateA:
                  start_wall_gap: float = 0.6, start_softness: float = 0.2,
                  n_agents: int | None = None, goal_gap_mult: float | None = None,
                  goal_shape: str = "conical", goal_spacing: float | None = None,
-                 goal_clearance: float | None = None, goal_attractor_shift: float | None = None):
+                 goal_clearance: float | None = None, goal_attractor_shift: float | None = None,
+                 goal_geometry_spacing: float | None = None):
         # geometry is sized by N; n_agents (default N) only sets the mass / agent count -- used by
         # the single-agent goal-hold unit test
         self.N_geom = N
@@ -53,16 +58,18 @@ class SingleGateA:
         self.H0 = H
         self.r_goal = r_goal_for_N(N) if goal_spacing is None else \
             math.sqrt(N / (math.pi * 2.0 / (math.sqrt(3.0) * goal_spacing ** 2)))
+        self.r_geom = self.r_goal if goal_geometry_spacing is None else \
+            math.sqrt(N / (math.pi * 2.0 / (math.sqrt(3.0) * goal_geometry_spacing ** 2)))
         self.z_off = 0.0                                   # source chamber spans z in [z_off, z_off + H0]
         if goal_gap_mult is None:
             self.arena = (W, H)
             self.waypoint = (0.75 * W, H / 2.0)
         else:
-            x_goal = self.wall_x + goal_gap_mult * self.r_goal
-            m = (H - 2.0 * self.r_goal) / 2.0 if goal_clearance is None else goal_clearance
-            Ha = max(H, 2.0 * self.r_goal + 2.0 * m)
+            x_goal = self.wall_x + goal_gap_mult * self.r_geom
+            m = (H - 2.0 * self.r_geom) / 2.0 if goal_clearance is None else goal_clearance
+            Ha = max(H, 2.0 * self.r_geom + 2.0 * m)
             self.z_off = (Ha - H) / 2.0
-            self.arena = (x_goal + self.r_goal + m, Ha)
+            self.arena = (x_goal + self.r_geom + m, Ha)
             self.waypoint = (x_goal, Ha / 2.0)
         self.gate_z = self.arena[1] / 2.0
         k = 0.0 if goal_attractor_shift is None else goal_attractor_shift
@@ -93,7 +100,7 @@ class SingleGateA:
         x0, x1, z0, z1 = self.start_box
         gate = (self.wall_x, self.gate_z)
         far = max(((x0, z0), (x0, z1)), key=lambda c: math.dist(c, gate))
-        return math.dist(far, gate) + math.dist(gate, self.goal) + self.r_goal
+        return math.dist(far, gate) + math.dist(gate, self.goal) + self.r_geom
 
     def source_area(self) -> float:
         """Source chamber (left of the wall): density-constant reference on the source side."""

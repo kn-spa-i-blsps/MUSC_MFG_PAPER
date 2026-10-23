@@ -41,7 +41,8 @@ def build_scenario(cfg, N):
                        edge_softness=s["edge_softness"], goal_gap_mult=s.get("goal_gap_mult"),
                        goal_shape=s.get("goal_shape", "conical"), goal_spacing=s.get("goal_spacing"),
                        goal_clearance=s.get("goal_clearance"),
-                       goal_attractor_shift=s.get("goal_attractor_shift"))
+                       goal_attractor_shift=s.get("goal_attractor_shift"),
+                       goal_geometry_spacing=s.get("goal_geometry_spacing"))
 
 
 def density_sweep(cfg):

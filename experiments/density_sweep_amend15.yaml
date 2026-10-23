@@ -1,0 +1,60 @@
+# AMEND15 (density sweep, pinned geometry): the amend11 config (= amend9 safe config) except run_name, this header and
+# scenario.goal_geometry_spacing. goal_geometry_spacing 1.05 pins the goal x-offset, arena and path length (horizon)
+# for every cell; experiments/amend15_density_sweep.py sets scenario.goal_spacing per cell (0.45 .. 1.05) and
+# run_name density_sweep_amend15_N100/s<spacing>. d_safe 0.55 for every arm; D_COLLISION only in the analysis.
+# log_xhat off (logging only).
+run_name: density_sweep_amend15_N100
+log_xhat: false                  # amend15: off (disk: xhat_rel ~260 MB per rollout); logging only, closed-loop x_hat MSE still logged
+horizon: path                    # amend5: T = HORIZON_MULT * path_length_to_goal / V_NOM
+snapshot_times: [0, 5, 10, 15, 20, 30, 40, 50]   # viz only
+N: 100
+condition: real                 # unused by ladder.py (arm from --arm)
+seeds: [0]
+density_sweep_N: [25, 50, 100, 150, 200]
+
+grid_step: 0.2
+dt_exec: 0.01
+
+scenario:
+  w_goal: 2.0                    # conical goal-progress weight
+  w_hold: 8.0                    # running penalty for being outside r_goal (goal-holding term)
+  goal_softness: 0.25
+  obs_penalty: 200.0             # soft macro wall
+  wall_thickness: 0.3
+  edge_softness: 0.25
+  goal_gap_mult: 3.0              # amend4: goal waypoint 3 r_goal behind the wall, downstream chamber
+  goal_spacing: 0.80              # amend9: hex spacing in the goal disc (was D_STAR 0.60) -> RHO_GOAL 1.80
+  goal_clearance: 1.18            # amend9: disc-to-wall clearance = amend4/6 value (8.66 - 6.30)/2 at N=100
+  goal_geometry_spacing: 1.05      # amend15: pinned geometry (sparsest cell, r_geom 5.51)
+
+macro_cost:
+  c_w: 1.0                       # W(m) = c_w m^2  (c_w=0 -> "W off", §9 (1))
+  w_bar: 10.0                    # soft collision barrier
+  m_bar: 6.25                    # = 1/R_BARRIER^2, agents/m^2
+  f_cap: 300.0                   # solver safeguard (inactive at m*: reported)
+
+fp:
+  damping: 0.02
+  max_iters: 800
+  burn_in: 200
+  tol: 0.005
+
+control:
+  c_dens: 1.0                    # C_DENS, prereg §3
+
+cbf:
+  d_safe: 0.55                   # amend9: D_COLLISION 0.30 + 0.25 m margin (< 0.80 goal spacing)
+  r_wall: 0.20                   # wall half-thickness 0.05 + R_D 0.15
+  r_body: 0.15
+  gamma: 20.0
+  rho: 1.0
+  slack_lin: 100.0
+  k_nb: 8
+  r_sense: 5.0
+  prio_gain: 2.0
+  prio_min: 0.25
+  u_box: 5.656854249492381       # V_MAX / sqrt(2)
+  tol: 1.0e-5
+  maxiter: 2000
+  qp_solver: exact_hard          # P1 fix: walls/arena own slack; "exact" = legacy shared slack (smoke attempt 3)
+
