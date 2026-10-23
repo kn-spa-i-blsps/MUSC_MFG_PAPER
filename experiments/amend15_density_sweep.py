@@ -6,7 +6,7 @@ d_safe 0.55 for every arm; D_COLLISION is an analysis parameter (--d_collision).
     python -m experiments.amend15_density_sweep integrity           # amend11 logs: learned safe success ~0.168
     python -m experiments.amend15_density_sweep write-cells         # experiments/amend15_cells/s<s>.yaml
     python -m experiments.amend15_density_sweep solve --cells 0.45 [...]   # Phi / m* per cell into results/cache
-    python -m experiments.amend15_density_sweep report [--d_collision 0.30] [--seeds 0 1 2]
+    python -m experiments.amend15_density_sweep report [--d_collision 0.30] [--seeds 0 1 2 3 4]
 
 Rollouts: python -m experiments.ladder --config experiments/amend15_cells/s<s>.yaml --mode eval --arm <arm>
     --weights results/ladder_fargoal_N100/predictor_weights.npz --seeds <seed>   (after the cell's solve).
@@ -175,7 +175,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["geometry", "integrity", "write-cells", "solve", "report"])
     ap.add_argument("--d_collision", type=float, default=0.30)
-    ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
+    ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2, 3, 4])
     ap.add_argument("--seeds11", type=int, nargs="+", default=[0, 1, 2, 3, 4])
     ap.add_argument("--cells", type=float, nargs="+", default=SPACINGS)
     a = ap.parse_args()

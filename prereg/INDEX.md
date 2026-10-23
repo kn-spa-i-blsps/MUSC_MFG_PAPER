@@ -17,5 +17,6 @@
 | prereg_projectA_amend12_safe_success.md | 426d4c3aa3a559486b5a296b6bf279cd3e24f5707fd4cbf3d94f548969e434b1 | re-analysis only (no runs) of amend11 logs: per-agent safe success = in r_goal at end AND never true d < D_COLLISION; 4-way breakdown, distinct agents ever collided, old completeness |
 | prereg_projectA_amend13_threshold_curve.md | ecf853c9761cd8094779fe869ef1ba91004ee001c27fe4db9708436734227a20 | re-analysis only (no runs) of amend11 logs: amend12 safe success vs crash threshold c in {0.30,0.25,0.20,0.15,0.10} m; ever-collided(c); 0.5 / 0.9 crossings (grid + continuous) |
 | prereg_projectA_amend15_density_sweep.md | 9f5d92168ebc0b08a97644c832a0c35707ee06e8d3617d7ea93cac223cdaf1a6 | density sweep safe-success vs spacing, c=0.30, geometria pinowana stała, 4 ramiona |
+| prereg_projectA_amend15_density_sweep.md (v4, supersedes 9f5d9216 before any run) | e2ed1964e3688ff696ce30f5dbd26c509c782f295f7856349924b4144e73e8bb | density sweep safe-success vs spacing, c=0.30, geometria pinowana, backend RunPod GPU (planned 4090; actual NVIDIA A40, $0.59/h, logged at run time), 5 seedów |
 
 Amendments take precedence over the original for the items they name; the original is never edited.

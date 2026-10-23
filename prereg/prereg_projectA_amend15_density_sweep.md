@@ -72,12 +72,15 @@ operating point at which the arms separate.
   r_goal = √(N/(π·ρ)) = 5.25·s. Grid brackets learned's predicted 0.47 m threshold (0.45 below,
   0.60–0.75 through, 0.90–1.05 above). real/cv thresholds (1.12/1.24) sit above the grid by design —
   pushing the grid there balloons the arena/path for no added insight.
-- **Arms:** real, cv, learned, smith. **Seeds:** 0–2 (3), seed-level cluster bootstrap. First pass
-  to establish curve shape and range; extended to 5 seeds after the shape is confirmed (Gate 1).
-- **Compute:** 5 spacings × 4 arms × 3 seeds = **60 rollouts** + 5 fresh Φ/m* solves (one per
-  density, pinned geometry, cached across arms/seeds). **Runs on CPU** — amend11 (20 rollouts) took
-  ≈ 1 h 45 on CPU, so 60 rollouts ≈ **6–7 h** (plus the pinned arena's slightly longer horizon) +
-  solve time; fits a single night without GPU. GPU is optional (faster if available), not required.
+- **Arms:** real, cv, learned, smith. **Seeds:** 0–4 (5), seed-level cluster bootstrap.
+- **Compute:** 5 spacings × 4 arms × 5 seeds = **100 rollouts** + 5 fresh Φ/m* solves (one per
+  density, pinned geometry, computed on the same backend and cached across arms/seeds). **Backend =
+  a single RunPod GPU (CUDA; exact model and hourly price logged at run time).** The **entire sweep
+  runs on this one GPU backend** — solves and all 100
+  rollouts — because JAX GPU vs CPU is not bit-identical; no cell is mixed across backends, and the
+  CPU solve cache is not reused for the GPU rollouts. One rollout is timed first to confirm the full
+  sweep fits the session. (The amend11 integrity check in §7 is a re-analysis of amend11's existing
+  CPU logs, so it is backend-independent and still expects ≈ 0.168.)
 
 ## 4. Metrics (report BOTH — safety is not bought by emptying the goal)
 
