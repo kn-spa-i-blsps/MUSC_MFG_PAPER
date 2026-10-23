@@ -20,7 +20,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     """Returns run(key, macro) -> logs; macro = {phi_grad, m_star, m_star_grad} (passed to jit as
     arguments) + python floats dt, step. cfg keys: dt_exec, n_steps, nu, cbf_on, c_w, w_bar, m_bar, c_dens, cbf (dict of CBFParams);
     optional (amend7): hold_on_arrival (bool; d_hold = cbf d_safe), log_xhat (bool: log x_hat - own
-    position per ordered pair as float16, the CBF neighbour indices and the hold flag)."""
+    position per ordered pair as float32 (float16 before the amend16 post-hoc check), the CBF neighbour indices and the hold flag)."""
     N = scenario.N
     W, H = scenario.arena
     arena_arr = jnp.array([W, H])
@@ -74,7 +74,7 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
              "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true,
              "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all}
         if log_xhat:
-            y["xhat_rel"] = (x_hat - positions[:, None]).astype(jnp.float16)   # (N,N,2) estimate - own pos
+            y["xhat_rel"] = (x_hat - positions[:, None]).astype(jnp.float32)   # (N,N,2) estimate - own pos (float32 since amend16 post-hoc; float16 before)
             y["cbf_nb_idx"] = info["nb_idx"].astype(jnp.int8)
             y["held"] = mdiag["held"]
         return (positions_new, history, key, warm), y

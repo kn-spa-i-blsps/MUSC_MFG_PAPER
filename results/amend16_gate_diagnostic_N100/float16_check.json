@@ -1,0 +1,28 @@
+{
+ "real": {
+  "same_trajectory_as_part3_float16_run": true,
+  "same_u_as_part3_run": true,
+  "float16_log_equals_float32_rounded": true,
+  "max_abs_quantization_m": 0.0078125,
+  "intervened_agent_steps": 13536,
+  "mean_err_live_vs_replay_float32": 0.0,
+  "mean_err_live_vs_replay_float16": 2.0338170528411865,
+  "mean_err_replay16_vs_replay32": 2.0338170528411865,
+  "max_err_live_vs_replay_float32_all_agents": 0.0,
+  "frac_agent_steps_err32_gt_0.01": 0.0,
+  "frac_agent_steps_err16_gt_0.01": 0.32605
+ },
+ "learned": {
+  "same_trajectory_as_part3_float16_run": true,
+  "same_u_as_part3_run": true,
+  "float16_log_equals_float32_rounded": true,
+  "max_abs_quantization_m": 0.0078125,
+  "intervened_agent_steps": 14743,
+  "mean_err_live_vs_replay_float32": 0.0,
+  "mean_err_live_vs_replay_float16": 2.8015859127044678,
+  "mean_err_replay16_vs_replay32": 2.8015859127044678,
+  "max_err_live_vs_replay_float32_all_agents": 0.0,
+  "frac_agent_steps_err32_gt_0.01": 0.0,
+  "frac_agent_steps_err16_gt_0.01": 0.46355
+ }
+}
