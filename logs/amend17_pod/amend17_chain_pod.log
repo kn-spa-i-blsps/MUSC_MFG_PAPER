@@ -1,0 +1,89 @@
+2026-10-23 22:02:32 chain start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-23 22:02:32 aneks sha256 3c807789dc2743d9d5fcded89d519f657948d735e5d5555e02ca578c9d5ad67b HEAD a0ed278de0da3039188896062ca076041583c501
+2026-10-23 22:02:32 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-23 22:02:37 s=1.05 cache present: results/cache/macro_N100_cw1_f770143b36.npz sha256 6fdff1341db7124c
+2026-10-23 22:02:37 start k1.00 real 0
+2026-10-23 22:02:37 start k1.00 learned 0
+2026-10-23 22:03:15 done k1.00 real 0 exit=0 [real seed=0] 21s compl=0.370 coll=54495 minsep=0.001 p5=0.015 interv=0.889 slack=0.5569
+2026-10-23 22:03:15 start k1.00 real 1
+2026-10-23 22:03:20 done k1.00 learned 0 exit=0 [learned seed=0] 26s compl=0.870 coll=3590 minsep=0.016 p5=0.181 interv=0.583 slack=0.0184
+2026-10-23 22:03:20 start k1.00 learned 1
+2026-10-23 22:03:52 done k1.00 real 1 exit=0 [real seed=1] 16s compl=0.360 coll=51543 minsep=0.001 p5=0.031 interv=0.887 slack=0.5574
+2026-10-23 22:03:52 start k1.00 real 2
+2026-10-23 22:04:01 done k1.00 learned 1 exit=0 [learned seed=1] 22s compl=0.850 coll=4326 minsep=0.011 p5=0.180 interv=0.595 slack=0.0197
+2026-10-23 22:04:01 start k1.00 learned 2
+2026-10-23 22:04:28 done k1.00 real 2 exit=0 [real seed=2] 16s compl=0.380 coll=56936 minsep=0.000 p5=0.020 interv=0.885 slack=0.5544
+2026-10-23 22:04:29 start k1.00 real 3
+2026-10-23 22:04:42 done k1.00 learned 2 exit=0 [learned seed=2] 21s compl=0.850 coll=3918 minsep=0.013 p5=0.235 interv=0.606 slack=0.0199
+2026-10-23 22:04:42 start k1.00 learned 3
+2026-10-23 22:05:04 done k1.00 real 3 exit=0 [real seed=3] 16s compl=0.390 coll=58201 minsep=0.001 p5=0.021 interv=0.887 slack=0.5575
+2026-10-23 22:05:04 start k1.00 real 4
+2026-10-23 22:05:21 done k1.00 learned 3 exit=0 [learned seed=3] 21s compl=0.880 coll=3642 minsep=0.015 p5=0.201 interv=0.602 slack=0.0176
+2026-10-23 22:05:21 start k1.00 learned 4
+2026-10-23 22:05:41 done k1.00 real 4 exit=0 [real seed=4] 16s compl=0.390 coll=53224 minsep=0.001 p5=0.014 interv=0.888 slack=0.5557
+2026-10-23 22:06:00 done k1.00 learned 4 exit=0 [learned seed=4] 20s compl=0.870 coll=4657 minsep=0.026 p5=0.194 interv=0.600 slack=0.0196
+2026-10-23 22:06:00 start k1.50 real 0
+2026-10-23 22:06:00 start k1.50 learned 0
+2026-10-23 22:06:37 done k1.50 real 0 exit=0 [real seed=0] 19s compl=0.390 coll=51616 minsep=0.002 p5=0.017 interv=0.905 slack=0.5931
+2026-10-23 22:06:37 start k1.50 real 1
+2026-10-23 22:06:44 done k1.50 learned 0 exit=0 [learned seed=0] 25s compl=0.590 coll=15069 minsep=0.001 p5=0.035 interv=0.799 slack=0.1595
+2026-10-23 22:06:44 start k1.50 learned 1
+2026-10-23 22:07:12 done k1.50 real 1 exit=0 [real seed=1] 16s compl=0.370 coll=50105 minsep=0.001 p5=0.021 interv=0.903 slack=0.5888
+2026-10-23 22:07:13 start k1.50 real 2
+2026-10-23 22:07:23 done k1.50 learned 1 exit=0 [learned seed=1] 22s compl=0.670 coll=17012 minsep=0.001 p5=0.020 interv=0.801 slack=0.1710
+2026-10-23 22:07:24 start k1.50 learned 2
+2026-10-23 22:07:47 done k1.50 real 2 exit=0 [real seed=2] 16s compl=0.320 coll=50398 minsep=0.001 p5=0.024 interv=0.905 slack=0.5924
+2026-10-23 22:07:47 start k1.50 real 3
+2026-10-23 22:08:04 done k1.50 learned 2 exit=0 [learned seed=2] 20s compl=0.630 coll=17174 minsep=0.002 p5=0.044 interv=0.797 slack=0.1706
+2026-10-23 22:08:04 start k1.50 learned 3
+2026-10-23 22:08:22 done k1.50 real 3 exit=0 [real seed=3] 15s compl=0.360 coll=51348 minsep=0.000 p5=0.022 interv=0.902 slack=0.5876
+2026-10-23 22:08:23 start k1.50 real 4
+2026-10-23 22:08:44 done k1.50 learned 3 exit=0 [learned seed=3] 21s compl=0.600 coll=16255 minsep=0.004 p5=0.027 interv=0.798 slack=0.1657
+2026-10-23 22:08:44 start k1.50 learned 4
+2026-10-23 22:08:59 done k1.50 real 4 exit=0 [real seed=4] 15s compl=0.350 coll=49027 minsep=0.001 p5=0.022 interv=0.903 slack=0.5968
+2026-10-23 22:09:23 done k1.50 learned 4 exit=0 [learned seed=4] 21s compl=0.640 coll=15703 minsep=0.001 p5=0.040 interv=0.805 slack=0.1678
+2026-10-23 22:09:23 start k2.00 learned 0
+2026-10-23 22:09:23 start k2.00 real 0
+2026-10-23 22:10:01 done k2.00 real 0 exit=0 [real seed=0] 20s compl=0.320 coll=48429 minsep=0.002 p5=0.012 interv=0.910 slack=0.6135
+2026-10-23 22:10:01 start k2.00 real 1
+2026-10-23 22:10:06 done k2.00 learned 0 exit=0 [learned seed=0] 26s compl=0.490 coll=19692 minsep=0.001 p5=0.013 interv=0.844 slack=0.2332
+2026-10-23 22:10:06 start k2.00 learned 1
+2026-10-23 22:10:37 done k2.00 real 1 exit=0 [real seed=1] 15s compl=0.370 coll=51884 minsep=0.000 p5=0.025 interv=0.908 slack=0.6055
+2026-10-23 22:10:38 start k2.00 real 2
+2026-10-23 22:10:48 done k2.00 learned 1 exit=0 [learned seed=1] 22s compl=0.490 coll=19898 minsep=0.002 p5=0.024 interv=0.843 slack=0.2254
+2026-10-23 22:10:48 start k2.00 learned 2
+2026-10-23 22:11:11 done k2.00 real 2 exit=0 [real seed=2] 15s compl=0.340 coll=45905 minsep=0.001 p5=0.020 interv=0.912 slack=0.6023
+2026-10-23 22:11:11 start k2.00 real 3
+2026-10-23 22:11:28 done k2.00 learned 2 exit=0 [learned seed=2] 20s compl=0.500 coll=20259 minsep=0.001 p5=0.024 interv=0.840 slack=0.2272
+2026-10-23 22:11:28 start k2.00 learned 3
+2026-10-23 22:11:48 done k2.00 real 3 exit=0 [real seed=3] 16s compl=0.350 coll=52163 minsep=0.001 p5=0.024 interv=0.911 slack=0.6194
+2026-10-23 22:11:48 start k2.00 real 4
+2026-10-23 22:12:07 done k2.00 learned 3 exit=0 [learned seed=3] 21s compl=0.490 coll=21722 minsep=0.001 p5=0.031 interv=0.844 slack=0.2344
+2026-10-23 22:12:07 start k2.00 learned 4
+2026-10-23 22:12:24 done k2.00 real 4 exit=0 [real seed=4] 16s compl=0.320 coll=48401 minsep=0.001 p5=0.023 interv=0.905 slack=0.6025
+2026-10-23 22:12:46 done k2.00 learned 4 exit=0 [learned seed=4] 21s compl=0.480 coll=20358 minsep=0.003 p5=0.035 interv=0.846 slack=0.2273
+2026-10-23 22:12:46 rollouts done: 30/30 metrics
+2026-10-23 22:12:46 cache: 30  "macro_cache": "results/cache/macro_N100_cw1_f770143b36.npz",
+2026-10-23 22:14:34 report exit=0
+2026-10-23 22:14:34 chain end
+2026-10-23 22:14:34 finish status=DONE
+Author identity unknown
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'root@e34130d0e24e.(none)')
+error: cannot pull with rebase: Your index contains uncommitted changes.
+error: Please commit or stash them.
+2026-10-23 22:14:37 push failed (try 1), retry in 60 s
+To github.com:kn-spa-i-blsps/MUSC_MFG_PAPER.git
+   a0ed278..2df1d8d  HEAD -> main
+2026-10-23 22:15:42 push ok 2df1d8d
+## main...origin/main
