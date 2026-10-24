@@ -1,0 +1,19 @@
+amend21 OOD diagnostic (2026-10-24, after N=25 completed on the A100; post-hoc, PI informed, led to the PI-ordered stop of
+the learned arms at N != 100).
+Closed loop, N=25, seed 0 (this run): xhat_err_near real 0.0-0.026 m^2 over the whole rollout; learned_fixed0.70 0 at
+  steps 0-5, 6.15 at step 50, 7.4-7.9 later; n_coll_pairs learned 0 (step 50) -> 39 (200) -> 300/300 pairs from step 3000
+  (whole swarm on one point; completeness 1.0). N=25 means over 10 seeds: real 0 collision pair-steps in all seeds, p5 0.475,
+  xhat_mse_near 0.0119; learned fixed0.70 3.55e6 pair-steps, p5 0.000, xhat_mse_near 7.37; closing0.75 3.58e6, 0.000, 7.27.
+Open-loop replay (experiments/amend21_ood_replay.py), MSE on neighbours < 2 m at k = 200/500/1000/2000/4000/6000:
+  amend15 real s=1.05 seed 0 (N=100, the predictor's training N, old geometry):
+     real    [1.2014, 0.9145, 0.9953, 0.7411, 0.6835, 0.485]
+     cv      [1.8149, 1.5631, 1.7441, 1.1623, 1.0568, 0.8175]
+     learned [0.5733, 0.4815, 0.5352, 0.3505, 0.3567, 0.2565]
+  amend21 N=25 real seed 0 (this geometry):
+     real    [0.0219, 0.0199, 0.0148, 0.0135, 0.0132, 0.0127]
+     cv      [0.0344, 0.0399, 0.0306, 0.0351, 0.0295, 0.0307]
+     learned [5.1252, 5.4934, 5.8337, 5.8342, 6.0128, 6.0032]
+Reading (facts): the frozen amend11 predictor (trained only on N=100, T_frame = 0.5 s) is the best estimator at N=100 and
+~300x worse than real at N=25 on in-scenario trajectories -> the learned arms at N != 100 measure predictor
+out-of-distribution failure, not the method. A synthetic straight-line test (random positions/velocities) is OOD at every N
+and was not used.

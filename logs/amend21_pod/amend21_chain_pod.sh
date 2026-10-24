@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # amend21 on the RunPod GPU (A100 80GB pod r863dyrq106k4m; the A40 OOMed in the solve), detached (tmux). N crossover on ONE fixed geometry (geometry_N 230,
 # gate 2.309), precision=highest, N in {25,50,100,150,200} x {real, learned fixed 0.70, learned closing 0.75} x seeds 0-9.
-# Per N: Phi/m* solve (PI decision: mass = N, one solve per N, shared by the 3 arms) -> 30 rollouts. -> report ->
+# Per N: Phi/m* solve (PI decision: mass = N, one solve per N) -> real 10 rollouts (+ learned arms at N=100 only, PI
+# mid-run deviation; N=25 learned kept) -> report ->
 # git add -f results + logs, commit, push -> DONE. EXIT trap commits/pushes whatever exists (DONE/FAILED). Pod left running.
 cd /workspace/MUSC_MFG_PAPER
 mkdir -p ~/.ssh && cp -n /workspace/.ssh/id_ed25519* ~/.ssh/ 2>/dev/null; chmod 600 ~/.ssh/id_ed25519
@@ -61,16 +62,20 @@ for N in 25 50 100 150 200; do
   log "solve done N=$N exit=$? $(tail -1 $L/solve_N$NN.log)"
   grep -q '"nan": false' $L/solve_N$NN.log || { log "solve N=$N failed or NaN -> skip N"; continue; }
   rollouts N${NN}_real real
-  rollouts N${NN}_learned_fixed0.70 learned
-  rollouts N${NN}_learned_closing0.75 learned
-  log "N=$N: $(ls $R/N$NN/*/*/metrics_seed*.json 2>/dev/null | wc -l)/30 metrics"
+  # PI-ordered mid-run deviation (2026-10-24): learned arms only at N=100 (the predictor's training N; it fails off-N,
+  # logs/amend21_pod/ood_diagnostic.log); the N=25 learned rollouts that already ran are kept and reported as such
+  if [ $N = 100 ]; then
+    rollouts N${NN}_learned_fixed0.70 learned
+    rollouts N${NN}_learned_closing0.75 learned
+  fi
+  log "N=$N: $(ls $R/N$NN/*/*/metrics_seed*.json 2>/dev/null | wc -l) metrics"
   free=$(df -BG --output=avail /workspace | tail -1 | tr -dc 0-9)
   if [ "$free" -lt "$DISK_MIN_GB" ]; then c=$(grep -o '"cache": "[^"]*"' $L/solve_N$NN.log | cut -d'"' -f4); log "disk ${free}G < ${DISK_MIN_GB}G -> delete cache $c"; rm -f "$c"; fi
 done
-n=$(ls $R/N*/*/*/metrics_seed*.json 2>/dev/null | wc -l); log "rollouts done: $n/150 metrics"
+n=$(ls $R/N*/*/*/metrics_seed*.json 2>/dev/null | wc -l); log "rollouts done: $n/90 metrics (real 5x10 + learned N=100 2x10 + learned N=25 2x10 kept)"
 grep -h matmul_precision $R/N*/*/*/metrics_seed*.json | sort | uniq -c | while read l; do log "precision: $l"; done
 
 python -m experiments.amend21_N_crossover report > $L/report.log 2>&1; rc=$?
 log "report exit=$rc"
-[ $rc = 0 ] && [ "$n" = 150 ] && STATUS=DONE
+[ $rc = 0 ] && [ "$n" = 90 ] && STATUS=DONE
 log "chain end"

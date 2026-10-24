@@ -142,6 +142,9 @@ def sha256(p):
 def cmd_report(a):
     sha = sha256(os.path.join(ROOT, WEIGHTS))
     out = {"d_collision": a.d_collision, "seeds": a.seeds, "geometry": cmd_geometry(a), "aneks_sha256": sha256(ANEKS),
+           "deviation": "PI-ordered mid-run (2026-10-24): learned arms run only at N=100; N=25 learned rows are the rollouts that "
+                        "ran before the stop; learned at N=50/150/200 not run (predictor fails off its training N=100, "
+                        "logs/amend21_pod/ood_diagnostic.log)",
            "weights": WEIGHTS, "weights_sha256": sha, "weights_sha256_matches_record": sha == WEIGHTS_SHA256,
            "matmul_precision": "highest", "ci": "seed-level (cluster) bootstrap, 10k, 95%", "rows": {}}
     for N in NS:
@@ -151,6 +154,8 @@ def cmd_report(a):
         out["rows"][str(N)] = {}
         for arm, (cond, _) in ARMS.items():
             rdir = os.path.join(ROOT, "results", load_cell(cell_name(N, arm))["run_name"], cond)
+            if not os.path.exists(os.path.join(rdir, f"metrics_seed{a.seeds[0]}.json")):
+                continue          # PI mid-run deviation: learned arms only at N=100 (+ the N=25 rollouts that already ran)
             out["rows"][str(N)][arm] = run_rows(rdir, sc, a.seeds, a.d_collision, margin="closing" in arm)
     os.makedirs(RES, exist_ok=True)
     json.dump(out, open(os.path.join(RES, "report.json"), "w"), indent=1)
