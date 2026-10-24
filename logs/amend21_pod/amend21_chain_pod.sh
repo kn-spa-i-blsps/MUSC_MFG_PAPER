@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# amend21 on the RunPod GPU (pod e1k7uqv308xuws), detached (tmux). N crossover on ONE fixed geometry (geometry_N 230,
+# amend21 on the RunPod GPU (A100 80GB pod r863dyrq106k4m; the A40 OOMed in the solve), detached (tmux). N crossover on ONE fixed geometry (geometry_N 230,
 # gate 2.309), precision=highest, N in {25,50,100,150,200} x {real, learned fixed 0.70, learned closing 0.75} x seeds 0-9.
 # Per N: Phi/m* solve (PI decision: mass = N, one solve per N, shared by the 3 arms) -> 30 rollouts. -> report ->
 # git add -f results + logs, commit, push -> DONE. EXIT trap commits/pushes whatever exists (DONE/FAILED). Pod left running.

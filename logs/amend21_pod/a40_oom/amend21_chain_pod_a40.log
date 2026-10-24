@@ -1,0 +1,11 @@
+2026-10-24 08:40:12 chain start gpu=NVIDIA A40 jax=0.12.0 [CudaDevice(id=0)]
+2026-10-24 08:40:12 aneks sha256 7a7a44cac326d5f8abbbbade5ff9af295c74ffef11ae2bbbbcb0d62c2d368da7 HEAD 6d659f14941584178c3adb9e2ee888d950227912
+2026-10-24 08:40:12 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-24 08:40:28 geometry: arena [43.37882399698611, 19.08143681963849] gate 2.309401076758503 r_goal 8.360718409819246 start_box [0.4, 8.15595035770913, 3.373755641537396, 15.707681178101096] horizon 131.48435916125675 identical True dropped [] minsep {'25': 1.669, '50': 1.075, '100': 0.788, '150': 0.626, '200': 0.553}
+2026-10-24 08:40:28 solve start N=25
+2026-10-24 08:41:00 solve done N=25 exit=1 jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 2.56GiB with allocator GPU_0_bfc on device 0. [executable_name='jit_true_divide'] [tf-allocator-allocation-error='']
+2026-10-24 08:41:00 solve N=25 failed or NaN -> skip N
+2026-10-24 08:41:00 solve start N=50
+2026-10-24 08:41:34 solve done N=50 exit=1 jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 2.56GiB with allocator GPU_0_bfc on device 0. [executable_name='jit_true_divide'] [tf-allocator-allocation-error='']
+2026-10-24 08:41:34 solve N=50 failed or NaN -> skip N
+2026-10-24 08:41:34 solve start N=100
