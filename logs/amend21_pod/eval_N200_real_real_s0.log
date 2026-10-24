@@ -1,0 +1,2 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[real seed=0] 31s compl=0.850 coll=269459 minsep=0.000 p5=0.031 interv=0.723 slack=0.2711

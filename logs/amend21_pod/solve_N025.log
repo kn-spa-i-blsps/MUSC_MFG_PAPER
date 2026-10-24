@@ -1,0 +1,1 @@
+{"N": 25, "cache": "results/cache/macro_N25_cw1_0fb517496a.npz", "wall_s_this_call": 23.432790994644165, "solve_seconds": 621.3579044342041, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}

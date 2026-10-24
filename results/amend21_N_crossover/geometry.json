@@ -1,0 +1,159 @@
+{
+ "geometry_N": 230,
+ "gate_width": 2.309401076758503,
+ "T_SLOT": 0.005,
+ "per_N": {
+  "25": {
+   "arena": [
+    43.37882399698611,
+    19.08143681963849
+   ],
+   "gate_width": 2.309401076758503,
+   "wall_x": 8.75595035770913,
+   "gate_z": 9.540718409819245,
+   "goal_xz": [
+    33.838105587166865,
+    9.540718409819245
+   ],
+   "r_goal": 8.360718409819246,
+   "start_box": [
+    0.4,
+    8.15595035770913,
+    3.373755641537396,
+    15.707681178101096
+   ],
+   "path_length": 43.82811972041891,
+   "horizon_s": 131.48435916125675,
+   "n_agents": 25,
+   "T_frame_s": 0.125,
+   "density_agents_per_free_m2": 0.03230070259855295,
+   "min_initial_sep_seeds0_9": 1.668700098991394,
+   "fits_without_overlap": true,
+   "min_initial_sep_ge_0.55": true
+  },
+  "50": {
+   "arena": [
+    43.37882399698611,
+    19.08143681963849
+   ],
+   "gate_width": 2.309401076758503,
+   "wall_x": 8.75595035770913,
+   "gate_z": 9.540718409819245,
+   "goal_xz": [
+    33.838105587166865,
+    9.540718409819245
+   ],
+   "r_goal": 8.360718409819246,
+   "start_box": [
+    0.4,
+    8.15595035770913,
+    3.373755641537396,
+    15.707681178101096
+   ],
+   "path_length": 43.82811972041891,
+   "horizon_s": 131.48435916125675,
+   "n_agents": 50,
+   "T_frame_s": 0.25,
+   "density_agents_per_free_m2": 0.0646014051971059,
+   "min_initial_sep_seeds0_9": 1.0747700929641724,
+   "fits_without_overlap": true,
+   "min_initial_sep_ge_0.55": true
+  },
+  "100": {
+   "arena": [
+    43.37882399698611,
+    19.08143681963849
+   ],
+   "gate_width": 2.309401076758503,
+   "wall_x": 8.75595035770913,
+   "gate_z": 9.540718409819245,
+   "goal_xz": [
+    33.838105587166865,
+    9.540718409819245
+   ],
+   "r_goal": 8.360718409819246,
+   "start_box": [
+    0.4,
+    8.15595035770913,
+    3.373755641537396,
+    15.707681178101096
+   ],
+   "path_length": 43.82811972041891,
+   "horizon_s": 131.48435916125675,
+   "n_agents": 100,
+   "T_frame_s": 0.5,
+   "density_agents_per_free_m2": 0.1292028103942118,
+   "min_initial_sep_seeds0_9": 0.7875750660896301,
+   "fits_without_overlap": true,
+   "min_initial_sep_ge_0.55": true
+  },
+  "150": {
+   "arena": [
+    43.37882399698611,
+    19.08143681963849
+   ],
+   "gate_width": 2.309401076758503,
+   "wall_x": 8.75595035770913,
+   "gate_z": 9.540718409819245,
+   "goal_xz": [
+    33.838105587166865,
+    9.540718409819245
+   ],
+   "r_goal": 8.360718409819246,
+   "start_box": [
+    0.4,
+    8.15595035770913,
+    3.373755641537396,
+    15.707681178101096
+   ],
+   "path_length": 43.82811972041891,
+   "horizon_s": 131.48435916125675,
+   "n_agents": 150,
+   "T_frame_s": 0.75,
+   "density_agents_per_free_m2": 0.19380421559131772,
+   "min_initial_sep_seeds0_9": 0.6255626082420349,
+   "fits_without_overlap": true,
+   "min_initial_sep_ge_0.55": true
+  },
+  "200": {
+   "arena": [
+    43.37882399698611,
+    19.08143681963849
+   ],
+   "gate_width": 2.309401076758503,
+   "wall_x": 8.75595035770913,
+   "gate_z": 9.540718409819245,
+   "goal_xz": [
+    33.838105587166865,
+    9.540718409819245
+   ],
+   "r_goal": 8.360718409819246,
+   "start_box": [
+    0.4,
+    8.15595035770913,
+    3.373755641537396,
+    15.707681178101096
+   ],
+   "path_length": 43.82811972041891,
+   "horizon_s": 131.48435916125675,
+   "n_agents": 200,
+   "T_frame_s": 1.0,
+   "density_agents_per_free_m2": 0.2584056207884236,
+   "min_initial_sep_seeds0_9": 0.5532655119895935,
+   "fits_without_overlap": true,
+   "min_initial_sep_ge_0.55": true
+  }
+ },
+ "geometry_identical_across_N": {
+  "arena": true,
+  "gate_width": true,
+  "wall_x": true,
+  "gate_z": true,
+  "goal_xz": true,
+  "r_goal": true,
+  "start_box": true,
+  "path_length": true,
+  "horizon_s": true
+ },
+ "dropped_N": []
+}

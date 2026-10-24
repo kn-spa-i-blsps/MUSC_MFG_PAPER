@@ -1,0 +1,75 @@
+2026-10-24 15:04:08 chain start gpu=NVIDIA A100-SXM4-80GB jax=0.12.0 [CudaDevice(id=0)]
+2026-10-24 15:04:08 aneks sha256 7a7a44cac326d5f8abbbbade5ff9af295c74ffef11ae2bbbbcb0d62c2d368da7 HEAD c365cbd3346976217cc5aea5ee91f9cd9d97224b
+2026-10-24 15:04:08 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-24 15:04:18 geometry: arena [43.37882399698611, 19.08143681963849] gate 2.309401076758503 r_goal 8.360718409819246 start_box [0.4, 8.15595035770913, 3.373755641537396, 15.707681178101096] horizon 131.48435916125675 identical True dropped [] minsep {'25': 1.669, '50': 1.075, '100': 0.788, '150': 0.626, '200': 0.553}
+2026-10-24 15:04:18 solve start N=25
+2026-10-24 15:15:08 solve done N=25 exit=0 {"N": 25, "cache": "results/cache/macro_N25_cw1_0fb517496a.npz", "wall_s_this_call": 644.6946232318878, "solve_seconds": 621.3579044342041, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 15:15:08 start N025_real real 1
+2026-10-24 15:15:08 start N025_real real 0
+2026-10-24 15:15:58 done N025_real real 0 exit=0 [real seed=0] 10s compl=1.000 coll=0 minsep=0.485 p5=0.496 interv=0.414 slack=0.0164
+2026-10-24 15:15:58 start N025_real real 2
+2026-10-24 15:16:23 done N025_real real 2 exit=0 [real seed=2] 10s compl=1.000 coll=0 minsep=0.447 p5=0.471 interv=0.409 slack=0.0184
+2026-10-24 15:16:23 start N025_real real 3
+2026-10-24 15:16:47 done N025_real real 3 exit=0 [real seed=3] 10s compl=1.000 coll=0 minsep=0.430 p5=0.452 interv=0.416 slack=0.0175
+2026-10-24 15:16:47 start N025_real real 4
+2026-10-24 15:18:01 done N025_real real 1 exit=0 [real seed=1] 10s compl=1.000 coll=0 minsep=0.431 p5=0.459 interv=0.407 slack=0.0162
+2026-10-24 15:18:01 start N025_real real 5
+2026-10-24 15:18:15 done N025_real real 4 exit=0 [real seed=4] 10s compl=1.000 coll=0 minsep=0.439 p5=0.472 interv=0.412 slack=0.0172
+2026-10-24 15:18:16 start N025_real real 6
+2026-10-24 15:18:54 done N025_real real 5 exit=0 [real seed=5] 12s compl=1.000 coll=0 minsep=0.472 p5=0.495 interv=0.423 slack=0.0206
+2026-10-24 15:18:54 start N025_real real 7
+2026-10-24 15:18:57 done N025_real real 6 exit=0 [real seed=6] 13s compl=1.000 coll=0 minsep=0.394 p5=0.432 interv=0.413 slack=0.0166
+2026-10-24 15:18:57 start N025_real real 8
+2026-10-24 15:19:20 done N025_real real 7 exit=0 [real seed=7] 11s compl=1.000 coll=0 minsep=0.468 p5=0.498 interv=0.412 slack=0.0177
+2026-10-24 15:19:20 start N025_real real 9
+2026-10-24 15:19:24 done N025_real real 8 exit=0 [real seed=8] 12s compl=1.000 coll=0 minsep=0.492 p5=0.505 interv=0.410 slack=0.0173
+2026-10-24 15:19:44 done N025_real real 9 exit=0 [real seed=9] 10s compl=1.000 coll=0 minsep=0.455 p5=0.472 interv=0.418 slack=0.0182
+2026-10-24 15:19:44 start N025_learned_fixed0.70 learned 0
+2026-10-24 15:19:44 start N025_learned_fixed0.70 learned 1
+2026-10-24 15:20:21 done N025_learned_fixed0.70 learned 1 exit=0 [learned seed=1] 21s compl=1.000 coll=3571891 minsep=0.000 p5=0.000 interv=0.078 slack=0.0020
+2026-10-24 15:20:21 start N025_learned_fixed0.70 learned 2
+2026-10-24 15:20:21 done N025_learned_fixed0.70 learned 0 exit=0 [learned seed=0] 21s compl=1.000 coll=3589829 minsep=0.000 p5=0.000 interv=0.079 slack=0.0019
+2026-10-24 15:20:21 start N025_learned_fixed0.70 learned 3
+2026-10-24 15:20:57 done N025_learned_fixed0.70 learned 3 exit=0 [learned seed=3] 20s compl=1.000 coll=3565691 minsep=0.000 p5=0.000 interv=0.079 slack=0.0021
+2026-10-24 15:20:57 start N025_learned_fixed0.70 learned 4
+2026-10-24 15:20:58 done N025_learned_fixed0.70 learned 2 exit=0 [learned seed=2] 20s compl=1.000 coll=3414910 minsep=0.000 p5=0.000 interv=0.079 slack=0.0018
+2026-10-24 15:20:58 start N025_learned_fixed0.70 learned 5
+2026-10-24 15:21:26 done N025_learned_fixed0.70 learned 4 exit=0 [learned seed=4] 13s compl=1.000 coll=3510127 minsep=0.000 p5=0.000 interv=0.078 slack=0.0018
+2026-10-24 15:21:26 start N025_learned_fixed0.70 learned 6
+2026-10-24 15:22:11 done N025_learned_fixed0.70 learned 6 exit=0 [learned seed=6] 13s compl=1.000 coll=3551502 minsep=0.000 p5=0.000 interv=0.080 slack=0.0018
+2026-10-24 15:22:11 start N025_learned_fixed0.70 learned 7
+2026-10-24 15:23:21 done N025_learned_fixed0.70 learned 7 exit=0 [learned seed=7] 17s compl=1.000 coll=3591088 minsep=0.000 p5=0.000 interv=0.078 slack=0.0019
+2026-10-24 15:23:21 start N025_learned_fixed0.70 learned 8
+2026-10-24 15:23:24 done N025_learned_fixed0.70 learned 5 exit=0 [learned seed=5] 17s compl=1.000 coll=3557819 minsep=0.000 p5=0.000 interv=0.079 slack=0.0019
+2026-10-24 15:23:24 start N025_learned_fixed0.70 learned 9
+2026-10-24 15:24:01 done N025_learned_fixed0.70 learned 8 exit=0 [learned seed=8] 15s compl=1.000 coll=3605213 minsep=0.000 p5=0.000 interv=0.079 slack=0.0020
+2026-10-24 15:24:05 done N025_learned_fixed0.70 learned 9 exit=0 [learned seed=9] 16s compl=1.000 coll=3574490 minsep=0.000 p5=0.000 interv=0.080 slack=0.0020
+2026-10-24 15:24:05 start N025_learned_closing0.75 learned 0
+2026-10-24 15:24:05 start N025_learned_closing0.75 learned 1
+2026-10-24 15:24:49 done N025_learned_closing0.75 learned 0 exit=0 [learned seed=0] 27s compl=1.000 coll=3584204 minsep=0.000 p5=0.000 interv=0.075 slack=0.0024
+2026-10-24 15:24:49 start N025_learned_closing0.75 learned 2
+2026-10-24 15:24:49 done N025_learned_closing0.75 learned 1 exit=0 [learned seed=1] 27s compl=1.000 coll=3595501 minsep=0.000 p5=0.000 interv=0.075 slack=0.0025
+2026-10-24 15:24:49 start N025_learned_closing0.75 learned 3
+2026-10-24 15:25:48 done N025_learned_closing0.75 learned 2 exit=0 [learned seed=2] 24s compl=1.000 coll=3577902 minsep=0.000 p5=0.000 interv=0.074 slack=0.0023
+2026-10-24 15:25:48 start N025_learned_closing0.75 learned 4
+2026-10-24 15:25:51 done N025_learned_closing0.75 learned 3 exit=0 [learned seed=3] 24s compl=1.000 coll=3590154 minsep=0.000 p5=0.000 interv=0.073 slack=0.0028
+2026-10-24 15:25:51 start N025_learned_closing0.75 learned 5
+2026-10-24 15:26:28 done N025_learned_closing0.75 learned 4 exit=0 [learned seed=4] 24s compl=1.000 coll=3567443 minsep=0.000 p5=0.000 interv=0.075 slack=0.0026
+2026-10-24 15:26:28 start N025_learned_closing0.75 learned 6
+2026-10-24 15:26:30 done N025_learned_closing0.75 learned 5 exit=0 [learned seed=5] 24s compl=1.000 coll=3537091 minsep=0.000 p5=0.000 interv=0.074 slack=0.0025
+2026-10-24 15:26:30 start N025_learned_closing0.75 learned 7
+2026-10-24 15:27:50 done N025_learned_closing0.75 learned 6 exit=0 [learned seed=6] 21s compl=1.000 coll=3568214 minsep=0.000 p5=0.000 interv=0.075 slack=0.0023
+2026-10-24 15:27:50 start N025_learned_closing0.75 learned 8
+2026-10-24 15:27:54 done N025_learned_closing0.75 learned 7 exit=0 [learned seed=7] 22s compl=1.000 coll=3585229 minsep=0.000 p5=0.000 interv=0.075 slack=0.0021
+2026-10-24 15:27:54 start N025_learned_closing0.75 learned 9
+2026-10-24 15:28:29 done N025_learned_closing0.75 learned 8 exit=0 [learned seed=8] 23s compl=1.000 coll=3613409 minsep=0.000 p5=0.000 interv=0.073 slack=0.0024
+2026-10-24 15:28:32 done N025_learned_closing0.75 learned 9 exit=0 [learned seed=9] 23s compl=1.000 coll=3601173 minsep=0.000 p5=0.000 interv=0.076 slack=0.0024
+2026-10-24 15:28:32 N=25: 30/30 metrics
+2026-10-24 15:28:32 solve start N=50
+2026-10-24 15:39:19 solve done N=50 exit=0 {"N": 50, "cache": "results/cache/macro_N50_cw1_b4c8c86cde.npz", "wall_s_this_call": 641.9307565689087, "solve_seconds": 620.0260083675385, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 15:39:19 start N050_real real 0
+2026-10-24 15:39:19 start N050_real real 1
+2026-10-24 15:41:31 done N050_real real 0 exit=0 [real seed=0] 16s compl=1.000 coll=536 minsep=0.017 p5=0.125 interv=0.459 slack=0.0341
+2026-10-24 15:41:31 start N050_real real 2
+2026-10-24 15:41:32 done N050_real real 1 exit=0 [real seed=1] 16s compl=1.000 coll=204 minsep=0.020 p5=0.131 interv=0.455 slack=0.0326
+2026-10-24 15:41:32 start N050_real real 3

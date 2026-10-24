@@ -1,0 +1,152 @@
+2026-10-24 15:42:56 chain start gpu=NVIDIA A100-SXM4-80GB jax=0.12.0 [CudaDevice(id=0)]
+2026-10-24 15:42:56 aneks sha256 7a7a44cac326d5f8abbbbade5ff9af295c74ffef11ae2bbbbcb0d62c2d368da7 HEAD d4450c435d2c6b7166a2b9a62963b07db052cbb8
+2026-10-24 15:42:56 weights sha256 fc4a52a582688a9927f252e8d11d45420796c2b5a3c82fe1ed535d55d447417e
+2026-10-24 15:43:05 geometry: arena [43.37882399698611, 19.08143681963849] gate 2.309401076758503 r_goal 8.360718409819246 start_box [0.4, 8.15595035770913, 3.373755641537396, 15.707681178101096] horizon 131.48435916125675 identical True dropped [] minsep {'25': 1.669, '50': 1.075, '100': 0.788, '150': 0.626, '200': 0.553}
+2026-10-24 15:43:05 solve start N=25
+2026-10-24 15:43:32 solve done N=25 exit=0 {"N": 25, "cache": "results/cache/macro_N25_cw1_0fb517496a.npz", "wall_s_this_call": 23.432790994644165, "solve_seconds": 621.3579044342041, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 15:43:32 skip N025_real real 0 (exists)
+2026-10-24 15:43:32 skip N025_real real 1 (exists)
+2026-10-24 15:43:32 skip N025_real real 2 (exists)
+2026-10-24 15:43:32 skip N025_real real 3 (exists)
+2026-10-24 15:43:32 skip N025_real real 4 (exists)
+2026-10-24 15:43:32 skip N025_real real 5 (exists)
+2026-10-24 15:43:33 skip N025_real real 6 (exists)
+2026-10-24 15:43:33 skip N025_real real 7 (exists)
+2026-10-24 15:43:33 skip N025_real real 8 (exists)
+2026-10-24 15:43:33 skip N025_real real 9 (exists)
+2026-10-24 15:43:33 N=25: 30 metrics
+2026-10-24 15:43:33 solve start N=50
+2026-10-24 15:43:45 solve done N=50 exit=0 {"N": 50, "cache": "results/cache/macro_N50_cw1_b4c8c86cde.npz", "wall_s_this_call": 8.238505125045776, "solve_seconds": 620.0260083675385, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 15:43:45 skip N050_real real 0 (exists)
+2026-10-24 15:43:45 skip N050_real real 1 (exists)
+2026-10-24 15:43:45 start N050_real real 2
+2026-10-24 15:43:45 start N050_real real 3
+2026-10-24 15:45:14 done N050_real real 3 exit=0 [real seed=3] 15s compl=1.000 coll=143 minsep=0.019 p5=0.271 interv=0.451 slack=0.0312
+2026-10-24 15:45:15 start N050_real real 4
+2026-10-24 15:45:17 done N050_real real 2 exit=0 [real seed=2] 16s compl=1.000 coll=217 minsep=0.039 p5=0.151 interv=0.453 slack=0.0306
+2026-10-24 15:45:17 start N050_real real 5
+2026-10-24 15:46:16 done N050_real real 4 exit=0 [real seed=4] 14s compl=1.000 coll=749 minsep=0.004 p5=0.119 interv=0.456 slack=0.0336
+2026-10-24 15:46:16 start N050_real real 6
+2026-10-24 15:46:19 done N050_real real 5 exit=0 [real seed=5] 15s compl=1.000 coll=353 minsep=0.011 p5=0.061 interv=0.457 slack=0.0346
+2026-10-24 15:46:19 start N050_real real 7
+2026-10-24 15:47:04 done N050_real real 6 exit=0 [real seed=6] 13s compl=1.000 coll=488 minsep=0.002 p5=0.090 interv=0.450 slack=0.0338
+2026-10-24 15:47:05 start N050_real real 8
+2026-10-24 15:47:08 done N050_real real 7 exit=0 [real seed=7] 13s compl=1.000 coll=406 minsep=0.007 p5=0.236 interv=0.452 slack=0.0330
+2026-10-24 15:47:08 start N050_real real 9
+2026-10-24 15:47:33 done N050_real real 8 exit=0 [real seed=8] 12s compl=1.000 coll=372 minsep=0.022 p5=0.210 interv=0.456 slack=0.0327
+2026-10-24 15:47:38 done N050_real real 9 exit=0 [real seed=9] 12s compl=1.000 coll=382 minsep=0.002 p5=0.135 interv=0.454 slack=0.0333
+2026-10-24 15:47:38 N=50: 10 metrics
+2026-10-24 15:47:38 solve start N=100
+2026-10-24 15:58:26 solve done N=100 exit=0 {"N": 100, "cache": "results/cache/macro_N100_cw1_14d351fc8e.npz", "wall_s_this_call": 642.3867127895355, "solve_seconds": 620.2731759548187, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 15:58:26 start N100_real real 0
+2026-10-24 15:58:26 start N100_real real 1
+2026-10-24 16:00:42 done N100_real real 1 exit=0 [real seed=1] 22s compl=1.000 coll=53423 minsep=0.001 p5=0.026 interv=0.585 slack=0.1604
+2026-10-24 16:00:42 start N100_real real 2
+2026-10-24 16:00:42 done N100_real real 0 exit=0 [real seed=0] 22s compl=1.000 coll=54261 minsep=0.001 p5=0.041 interv=0.585 slack=0.1593
+2026-10-24 16:00:42 start N100_real real 3
+2026-10-24 16:01:19 done N100_real real 3 exit=0 [real seed=3] 20s compl=1.000 coll=51452 minsep=0.001 p5=0.037 interv=0.580 slack=0.1553
+2026-10-24 16:01:19 start N100_real real 4
+2026-10-24 16:01:21 done N100_real real 2 exit=0 [real seed=2] 21s compl=1.000 coll=51179 minsep=0.000 p5=0.033 interv=0.586 slack=0.1567
+2026-10-24 16:01:21 start N100_real real 5
+2026-10-24 16:01:54 done N100_real real 4 exit=0 [real seed=4] 18s compl=1.000 coll=53858 minsep=0.001 p5=0.034 interv=0.595 slack=0.1634
+2026-10-24 16:01:54 start N100_real real 6
+2026-10-24 16:01:57 done N100_real real 5 exit=0 [real seed=5] 18s compl=1.000 coll=51167 minsep=0.000 p5=0.021 interv=0.589 slack=0.1580
+2026-10-24 16:01:57 start N100_real real 7
+2026-10-24 16:02:39 done N100_real real 6 exit=0 [real seed=6] 16s compl=1.000 coll=52572 minsep=0.000 p5=0.039 interv=0.583 slack=0.1571
+2026-10-24 16:02:39 start N100_real real 8
+2026-10-24 16:02:44 done N100_real real 7 exit=0 [real seed=7] 17s compl=1.000 coll=54448 minsep=0.000 p5=0.035 interv=0.587 slack=0.1622
+2026-10-24 16:02:44 start N100_real real 9
+2026-10-24 16:03:14 done N100_real real 8 exit=0 [real seed=8] 18s compl=1.000 coll=51957 minsep=0.001 p5=0.039 interv=0.586 slack=0.1577
+2026-10-24 16:03:18 done N100_real real 9 exit=0 [real seed=9] 18s compl=1.000 coll=51310 minsep=0.001 p5=0.021 interv=0.579 slack=0.1563
+2026-10-24 16:03:18 start N100_learned_fixed0.70 learned 0
+2026-10-24 16:03:18 start N100_learned_fixed0.70 learned 1
+2026-10-24 16:04:28 done N100_learned_fixed0.70 learned 0 exit=0 [learned seed=0] 26s compl=0.970 coll=173 minsep=0.037 p5=0.405 interv=0.909 slack=0.1426
+2026-10-24 16:04:28 start N100_learned_fixed0.70 learned 2
+2026-10-24 16:04:30 done N100_learned_fixed0.70 learned 1 exit=0 [learned seed=1] 26s compl=0.980 coll=44 minsep=0.174 p5=0.458 interv=0.911 slack=0.1451
+2026-10-24 16:04:30 start N100_learned_fixed0.70 learned 3
+2026-10-24 16:05:12 done N100_learned_fixed0.70 learned 2 exit=0 [learned seed=2] 26s compl=0.990 coll=146 minsep=0.161 p5=0.308 interv=0.911 slack=0.1425
+2026-10-24 16:05:13 start N100_learned_fixed0.70 learned 4
+2026-10-24 16:05:14 done N100_learned_fixed0.70 learned 3 exit=0 [learned seed=3] 26s compl=0.990 coll=146 minsep=0.102 p5=0.457 interv=0.909 slack=0.1392
+2026-10-24 16:05:15 start N100_learned_fixed0.70 learned 5
+2026-10-24 16:05:53 done N100_learned_fixed0.70 learned 4 exit=0 [learned seed=4] 23s compl=0.990 coll=105 minsep=0.105 p5=0.410 interv=0.911 slack=0.1398
+2026-10-24 16:05:53 start N100_learned_fixed0.70 learned 6
+2026-10-24 16:05:57 done N100_learned_fixed0.70 learned 5 exit=0 [learned seed=5] 25s compl=0.980 coll=101 minsep=0.040 p5=0.412 interv=0.912 slack=0.1441
+2026-10-24 16:05:57 start N100_learned_fixed0.70 learned 7
+2026-10-24 16:06:30 done N100_learned_fixed0.70 learned 6 exit=0 [learned seed=6] 21s compl=0.970 coll=84 minsep=0.101 p5=0.456 interv=0.912 slack=0.1422
+2026-10-24 16:06:30 start N100_learned_fixed0.70 learned 8
+2026-10-24 16:06:36 done N100_learned_fixed0.70 learned 7 exit=0 [learned seed=7] 22s compl=0.970 coll=54 minsep=0.212 p5=0.391 interv=0.912 slack=0.1407
+2026-10-24 16:06:36 start N100_learned_fixed0.70 learned 9
+2026-10-24 16:07:06 done N100_learned_fixed0.70 learned 8 exit=0 [learned seed=8] 19s compl=0.980 coll=219 minsep=0.154 p5=0.321 interv=0.911 slack=0.1449
+2026-10-24 16:07:13 done N100_learned_fixed0.70 learned 9 exit=0 [learned seed=9] 20s compl=0.980 coll=69 minsep=0.161 p5=0.453 interv=0.911 slack=0.1405
+2026-10-24 16:07:13 start N100_learned_closing0.75 learned 0
+2026-10-24 16:07:13 start N100_learned_closing0.75 learned 1
+2026-10-24 16:08:13 done N100_learned_closing0.75 learned 1 exit=0 [learned seed=1] 34s compl=1.000 coll=3819 minsep=0.052 p5=0.148 interv=0.749 slack=0.4874
+2026-10-24 16:08:14 start N100_learned_closing0.75 learned 2
+2026-10-24 16:08:14 done N100_learned_closing0.75 learned 0 exit=0 [learned seed=0] 33s compl=1.000 coll=2143 minsep=0.055 p5=0.229 interv=0.744 slack=0.4922
+2026-10-24 16:08:14 start N100_learned_closing0.75 learned 3
+2026-10-24 16:09:04 done N100_learned_closing0.75 learned 2 exit=0 [learned seed=2] 32s compl=1.000 coll=3403 minsep=0.060 p5=0.238 interv=0.759 slack=0.5031
+2026-10-24 16:09:04 start N100_learned_closing0.75 learned 4
+2026-10-24 16:09:06 done N100_learned_closing0.75 learned 3 exit=0 [learned seed=3] 33s compl=1.000 coll=3089 minsep=0.006 p5=0.289 interv=0.743 slack=0.4847
+2026-10-24 16:09:06 start N100_learned_closing0.75 learned 5
+2026-10-24 16:09:53 done N100_learned_closing0.75 learned 4 exit=0 [learned seed=4] 31s compl=1.000 coll=3729 minsep=0.111 p5=0.253 interv=0.758 slack=0.5018
+2026-10-24 16:09:53 start N100_learned_closing0.75 learned 6
+2026-10-24 16:09:56 done N100_learned_closing0.75 learned 5 exit=0 [learned seed=5] 31s compl=1.000 coll=2835 minsep=0.017 p5=0.294 interv=0.746 slack=0.4941
+2026-10-24 16:09:56 start N100_learned_closing0.75 learned 7
+2026-10-24 16:10:40 done N100_learned_closing0.75 learned 6 exit=0 [learned seed=6] 28s compl=1.000 coll=2365 minsep=0.070 p5=0.248 interv=0.742 slack=0.4737
+2026-10-24 16:10:40 start N100_learned_closing0.75 learned 8
+2026-10-24 16:10:45 done N100_learned_closing0.75 learned 7 exit=0 [learned seed=7] 30s compl=1.000 coll=2163 minsep=0.019 p5=0.254 interv=0.763 slack=0.5081
+2026-10-24 16:10:45 start N100_learned_closing0.75 learned 9
+2026-10-24 16:11:27 done N100_learned_closing0.75 learned 8 exit=0 [learned seed=8] 28s compl=1.000 coll=2051 minsep=0.061 p5=0.307 interv=0.749 slack=0.4922
+2026-10-24 16:11:33 done N100_learned_closing0.75 learned 9 exit=0 [learned seed=9] 29s compl=1.000 coll=1314 minsep=0.092 p5=0.266 interv=0.756 slack=0.4992
+2026-10-24 16:11:33 N=100: 30 metrics
+2026-10-24 16:11:33 solve start N=150
+2026-10-24 16:22:20 solve done N=150 exit=0 {"N": 150, "cache": "results/cache/macro_N150_cw1_2f21768897.npz", "wall_s_this_call": 642.3822104930878, "solve_seconds": 620.5019447803497, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 16:22:20 start N150_real real 1
+2026-10-24 16:22:20 start N150_real real 0
+2026-10-24 16:23:59 done N150_real real 1 exit=0 [real seed=1] 28s compl=0.973 coll=144041 minsep=0.000 p5=0.042 interv=0.665 slack=0.2233
+2026-10-24 16:23:59 start N150_real real 2
+2026-10-24 16:24:00 done N150_real real 0 exit=0 [real seed=0] 28s compl=0.973 coll=147392 minsep=0.001 p5=0.041 interv=0.665 slack=0.2268
+2026-10-24 16:24:00 start N150_real real 3
+2026-10-24 16:24:45 done N150_real real 3 exit=0 [real seed=3] 26s compl=0.967 coll=146084 minsep=0.000 p5=0.043 interv=0.668 slack=0.2261
+2026-10-24 16:24:45 start N150_real real 4
+2026-10-24 16:24:45 done N150_real real 2 exit=0 [real seed=2] 26s compl=0.960 coll=145280 minsep=0.000 p5=0.043 interv=0.663 slack=0.2238
+2026-10-24 16:24:46 start N150_real real 5
+2026-10-24 16:25:32 done N150_real real 5 exit=0 [real seed=5] 27s compl=0.980 coll=152260 minsep=0.000 p5=0.039 interv=0.668 slack=0.2315
+2026-10-24 16:25:32 start N150_real real 6
+2026-10-24 16:25:32 done N150_real real 4 exit=0 [real seed=4] 27s compl=0.967 coll=145190 minsep=0.000 p5=0.034 interv=0.664 slack=0.2244
+2026-10-24 16:25:32 start N150_real real 7
+2026-10-24 16:26:18 done N150_real real 6 exit=0 [real seed=6] 27s compl=0.973 coll=148497 minsep=0.000 p5=0.036 interv=0.665 slack=0.2271
+2026-10-24 16:26:18 start N150_real real 8
+2026-10-24 16:26:19 done N150_real real 7 exit=0 [real seed=7] 27s compl=0.993 coll=151504 minsep=0.000 p5=0.033 interv=0.670 slack=0.2306
+2026-10-24 16:26:19 start N150_real real 9
+2026-10-24 16:27:05 done N150_real real 8 exit=0 [real seed=8] 27s compl=0.967 coll=146554 minsep=0.000 p5=0.044 interv=0.669 slack=0.2279
+2026-10-24 16:27:05 done N150_real real 9 exit=0 [real seed=9] 27s compl=0.967 coll=149489 minsep=0.000 p5=0.041 interv=0.669 slack=0.2265
+2026-10-24 16:27:05 N=150: 10 metrics
+2026-10-24 16:27:05 solve start N=200
+2026-10-24 16:37:55 solve done N=200 exit=0 {"N": 200, "cache": "results/cache/macro_N200_cw1_6490094688.npz", "wall_s_this_call": 644.1750049591064, "solve_seconds": 620.9668092727661, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-24 16:37:55 start N200_real real 0
+2026-10-24 16:37:55 start N200_real real 1
+2026-10-24 16:39:53 done N200_real real 1 exit=0 [real seed=1] 31s compl=0.895 coll=270363 minsep=0.000 p5=0.037 interv=0.723 slack=0.2719
+2026-10-24 16:39:53 start N200_real real 2
+2026-10-24 16:39:53 done N200_real real 0 exit=0 [real seed=0] 31s compl=0.850 coll=269459 minsep=0.000 p5=0.031 interv=0.723 slack=0.2711
+2026-10-24 16:39:53 start N200_real real 3
+2026-10-24 16:41:28 done N200_real real 2 exit=0 [real seed=2] 29s compl=0.895 coll=259402 minsep=0.000 p5=0.041 interv=0.719 slack=0.2650
+2026-10-24 16:41:29 start N200_real real 4
+2026-10-24 16:41:29 done N200_real real 3 exit=0 [real seed=3] 30s compl=0.885 coll=264224 minsep=0.000 p5=0.036 interv=0.722 slack=0.2688
+2026-10-24 16:41:29 start N200_real real 5
+2026-10-24 16:42:20 done N200_real real 4 exit=0 [real seed=4] 31s compl=0.900 coll=260483 minsep=0.000 p5=0.038 interv=0.716 slack=0.2660
+2026-10-24 16:42:21 start N200_real real 6
+2026-10-24 16:42:21 done N200_real real 5 exit=0 [real seed=5] 31s compl=0.885 coll=265167 minsep=0.000 p5=0.038 interv=0.718 slack=0.2687
+2026-10-24 16:42:21 start N200_real real 7
+2026-10-24 16:43:12 done N200_real real 7 exit=0 [real seed=7] 31s compl=0.835 coll=259096 minsep=0.000 p5=0.044 interv=0.720 slack=0.2658
+2026-10-24 16:43:12 start N200_real real 8
+2026-10-24 16:43:13 done N200_real real 6 exit=0 [real seed=6] 31s compl=0.910 coll=262201 minsep=0.000 p5=0.024 interv=0.719 slack=0.2670
+2026-10-24 16:43:13 start N200_real real 9
+2026-10-24 16:44:03 done N200_real real 9 exit=0 [real seed=9] 30s compl=0.915 coll=263969 minsep=0.000 p5=0.032 interv=0.719 slack=0.2688
+2026-10-24 16:44:03 done N200_real real 8 exit=0 [real seed=8] 30s compl=0.860 coll=258533 minsep=0.000 p5=0.039 interv=0.718 slack=0.2658
+2026-10-24 16:44:03 N=200: 10 metrics
+2026-10-24 16:44:04 rollouts done: 90/90 metrics (real 5x10 + learned N=100 2x10 + learned N=25 2x10 kept)
+2026-10-24 16:44:04 precision: 90  "matmul_precision": "highest"
+2026-10-24 16:49:19 report exit=0
+2026-10-24 16:49:19 chain end
+2026-10-24 16:49:19 finish status=DONE
