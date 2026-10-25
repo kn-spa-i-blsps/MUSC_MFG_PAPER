@@ -1,0 +1,62 @@
+2026-10-25 20:08:31 chain start amend24 gpu=NVIDIA A100-SXM4-80GB HEAD 118e4bd20480fea8f506fc8fbb4398b9f0470e80
+2026-10-25 20:08:31 aneks sha256 15da76975a29f15d118469084f7877d72c28c4aaa278bfdf8386d1502932faca
+2026-10-25 20:08:31 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 20:08:31 start N025_noise_only_d0.70 (noise_only) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:08:31 start N050_noise_only_d0.70 (noise_only) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:11:00 done N025_noise_only_d0.70 exit=0 10 seeds
+2026-10-25 20:11:00 start N100_noise_only_d0.70 (noise_only) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:11:13 done N050_noise_only_d0.70 exit=0 10 seeds
+2026-10-25 20:11:13 start N150_fresh_d0.70 (fresh) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:16:18 done N100_noise_only_d0.70 exit=0 10 seeds
+2026-10-25 20:16:18 start N150_noise_only_d0.70 (noise_only) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:16:25 done N150_fresh_d0.70 exit=0 10 seeds
+2026-10-25 20:16:25 start N200_fresh_d0.70 (fresh) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:22:09 done N200_fresh_d0.70 exit=0 10 seeds
+2026-10-25 20:22:09 start N200_noise_only_d0.70 (noise_only) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:23:03 done N150_noise_only_d0.70 exit=0 10 seeds
+2026-10-25 20:25:49 done N200_noise_only_d0.70 exit=0 10 seeds
+2026-10-25 20:25:49 rollouts done: 70/70
+2026-10-25 20:25:49 precision: 70  "matmul_precision": "highest",
+2026-10-25 20:33:33 report exit=0
+   ]
+  },
+  "noise_only_minus_real_d0.70_ever_collided": {
+   "diff": -1.0,
+   "ci95": [
+    -1.0,
+    -1.0
+   ]
+  },
+  "fresh_minus_learned_pooled_d0.70_safe_success": {
+   "diff": 0.6265,
+   "ci95": [
+    0.5165,
+    0.6915
+   ]
+  },
+  "fresh_minus_learned_pooled_d0.70_ever_collided": {
+   "diff": -0.8265,
+   "ci95": [
+    -0.8459999999999999,
+    -0.8065
+   ]
+  },
+  "fresh_minus_real_d0.70_safe_success": {
+   "diff": 0.7635,
+   "ci95": [
+    0.658,
+    0.8215
+   ]
+  },
+  "fresh_minus_real_d0.70_ever_collided": {
+   "diff": -1.0,
+   "ci95": [
+    -1.0,
+    -1.0
+   ]
+  }
+ }
+}
+aneks sha256: 15da76975a29f15d118469084f7877d72c28c4aaa278bfdf8386d1502932faca
+2026-10-25 20:33:33 chain end
+2026-10-25 20:33:33 finish status=DONE
