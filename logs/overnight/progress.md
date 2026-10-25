@@ -159,3 +159,12 @@ Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registe
 - To resume: add funds → start biiz4t7r00oef8 (volume keeps results/amend25_gate_sweep, caches N100 ×5) → re-copy
   /workspace/.ssh key → `bash logs/overnight/tail_chain_pod.sh` (validates existing outputs, skips done seeds,
   continues amend25 report → amend26 → re-solves → v4).
+
+## 2026-10-26 resume (PI added funds)
+- biiz4t7r00oef8 cannot start ("not enough free GPUs on the host"); GPU count of a stopped pod cannot be changed (no
+  CPU-only start for data retrieval). Its volume (unreported amend25 rollouts) is left untouched.
+- NEW pod xby8jnv4zqwvn2 (A100-SXM4-80GB, SECURE, $1.79/h, 250 GB volume to avoid the 150 GB quota). amend25 and amend26
+  re-run from scratch under their unchanged pre-registrations (results of the old volume are not used).
+- Real-arm datagen (seeds 100–111, needed by v4) existed only on the old volume; regenerated (real path is
+  bit-deterministic) and checked: v3 open-loop on the regenerated histories must equal openloop_v3.json exactly.
+- Chain: logs/overnight/resume_chain_pod.sh.
