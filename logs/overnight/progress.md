@@ -137,3 +137,13 @@ Gate (in addition to G1–G3 on real test histories):
 - Selection among passing variants: lowest mean p99 (learned histories) over N = 150, 200.
 - If none passes: v3 stays; reported as a negative.
 Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registered), compared with amend22/24.
+
+## INCIDENT 21:29–21:46 UTC — volume quota (150 GB) reached → amend25/26 writes failed
+- 9 Φ/m* caches × 13 GB = 116 GB + results filled the 150 GB volume at ~21:29. From then: rollouts died silently
+  (empty logs), one metrics json written empty (amend25 g2.309 real_d0.55 seed 2), the chain log was truncated, the
+  FAILED commit did not happen. amend25 reached 35/150 metrics, amend26 started 21:44 and produced empty cells.
+- Fix: deleted the N=25/50/150/200 caches (regenerable with identical keys) → 90 GB; killed both chains; moved the
+  failed-attempt logs to /workspace/failed_attempts/ (copied into the repo with the result); every existing per-seed
+  output is validated (json + full npz read) before reuse, corrupt ones deleted and re-run. New tail chain
+  (logs/overnight/tail_chain_pod.sh): amend25 → amend26 → delete gate caches, re-solve N=25/50/150/200 → v4.
+- No pre-registered design changed. No reported number came from the quota window (corrupt files are re-run).
