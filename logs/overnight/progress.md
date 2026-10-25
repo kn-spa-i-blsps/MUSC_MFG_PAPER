@@ -88,3 +88,7 @@ real 0.70, learned_pooled 0.70.
   pairs at every N. v3 frozen: sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5 (36 epochs).
 - Exploratory artefacts pushed in 5cd4443.
 - **amend22 pre-registered** (aneks sha256 ceb6aa4e…, commit 22b0e6b) BEFORE any run; launched 18:45 UTC on the pod.
+- amend22 attempt 1 (18:45 UTC): 3 cells in parallel → GPU OOM in 2 of 3 processes at start ("RESOURCE_EXHAUSTED ...
+  5.12GiB"; each process holds the per-N Φ/m* space-time fields). Chain killed at 18:49 (its trap pushed a FAILED commit
+  82dfabf holding the 11 per-seed metrics already complete: N200 learned seeds 0–8, N200 real_d0.70 seeds 0–1; completed
+  seeds are whole files, kept and skipped on restart). Infra fix P=2 (f26bda8; as amend21), relaunched 18:49 UTC.
