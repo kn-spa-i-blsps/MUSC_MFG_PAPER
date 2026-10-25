@@ -1,4 +1,4 @@
-# Overnight summary (2026-10-25/26) — draft, completed at the end of the night
+# Overnight summary (2026-10-25/26)
 
 Chronological log: logs/overnight/progress.md. Per-result reviews: logs/overnight/review_amend22.md … review_amend26.md.
 Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.csv). Pod: biiz4t7r00oef8 (A100-SXM4-80GB).
@@ -16,7 +16,12 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 
 ## Not resolved / negative (reported as such)
 - Best margin at N=150: no margin both safe and complete; 0.70 vs 0.85 tie (amend23).
-- (filled in as results arrive: amend25, amend26, predictor v4)
+- **Not done (compute stopped: RunPod balance exhausted ~22:15–22:40 UTC, pod EXITED):**
+  - amend25 gate sweep (Phase 3): pre-registered; 150/150 rollouts finished on the pod volume, but the open-loop
+    check, report and review were not done, so there are no numbers.
+  - amend26 t_slot sweep (Phase 4): pre-registered; 8/120 rollouts, not run.
+  - Predictor v4 (closed-loop learned datagen, review_amend24 fix 1): gate fixed in progress.md, not run.
+  - Resume: add funds, start pod biiz4t7r00oef8, then `bash logs/overnight/tail_chain_pod.sh`.
 
 ## Quarantined / ARTIFACT / excluded — and why
 | Item | Why |
@@ -28,6 +33,9 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 | fresh (no-noise oracle) completeness at N=200 (0.763 vs noise_only 0.968) | unexplained liveness observation, not a claim |
 
 ## Infra incidents (no effect on any reported number)
+- 150 GB volume quota hit at ~21:29 UTC (9 caches × 13 GB). amend25/26 writes failed silently. Caches were deleted,
+  outputs validated (one corrupt json deleted) and the chain resumed; no reported number comes from that window.
+- RunPod balance exhausted → pod stopped; see above.
 - New pod (old A100 host had no free GPU) → all 5 per-N caches re-solved; identity vs amend21 real at every N passed.
 - GPU OOM when rollouts ran concurrently with a solve (P1a attempt 1) or 3 rollouts in parallel (amend22 attempt 1);
   fixed by ordering / P=2; completed seeds were whole files and were kept.

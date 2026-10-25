@@ -147,3 +147,15 @@ Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registe
   output is validated (json + full npz read) before reuse, corrupt ones deleted and re-run. New tail chain
   (logs/overnight/tail_chain_pod.sh): amend25 → amend26 → delete gate caches, re-solve N=25/50/150/200 → v4.
 - No pre-registered design changed. No reported number came from the quota window (corrupt files are re-run).
+
+## STOP ~22:15–22:40 UTC — RunPod account balance exhausted; pod biiz4t7r00oef8 EXITED (not stopped by me)
+- Last pod state seen (22:11 UTC): amend25 150/150 rollouts done (34 validated pre-incident + 116 new), open-loop check
+  (pre-report) running; disk 96 GB. Nothing of amend25 after the pre-incident partials was pushed (the result commit
+  happens at the end of the chain).
+- `pod-action start` → 402 "Your account balance is too low to rent a pod". No compute possible until funds are added.
+- Consequences: amend25 (gate sweep) = rollouts complete ON THE POD VOLUME, report/open-loop check/review NOT done →
+  no reported numbers. amend26 (t_slot sweep) = 8/120 metrics, not run. Predictor v4 = not run. All three remain
+  pre-registered / gated with no results; nothing is claimed from them.
+- To resume: add funds → start biiz4t7r00oef8 (volume keeps results/amend25_gate_sweep, caches N100 ×5) → re-copy
+  /workspace/.ssh key → `bash logs/overnight/tail_chain_pod.sh` (validates existing outputs, skips done seeds,
+  continues amend25 report → amend26 → re-solves → v4).
