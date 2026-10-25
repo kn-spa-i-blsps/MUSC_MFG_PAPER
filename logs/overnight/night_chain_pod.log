@@ -1,2 +1,3 @@
-2026-10-25 19:34:33 identity gate start HEAD ea0a5c5
-2026-10-25 19:38:24 identity (n_near logging) vs amend21 real seed 0 N=25,100: all_equal=True
+2026-10-25 19:40:03 identity gate start HEAD 2b32112
+2026-10-25 19:40:03 identity gate already passed (logs/overnight/identity_nnear/identity.json) -> skip
+2026-10-25 19:40:03 identity (n_near logging) vs amend21 real seed 0 N=25,100: all_equal=True
