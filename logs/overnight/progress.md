@@ -71,3 +71,7 @@ real 0.70, learned_pooled 0.70.
   delay error to remove; the training loss is dominated by FAR pairs (uniform j), whose error scale is much larger than
   near pairs. Next (exploratory): v2 = near-pair oversampling (near_frac 0.5, j within 3 m), v3 = v2 + hidden 128.
   Thresholds are NOT changed.
+- Decision rule for the iterations, written BEFORE v2/v3 numbers: pick the first variant passing G1∧G2∧G3. If none
+  passes G2 at N=50 but one passes G1 (≤ real at every N) and G3, that variant is still IN-DISTRIBUTION (the brief's
+  gate is "no OOD blow-up"); the crossover may then run on it with the deviation stated in the aneks ("G2 failed at
+  N=50: compensation ≈ no gain where stale error ≈ sensor-noise floor"). A variant failing G1 never runs.
