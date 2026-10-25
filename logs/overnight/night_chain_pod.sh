@@ -3,10 +3,12 @@
 cd /workspace/MUSC_MFG_PAPER
 . logs/env.sh
 L=logs/overnight/identity_nnear
-mkdir -p $L
+mkdir -p $L logs/amend23_pod logs/amend24_pod
 log() { echo "$(date '+%F %T') $*"; }
 log "identity gate start HEAD $(git rev-parse --short HEAD)"
-for N in 25 100; do
+if [ "$(python -c "import json; print(json.load(open('$L/identity.json'))['all_equal'])" 2>/dev/null)" = True ]; then
+  log "identity gate already passed ($L/identity.json) -> skip"; SKIPID=1; fi
+for N in 25 100; do [ -n "$SKIPID" ] && break
   NN=$(printf "%03d" $N)
   python - $NN <<'PY'
 import sys, yaml
@@ -16,7 +18,7 @@ yaml.safe_dump(c, open(f"logs/overnight/identity_nnear/N{NN}_real.yaml", "w"), s
 PY
   python -m experiments.ladder --config $L/N${NN}_real.yaml --mode eval --arm real --seeds 0 > $L/eval_N$NN.log 2>&1
 done
-python - > $L/identity.json <<'PY'
+[ -n "$SKIPID" ] || python - > $L/identity.json <<'PY'
 import json
 K = ["completeness_final", "collision_pair_steps", "min_sep_overall_m", "p5_sep_worst_step_m", "cbf_intervention_rate",
      "slack_active_rate", "closedloop_xhat_mse_near", "closedloop_xhat_mse_all"]
