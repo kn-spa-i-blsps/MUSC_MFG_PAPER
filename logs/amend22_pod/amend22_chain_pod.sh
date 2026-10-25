@@ -2,7 +2,7 @@
 # amend22 on RunPod A100 pod biiz4t7r00oef8, detached (tmux). N crossover with the pooled predictor on the amend21 fixed
 # geometry, precision=highest: N in {25,50,100,150,200} x {real d0.55, real d0.70, learned_pooled d0.70} x seeds 0-9.
 # Caches = amend21 keys (re-solved on this pod in overnight P1a, identity checked). One process per cell (seeds 0-9,
-# skip existing), 3 cells in parallel -> report -> git add -f results + logs, commit, push -> DONE marker.
+# skip existing), 2 cells in parallel (3 OOMed the 80 GB GPU) -> report -> git add -f results + logs, commit, push -> DONE marker.
 cd /workspace/MUSC_MFG_PAPER
 mkdir -p ~/.ssh && cp -n /workspace/.ssh/id_ed25519* ~/.ssh/ 2>/dev/null; chmod 600 ~/.ssh/id_ed25519
 git config user.name Gio; git config user.email mikojasiek@gmail.com
@@ -31,7 +31,7 @@ log "aneks sha256 $(sha256sum prereg/prereg_projectA_amend22_N_crossover_pooled.
 log "weights $W sha256 $(sha256sum $W | cut -c1-64)"
 export W
 for N in 200 150 100 50 25; do for arm in learned_pooled_d0.70 real_d0.70 real_d0.55; do echo "N$(printf %03d $N)_$arm"; done; done |
-  xargs -P 3 -L 1 bash -c '
+  xargs -P 2 -L 1 bash -c '
     cell=$0; rn=$(python -c "import yaml; print(yaml.safe_load(open(\"experiments/amend22_cells/$cell.yaml\"))[\"run_name\"])")
     case $cell in *learned*) arm=learned;; *) arm=real;; esac
     miss=""; for s in 0 1 2 3 4 5 6 7 8 9; do [ -f results/$rn/$arm/metrics_seed$s.json ] || miss="$miss $s"; done
