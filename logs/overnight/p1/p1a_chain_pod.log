@@ -1,0 +1,19 @@
+2026-10-25 17:29:36 start gpu=NVIDIA A100-SXM4-80GB jax=0.12.0 [CudaDevice(id=0)] HEAD a75a91f
+2026-10-25 17:29:36 solve start N=50
+2026-10-25 17:41:28 solve done N=50 exit=0 {"N": 50, "cache": "results/cache/macro_N50_cw1_b4c8c86cde.npz", "wall_s_this_call": 704.8673276901245, "solve_seconds": 666.0593464374542, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-25 17:41:28 solve start N=100
+2026-10-25 17:52:35 solve done N=100 exit=0 {"N": 100, "cache": "results/cache/macro_N100_cw1_14d351fc8e.npz", "wall_s_this_call": 659.9751081466675, "solve_seconds": 622.3736300468445, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-25 17:52:35 solve start N=150
+2026-10-25 18:03:49 solve done N=150 exit=0 {"N": 150, "cache": "results/cache/macro_N150_cw1_2f21768897.npz", "wall_s_this_call": 666.3447866439819, "solve_seconds": 622.418594121933, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-25 18:03:49 solve start N=200
+2026-10-25 18:15:09 solve done N=200 exit=0 {"N": 200, "cache": "results/cache/macro_N200_cw1_6490094688.npz", "wall_s_this_call": 664.6517171859741, "solve_seconds": 622.0104331970215, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-25 18:20:44 N=50 identity+datagen exit=0 [datagen seed=111] 15s
+2026-10-25 18:20:52 N=25 identity+datagen exit=0 [datagen seed=111] 6s
+2026-10-25 18:27:42 N=100 identity+datagen exit=0 [datagen seed=111] 20s
+2026-10-25 18:28:29 N=150 identity+datagen exit=0 [datagen seed=111] 10s
+2026-10-25 18:32:12 N=200 identity+datagen exit=0 [datagen seed=111] 13s
+2026-10-25 18:32:12 identity vs amend21 all_equal=True
+2026-10-25 18:32:12 datagen files 60/60
+2026-10-25 18:32:12 train v1 start ()
+2026-10-25 18:34:21 train done sha=ff12c92e06837990976d181c368d028d0d522e25557ec79d7187c9e8283c4a8e
+2026-10-25 18:34:26 finish status=FAILED

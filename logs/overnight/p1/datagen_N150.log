@@ -1,0 +1,13 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[datagen seed=100] 28s
+[datagen seed=101] 22s
+[datagen seed=102] 22s
+[datagen seed=103] 22s
+[datagen seed=104] 22s
+[datagen seed=105] 22s
+[datagen seed=106] 22s
+[datagen seed=107] 15s
+[datagen seed=108] 10s
+[datagen seed=109] 10s
+[datagen seed=110] 10s
+[datagen seed=111] 10s

@@ -1,0 +1,17 @@
+2026-10-25 17:11:31 start gpu=NVIDIA A100-SXM4-80GB jax=0.12.0 [CudaDevice(id=0)] HEAD 99994d4
+2026-10-25 17:11:31 solve start N=25
+2026-10-25 17:23:37 solve done N=25 exit=0 {"N": 25, "cache": "results/cache/macro_N25_cw1_0fb517496a.npz", "wall_s_this_call": 717.0344195365906, "solve_seconds": 676.7130935192108, "horizon_s": 131.48435916125675, "cesaro_converged": true, "iters": 800, "nan": false}
+2026-10-25 17:23:37 solve start N=50
+2026-10-25 17:25:40 N=25 identity+datagen exit=1 jax.errors.JaxRuntimeError: RESOURCE_EXHAUSTED: Out of memory while trying to allocate 5.12GiB with allocator GPU_0_bfc on device 0. [tf-allocator-allocation-error=''] [executable_name='jit_run_arrays']
+2026-10-25 17:26:57 finish status=FAILED
+logs/overnight/p1/p1a_chain_pod.sh: line 14:  2218 Hangup                  python -m experiments.amend21_N_crossover solve --N $N > $L/solve_N$NN.log 2>&1
+2026-10-25 17:26:58 commit f74904c
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+2026-10-25 17:26:58 push failed (try 1)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+2026-10-25 17:27:59 push failed (try 2)
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+2026-10-25 17:28:59 push failed (try 3)
