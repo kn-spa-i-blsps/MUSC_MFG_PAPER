@@ -66,6 +66,7 @@ def main():
     ap.add_argument("--arm", default="real")
     ap.add_argument("--seeds", type=int, nargs="+", required=True)
     ap.add_argument("--weights", default=None)
+    ap.add_argument("--datagen_arm", default="real")   # overnight v4: closed-loop histories under another arm (default real)
     a = ap.parse_args()
     cfg = yaml.safe_load(open(a.config))
     if cfg.get("matmul_precision"):    # amend20: global matmul precision (e.g. "highest"), before anything is traced
@@ -81,7 +82,7 @@ def main():
     sc, grid, sol, rcfg, path = setup(cfg)
     fields = {k: sol[k] for k in ("phi_grad", "m_star", "m_star_grad")}
     fields.update(dt=sol["dt"], step=sol["step"])
-    arm = "real" if a.mode == "datagen" else a.arm
+    arm = a.datagen_arm if a.mode == "datagen" else a.arm
     out_dir = render.ensure_dir(os.path.join(ROOT, "results", cfg["run_name"],
                                              "datagen" if a.mode == "datagen" else arm))
     run = make_arm_rollout(arm, sc, rcfg, sol, a.weights)

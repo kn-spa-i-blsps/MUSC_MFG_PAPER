@@ -119,3 +119,21 @@ real 0.70, learned_pooled 0.70.
 - Reproducibility: amend22 learned d0.70 N=150 repeated bit-identically; N=100 within CI (0.892 vs 0.880).
 - Pre-registered now (before any run): amend25 gate sweep (Phase 3) + amend26 t_slot sweep (Phase 4), d_safe 0.70,
   queued on the pod behind amend24 (logs/overnight/phase34_chain_pod.sh).
+
+## amend24 DONE (eacfb15) → review_amend24.md
+- CONFIRMED (headline mechanism): with the TDMA delay removed (noise_only: same controller, margin, geometry, packing,
+  sensor noise), ever<0.30 = 0.000 at EVERY N ∈ {25..200}, completeness ≥ 0.968. The density hypothesis for learned's
+  N ≥ 150 degradation is FALSIFIED; the residual is predictor error (pre-registered branch). Headroom over v3:
+  +0.12 / +0.52 / +0.83 safe-success at N = 100 / 150 / 200.
+- Note: fresh (no noise) at N=200 has completeness 0.763 vs noise_only 0.968 (safety equal); unexplained, not a claim.
+
+## Predictor v4 (exploratory; review_amend24 fix 1) — gate fixed BEFORE data
+Idea: v1–v3 were trained only on REAL-arm histories; the closed loop runs under the LEARNED arm (calmer, sparser
+swarm) → distribution shift. v4 adds closed-loop learned-v3 d0.70 histories (seeds 100–111 per N; DAgger-style).
+Variants: v4a (real+learned, near 0.5, h128), v4b (same, h256, 200k windows/seed/N).
+Gate (in addition to G1–G3 on real test histories):
+- G4: on LEARNED closed-loop test histories (seeds 110–111), near-pair MSE AND p99 below v3's at every N ≥ 100, and
+  not worse than v3 by > 10 % at N ≤ 50.
+- Selection among passing variants: lowest mean p99 (learned histories) over N = 150, 200.
+- If none passes: v3 stays; reported as a negative.
+Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registered), compared with amend22/24.

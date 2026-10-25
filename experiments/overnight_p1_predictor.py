@@ -40,8 +40,9 @@ OLD_WEIGHTS = os.path.join(ROOT, "results", "ladder_fargoal_N100", "predictor_we
 LR, BATCH, MAX_EPOCHS, PATIENCE, INIT_SEED = 1e-3, 256, 200, 20, 0
 
 
-def datagen_dir(N):
-    return os.path.join(RES, f"datagen_N{N:03d}", "datagen")
+def datagen_dir(N, src="datagen"):
+    """src 'datagen' = real-arm histories (v1-v3); 'datagenL' = closed-loop learned-v3 d_safe 0.70 histories (v4+)."""
+    return os.path.join(RES, f"{src}_N{N:03d}", "datagen")
 
 
 def cmd_write_cells(a):
@@ -50,9 +51,11 @@ def cmd_write_cells(a):
     os.makedirs(CELL_DIR, exist_ok=True)
     for N in NS:
         src = os.path.join(ROOT, "experiments", "amend21_cells", f"N{N:03d}_real.yaml")
-        for kind in ("datagen", "identity"):
+        for kind in ("datagen", "identity", "datagenL"):
             c = copy.deepcopy(yaml.safe_load(open(src)))
             c["run_name"] = f"overnight_p1/{kind}_N{N:03d}"
+            if kind == "datagenL":
+                c["cbf"]["d_safe"] = 0.70
             p = os.path.join(CELL_DIR, f"{kind}_N{N:03d}.yaml")
             with open(p, "w") as f:
                 f.write(f"# overnight P1 {kind} cell: amend21_cells/N{N:03d}_real.yaml with run_name changed\n")
@@ -97,12 +100,14 @@ def extract_windows(history, N, rng, n, near_frac=0.0, near_r=3.0):
     return np.concatenate(blocks, -1).astype(np.float32), Y.astype(np.float32)
 
 
-def load_split(seeds, n, near_frac):
+def load_split(seeds, n, near_frac, sources=("datagen",)):
     Xs, Ys, Ns = [], [], []
     for N in NS:
-        for s in seeds:
-            h = np.load(os.path.join(datagen_dir(N), f"pos_seed{s}.npz"))["pos"].astype(np.float64)
-            X, Y = extract_windows(h, N, np.random.default_rng(1_000_003 + 7919 * N + s), n, near_frac)
+        for si, src in enumerate(sources):
+          for s in seeds:
+            h = np.load(os.path.join(datagen_dir(N, src), f"pos_seed{s}.npz"))["pos"].astype(np.float64)
+            X, Y = extract_windows(h, N, np.random.default_rng(1_000_003 + 7919 * N + s + 104_729 * si),
+                                   n // len(sources), near_frac)
             Xs.append(X); Ys.append(Y); Ns.append(np.full(len(X), N, np.int32))
     return np.concatenate(Xs), np.concatenate(Ys), np.concatenate(Ns)
 
@@ -126,7 +131,7 @@ def cmd_train(a):
     jax.config.update("jax_default_matmul_precision", "highest")
     out = os.path.join(RES, f"predictor_{a.tag}")
     os.makedirs(out, exist_ok=True)
-    data = {sp: load_split(seeds, a.samples if sp == "train" else a.samples // 2, a.near_frac)
+    data = {sp: load_split(seeds, a.samples if sp == "train" else a.samples // 2, a.near_frac, tuple(a.sources))
             for sp, seeds in SPLITS.items()}
     Xtr, Ytr, _ = data["train"]
     x_mean, x_std = Xtr.mean(0), Xtr.std(0) + 1e-6
@@ -179,6 +184,7 @@ def cmd_train(a):
            "wall_s": time.time() - t0, "NS": NS, "splits": SPLITS, "matmul_precision": "highest",
            "recipe": dict(hidden=a.hidden, lr=a.lr, batch=BATCH, max_epochs=MAX_EPOCHS, patience=PATIENCE,
                           init_seed=INIT_SEED, samples_per_seed_per_N=a.samples, near_frac=a.near_frac,
+                          sources=a.sources,
                           k_window=K_WINDOW), "window_mse_m2": {}}
     for sp, (X, Y, Nv) in data.items():
         err = np.asarray(forward(fj, jnp.asarray(X))) - Y
@@ -204,20 +210,20 @@ def cmd_openloop(a):
     preds = {"learned_new": load_predictor(a.weights)}
     if a.weights_old:
         preds["learned_old"] = load_predictor(a.weights_old)
-    arms = ["real", "cv"] + list(preds)
-    res = {"weights": a.weights, "weights_sha256": hashlib.sha256(open(a.weights, "rb").read()).hexdigest(),
+    arms = ["real", "cv", "noise_only"] + list(preds)
+    res = {"src": a.src, "weights": a.weights, "weights_sha256": hashlib.sha256(open(a.weights, "rb").read()).hexdigest(),
            "weights_old": a.weights_old, "test_seeds": SPLITS["test"], "steps_per_seed": 400,
            "matmul_precision": jax.config.jax_default_matmul_precision, "per_N": {}}
     for N in NS:
         k_min = 4 * int(round(t_frame(N) / DT_EXEC))
         fns = {}
         for arm in arms:
-            cond, pp = ("learned", preds[arm]) if arm.startswith("learned") else (arm, None)
+            cond, pp = ("learned", preds[arm]) if arm.startswith("learned") else (arm, None)   # noqa
             fns[arm] = jax.jit(lambda h, k, key, cond=cond, pp=pp, N=N: perceive(cond, h, k, DT_EXEC, N, key,
                                                                                    predictor_params=pp))
         acc = {arm: {"near": [], "near2": [], "all": []} for arm in arms}
         for s in SPLITS["test"]:
-            h = jnp.asarray(np.load(os.path.join(datagen_dir(N), f"pos_seed{s}.npz"))["pos"], jnp.float32)
+            h = jnp.asarray(np.load(os.path.join(datagen_dir(N, a.src), f"pos_seed{s}.npz"))["pos"], jnp.float32)
             ks = np.random.default_rng(7 + s).integers(k_min, h.shape[0], 400)
             for k in ks:
                 p = np.asarray(h[k])
@@ -230,6 +236,8 @@ def cmd_openloop(a):
                     acc[arm]["near2"].append(e2[offd & (d < 2.0)])
                     acc[arm]["all"].append(e2[offd])
         res["per_N"][str(N)] = {arm: {"mse_near1m_m2": float(np.mean(np.concatenate(v["near"]))),
+                                      "p99_near1m_m2": float(np.percentile(np.concatenate(v["near"]), 99)),
+                                      "p999_near1m_m2": float(np.percentile(np.concatenate(v["near"]), 99.9)),
                                       "mse_near2m_m2": float(np.mean(np.concatenate(v["near2"]))),
                                       "mse_all_m2": float(np.mean(np.concatenate(v["all"]))),
                                       "n_near1m": int(sum(x.size for x in v["near"]))} for arm, v in acc.items()}
@@ -249,6 +257,8 @@ def main():
     ap.add_argument("--weights")
     ap.add_argument("--weights_old", default=None)
     ap.add_argument("--out")
+    ap.add_argument("--sources", nargs="+", default=["datagen"])
+    ap.add_argument("--src", default="datagen")
     a = ap.parse_args()
     {"write-cells": cmd_write_cells, "train": cmd_train, "openloop": cmd_openloop}[a.cmd](a)
 
