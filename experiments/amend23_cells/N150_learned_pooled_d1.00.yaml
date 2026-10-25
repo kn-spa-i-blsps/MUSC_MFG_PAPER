@@ -1,0 +1,66 @@
+# AMEND23 cell N150_learned_pooled_d1.00 (condition learned): amend21_cells/N150_real.yaml with cbf.d_safe=1.0 and run_name changed
+run_name: amend23_margin_pooled/N150/d1.00
+log_xhat: false
+horizon: path
+snapshot_times:
+- 0
+- 5
+- 10
+- 15
+- 20
+- 30
+- 40
+- 50
+N: 150
+condition: real
+seeds:
+- 0
+density_sweep_N:
+- 25
+- 50
+- 100
+- 150
+- 200
+grid_step: 0.2
+dt_exec: 0.01
+scenario:
+  w_goal: 2.0
+  w_hold: 8.0
+  goal_softness: 0.25
+  obs_penalty: 200.0
+  wall_thickness: 0.3
+  edge_softness: 0.25
+  goal_gap_mult: 3.0
+  goal_spacing: 1.05
+  goal_clearance: 1.18
+  goal_geometry_spacing: 1.05
+  geometry_N: 230
+  gate_width: 2.309401076758503
+macro_cost:
+  c_w: 1.0
+  w_bar: 10.0
+  m_bar: 6.25
+  f_cap: 300.0
+fp:
+  damping: 0.02
+  max_iters: 800
+  burn_in: 200
+  tol: 0.005
+control:
+  c_dens: 1.0
+cbf:
+  d_safe: 1.0
+  r_wall: 0.2
+  r_body: 0.15
+  gamma: 20.0
+  rho: 1.0
+  slack_lin: 100.0
+  k_nb: 8
+  r_sense: 5.0
+  prio_gain: 2.0
+  prio_min: 0.25
+  u_box: 5.656854249492381
+  tol: 1.0e-05
+  maxiter: 2000
+  qp_solver: exact_hard
+matmul_precision: highest

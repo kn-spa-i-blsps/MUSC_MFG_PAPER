@@ -67,18 +67,19 @@ def sha256(p):
         return hashlib.sha256(f.read()).hexdigest()
 
 
-def run_rows(rdir, sc, seeds, d_collision):
+def run_rows(rdir, sc, seeds, d_collision, extra=()):
+    """extra: additional metrics-json keys (e.g. closedloop_xhat_mse_near_pairw, amend23+); default = amend22 set."""
     rows, prec, w = [], set(), set()
     for seed in seeds:
         z = np.load(os.path.join(rdir, f"logs_seed{seed}.npz"))
         m = json.load(open(os.path.join(rdir, f"metrics_seed{seed}.json")))
         f = safe_success({"pos": z["pos"].astype(np.float64), "pos_final": z["pos_final"].astype(np.float64)},
                          sc, d_collision)
-        f.update({k: m[k] for k in METRICS[3:]})
+        f.update({k: m[k] for k in METRICS[3:] + tuple(extra)})
         assert abs(f["completeness"] - m["completeness_final"]) < 1e-9
         prec.add(str(m.get("matmul_precision"))); w.add(str(m.get("weights")))
         rows.append(f)
-    return {k: ci([r[k] for r in rows]) for k in METRICS} | {"matmul_precision": sorted(prec), "weights": sorted(w)}
+    return {k: ci([r[k] for r in rows]) for k in METRICS + tuple(extra)} | {"matmul_precision": sorted(prec), "weights": sorted(w)}
 
 
 def safe_N(rows, arm):

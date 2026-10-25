@@ -88,7 +88,8 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
              "slack_max": info["slack_max"], "slack_hard": info["slack_hard"], "intervention": info["intervention"],
              "qp_iters": info["qp_iters"], "row_violation": info["row_violation"],
              "m_hat": mdiag["m_hat"], "m_star_at": mdiag["m_star"], "rho_true": rho_true,
-             "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all}
+             "xhat_err_near": xhat_err_near, "xhat_err_all": xhat_err_all,
+             "n_near": jnp.sum(near).astype(jnp.int32)}   # overnight: near-pair count (logging only) -> pair-weighted MSE
         if adaptive and cbf_on:   # realized margin on the valid neighbour rows: exact sum/count + 0.01 m histogram
             ds, ok = info["nb_d_safe"], info["nb_valid"]
             b = jnp.clip(jnp.round((ds - D_COLLISION) / DSAFE_BIN).astype(jnp.int32), 0, DSAFE_NBINS - 1)
@@ -204,6 +205,10 @@ def summarize(logs, scenario, dt_exec, c_w=1.0):
         "mean_speed_mps": float(np.linalg.norm(np.asarray(logs["u"]), axis=-1).mean()),
         "closedloop_xhat_mse_near": float(np.mean(logs["xhat_err_near"])) if "xhat_err_near" in logs else None,
         "closedloop_xhat_mse_all": float(np.mean(logs["xhat_err_all"])) if "xhat_err_all" in logs else None,
+        # pair-weighted (every near pair-step counts once; steps without near pairs do not enter as 0)
+        "closedloop_xhat_mse_near_pairw": (float(np.sum(np.asarray(logs["xhat_err_near"], np.float64) * logs["n_near"])
+                                                 / max(int(np.sum(logs["n_near"])), 1)) if "n_near" in logs else None),
+        "near_pair_steps": int(np.sum(logs["n_near"])) if "n_near" in logs else None,
         "integral_W_true": float(np.sum(np.mean(c_w * np.asarray(logs["rho_true"]) ** 2, 1)) * dt_exec),
         **dsafe_stats(logs),
     }

@@ -92,3 +92,12 @@ real 0.70, learned_pooled 0.70.
   5.12GiB"; each process holds the per-N Φ/m* space-time fields). Chain killed at 18:49 (its trap pushed a FAILED commit
   82dfabf holding the 11 per-seed metrics already complete: N200 learned seeds 0–8, N200 real_d0.70 seeds 0–1; completed
   seeds are whole files, kept and skipped on restart). Infra fix P=2 (f26bda8; as amend21), relaunched 18:49 UTC.
+
+## amend22 DONE (c24e62f) → review_amend22.md
+- Verdict (details in the review): CONFIRMED real staleness barrier (safe_N 25 at d 0.55 and 0.70), compensation gap
+  at N=50/100 vs margin-matched real 0.70 (+0.936 / +0.880 safe-success, CIs exclude 0), OOD fix; larger margin does NOT
+  help real (0.70 worse than 0.55). SUSPECT mechanism of learned degradation at N=150/200 (not explained by mean x̂
+  error; packing below d_safe there). QUARANTINED: closed-loop x̂ MSE as a cross-arm comparison (steps without near pairs
+  enter as 0 → biased low for separated swarms).
+- Next (pre-registered now, before any run): identity gate for a logging-only n_near change → amend23 (Phase 2 margin
+  re-tune, N=100/150) → amend24 (noise_only / fresh mechanism control), one night chain on the pod.
