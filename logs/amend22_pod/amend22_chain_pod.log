@@ -1,0 +1,68 @@
+2026-10-25 18:49:36 chain start gpu=NVIDIA A100-SXM4-80GB HEAD d0dd6bed6af9b7b1938a3cb8ab6903733cf89bd3
+2026-10-25 18:49:36 aneks sha256 ceb6aa4e077814622a068bd99b5f90c5177bdba9f48154c8984b76085fc02aa0
+2026-10-25 18:49:36 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 18:49:36 start N200_real_d0.70 seeds 2 3 4 5 6 7 8 9
+2026-10-25 18:49:36 start N200_learned_pooled_d0.70 seeds 9
+2026-10-25 18:50:33 done N200_learned_pooled_d0.70 exit=0 1 seeds
+2026-10-25 18:50:33 start N200_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:53:03 done N200_real_d0.70 exit=0 8 seeds
+2026-10-25 18:53:03 start N150_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:55:13 done N200_real_d0.55 exit=0 10 seeds
+2026-10-25 18:55:13 start N150_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:59:21 done N150_real_d0.70 exit=0 10 seeds
+2026-10-25 18:59:21 start N150_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:00:04 done N150_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:00:04 start N100_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:03:06 done N150_real_d0.55 exit=0 10 seeds
+2026-10-25 19:03:06 start N100_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:04:20 done N100_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:04:20 start N100_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:07:10 done N100_real_d0.55 exit=0 10 seeds
+2026-10-25 19:07:10 start N050_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:08:16 done N100_real_d0.70 exit=0 10 seeds
+2026-10-25 19:08:17 start N050_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:09:59 done N050_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:09:59 start N050_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:12:16 done N050_real_d0.70 exit=0 10 seeds
+2026-10-25 19:12:16 start N025_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:14:36 done N050_real_d0.55 exit=0 10 seeds
+2026-10-25 19:14:36 start N025_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:14:52 done N025_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:14:52 start N025_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:19:07 done N025_real_d0.70 exit=0 10 seeds
+2026-10-25 19:19:25 done N025_real_d0.55 exit=0 10 seeds
+2026-10-25 19:19:25 rollouts done: 150/150
+2026-10-25 19:19:25 precision: 150  "matmul_precision": "highest",
+2026-10-25 19:29:35 report exit=0
+    0.1545
+   ]
+  },
+  "learned_pooled_d0.70_minus_real_d0.70_ever_collided": {
+   "diff": -0.1735,
+   "ci95": [
+    -0.19299999999999995,
+    -0.15449999999999997
+   ]
+  },
+  "learned_pooled_d0.70_minus_real_d0.55_safe_success": {
+   "diff": 0.13699999999999998,
+   "ci95": [
+    0.12050000000000001,
+    0.1545
+   ]
+  },
+  "learned_pooled_d0.70_minus_real_d0.55_ever_collided": {
+   "diff": -0.1735,
+   "ci95": [
+    -0.19299999999999995,
+    -0.15449999999999997
+   ]
+  }
+ }
+}
+safe_N: {'real_d0.55': 25, 'real_d0.70': 25, 'learned_pooled_d0.70': 50}
+identity real d0.55 vs amend21: True
+precision per row: {'25/real_d0.55': ['highest'], '25/real_d0.70': ['highest'], '25/learned_pooled_d0.70': ['highest'], '50/real_d0.55': ['highest'], '50/real_d0.70': ['highest'], '50/learned_pooled_d0.70': ['highest'], '100/real_d0.55': ['highest'], '100/real_d0.70': ['highest'], '100/learned_pooled_d0.70': ['highest'], '150/real_d0.55': ['highest'], '150/real_d0.70': ['highest'], '150/learned_pooled_d0.70': ['highest'], '200/real_d0.55': ['highest'], '200/real_d0.70': ['highest'], '200/learned_pooled_d0.70': ['highest']}
+aneks sha256: ceb6aa4e077814622a068bd99b5f90c5177bdba9f48154c8984b76085fc02aa0 weights sha256: 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 19:29:35 chain end
+2026-10-25 19:29:35 finish status=DONE
