@@ -27,7 +27,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "commit $(git re
 }
 trap finish EXIT
 log "start gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader) jax=$(python -c 'import jax; print(jax.__version__, jax.devices())') HEAD $(git rev-parse --short HEAD)"
-pids=()
 for N in 25 50 100 150 200; do
   NN=$(printf "%03d" $N)
   if ! ls results/cache/ 2>/dev/null | grep -q "^macro_N${N}_cw1_"; then
@@ -35,14 +34,16 @@ for N in 25 50 100 150 200; do
     python -m experiments.amend21_N_crossover solve --N $N > $L/solve_N$NN.log 2>&1
     log "solve done N=$N exit=$? $(tail -1 $L/solve_N$NN.log)"
   fi
-  grep -q '"nan": false' $L/solve_N$NN.log 2>/dev/null || ls results/cache | grep -q "^macro_N${N}_cw1_" || { log "solve N=$N failed"; exit 1; }
-  ( python -m experiments.ladder --config experiments/overnight_p1_cells/identity_N$NN.yaml --mode eval --arm real --seeds 0 > $L/identity_N$NN.log 2>&1
-    miss=""; for s in 100 101 102 103 104 105 106 107 108 109 110 111; do [ -f $R/datagen_N$NN/datagen/pos_seed$s.npz ] || miss="$miss $s"; done
-    [ -n "$miss" ] && python -m experiments.ladder --config experiments/overnight_p1_cells/datagen_N$NN.yaml --mode datagen --seeds $miss > $L/datagen_N$NN.log 2>&1
-    log "N=$N identity+datagen exit=$? $(tail -1 $L/datagen_N$NN.log)" ) &
-  pids+=($!)
+  ls results/cache | grep -q "^macro_N${N}_cw1_" || { log "solve N=$N failed"; exit 1; }
 done
-wait "${pids[@]}"
+# identity + datagen AFTER all solves (run concurrently with a solve they OOMed the GPU), 2 processes at a time
+export L R
+for N in 25 50 100 150 200; do echo $N; done | xargs -P 2 -L 1 bash -c '
+  NN=$(printf "%03d" $0)
+  [ -f $R/identity_N$NN/real/metrics_seed0.json ] || python -m experiments.ladder --config experiments/overnight_p1_cells/identity_N$NN.yaml --mode eval --arm real --seeds 0 > $L/identity_N$NN.log 2>&1
+  miss=""; for s in 100 101 102 103 104 105 106 107 108 109 110 111; do [ -f $R/datagen_N$NN/datagen/pos_seed$s.npz ] || miss="$miss $s"; done
+  [ -n "$miss" ] && python -m experiments.ladder --config experiments/overnight_p1_cells/datagen_N$NN.yaml --mode datagen --seeds $miss > $L/datagen_N$NN.log 2>&1
+  echo "$(date "+%F %T") N=$0 identity+datagen exit=$? $(tail -1 $L/datagen_N$NN.log)"'
 python - > $L/identity_vs_amend21.json <<'PY'
 import json
 K = ["completeness_final", "collision_pair_steps", "min_sep_overall_m", "p5_sep_worst_step_m", "cbf_intervention_rate",
