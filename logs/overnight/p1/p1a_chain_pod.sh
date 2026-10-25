@@ -22,7 +22,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "commit $(git re
     git pull -q --rebase origin main && git push origin HEAD:main && { log "push ok $(git rev-parse --short HEAD)"; break; }
     log "push failed (try $i)"; sleep 60
   done
-  echo "$STATUS $(date '+%F %T') $(git rev-parse HEAD)" > $L/p1a_$TAG_$STATUS.marker
+  echo "$STATUS $(date '+%F %T') $(git rev-parse HEAD)" > $L/p1a_${TAG}_$STATUS.marker
   echo "$STATUS $(date '+%F %T') $(git rev-parse HEAD)" > /workspace/p1a_$STATUS
 }
 trap finish EXIT
