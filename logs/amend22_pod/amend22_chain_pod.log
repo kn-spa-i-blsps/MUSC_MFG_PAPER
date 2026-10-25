@@ -1,0 +1,11 @@
+2026-10-25 18:45:01 chain start gpu=NVIDIA A100-SXM4-80GB HEAD 22b0e6bf2eebcfb825c52286d8f7c7ee42a249a1
+2026-10-25 18:45:01 aneks sha256 ceb6aa4e077814622a068bd99b5f90c5177bdba9f48154c8984b76085fc02aa0
+2026-10-25 18:45:01 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 18:45:01 start N200_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:45:01 start N200_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:45:01 start N200_real_d0.55 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:47:51 done N200_real_d0.55 exit=0 0 seeds
+2026-10-25 18:47:51 start N150_learned_pooled_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:48:26 done N150_learned_pooled_d0.70 exit=0 0 seeds
+2026-10-25 18:48:26 start N150_real_d0.70 seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 18:48:58 finish status=FAILED
