@@ -75,3 +75,16 @@ real 0.70, learned_pooled 0.70.
   passes G2 at N=50 but one passes G1 (≤ real at every N) and G3, that variant is still IN-DISTRIBUTION (the brief's
   gate is "no OOD blow-up"); the crossover may then run on it with the deviation stated in the aneks ("G2 failed at
   N=50: compensation ≈ no gain where stale error ≈ sensor-noise floor"). A variant failing G1 never runs.
+
+## Predictor v2/v3 + gate decision
+| N | real | v2 (near 0.5, h64) | v3 (near 0.5, h128) | v3/real |
+|---|---|---|---|---|
+| 25 | 0.0117 | 0.0144 | 0.0077 | 0.66 |
+| 50 | 0.0224 | 0.0200 | 0.0156 | 0.70 |
+| 100 | 0.4625 | 0.2371 | 0.2417 | 0.52 |
+| 150 | 1.5285 | 0.6205 | 0.6114 | 0.40 |
+| 200 | 3.1703 | 0.9989 | 0.9725 | 0.31 |
+- v2 FAIL (G1 at N=25). **v3 PASS** G1 ∧ G2 ∧ G3 (G3: 0.2417 ≤ 1.25 × 0.2446). v3 also < real on pairs < 2 m and on all
+  pairs at every N. v3 frozen: sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5 (36 epochs).
+- Exploratory artefacts pushed in 5cd4443.
+- **amend22 pre-registered** (aneks sha256 ceb6aa4e…, commit 22b0e6b) BEFORE any run; launched 18:45 UTC on the pod.
