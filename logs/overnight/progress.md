@@ -42,3 +42,32 @@ real 0.70, learned_pooled 0.70.
   ("RESOURCE_EXHAUSTED ... 5.12GiB ... jit_run_arrays"). No datagen produced. Chain killed; fix: all solves first, then
   identity/datagen 2 processes at a time (commit a75a91f). Relaunched (pod log time = UTC). Attempt-1 log kept as
   logs/overnight/p1/p1a_chain_pod_attempt1.log.
+
+## P1a relaunch — results (pod times UTC)
+- Per-N solves (A100, ~11 min each): keys identical to amend21 (N25 0fb517496a, N50 b4c8c86cde, N100 14d351fc8e,
+  N150 2f21768897, N200 6490094688), all Cesàro-converged, no NaN.
+- **Identity (§3.1, pod/cache):** amend21 real seed 0 re-run on the new pod at every N → 7 metrics equal to the committed
+  amend21 values at all 5 N (all_equal = True, logs/overnight/p1/identity_vs_amend21.json).
+- Datagen: 60/60 histories (5 N × seeds 100–111).
+- Predictor **v1** (recipe unchanged, pooled N-balanced, 100k windows/seed/N, hidden 64): 106 epochs, sha256
+  ff12c92e06837990976d181c368d028d0d522e25557ec79d7187c9e8283c4a8e.
+- The chain's open-loop step failed (old N=100 weights not present on a fresh clone; untracked file) → copied the
+  local file (sha256 fc4a52a5…, matches record) and ran open-loop by hand.
+
+### Open-loop gate, v1 (x̂ MSE m², pairs < 1 m, test seeds 110–111)
+| N | real | cv | learned_old (N=100-only) | learned v1 (pooled) | v1/real |
+|---|---|---|---|---|---|
+| 25 | 0.0117 | 0.0299 | 5.9522 | 0.0123 | 1.05 |
+| 50 | 0.0224 | 0.0551 | 4.1892 | 0.0190 | 0.85 |
+| 100 | 0.4625 | 0.7348 | 0.2446 | 0.2582 | 0.56 |
+| 150 | 1.5285 | 2.3945 | 5.2134 | 0.7705 | 0.50 |
+| 200 | 3.1703 | 5.1619 | 25.2162 | 1.5399 | 0.49 |
+
+- The OOD blow-up of the N=100-only predictor is reproduced (5.95 at N=25, 25.2 at N=200) and is GONE with pooled
+  training (v1 within 5% of real at N=25, ≈ half of real at N ≥ 100).
+- **Gate v1: FAIL** under the pre-declared thresholds: G1 fails at N=25 (1.05 > 1.00), G2 fails at N=50 (0.85 > 0.75);
+  G3 passes (0.2582 ≤ 1.25 × 0.2446). No crossover on v1.
+- Reasoning: at N=25/50 the stale error is close to the sensor-noise floor (range σ, bearing σ), so there is little
+  delay error to remove; the training loss is dominated by FAR pairs (uniform j), whose error scale is much larger than
+  near pairs. Next (exploratory): v2 = near-pair oversampling (near_frac 0.5, j within 3 m), v3 = v2 + hidden 128.
+  Thresholds are NOT changed.
