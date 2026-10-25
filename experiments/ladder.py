@@ -72,6 +72,12 @@ def main():
         jax.config.update("jax_default_matmul_precision", cfg["matmul_precision"])
     precision = jax.config.jax_default_matmul_precision
     print(f"[ladder] jax_default_matmul_precision = {precision!r}", flush=True)
+    if cfg.get("t_slot") is not None:  # overnight P4: TDMA slot length override (perception only; absent = T_SLOT 0.005)
+        import control.params_legacy as _pl
+        import compensation.perception as _pc
+        _pl.T_SLOT = _pc.T_SLOT = float(cfg["t_slot"])
+    from control.params_legacy import T_SLOT as t_slot
+    print(f"[ladder] t_slot = {t_slot!r}", flush=True)
     sc, grid, sol, rcfg, path = setup(cfg)
     fields = {k: sol[k] for k in ("phi_grad", "m_star", "m_star_grad")}
     fields.update(dt=sol["dt"], step=sol["step"])
@@ -91,7 +97,7 @@ def main():
         metrics, series = summarize(logs, sc, cfg["dt_exec"], c_w=1.0)
         gz, _ = goal_zone_facts(series, logs, sc, cfg)
         metrics.update(gz, seed=seed, arm=arm, wall_seconds=wall, macro_cache=os.path.relpath(path, ROOT),
-                       weights=a.weights, matmul_precision=precision)
+                       weights=a.weights, matmul_precision=precision, t_slot=t_slot)
         np.savez_compressed(os.path.join(out_dir, f"logs_seed{seed}.npz"),
                             **{k: np.asarray(v) for k, v in logs.items()},
                             t=series["t"], arrived_frac=series["arrived_frac"])
