@@ -1,0 +1,189 @@
+epoch   0: train=0.094928 val=0.049734 best=0.049734 since=0
+epoch   1: train=0.048288 val=0.046720 best=0.046720 since=0
+epoch   2: train=0.046325 val=0.046295 best=0.046295 since=0
+epoch   3: train=0.045435 val=0.044517 best=0.044517 since=0
+epoch   4: train=0.044904 val=0.044744 best=0.044517 since=1
+epoch   5: train=0.044573 val=0.044703 best=0.044517 since=2
+epoch   6: train=0.044320 val=0.044504 best=0.044504 since=0
+epoch   7: train=0.044122 val=0.044836 best=0.044504 since=1
+epoch   8: train=0.043925 val=0.044253 best=0.044253 since=0
+epoch   9: train=0.043836 val=0.045418 best=0.044253 since=1
+epoch  10: train=0.043721 val=0.043414 best=0.043414 since=0
+epoch  11: train=0.043573 val=0.043485 best=0.043414 since=1
+epoch  12: train=0.043518 val=0.043403 best=0.043403 since=0
+epoch  13: train=0.043400 val=0.043549 best=0.043403 since=1
+epoch  14: train=0.043359 val=0.043732 best=0.043403 since=2
+epoch  15: train=0.043316 val=0.042737 best=0.042737 since=0
+epoch  16: train=0.043264 val=0.043482 best=0.042737 since=1
+epoch  17: train=0.043226 val=0.043390 best=0.042737 since=2
+epoch  18: train=0.043184 val=0.043237 best=0.042737 since=3
+epoch  19: train=0.043133 val=0.044579 best=0.042737 since=4
+epoch  20: train=0.043106 val=0.043616 best=0.042737 since=5
+epoch  21: train=0.043073 val=0.042842 best=0.042737 since=6
+epoch  22: train=0.043051 val=0.042830 best=0.042737 since=7
+epoch  23: train=0.043036 val=0.043017 best=0.042737 since=8
+epoch  24: train=0.042982 val=0.042775 best=0.042737 since=9
+epoch  25: train=0.042977 val=0.043207 best=0.042737 since=10
+epoch  26: train=0.042940 val=0.042850 best=0.042737 since=11
+epoch  27: train=0.042911 val=0.043446 best=0.042737 since=12
+epoch  28: train=0.042903 val=0.043166 best=0.042737 since=13
+epoch  29: train=0.042900 val=0.043525 best=0.042737 since=14
+epoch  30: train=0.042869 val=0.043210 best=0.042737 since=15
+epoch  31: train=0.042846 val=0.042997 best=0.042737 since=16
+epoch  32: train=0.042827 val=0.043598 best=0.042737 since=17
+epoch  33: train=0.042792 val=0.043487 best=0.042737 since=18
+epoch  34: train=0.042803 val=0.042832 best=0.042737 since=19
+epoch  35: train=0.042815 val=0.044294 best=0.042737 since=20
+{
+ "weights": "results/overnight_p1/predictor_v3/predictor_weights.npz",
+ "sha256": "9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5",
+ "epochs": 36,
+ "best_val_mse_norm": 0.042737483978271484,
+ "wall_s": 88.65134167671204,
+ "NS": [
+  25,
+  50,
+  100,
+  150,
+  200
+ ],
+ "splits": {
+  "train": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   105,
+   106,
+   107
+  ],
+  "val": [
+   108,
+   109
+  ],
+  "test": [
+   110,
+   111
+  ]
+ },
+ "matmul_precision": "highest",
+ "recipe": {
+  "hidden": 128,
+  "lr": 0.001,
+  "batch": 256,
+  "max_epochs": 200,
+  "patience": 20,
+  "init_seed": 0,
+  "samples_per_seed_per_N": 100000,
+  "near_frac": 0.5,
+  "k_window": 4
+ },
+ "window_mse_m2": {
+  "train_N25": {
+   "learned": 0.018872801214456558,
+   "stale": 0.024728653952479362,
+   "learned_near1m": 0.007805756293237209,
+   "stale_near1m": 0.011716490611433983,
+   "n_near1m": 134604
+  },
+  "train_N50": {
+   "learned": 0.033465221524238586,
+   "stale": 0.04831787943840027,
+   "learned_near1m": 0.015127131715416908,
+   "stale_near1m": 0.02162284404039383,
+   "n_near1m": 104283
+  },
+  "train_N100": {
+   "learned": 0.29889702796936035,
+   "stale": 0.5718859434127808,
+   "learned_near1m": 0.23770250380039215,
+   "stale_near1m": 0.4496705234050751,
+   "n_near1m": 63448
+  },
+  "train_N150": {
+   "learned": 0.8687038421630859,
+   "stale": 1.856858491897583,
+   "learned_near1m": 0.6380525827407837,
+   "stale_near1m": 1.5754526853561401,
+   "n_near1m": 53312
+  },
+  "train_N200": {
+   "learned": 1.6698040962219238,
+   "stale": 3.744682788848877,
+   "learned_near1m": 1.0131462812423706,
+   "stale_near1m": 3.2378079891204834,
+   "n_near1m": 51981
+  },
+  "val_N25": {
+   "learned": 0.018703125417232513,
+   "stale": 0.02478024922311306,
+   "learned_near1m": 0.00783637072890997,
+   "stale_near1m": 0.011992992833256721,
+   "n_near1m": 17323
+  },
+  "val_N50": {
+   "learned": 0.03321489319205284,
+   "stale": 0.04720723256468773,
+   "learned_near1m": 0.014867808669805527,
+   "stale_near1m": 0.02086590975522995,
+   "n_near1m": 13049
+  },
+  "val_N100": {
+   "learned": 0.2972077429294586,
+   "stale": 0.5733282566070557,
+   "learned_near1m": 0.2285846471786499,
+   "stale_near1m": 0.4249104857444763,
+   "n_near1m": 7955
+  },
+  "val_N150": {
+   "learned": 0.8731864094734192,
+   "stale": 1.8459644317626953,
+   "learned_near1m": 0.6495739221572876,
+   "stale_near1m": 1.5928561687469482,
+   "n_near1m": 6811
+  },
+  "val_N200": {
+   "learned": 1.6893490552902222,
+   "stale": 3.718228340148926,
+   "learned_near1m": 1.0310190916061401,
+   "stale_near1m": 3.223940849304199,
+   "n_near1m": 6514
+  },
+  "test_N25": {
+   "learned": 0.018621275201439857,
+   "stale": 0.024839350953698158,
+   "learned_near1m": 0.007725590839982033,
+   "stale_near1m": 0.011767478659749031,
+   "n_near1m": 16674
+  },
+  "test_N50": {
+   "learned": 0.034801945090293884,
+   "stale": 0.050949472934007645,
+   "learned_near1m": 0.015244051814079285,
+   "stale_near1m": 0.021324066445231438,
+   "n_near1m": 12816
+  },
+  "test_N100": {
+   "learned": 0.2956550717353821,
+   "stale": 0.5676433444023132,
+   "learned_near1m": 0.2316046953201294,
+   "stale_near1m": 0.44954630732536316,
+   "n_near1m": 7802
+  },
+  "test_N150": {
+   "learned": 0.8731421232223511,
+   "stale": 1.8382291793823242,
+   "learned_near1m": 0.6395204663276672,
+   "stale_near1m": 1.6075345277786255,
+   "n_near1m": 6562
+  },
+  "test_N200": {
+   "learned": 1.6936097145080566,
+   "stale": 3.771484375,
+   "learned_near1m": 1.033133625984192,
+   "stale_near1m": 3.1534318923950195,
+   "n_near1m": 6533
+  }
+ }
+}

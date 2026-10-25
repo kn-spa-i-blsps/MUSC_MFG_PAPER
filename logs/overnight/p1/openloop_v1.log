@@ -1,17 +1,6 @@
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/workspace/MUSC_MFG_PAPER/experiments/overnight_p1_predictor.py", line 257, in <module>
-    main()
-  File "/workspace/MUSC_MFG_PAPER/experiments/overnight_p1_predictor.py", line 253, in main
-    {"write-cells": cmd_write_cells, "train": cmd_train, "openloop": cmd_openloop}[a.cmd](a)
-  File "/workspace/MUSC_MFG_PAPER/experiments/overnight_p1_predictor.py", line 206, in cmd_openloop
-    preds["learned_old"] = load_predictor(a.weights_old)
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/MUSC_MFG_PAPER/experiments/ladder.py", line 50, in load_predictor
-    return {k: jnp.asarray(v) for k, v in np.load(path).items()}
-                                          ^^^^^^^^^^^^^
-  File "/workspace/venv/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py", line 454, in load
-    fid = stack.enter_context(open(os.fspath(file), "rb"))
-                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'results/ladder_fargoal_N100/predictor_weights.npz'
+25 {"real": 0.0117, "cv": 0.0299, "learned_new": 0.0123, "learned_old": 5.9522}
+50 {"real": 0.0224, "cv": 0.0551, "learned_new": 0.019, "learned_old": 4.1892}
+100 {"real": 0.4625, "cv": 0.7348, "learned_new": 0.2582, "learned_old": 0.2446}
+150 {"real": 1.5285, "cv": 2.3945, "learned_new": 0.7705, "learned_old": 5.2134}
+200 {"real": 3.1703, "cv": 5.1619, "learned_new": 1.5399, "learned_old": 25.2162}
+EXIT 0

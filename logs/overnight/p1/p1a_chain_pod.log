@@ -17,3 +17,7 @@
 2026-10-25 18:32:12 train v1 start ()
 2026-10-25 18:34:21 train done sha=ff12c92e06837990976d181c368d028d0d522e25557ec79d7187c9e8283c4a8e
 2026-10-25 18:34:26 finish status=FAILED
+2026-10-25 18:34:27 commit 10e701f
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+2026-10-25 18:34:28 push failed (try 1)

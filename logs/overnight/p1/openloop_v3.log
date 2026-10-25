@@ -1,0 +1,6 @@
+25 {"real": 0.0117, "cv": 0.0299, "learned_new": 0.0077}
+50 {"real": 0.0224, "cv": 0.0551, "learned_new": 0.0156}
+100 {"real": 0.4625, "cv": 0.7348, "learned_new": 0.2417}
+150 {"real": 1.5285, "cv": 2.3945, "learned_new": 0.6114}
+200 {"real": 3.1703, "cv": 5.1619, "learned_new": 0.9725}
+EXIT 0
