@@ -101,3 +101,13 @@ real 0.70, learned_pooled 0.70.
   enter as 0 → biased low for separated swarms).
 - Next (pre-registered now, before any run): identity gate for a logging-only n_near change → amend23 (Phase 2 margin
   re-tune, N=100/150) → amend24 (noise_only / fresh mechanism control), one night chain on the pod.
+
+## Night chain (pod times UTC)
+- 19:38 identity gate for the logging-only n_near change: real seed 0 at N=25 and N=100 equal amend21 on 8 metrics
+  (all_equal = True; logs/overnight/identity_nnear/identity.json). New pair-weighted near MSE at N=25 real = 0.01166
+  vs the old per-step-mean metric 0.01193.
+- First launch ran no amendment (log dirs absent on the pod); fixed (2b32112), relaunched 19:40: amend23 started.
+- Drafted while waiting (not yet pre-registered; margin D to be set from amend23's rule): amend25 gate sweep
+  {1.5, 2.309, 3.5, 5.0, 7.0} at N=100 (new solves per gate) and amend26 t_slot sweep {2.5, 5, 7.5, 10 ms} at N=100
+  (same cache), arms real 0.55 / real D / learned v3 D, each with an open-loop estimator check per sweep value and an
+  identity check of the baseline cell vs amend21.
