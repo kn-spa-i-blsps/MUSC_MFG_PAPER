@@ -7,7 +7,7 @@ cd /workspace/MUSC_MFG_PAPER
 . logs/env.sh
 L=logs/overnight/p1; R=results/overnight_p1; W3=$R/predictor_v3/predictor_weights.npz
 log() { echo "$(date '+%F %T') $*"; }
-until ls /workspace/amend26_DONE /workspace/amend26_FAILED >/dev/null 2>&1; do sleep 60; done
+until [ -e /workspace/amend26_DONE ] || [ -e /workspace/amend26_FAILED ]; do sleep 60; done
 git pull -q --rebase --autostash origin main; log "v4 start HEAD $(git rev-parse --short HEAD)"
 python -m experiments.overnight_p1_predictor write-cells > /dev/null
 export L R W3

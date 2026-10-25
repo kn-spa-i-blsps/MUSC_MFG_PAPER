@@ -4,7 +4,7 @@
 cd /workspace/MUSC_MFG_PAPER
 . logs/env.sh
 log() { echo "$(date '+%F %T') $*"; }
-until ls /workspace/amend24_DONE /workspace/amend24_FAILED >/dev/null 2>&1; do sleep 60; done
+until [ -e /workspace/amend24_DONE ] || [ -e /workspace/amend24_FAILED ]; do sleep 60; done
 log "amend24 finished ($(ls /workspace/amend24_* | xargs -n1 basename)); start phase 3-4 HEAD $(git rev-parse --short HEAD)"
 git pull -q --rebase --autostash origin main; log "HEAD after pull $(git rev-parse --short HEAD)"
 mkdir -p logs/amend25_pod logs/amend26_pod
