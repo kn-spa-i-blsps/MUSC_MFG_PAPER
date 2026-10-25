@@ -111,3 +111,11 @@ real 0.70, learned_pooled 0.70.
   {1.5, 2.309, 3.5, 5.0, 7.0} at N=100 (new solves per gate) and amend26 t_slot sweep {2.5, 5, 7.5, 10 ms} at N=100
   (same cache), arms real 0.55 / real D / learned v3 D, each with an open-loop estimator check per sweep value and an
   identity check of the baseline cell vs amend21.
+
+## amend23 DONE (118e4bd) → review_amend23.md
+- CONFIRMED operating margin 0.70 at N=100 (pre-registered rule, resolved): safe-success 0.892 vs 0.675 / 0.747 / 0.686
+  for 0.55 / 0.85 / 1.00; larger margins buy ever<0.30 (0.020 / 0.010) only by freezing (completeness 0.76 / 0.69).
+- N=150: no margin both safe and complete; 0.70 vs 0.85 tie on safe-success; rule keeps 0.70 (not resolved).
+- Reproducibility: amend22 learned d0.70 N=150 repeated bit-identically; N=100 within CI (0.892 vs 0.880).
+- Pre-registered now (before any run): amend25 gate sweep (Phase 3) + amend26 t_slot sweep (Phase 4), d_safe 0.70,
+  queued on the pod behind amend24 (logs/overnight/phase34_chain_pod.sh).

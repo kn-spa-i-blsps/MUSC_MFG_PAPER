@@ -16,7 +16,7 @@ log() { echo "$(date '+%F %T') $*"; }
 finish() {
   log "finish status=$STATUS"
   echo "$STATUS $(date '+%F %T') (pre-commit)" > $L/${A}_$STATUS
-  for f in $R/report.json $R/N*/*/*/metrics_seed*.json $L/*.log $L/${A}_*; do [ -e "$f" ] && git add -f "$f"; done
+  for f in $R/report.json $R/openloop.json $R/N*/*/*/metrics_seed*.json $R/g*/*/*/metrics_seed*.json $R/ts*/*/*/metrics_seed*.json $L/*.log $L/${A}_*; do [ -e "$f" ] && git add -f "$f"; done
   git commit -q -m "$A result ($STATUS): $(head -1 prereg/prereg_projectA_${A}_*.md | sed 's/^# //'), seeds 0-9, precision=highest (RunPod A100)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "commit $(git rev-parse --short HEAD)"
@@ -39,8 +39,10 @@ ls $CD/*.yaml | xargs -n1 basename | sed 's/.yaml$//' | xargs -P 2 -L 1 bash -c 
   echo "$(date "+%F %T") start $cell ($arm) seeds$miss"
   python -m experiments.ladder --config $cd_/$cell.yaml --mode eval --arm $arm --weights $W --seeds $miss > $L/eval_$cell.log 2>&1
   echo "$(date "+%F %T") done $cell exit=$? $(grep -c "seed=" $L/eval_$cell.log) seeds"'
-n=$(ls $R/N*/*/*/metrics_seed*.json 2>/dev/null | wc -l); log "rollouts done: $n/$NEXP"
-grep -h '"matmul_precision"' $R/N*/*/*/metrics_seed*.json | sort | uniq -c | while read l; do log "precision: $l"; done
+n=$(ls $R/*/*/*/metrics_seed*.json 2>/dev/null | wc -l); log "rollouts done: $n/$NEXP"
+grep -h '"matmul_precision"' $R/*/*/*/metrics_seed*.json | sort | uniq -c | while read l; do log "precision: $l"; done
+if [ -n "$PRE_REPORT" ]; then log "pre-report: $PRE_REPORT"; $PRE_REPORT > $L/pre_report.log 2>&1; log "pre-report exit=$?"; tail -8 $L/pre_report.log; fi
+for f in $R/openloop.json; do [ -e "$f" ] && git add -f "$f"; done
 python -m $MOD report > $L/report.log 2>&1; rc=$?
 log "report exit=$rc"; tail -40 $L/report.log
 [ $rc = 0 ] && [ "$n" = "$NEXP" ] && STATUS=DONE
