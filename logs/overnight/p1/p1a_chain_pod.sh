@@ -19,7 +19,7 @@ finish() {
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "commit $(git rev-parse --short HEAD)"
   for i in 1 2 3 4 5 6 7 8 9 10; do
-    git pull -q --rebase origin main && git push origin HEAD:main && { log "push ok $(git rev-parse --short HEAD)"; break; }
+    git pull -q --rebase --autostash origin main && git push origin HEAD:main && { log "push ok $(git rev-parse --short HEAD)"; break; }
     log "push failed (try $i)"; sleep 60
   done
   echo "$STATUS $(date '+%F %T') $(git rev-parse HEAD)" > $L/p1a_${TAG}_$STATUS.marker
