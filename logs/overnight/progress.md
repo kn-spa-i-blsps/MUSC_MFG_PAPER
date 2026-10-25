@@ -35,3 +35,10 @@ Gate PASS = G1 ∧ G2 ∧ G3. No crossover run before PASS.
 amend21's real arm ran at d_safe 0.55, learned at 0.70 → real-vs-learned confounds compensation with margin. The
 amend22 crossover therefore adds a margin-matched control `real fixed 0.70`; arms: real 0.55 (identity vs amend21),
 real 0.70, learned_pooled 0.70.
+
+## P1a attempt 1 — infra failure (no data)
+- Solve N=25 on the new pod: cache key macro_N25_cw1_0fb517496a (= amend21 key), Cesàro converged, no NaN.
+- The chain started identity+datagen for N=25 concurrently with the N=50 solve → GPU OOM in the rollout
+  ("RESOURCE_EXHAUSTED ... 5.12GiB ... jit_run_arrays"). No datagen produced. Chain killed; fix: all solves first, then
+  identity/datagen 2 processes at a time (commit a75a91f). Relaunched (pod log time = UTC). Attempt-1 log kept as
+  logs/overnight/p1/p1a_chain_pod_attempt1.log.
