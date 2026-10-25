@@ -1,0 +1,59 @@
+2026-10-25 19:40:08 chain start amend23 gpu=NVIDIA A100-SXM4-80GB HEAD 6169de0fdbe7cfc38f0de9659e66f1bcc5ddac59
+2026-10-25 19:40:08 aneks sha256 cb062a5e8bf22fae8d51eb089cafe329875ab3d419969b732321d307bd020021
+2026-10-25 19:40:08 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 19:40:08 start N100_learned_pooled_d0.55 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:40:08 start N100_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:44:00 done N100_learned_pooled_d0.55 exit=0 10 seeds
+2026-10-25 19:44:00 start N100_learned_pooled_d0.85 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:44:07 done N100_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:44:07 start N100_learned_pooled_d1.00 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:48:21 done N100_learned_pooled_d1.00 exit=0 10 seeds
+2026-10-25 19:48:21 start N150_learned_pooled_d0.55 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:49:07 done N100_learned_pooled_d0.85 exit=0 10 seeds
+2026-10-25 19:49:07 start N150_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:55:04 done N150_learned_pooled_d0.55 exit=0 10 seeds
+2026-10-25 19:55:04 start N150_learned_pooled_d0.85 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 19:55:06 done N150_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-25 19:55:06 start N150_learned_pooled_d1.00 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-25 20:01:49 done N150_learned_pooled_d0.85 exit=0 10 seeds
+2026-10-25 20:02:17 done N150_learned_pooled_d1.00 exit=0 10 seeds
+2026-10-25 20:02:17 rollouts done: 80/80
+2026-10-25 20:02:17 precision: 80  "matmul_precision": "highest",
+2026-10-25 20:08:20 report exit=0
+N=100 d=0.55 safe_success=0.675 [0.645,0.705] ever_collided=0.325 [0.295,0.355] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.324 [0.312,0.337] cbf_intervention_rate=0.567 [0.565,0.569]
+N=100 d=0.70 safe_success=0.892 [0.862,0.919] ever_collided=0.072 [0.046,0.102] completeness=0.958 [0.949,0.967] p5_sep_worst_step_m=0.464 [0.446,0.481] cbf_intervention_rate=0.903 [0.901,0.904]
+N=100 d=0.85 safe_success=0.747 [0.734,0.759] ever_collided=0.020 [0.010,0.030] completeness=0.764 [0.755,0.773] p5_sep_worst_step_m=0.566 [0.551,0.580] cbf_intervention_rate=0.944 [0.943,0.945]
+N=100 d=1.00 safe_success=0.686 [0.675,0.696] ever_collided=0.010 [0.004,0.016] completeness=0.692 [0.682,0.702] p5_sep_worst_step_m=0.669 [0.654,0.683] cbf_intervention_rate=0.945 [0.944,0.945]
+N=150 d=0.55 safe_success=0.169 [0.153,0.185] ever_collided=0.831 [0.815,0.847] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.256 [0.237,0.274] cbf_intervention_rate=0.609 [0.607,0.611]
+N=150 d=0.70 safe_success=0.479 [0.445,0.511] ever_collided=0.473 [0.433,0.511] completeness=0.857 [0.853,0.862] p5_sep_worst_step_m=0.413 [0.399,0.425] cbf_intervention_rate=0.925 [0.925,0.926]
+N=150 d=0.85 safe_success=0.486 [0.463,0.504] ever_collided=0.213 [0.187,0.239] completeness=0.577 [0.569,0.586] p5_sep_worst_step_m=0.557 [0.531,0.583] cbf_intervention_rate=0.958 [0.957,0.959]
+N=150 d=1.00 safe_success=0.411 [0.398,0.425] ever_collided=0.099 [0.082,0.115] completeness=0.453 [0.446,0.461] p5_sep_worst_step_m=0.577 [0.566,0.589] cbf_intervention_rate=0.964 [0.964,0.965]
+selection: {
+ "100": {
+  "eligible": [
+   0.55,
+   0.7
+  ],
+  "best_mean": 0.7,
+  "chosen": 0.7,
+  "resolved": true
+ },
+ "150": {
+  "eligible": [
+   0.55
+  ],
+  "best_mean": 0.55,
+  "best_minus_incumbent": {
+   "diff": -0.3093333333333333,
+   "ci95": [
+    -0.3466666666666665,
+    -0.27265000000000017
+   ]
+  },
+  "chosen": 0.7,
+  "resolved": false
+ }
+}
+aneks sha256: cb062a5e8bf22fae8d51eb089cafe329875ab3d419969b732321d307bd020021 weights sha256: 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-25 20:08:20 chain end
+2026-10-25 20:08:20 finish status=DONE
