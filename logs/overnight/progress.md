@@ -200,3 +200,16 @@ closed-loop learned-v3 histories (the evaluation distribution).
   appears at the regime level: it prevents the transition into the high-error, crowded regime real falls into. In the
   calm regime its per-step advantage is small, and v3 is out of its training distribution there (the motivation for v4,
   which lowers the mean but not the N=200 tail).
+
+## Phase B (brief logs/overnight/AGENT_BRIEF_phaseB.md), 2026-10-26
+- G-pred criteria fixed before any data: logs/overnight/phaseB_gpred_gate.md (sha256 bd2ffb7d…), commit b020562.
+  Code experiments/phaseB_gpred.py.
+- COMPUTE BLOCKED: `pod-action start` on xby8jnv4zqwvn2 → 402 "account balance is too low". The pooled-geometry
+  histories (datagen/datagenL, N 25–200) and caches exist only on that volume; the geometry_N=230 solve cannot run
+  locally (no GPU, 30 GB RAM; it OOM'd on a 46 GB A40). The real G-pred gate has NOT run.
+- Exploratory PROXY (local CPU, not the gate): N=100 amend11 geometry, real-arm histories, old N=100 predictor
+  (in-distribution), test seeds 110–111, pairs < 2 m, n=20348 → review_phaseB_gpred_proxy.md. Error is predictable and
+  the result is flat over the §C recipe ladder (not capacity-limited): AUC(top decile) 0.79–0.81, lift(top 1 %) 0.39–0.48
+  (random 0.10), Spearman 0.51–0.54, R²(log) 0.24–0.27, corr²(|e|) 0.21–0.24; top-σ-decile mean error 4.5–4.8× the
+  bottom decile. Age-only (staleness) model reaches AUC 0.775 → most of the information is per-neighbour staleness.
+  Ranking WITHIN the top decile is weak (Spearman 0.12–0.19).

@@ -158,6 +158,8 @@ def metrics(E, slog, q90):
             "r2_abs": r2(E, np.exp(slog)), "r2_log": r2(le, slog), "spearman": float(spearmanr(slog, E)[0]),
             "auc_top10": auc(slog, t10), "lift_top1": float(s_top10[t1].mean()),
             "r2_tail_log": r2(le[t10], slog[t10]),
+            "corr2_abs": float(np.corrcoef(np.exp(slog), E)[0, 1] ** 2),
+            "spearman_tail": float(spearmanr(slog[t10], E[t10])[0]),
             "q90_coverage_raw": float(np.mean(E <= q90)),
             "e_ratio_top_vs_bottom_sdecile": float(E[s_top10].mean() / E[slog < np.quantile(slog, 0.1)].mean())}
 
