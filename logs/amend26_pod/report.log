@@ -1,0 +1,102 @@
+identity vs amend21: True
+ts2.50ms real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.075 [0.062,0.090] cbf_intervention_rate=0.574 [0.571,0.577] closedloop_xhat_mse_near_pairw=0.053 [0.052,0.054]
+ts2.50ms real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.076 [0.065,0.085] cbf_intervention_rate=0.789 [0.786,0.792] closedloop_xhat_mse_near_pairw=0.118 [0.116,0.119]
+ts2.50ms learned_pooled_d0.70   safe_success=0.986 [0.976,0.996] ever_collided=0.014 [0.004,0.024] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.493 [0.486,0.502] cbf_intervention_rate=0.874 [0.871,0.876] closedloop_xhat_mse_near_pairw=0.011 [0.011,0.011]
+ts5.00ms real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.032 [0.028,0.036] cbf_intervention_rate=0.586 [0.583,0.588] closedloop_xhat_mse_near_pairw=0.459 [0.452,0.466]
+ts5.00ms real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.994 [0.989,0.999] p5_sep_worst_step_m=0.035 [0.030,0.039] cbf_intervention_rate=0.705 [0.704,0.707] closedloop_xhat_mse_near_pairw=0.883 [0.869,0.896]
+ts5.00ms learned_pooled_d0.70   safe_success=0.892 [0.862,0.919] ever_collided=0.072 [0.046,0.102] completeness=0.958 [0.949,0.967] p5_sep_worst_step_m=0.464 [0.446,0.481] cbf_intervention_rate=0.903 [0.901,0.904] closedloop_xhat_mse_near_pairw=0.023 [0.023,0.023]
+ts7.50ms real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.995 [0.991,0.999] p5_sep_worst_step_m=0.027 [0.023,0.030] cbf_intervention_rate=0.584 [0.582,0.586] closedloop_xhat_mse_near_pairw=1.188 [1.178,1.198]
+ts7.50ms real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.969 [0.962,0.976] p5_sep_worst_step_m=0.029 [0.025,0.033] cbf_intervention_rate=0.678 [0.676,0.680] closedloop_xhat_mse_near_pairw=2.100 [2.081,2.120]
+ts7.50ms learned_pooled_d0.70   safe_success=0.545 [0.498,0.587] ever_collided=0.455 [0.413,0.502] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.322 [0.285,0.355] cbf_intervention_rate=0.886 [0.884,0.887] closedloop_xhat_mse_near_pairw=0.031 [0.031,0.031]
+ts10.00ms real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.977 [0.971,0.984] p5_sep_worst_step_m=0.020 [0.016,0.024] cbf_intervention_rate=0.585 [0.583,0.588] closedloop_xhat_mse_near_pairw=2.146 [2.114,2.176]
+ts10.00ms real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.917 [0.901,0.932] p5_sep_worst_step_m=0.023 [0.018,0.027] cbf_intervention_rate=0.667 [0.666,0.669] closedloop_xhat_mse_near_pairw=3.638 [3.606,3.664]
+ts10.00ms learned_pooled_d0.70   safe_success=0.178 [0.160,0.195] ever_collided=0.822 [0.805,0.840] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.172 [0.128,0.212] cbf_intervention_rate=0.891 [0.889,0.892] closedloop_xhat_mse_near_pairw=0.048 [0.048,0.049]
+diffs: {
+ "ts2.50ms": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.986,
+   "ci95": [
+    0.9760000000000002,
+    0.9960000000000001
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.986,
+   "ci95": [
+    -0.996,
+    -0.976
+   ]
+  }
+ },
+ "ts5.00ms": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.892,
+   "ci95": [
+    0.8620000000000001,
+    0.9189999999999999
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.928,
+   "ci95": [
+    -0.954,
+    -0.898
+   ]
+  }
+ },
+ "ts7.50ms": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.5449999999999999,
+   "ci95": [
+    0.49800000000000005,
+    0.587
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.5449999999999999,
+   "ci95": [
+    -0.587,
+    -0.498
+   ]
+  }
+ },
+ "ts10.00ms": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.178,
+   "ci95": [
+    0.16,
+    0.195
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.17799999999999994,
+   "ci95": [
+    -0.19499999999999995,
+    -0.16000000000000014
+   ]
+  }
+ }
+}
+openloop: {
+ "ts2.50ms": {
+  "real": 0.0516820028424263,
+  "learned": 0.035126909613609314,
+  "ratio_learned_over_real": 0.6796739228684315
+ },
+ "ts5.00ms": {
+  "real": 0.44868603348731995,
+  "learned": 0.2352842092514038,
+  "ratio_learned_over_real": 0.5243849634068296
+ },
+ "ts7.50ms": {
+  "real": 1.182550072669983,
+  "learned": 0.4856955111026764,
+  "ratio_learned_over_real": 0.41071876982432065
+ },
+ "ts10.00ms": {
+  "real": 2.1195244789123535,
+  "learned": 0.678070604801178,
+  "ratio_learned_over_real": 0.31991638291865065
+ }
+}
+aneks sha256: d3afb507e4c1d76e9ea3f1414017f076f892e106bedd6f9e397b4412a95e8af9

@@ -1,0 +1,78 @@
+2026-10-26 00:43:21 chain start amend26 gpu=NVIDIA A100-SXM4-80GB HEAD 1ce2b210a05c9eb65fd7b08d15ec33f5887396b8
+2026-10-26 00:43:21 aneks sha256 d3afb507e4c1d76e9ea3f1414017f076f892e106bedd6f9e397b4412a95e8af9
+2026-10-26 00:43:21 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-26 00:43:21 start ts10.00ms_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:43:21 start ts10.00ms_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:51:49 done ts10.00ms_real_d0.55 exit=0 10 seeds
+2026-10-26 00:51:49 start ts10.00ms_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:52:09 done ts10.00ms_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:52:09 start ts2.50ms_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:54:59 done ts10.00ms_real_d0.70 exit=0 10 seeds
+2026-10-26 00:55:00 start ts2.50ms_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:55:45 done ts2.50ms_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:55:45 start ts2.50ms_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:58:00 done ts2.50ms_real_d0.55 exit=0 10 seeds
+2026-10-26 00:58:00 start ts5.00ms_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:58:41 done ts2.50ms_real_d0.70 exit=0 10 seeds
+2026-10-26 00:58:41 start ts5.00ms_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 01:01:41 done ts5.00ms_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 01:01:41 start ts5.00ms_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 01:01:58 done ts5.00ms_real_d0.55 exit=0 10 seeds
+2026-10-26 01:01:58 start ts7.50ms_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 01:05:00 done ts5.00ms_real_d0.70 exit=0 10 seeds
+2026-10-26 01:05:00 start ts7.50ms_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 01:05:37 done ts7.50ms_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 01:05:37 start ts7.50ms_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 01:08:10 done ts7.50ms_real_d0.55 exit=0 10 seeds
+2026-10-26 01:08:38 done ts7.50ms_real_d0.70 exit=0 10 seeds
+2026-10-26 01:08:38 rollouts done: 120/120
+2026-10-26 01:08:38 precision: 120  "matmul_precision": "highest",
+2026-10-26 01:08:38 pre-report: python -m experiments.amend26_tslot_sweep openloop
+2026-10-26 01:09:07 pre-report exit=0
+ts2.50ms {'real': 0.0516820028424263, 'learned': 0.035126909613609314, 'ratio_learned_over_real': 0.6796739228684315}
+ts5.00ms {'real': 0.44868603348731995, 'learned': 0.2352842092514038, 'ratio_learned_over_real': 0.5243849634068296}
+ts7.50ms {'real': 1.182550072669983, 'learned': 0.4856955111026764, 'ratio_learned_over_real': 0.41071876982432065}
+ts10.00ms {'real': 2.1195244789123535, 'learned': 0.678070604801178, 'ratio_learned_over_real': 0.31991638291865065}
+2026-10-26 01:15:17 report exit=0
+ "ts10.00ms": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.178,
+   "ci95": [
+    0.16,
+    0.195
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.17799999999999994,
+   "ci95": [
+    -0.19499999999999995,
+    -0.16000000000000014
+   ]
+  }
+ }
+}
+openloop: {
+ "ts2.50ms": {
+  "real": 0.0516820028424263,
+  "learned": 0.035126909613609314,
+  "ratio_learned_over_real": 0.6796739228684315
+ },
+ "ts5.00ms": {
+  "real": 0.44868603348731995,
+  "learned": 0.2352842092514038,
+  "ratio_learned_over_real": 0.5243849634068296
+ },
+ "ts7.50ms": {
+  "real": 1.182550072669983,
+  "learned": 0.4856955111026764,
+  "ratio_learned_over_real": 0.41071876982432065
+ },
+ "ts10.00ms": {
+  "real": 2.1195244789123535,
+  "learned": 0.678070604801178,
+  "ratio_learned_over_real": 0.31991638291865065
+ }
+}
+aneks sha256: d3afb507e4c1d76e9ea3f1414017f076f892e106bedd6f9e397b4412a95e8af9
+2026-10-26 01:15:17 chain end
+2026-10-26 01:15:17 finish status=DONE
