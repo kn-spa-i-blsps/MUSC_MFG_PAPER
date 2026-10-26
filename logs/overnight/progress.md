@@ -174,3 +174,29 @@ Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registe
   exactly on a different pod.
 - amend26 DONE (ac32b09) → review_amend26.md: CONFIRMED pure-staleness effect and the staleness/density decomposition
   (learned collisions track T_frame exactly; completeness loss at large N is density).
+
+## Predictor v4 — gate result (pushed ee33aee): FAIL → v3 stays (negative, reported)
+Open-loop near-pair x̂ MSE / p99 [m²], test seeds 110–111. "real hist." = real-arm histories; "learned hist." =
+closed-loop learned-v3 histories (the evaluation distribution).
+
+| N | real hist.: real | v3 | v4a | v4b | learned hist.: real | noise_only | v3 | v4a | v4b |
+|---|---|---|---|---|---|---|---|---|---|
+| 25 | 0.0117 | 0.0077 | 0.0087 | 0.0081 | 0.0114/0.069 | 0.0108/0.066 | 0.0077/0.043 | 0.0081/0.046 | 0.0073/0.045 |
+| 50 | 0.0224 | 0.0156 | 0.0157 | 0.0149 | 0.0130/0.080 | 0.0108/0.068 | 0.0104/0.064 | 0.0102/0.063 | 0.0093/0.067 |
+| 100 | 0.4625 | 0.2417 | 0.2456 | 0.2313 | 0.0197/0.126 | 0.0107/0.067 | 0.0224/0.128 | 0.0196/0.114 | 0.0156/0.112 |
+| 150 | 1.5285 | 0.6114 | 0.6357 | 0.6129 | 0.0317/0.247 | 0.0108/0.067 | 0.0305/0.187 | 0.0256/0.185 | 0.0222/0.170 |
+| 200 | 3.1703 | 0.9725 | 1.0417 | 1.0253 | 0.0696/0.669 | 0.0108/0.067 | 0.0490/0.351 | 0.0437/0.399 | 0.0400/0.357 |
+
+- G1–G3 (real histories): v4a and v4b both PASS (ratios ≤ 0.70, N=100 within 1.25× of the old specialist).
+- G4 (learned histories, MSE AND p99 below v3 at every N ≥ 100; ≤ +10 % at N ≤ 50):
+  - v4a: MSE lower at N = 100 / 150 / 200, p99 lower at N = 100 / 150, but p99 at N=200 is 0.399 > 0.351. **FAIL.**
+  - v4b: MSE lower at all N ≥ 100, p99 lower at N = 100 / 150, but p99 at N=200 is 0.357 > 0.351 (+1.7 %). **FAIL.**
+  - N ≤ 50: both within +10 %.
+- By the pre-declared rule **v3 stays; amend27 is not run**. The threshold is not moved after seeing the data, even
+  though v4b misses by 1.7 %.
+- Side finding (fact, for the mechanism panel): on the learned closed-loop distribution the stale error is small
+  (real 0.0197 at N=100 vs 0.4625 on real-arm histories), and v3's mean error there is not below the stale estimate
+  at N = 100 / 150 (0.0224 vs 0.0197; 0.0305 vs 0.0317). The calm learned swarm keeps stale error low. v3's benefit
+  appears at the regime level: it prevents the transition into the high-error, crowded regime real falls into. In the
+  calm regime its per-step advantage is small, and v3 is out of its training distribution there (the motivation for v4,
+  which lowers the mean but not the N=200 tail).

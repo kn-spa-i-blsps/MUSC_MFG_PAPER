@@ -21,7 +21,9 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 - **Not done (compute stopped: RunPod balance exhausted ~22:15–22:40 UTC, pod EXITED):**
   - (amend25 was later re-run on the new pod and is DONE — claim 7.)
   - (amend26 was later re-run on the new pod and is DONE — claim 8.)
-  - Predictor v4 (closed-loop learned datagen, review_amend24 fix 1): gate fixed in progress.md, not run.
+  - Predictor v4 (closed-loop learned datagen, DAgger-style; review_amend24 fix 1): run on the new pod. v4a/v4b pass
+    G1–G3 and lower the mean error on the learned closed-loop distribution at N ≥ 100, but FAIL the pre-declared G4
+    tail criterion at N=200 (p99 0.399 / 0.357 vs v3 0.351). **Negative: v3 stays, amend27 not run.**
   - Resume: add funds, start pod biiz4t7r00oef8, then `bash logs/overnight/tail_chain_pod.sh`.
 
 ## Quarantined / ARTIFACT / excluded — and why
@@ -29,6 +31,7 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 |---|---|
 | amend21 learned rows at N=25 (fixed 0.70 / closing 0.75) | N=100-only predictor OOD at N=25 (open-loop 5.95 vs real 0.012); superseded by amend22 |
 | Closed-loop x̂ MSE ("closedloop_xhat_mse_near") as a CROSS-ARM comparison (amend21–22) | per-step mean with steps lacking near pairs entering as 0 → biased low for separated swarms; replaced by the pair-weighted metric (from amend23) and the open-loop gate |
+| Predictor v4a, v4b | failed the pre-declared G4 tail criterion at N=200 (v4b by 1.7 %); threshold not moved; not used |
 | Predictor v1, v2 | failed the pre-declared open-loop gate (v1: G1 at N=25 1.05, G2 at N=50 0.85; v2: G1 at N=25); never used in a closed-loop run |
 | review_amend22's density hypothesis for learned at N ≥ 150 | falsified by amend24 |
 | fresh (no-noise oracle) completeness at N=200 (0.763 vs noise_only 0.968) | unexplained liveness observation, not a claim |
