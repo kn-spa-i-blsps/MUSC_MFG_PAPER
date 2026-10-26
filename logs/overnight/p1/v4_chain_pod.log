@@ -1,0 +1,17 @@
+Created autostash: 0a9cbef
+Applied autostash.
+2026-10-26 02:08:33 v4 start HEAD 26beb77
+2026-10-26 02:11:30 datagenL N=25 exit=0 [datagen seed=111] 12s
+2026-10-26 02:11:46 datagenL N=50 exit=0 [datagen seed=111] 8s
+2026-10-26 02:15:35 datagenL N=100 exit=0 [datagen seed=111] 21s
+2026-10-26 02:17:04 datagenL N=150 exit=0 [datagen seed=111] 27s
+2026-10-26 02:19:30 datagenL N=200 exit=0 [datagen seed=111] 14s
+2026-10-26 02:19:30 datagenL files 60/60
+2026-10-26 02:22:07 train v4a exit=0 sha=64fc8d918f72f28e9eb56d59af83c7d5af3f39b189bb7e0e9ff4e66b3a5cdcc1
+2026-10-26 02:27:19 train v4b exit=0 sha=ac84050238d6d6ad2d96969da37660e935967449427d8864a90fdfc4ee100067
+2026-10-26 02:28:26 openloop v3 on datagen exit=0
+2026-10-26 02:29:33 openloop v4a on datagen exit=0
+2026-10-26 02:30:35 openloop v4b on datagen exit=0
+2026-10-26 02:31:42 openloop v3 on datagenL exit=0
+2026-10-26 02:32:49 openloop v4a on datagenL exit=0
+2026-10-26 02:33:51 openloop v4b on datagenL exit=0

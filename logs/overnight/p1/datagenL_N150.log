@@ -1,0 +1,15 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+W1026 02:12:09.229750   36864 cuda_timer.cc:88] Delay kernel timed out: measured time has sub-optimal accuracy. There may be a missing warmup execution, please investigate in Nsight Systems.
+[datagen seed=100] 35s
+[datagen seed=101] 27s
+[datagen seed=102] 24s
+[datagen seed=103] 27s
+[datagen seed=104] 24s
+[datagen seed=105] 27s
+[datagen seed=106] 24s
+[datagen seed=107] 21s
+[datagen seed=108] 11s
+[datagen seed=109] 17s
+[datagen seed=110] 24s
+[datagen seed=111] 27s

@@ -1,0 +1,5 @@
+25 {"real": 0.0114, "cv": 0.029, "noise_only": 0.0108, "learned_new": 0.0077}
+50 {"real": 0.013, "cv": 0.0308, "noise_only": 0.0108, "learned_new": 0.0104}
+100 {"real": 0.0197, "cv": 0.0423, "noise_only": 0.0107, "learned_new": 0.0224}
+150 {"real": 0.0317, "cv": 0.062, "noise_only": 0.0108, "learned_new": 0.0305}
+200 {"real": 0.0696, "cv": 0.1237, "noise_only": 0.0108, "learned_new": 0.049}
