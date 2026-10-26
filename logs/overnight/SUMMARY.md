@@ -12,13 +12,13 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 | 3 | Compensation gap at matched margin: learned v3 d0.70 − real d0.70 safe-success +0.936 (N=50), +0.880 (N=100), +0.479 (N=150), +0.137 (N=200), CIs exclude 0; learned safe_N = 50 (N=100 misses only on CI upper 0.106 vs 0.10) | amend22 |
 | 4 | Larger margin does not help real (0.70 worse than 0.55) but does help learned — the margin helps only on an accurate estimate | amend22, amend23 |
 | 5 | Operating margin d_safe = 0.70 at N=100 (pre-registered rule, resolved); larger margins buy safety only by freezing | amend23, fig3 |
+| 7 | Compensation advantage holds across gate widths 1.5–7.0 m at N=100: learned 0.70 − real 0.70 safe-success +0.87…+0.93 at every gate (CIs exclude 0); gate width itself is a weak lever (real dead at all gates, learned ever 0.07–0.13; only 1.5 m measurably worse) — the collision driver is estimation error (T_frame), not gate flux | amend25, review_amend25, fig4 |
 | 6 | Mechanism: with the TDMA delay removed (noise_only), ever<0.30 = 0 at every N up to 200 (same controller, margin, packing, sensor noise) → collisions in the crossover are caused by delay-estimation error, not density; v3 leaves +0.12 / +0.52 / +0.83 safe-success headroom at N = 100 / 150 / 200 | amend24, review_amend24, fig1 |
 
 ## Not resolved / negative (reported as such)
 - Best margin at N=150: no margin both safe and complete; 0.70 vs 0.85 tie (amend23).
 - **Not done (compute stopped: RunPod balance exhausted ~22:15–22:40 UTC, pod EXITED):**
-  - amend25 gate sweep (Phase 3): pre-registered; 150/150 rollouts finished on the pod volume, but the open-loop
-    check, report and review were not done, so there are no numbers.
+  - (amend25 was later re-run on the new pod and is DONE — claim 7.)
   - amend26 t_slot sweep (Phase 4): pre-registered; 8/120 rollouts, not run.
   - Predictor v4 (closed-loop learned datagen, review_amend24 fix 1): gate fixed in progress.md, not run.
   - Resume: add funds, start pod biiz4t7r00oef8, then `bash logs/overnight/tail_chain_pod.sh`.

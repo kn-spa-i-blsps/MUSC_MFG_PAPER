@@ -168,3 +168,7 @@ Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registe
 - Real-arm datagen (seeds 100–111, needed by v4) existed only on the old volume; regenerated (real path is
   bit-deterministic) and checked: v3 open-loop on the regenerated histories must equal openloop_v3.json exactly.
 - Chain: logs/overnight/resume_chain_pod.sh.
+- amend25 DONE (1ce2b21) on pod xby8jnv4zqwvn2 → review_amend25.md: CONFIRMED learned advantage at every gate
+  (+0.87…+0.93); gate width a weak lever (wrong-knob finding consistent with amend24); Q3 boundary non-monotone within
+  noise (3.5 passes, 5.0 fails, 7.0 passes). Identity real vs amend21 PASS; learned gate 2.309 reproduces amend23
+  exactly on a different pod.
