@@ -172,3 +172,5 @@ Then (if a v4 passes) amend27 = learned v4 d0.70 crossover at all N (pre-registe
   (+0.87…+0.93); gate width a weak lever (wrong-knob finding consistent with amend24); Q3 boundary non-monotone within
   noise (3.5 passes, 5.0 fails, 7.0 passes). Identity real vs amend21 PASS; learned gate 2.309 reproduces amend23
   exactly on a different pod.
+- amend26 DONE (ac32b09) → review_amend26.md: CONFIRMED pure-staleness effect and the staleness/density decomposition
+  (learned collisions track T_frame exactly; completeness loss at large N is density).
