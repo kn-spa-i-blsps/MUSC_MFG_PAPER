@@ -18,13 +18,17 @@ Figures (CONFIRMED cells only): results/overnight_figures/ (PNG + figure_data.cs
 
 ## Not resolved / negative (reported as such)
 - Best margin at N=150: no margin both safe and complete; 0.70 vs 0.85 tie (amend23).
-- **Not done (compute stopped: RunPod balance exhausted ~22:15–22:40 UTC, pod EXITED):**
-  - (amend25 was later re-run on the new pod and is DONE — claim 7.)
-  - (amend26 was later re-run on the new pod and is DONE — claim 8.)
-  - Predictor v4 (closed-loop learned datagen, DAgger-style; review_amend24 fix 1): run on the new pod. v4a/v4b pass
-    G1–G3 and lower the mean error on the learned closed-loop distribution at N ≥ 100, but FAIL the pre-declared G4
-    tail criterion at N=200 (p99 0.399 / 0.357 vs v3 0.351). **Negative: v3 stays, amend27 not run.**
-  - Resume: add funds, start pod biiz4t7r00oef8, then `bash logs/overnight/tail_chain_pod.sh`.
+- **Predictor v4** (closed-loop learned datagen, DAgger-style; review_amend24 fix 1): v4a and v4b pass G1–G3 and
+  lower the mean error on the learned closed-loop distribution at N ≥ 100. Both FAIL the pre-declared G4 tail
+  criterion at N=200 (p99 0.399 / 0.357 vs v3 0.351). **Negative: v3 stays, amend27 not run.**
+- Not tested: an arena-size / start-spacing density axis. The gate sweep shows gate flux is a weak lever; the
+  amend20→21 density effect came from arena and start packing.
+
+## Compute history
+- The RunPod balance ran out at ~22:15–22:40 UTC (pod biiz4t7r00oef8 EXITED; its unreported amend25 attempt is not
+  used). After the PI added funds, everything since amend25 was re-run on the new pod xby8jnv4zqwvn2 (250 GB):
+  amend25, amend26, cache re-solves, real datagen regeneration (exact-equality check vs the committed v3 open-loop:
+  True), and v4.
 
 ## Quarantined / ARTIFACT / excluded — and why
 | Item | Why |
