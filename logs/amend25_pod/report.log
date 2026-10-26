@@ -1,0 +1,126 @@
+identity vs amend21: True
+g1.500 real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.025 [0.020,0.030] cbf_intervention_rate=0.592 [0.590,0.594] closedloop_xhat_mse_near_pairw=0.476 [0.469,0.483]
+g1.500 real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.994 [0.989,0.998] p5_sep_worst_step_m=0.031 [0.026,0.035] cbf_intervention_rate=0.705 [0.704,0.707] closedloop_xhat_mse_near_pairw=0.886 [0.879,0.894]
+g1.500 learned_pooled_d0.70   safe_success=0.874 [0.853,0.893] ever_collided=0.126 [0.107,0.147] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.407 [0.398,0.416] cbf_intervention_rate=0.852 [0.850,0.854] closedloop_xhat_mse_near_pairw=0.022 [0.022,0.023]
+g2.309 real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.032 [0.028,0.036] cbf_intervention_rate=0.586 [0.583,0.588] closedloop_xhat_mse_near_pairw=0.459 [0.452,0.466]
+g2.309 real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.994 [0.989,0.999] p5_sep_worst_step_m=0.035 [0.030,0.039] cbf_intervention_rate=0.705 [0.704,0.707] closedloop_xhat_mse_near_pairw=0.883 [0.869,0.896]
+g2.309 learned_pooled_d0.70   safe_success=0.892 [0.862,0.919] ever_collided=0.072 [0.046,0.102] completeness=0.958 [0.949,0.967] p5_sep_worst_step_m=0.464 [0.446,0.481] cbf_intervention_rate=0.903 [0.901,0.904] closedloop_xhat_mse_near_pairw=0.023 [0.023,0.023]
+g3.500 real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.999 [0.997,1.000] p5_sep_worst_step_m=0.044 [0.038,0.050] cbf_intervention_rate=0.571 [0.569,0.572] closedloop_xhat_mse_near_pairw=0.423 [0.417,0.428]
+g3.500 real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.994 [0.989,0.999] p5_sep_worst_step_m=0.042 [0.037,0.047] cbf_intervention_rate=0.698 [0.697,0.700] closedloop_xhat_mse_near_pairw=0.851 [0.844,0.858]
+g3.500 learned_pooled_d0.70   safe_success=0.928 [0.907,0.949] ever_collided=0.072 [0.051,0.093] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.483 [0.462,0.502] cbf_intervention_rate=0.839 [0.837,0.841] closedloop_xhat_mse_near_pairw=0.023 [0.023,0.023]
+g5.000 real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.999 [0.997,1.000] p5_sep_worst_step_m=0.042 [0.038,0.046] cbf_intervention_rate=0.568 [0.565,0.571] closedloop_xhat_mse_near_pairw=0.422 [0.415,0.429]
+g5.000 real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.997 [0.994,1.000] p5_sep_worst_step_m=0.041 [0.036,0.047] cbf_intervention_rate=0.697 [0.695,0.699] closedloop_xhat_mse_near_pairw=0.838 [0.826,0.848]
+g5.000 learned_pooled_d0.70   safe_success=0.885 [0.862,0.908] ever_collided=0.107 [0.086,0.128] completeness=0.991 [0.983,0.997] p5_sep_worst_step_m=0.468 [0.447,0.489] cbf_intervention_rate=0.877 [0.876,0.879] closedloop_xhat_mse_near_pairw=0.023 [0.023,0.023]
+g7.000 real_d0.55             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=1.000 [1.000,1.000] p5_sep_worst_step_m=0.042 [0.039,0.046] cbf_intervention_rate=0.573 [0.571,0.575] closedloop_xhat_mse_near_pairw=0.434 [0.427,0.440]
+g7.000 real_d0.70             safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.995 [0.989,1.000] p5_sep_worst_step_m=0.045 [0.041,0.049] cbf_intervention_rate=0.697 [0.694,0.699] closedloop_xhat_mse_near_pairw=0.860 [0.850,0.869]
+g7.000 learned_pooled_d0.70   safe_success=0.927 [0.903,0.950] ever_collided=0.072 [0.049,0.096] completeness=0.998 [0.995,1.000] p5_sep_worst_step_m=0.471 [0.450,0.491] cbf_intervention_rate=0.881 [0.880,0.882] closedloop_xhat_mse_near_pairw=0.022 [0.022,0.022]
+diffs: {
+ "g1.500": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.874,
+   "ci95": [
+    0.8530000000000001,
+    0.893
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.874,
+   "ci95": [
+    -0.893,
+    -0.853
+   ]
+  }
+ },
+ "g2.309": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.892,
+   "ci95": [
+    0.8620000000000001,
+    0.9189999999999999
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.928,
+   "ci95": [
+    -0.954,
+    -0.898
+   ]
+  }
+ },
+ "g3.500": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.9279999999999999,
+   "ci95": [
+    0.907,
+    0.9490000000000001
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.928,
+   "ci95": [
+    -0.949,
+    -0.907
+   ]
+  }
+ },
+ "g5.000": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.885,
+   "ci95": [
+    0.8619999999999999,
+    0.908
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.893,
+   "ci95": [
+    -0.914,
+    -0.872
+   ]
+  }
+ },
+ "g7.000": {
+  "learned_minus_real_d0.70_safe_success": {
+   "diff": 0.9269999999999999,
+   "ci95": [
+    0.9030000000000001,
+    0.95
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.9279999999999999,
+   "ci95": [
+    -0.951,
+    -0.904
+   ]
+  }
+ }
+}
+openloop: {
+ "g1.500": {
+  "real": 0.4653838276863098,
+  "learned": 0.24214306473731995,
+  "ratio_learned_over_real": 0.520308292492999
+ },
+ "g2.309": {
+  "real": 0.44868603348731995,
+  "learned": 0.2352842092514038,
+  "ratio_learned_over_real": 0.5243849634068296
+ },
+ "g3.500": {
+  "real": 0.4124293625354767,
+  "learned": 0.21988658607006073,
+  "ratio_learned_over_real": 0.5331496882721253
+ },
+ "g5.000": {
+  "real": 0.40777313709259033,
+  "learned": 0.21766936779022217,
+  "ratio_learned_over_real": 0.5338001648225235
+ },
+ "g7.000": {
+  "real": 0.43516093492507935,
+  "learned": 0.2296348214149475,
+  "ratio_learned_over_real": 0.5277009101345074
+ }
+}
+aneks sha256: 0b7498fa11dbad6750cdb966152ace4b9a0e7869086c8061af6099e36a3481c7

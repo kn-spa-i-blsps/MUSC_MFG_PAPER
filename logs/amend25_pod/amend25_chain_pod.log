@@ -1,0 +1,85 @@
+2026-10-26 00:01:00 chain start amend25 gpu=NVIDIA A100-SXM4-80GB HEAD 5613a37f9370aa178506ac19f51ab25d74278f59
+2026-10-26 00:01:00 aneks sha256 0b7498fa11dbad6750cdb966152ace4b9a0e7869086c8061af6099e36a3481c7
+2026-10-26 00:01:00 weights results/overnight_p1/predictor_v3/predictor_weights.npz sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-26 00:01:00 start g1.500_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:01:00 start g1.500_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:04:21 done g1.500_real_d0.55 exit=0 10 seeds
+2026-10-26 00:04:21 start g1.500_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:04:30 done g1.500_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:04:30 start g2.309_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:07:43 done g1.500_real_d0.70 exit=0 10 seeds
+2026-10-26 00:07:43 start g2.309_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:08:08 done g2.309_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:08:08 start g2.309_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:10:07 done g2.309_real_d0.55 exit=0 10 seeds
+2026-10-26 00:10:07 start g3.500_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:13:26 done g2.309_real_d0.70 exit=0 10 seeds
+2026-10-26 00:13:26 start g3.500_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:13:52 done g3.500_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:13:52 start g3.500_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:16:43 done g3.500_real_d0.55 exit=0 10 seeds
+2026-10-26 00:16:43 start g5.000_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:17:04 done g3.500_real_d0.70 exit=0 10 seeds
+2026-10-26 00:17:04 start g5.000_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:20:12 done g5.000_real_d0.55 exit=0 10 seeds
+2026-10-26 00:20:12 start g5.000_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:20:23 done g5.000_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:20:23 start g7.000_learned_pooled_d0.70 (learned) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:23:21 done g5.000_real_d0.70 exit=0 10 seeds
+2026-10-26 00:23:21 start g7.000_real_d0.55 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:24:01 done g7.000_learned_pooled_d0.70 exit=0 10 seeds
+2026-10-26 00:24:01 start g7.000_real_d0.70 (real) seeds 0 1 2 3 4 5 6 7 8 9
+2026-10-26 00:26:49 done g7.000_real_d0.55 exit=0 10 seeds
+2026-10-26 00:27:24 done g7.000_real_d0.70 exit=0 10 seeds
+2026-10-26 00:27:24 rollouts done: 150/150
+2026-10-26 00:27:24 precision: 150  "matmul_precision": "highest",
+2026-10-26 00:27:24 pre-report: python -m experiments.amend25_gate_sweep openloop
+2026-10-26 00:27:49 pre-report exit=0
+g1.500 {'real': 0.4653838276863098, 'learned': 0.24214306473731995, 'ratio_learned_over_real': 0.520308292492999}
+g2.309 {'real': 0.44868603348731995, 'learned': 0.2352842092514038, 'ratio_learned_over_real': 0.5243849634068296}
+g3.500 {'real': 0.4124293625354767, 'learned': 0.21988658607006073, 'ratio_learned_over_real': 0.5331496882721253}
+g5.000 {'real': 0.40777313709259033, 'learned': 0.21766936779022217, 'ratio_learned_over_real': 0.5338001648225235}
+g7.000 {'real': 0.43516093492507935, 'learned': 0.2296348214149475, 'ratio_learned_over_real': 0.5277009101345074}
+2026-10-26 00:43:18 report exit=0
+    0.95
+   ]
+  },
+  "learned_minus_real_d0.70_ever_collided": {
+   "diff": -0.9279999999999999,
+   "ci95": [
+    -0.951,
+    -0.904
+   ]
+  }
+ }
+}
+openloop: {
+ "g1.500": {
+  "real": 0.4653838276863098,
+  "learned": 0.24214306473731995,
+  "ratio_learned_over_real": 0.520308292492999
+ },
+ "g2.309": {
+  "real": 0.44868603348731995,
+  "learned": 0.2352842092514038,
+  "ratio_learned_over_real": 0.5243849634068296
+ },
+ "g3.500": {
+  "real": 0.4124293625354767,
+  "learned": 0.21988658607006073,
+  "ratio_learned_over_real": 0.5331496882721253
+ },
+ "g5.000": {
+  "real": 0.40777313709259033,
+  "learned": 0.21766936779022217,
+  "ratio_learned_over_real": 0.5338001648225235
+ },
+ "g7.000": {
+  "real": 0.43516093492507935,
+  "learned": 0.2296348214149475,
+  "ratio_learned_over_real": 0.5277009101345074
+ }
+}
+aneks sha256: 0b7498fa11dbad6750cdb966152ace4b9a0e7869086c8061af6099e36a3481c7
+2026-10-26 00:43:18 chain end
+2026-10-26 00:43:18 finish status=DONE
