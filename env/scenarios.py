@@ -199,3 +199,85 @@ class SingleGateA:
         inside = ((X - self.goal[0]) ** 2 + (Z - self.goal[1]) ** 2 <= self.r_goal ** 2) & \
                  (X > self.wall_x + WALL_HALF_THICKNESS)
         return float(inside.sum() * step ** 2)
+
+
+class LayoutA(SingleGateA):
+    """amend30 generic layouts on the SingleGateA arena (same arena, start box, goal disc, horizon rule):
+      layout="two_gates":   the wall has two gates of width gate_width centred at the source chamber's quarter points
+                            z = z_off + H0/4 and z_off + 3 H0/4 (no centre gate)
+      layout="offset_gate": one gate of width gate_width centred at z = z_off + H0/4
+      layout="pillar":      the centred gate plus a square pillar (side pillar_side) midway between the wall and the
+                            goal disc's near edge, at z = H/2
+    Hard geometry (CBF) = wall pieces between gates + the pillar's 4 edges; soft V_obs = the wall profile blocked
+    outside every gate (product of the per-gate tanh steps) + obs_penalty * exp(-(dist to pillar edge / thickness)^2)."""
+
+    def __init__(self, N, *, layout, pillar_side=2.0, **kw):
+        super().__init__(N, **kw)
+        H = self.arena[1]
+        q1, q3 = self.z_off + self.H0 / 4.0, self.z_off + 3.0 * self.H0 / 4.0   # source-chamber quarter points
+        if layout == "two_gates":
+            self.gates = [(q1, self.gate_width), (q3, self.gate_width)]
+        elif layout == "offset_gate":
+            self.gates = [(q1, self.gate_width)]
+        elif layout == "pillar":
+            self.gates = [(self.gate_z, self.gate_width)]
+        else:
+            raise ValueError(layout)
+        self.layout = layout
+        self.pillar = None
+        if layout == "pillar":
+            cx = 0.5 * (self.wall_x + self.goal[0] - self.r_goal)
+            h = pillar_side / 2.0
+            self.pillar = (cx, H / 2.0, h)
+
+    def _pillar_segments(self):
+        if self.pillar is None:
+            return []
+        cx, cz, h = self.pillar
+        c = [(cx - h, cz - h), (cx + h, cz - h), (cx + h, cz + h), (cx - h, cz + h)]
+        return [[list(c[i]), list(c[(i + 1) % 4])] for i in range(4)]
+
+    def wall_segments(self):
+        H, wx = self.arena[1], self.wall_x
+        segs, z = [], 0.0
+        for gz, w in sorted(self.gates):
+            segs.append([[wx, z], [wx, gz - w / 2.0]])
+            z = gz + w / 2.0
+        segs.append([[wx, z], [wx, H]])
+        if self.z_off > 0:
+            zl, zh = self.z_off, self.z_off + self.H0
+            segs += [[[0.0, zl], [wx, zl]], [[0.0, zh], [wx, zh]]]
+        return np.array(segs + self._pillar_segments())
+
+    def path_length_to_goal(self):
+        x0, x1, z0, z1 = self.start_box
+        best = lambda c: min(math.dist(c, (self.wall_x, gz)) + math.dist((self.wall_x, gz), self.goal)
+                             for gz, _ in self.gates)
+        detour = 0.0 if self.pillar is None else 2.0 * self.pillar[2]
+        return max(best((x0, z0)), best((x0, z1))) + self.r_geom + detour
+
+    def free_area(self):
+        W, H = self.arena
+        open_w = sum(w for _, w in self.gates)
+        p = 0.0 if self.pillar is None else (2.0 * self.pillar[2]) ** 2
+        return W * H - 2.0 * self.wall_x * self.z_off - 2.0 * WALL_HALF_THICKNESS * (H - open_w) - p
+
+    def potentials(self, grid):
+        v_goal, _ = SingleGateA.potentials(self, grid)
+        x, z = grid.meshgrid()
+        wall_profile = self.obs_penalty * jnp.exp(-((x - self.wall_x) / self.wall_thickness) ** 2)
+        blocked = jnp.ones_like(x)
+        for gz, w in self.gates:
+            blocked = blocked * 0.5 * (jnp.tanh((jnp.abs(z - gz) - w / 2.0) / self.edge_softness) + 1.0)
+        v_obs = wall_profile * blocked
+        if self.z_off > 0:
+            src = 0.5 * (jnp.tanh((self.wall_x - x) / self.edge_softness) + 1.0)
+            for zw in (self.z_off, self.z_off + self.H0):
+                v_obs = v_obs + self.obs_penalty * jnp.exp(-((z - zw) / self.wall_thickness) ** 2) * src
+        if self.pillar is not None:
+            cx, cz, h = self.pillar
+            dx = jnp.maximum(jnp.abs(x - cx) - h, 0.0)
+            dz = jnp.maximum(jnp.abs(z - cz) - h, 0.0)
+            d = jnp.sqrt(dx ** 2 + dz ** 2)                 # 0 inside the square
+            v_obs = v_obs + self.obs_penalty * jnp.exp(-(d / self.wall_thickness) ** 2)
+        return v_goal, v_obs

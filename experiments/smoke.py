@@ -39,6 +39,16 @@ def build_scenario(cfg, N):
     (fixed arena across N). Absent = geometry sized by N (unchanged)."""
     s = cfg["scenario"]
     geom_N = s.get("geometry_N")
+    if s.get("layout") is not None:   # amend30 generic layouts (absent = SingleGateA, unchanged)
+        from env.scenarios import LayoutA
+        return LayoutA(N if geom_N is None else geom_N, layout=s["layout"], pillar_side=s.get("pillar_side", 2.0),
+                       n_agents=None if geom_N is None else N, w_goal=s["w_goal"], w_hold=s["w_hold"],
+                       goal_softness=s["goal_softness"], obs_penalty=s["obs_penalty"],
+                       wall_thickness=s["wall_thickness"], edge_softness=s["edge_softness"],
+                       goal_gap_mult=s.get("goal_gap_mult"), goal_shape=s.get("goal_shape", "conical"),
+                       goal_spacing=s.get("goal_spacing"), goal_clearance=s.get("goal_clearance"),
+                       goal_attractor_shift=s.get("goal_attractor_shift"),
+                       goal_geometry_spacing=s.get("goal_geometry_spacing"), gate_width=s.get("gate_width"))
     return SingleGateA(N if geom_N is None else geom_N, n_agents=None if geom_N is None else N, w_goal=s["w_goal"], w_hold=s["w_hold"], goal_softness=s["goal_softness"],
                        obs_penalty=s["obs_penalty"], wall_thickness=s["wall_thickness"],
                        edge_softness=s["edge_softness"], goal_gap_mult=s.get("goal_gap_mult"),
