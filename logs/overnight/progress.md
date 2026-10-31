@@ -226,3 +226,11 @@ closed-loop learned-v3 histories (the evaluation distribution).
   vs committed open-loop numbers → D (+per-N ceiling) and the full §C ladder → secondary D on real histories → commit/push,
   DONE/FAILED marker); logs/overnight/phaseB_pod_bootstrap.sh (run locally: `bash logs/overnight/phaseB_pod_bootstrap.sh IP PORT`).
   Estimated ~2.5 h A100 ≈ $5.
+
+## 2026-10-31 21:30 UTC — funds added; pod mc4847t30028lq (A100-SXM4-80GB, US-MD-1, $1.79/h, 250 GB), alias musc-pB
+- G-pred chain launched 21:33 (HEAD 13103ea), tmux "gpred".
+- PI goal restated (zero-latency works → delay damage → compensation methods, NN hopefully best; two-phase
+  compensation MFG + CBF). Gap analysis vs SUMMARY: cv/smith never run on the crossover geometry; the layer split
+  (MFG vs CBF) never measured. → amend27 pre-registered (aneks d13f98ca…, commit 6b6405f) before any run; queued on
+  the pod after the G-pred chain (tmux "amend27", /workspace/launch_amend27.sh). Split arm: CPU smoke test N=25,
+  60 steps: split:real/real bit-equal to real (pos, u_nom, u); pod identity gate vs amend22 runs first.
