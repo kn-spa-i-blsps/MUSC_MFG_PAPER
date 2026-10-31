@@ -234,3 +234,13 @@ closed-loop learned-v3 histories (the evaluation distribution).
   (MFG vs CBF) never measured. → amend27 pre-registered (aneks d13f98ca…, commit 6b6405f) before any run; queued on
   the pod after the G-pred chain (tmux "amend27", /workspace/launch_amend27.sh). Split arm: CPU smoke test N=25,
   60 steps: split:real/real bit-equal to real (pos, u_nom, u); pod identity gate vs amend22 runs first.
+
+## 2026-11-01 — Phase B G-pred gate: PASS (registered criteria, default recipe D)
+- Chain DONE 23:31 (commit 01701ef); regenerated histories verified against committed open-loop evals (bit-equal on
+  all shared keys; datagenL N=100 learned 8e-8 rel. = known GPU nondeterminism).
+- PRIMARY datagenL test: auc_top10 0.810/0.781/0.817/0.843/0.863 (N 25/50/100/150/200), lift_top1 N150/200
+  0.843/0.766, pooled r2_log 0.346 → P1, P2, P3 all met. §C ladder variants all within ±0.03 auc; per-N models no
+  better than pooled. Raw q0.9 coverage 0.88–0.92; age-only baseline weak (σ is not staleness alone).
+- Limitations: per-N r2_log only 0.15–0.28 (the PI's example R²>0.5 is not met; not the registered criterion); tail
+  magnitude not regressed (r2_tail_log < 0), tail ranking strong. → review_gpred.md.
+- Queue continues: amend27 → 28 → 29 → 30. Phase B step 2 (conformal σ, G-cal) to be pre-registered next.
