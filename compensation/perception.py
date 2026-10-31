@@ -29,7 +29,30 @@ def tdma_age(t_sim: float, N: int) -> jnp.ndarray:
     and correctly (continuously) at every other instant."""
     T_frame = t_frame(N)
     j = jnp.arange(N)
-    return jnp.mod(t_sim - j * T_SLOT, T_frame)
+    age = jnp.mod(t_sim - j * T_SLOT, T_frame)
+    if P_LOSS > 0.0:   # amend29 packet loss (module globals set by the runner; P_LOSS = 0 -> unchanged expression)
+        f0 = jnp.floor((t_sim - j * T_SLOT) / T_frame).astype(jnp.int32)       # j's latest scheduled frame
+        m = jnp.arange(LOSS_MAX_FRAMES)[:, None]
+        dropped = (_loss_uniform(f0[None, :] - m, j[None, :]) < P_LOSS) & (f0[None, :] - m >= 0)
+        extra = jnp.sum(jnp.cumprod(dropped.astype(jnp.int32), axis=0), axis=0)  # consecutive drops back from f0
+        age = age + jnp.minimum(extra, LOSS_MAX_FRAMES - 1) * T_frame
+    return age
+
+
+# amend29: TDMA packet loss. Each scheduled broadcast (frame f, slot j) is lost independently with probability P_LOSS,
+# decided by a deterministic integer hash of (f, j, LOSS_SALT) so every caller of tdma_age within one rollout agrees;
+# age_j = time since j's last SUCCESSFUL broadcast (capped at LOSS_MAX_FRAMES - 1 extra frames). Older observations in
+# cv's / the learned window keep their one-frame spacing behind that broadcast (stated simplification).
+P_LOSS = 0.0
+LOSS_SALT = 0
+LOSS_MAX_FRAMES = 8
+
+
+def _loss_uniform(f, j):
+    h = (f.astype(jnp.uint32) * jnp.uint32(73856093)) ^ (j.astype(jnp.uint32) * jnp.uint32(19349663)) \
+        ^ (jnp.uint32(LOSS_SALT) * jnp.uint32(83492791))
+    h = h ^ (h >> 16); h = h * jnp.uint32(0x7FEB352D); h = h ^ (h >> 15); h = h * jnp.uint32(0x846CA68B); h = h ^ (h >> 16)
+    return h.astype(jnp.float32) / jnp.float32(4294967296.0)
 
 
 def _noisy_rel_vec(pos_from: jnp.ndarray, pos_to: jnp.ndarray, key: jax.Array) -> jnp.ndarray:

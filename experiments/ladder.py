@@ -33,7 +33,7 @@ def setup(cfg):
     cache_dir = os.path.join(ROOT, "results", "cache")
     sol, cost, path = get_macro(cfg, sc, grid, cfg["macro_cost"]["c_w"], cache_dir)
     n_steps = int(round(grid.horizon / cfg["dt_exec"]))
-    rcfg = dict(dt_exec=cfg["dt_exec"], n_steps=n_steps, nu=0.0, cbf_on=cfg.get("cbf_on", True), c_w=cost.c_w,
+    rcfg = dict(dt_exec=cfg["dt_exec"], n_steps=n_steps, nu=float(cfg.get("nu", 0.0)), cbf_on=cfg.get("cbf_on", True), c_w=cost.c_w,
                 w_bar=cost.w_bar, m_bar=cost.m_bar, c_dens=cfg["control"]["c_dens"],
                 cbf=copy.deepcopy(cfg["cbf"]), hold_on_arrival=cfg["control"].get("hold_on_arrival", False),
                 log_xhat=cfg.get("log_xhat", False))
@@ -80,6 +80,11 @@ def main():
         _pl.T_SLOT = _pc.T_SLOT = float(cfg["t_slot"])
     from control.params_legacy import T_SLOT as t_slot
     print(f"[ladder] t_slot = {t_slot!r}", flush=True)
+    import compensation.perception as _pc
+    if cfg.get("sigma_scale") is not None:   # amend29: UWB range / bearing noise scale (perception only; absent = 1)
+        _pc.SIGMA_R, _pc.SIGMA_THETA = _pc.SIGMA_R * float(cfg["sigma_scale"]), _pc.SIGMA_THETA * float(cfg["sigma_scale"])
+    p_loss = float(cfg.get("p_loss", 0.0))   # amend29: TDMA packet loss (absent = 0 = unchanged)
+    print(f"[ladder] sigma_r = {_pc.SIGMA_R!r} sigma_theta = {_pc.SIGMA_THETA!r} p_loss = {p_loss!r} nu = {cfg.get('nu', 0.0)!r}", flush=True)
     sc, grid, sol, rcfg, path = setup(cfg)
     fields = {k: sol[k] for k in ("phi_grad", "m_star", "m_star_grad")}
     fields.update(dt=sol["dt"], step=sol["step"])
@@ -88,6 +93,9 @@ def main():
                                              "datagen" if a.mode == "datagen" else arm.replace(":", "_").replace("/", "-")))
     run = make_arm_rollout(arm, sc, rcfg, sol, a.weights)
     for seed in a.seeds:
+        if p_loss > 0.0:   # loss pattern per seed: set the globals, re-trace (they are read at trace time)
+            _pc.P_LOSS, _pc.LOSS_SALT = p_loss, 1000 + seed
+            run = make_arm_rollout(arm, sc, rcfg, sol, a.weights)
         t0 = time.time()
         logs = jax.device_get(run(jax.random.PRNGKey(seed), fields))
         wall = time.time() - t0
@@ -99,7 +107,8 @@ def main():
         metrics, series = summarize(logs, sc, cfg["dt_exec"], c_w=1.0)
         gz, _ = goal_zone_facts(series, logs, sc, cfg)
         metrics.update(gz, seed=seed, arm=arm, wall_seconds=wall, macro_cache=os.path.relpath(path, ROOT),
-                       weights=a.weights, matmul_precision=precision, t_slot=t_slot)
+                       weights=a.weights, matmul_precision=precision, t_slot=t_slot,
+                       sigma_r=_pc.SIGMA_R, sigma_theta=_pc.SIGMA_THETA, p_loss=p_loss, nu=rcfg["nu"])
         np.savez_compressed(os.path.join(out_dir, f"logs_seed{seed}.npz"),
                             **{k: np.asarray(v) for k, v in logs.items()},
                             t=series["t"], arrived_frac=series["arrived_frac"])
