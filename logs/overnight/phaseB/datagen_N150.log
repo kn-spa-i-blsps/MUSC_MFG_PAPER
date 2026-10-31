@@ -1,0 +1,14 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[datagen seed=100] 26s
+[datagen seed=101] 21s
+[datagen seed=102] 21s
+[datagen seed=103] 21s
+[datagen seed=104] 21s
+[datagen seed=105] 21s
+[datagen seed=106] 21s
+[datagen seed=107] 21s
+[datagen seed=108] 21s
+[datagen seed=109] 11s
+[datagen seed=110] 10s
+[datagen seed=111] 10s

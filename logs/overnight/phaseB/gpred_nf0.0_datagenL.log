@@ -1,0 +1,31 @@
+loaded {'train': (2400000, 26), 'val': (300000, 26), 'test': (300000, 26)} 25s
+error model 'full'
+  epoch 0: train 0.5911 val 0.5786 best 0.5786
+  epoch 10: train 0.4882 val 0.4878 best 0.4878
+  epoch 20: train 0.4755 val 0.4764 best 0.4764
+  epoch 30: train 0.4700 val 0.4737 best 0.4695
+  epoch 40: train 0.4666 val 0.4718 best 0.4683
+  epoch 50: train 0.4643 val 0.4675 best 0.4675
+  epoch 60: train 0.4625 val 0.4707 best 0.4642
+  epoch 70: train 0.4609 val 0.4689 best 0.4639
+  epoch 80: train 0.4600 val 0.4683 best 0.4629
+  epoch 90: train 0.4590 val 0.4661 best 0.4629
+  epoch 100: train 0.4581 val 0.4638 best 0.4618
+  epoch 110: train 0.4575 val 0.4674 best 0.4617
+  epoch 120: train 0.4567 val 0.4640 best 0.4615
+  epoch 130: train 0.4563 val 0.4607 best 0.4600
+  epoch 140: train 0.4557 val 0.4641 best 0.4599
+  epoch 150: train 0.4552 val 0.4618 best 0.4589
+  epoch 160: train 0.4548 val 0.4595 best 0.4589
+{"pooled": {"r2_abs": 0.356, "spearman": 0.553, "auc_top10": 0.892, "lift_top1": 0.891}, "25": {"r2_abs": 0.171, "spearman": 0.425, "auc_top10": 0.807, "lift_top1": 0.71}, "50": {"r2_abs": 0.164, "spearman": 0.375, "auc_top10": 0.772, "lift_top1": 0.758}, "100": {"r2_abs": 0.187, "spearman": 0.429, "auc_top10": 0.797, "lift_top1": 0.699}, "150": {"r2_abs": 0.198, "spearman": 0.456, "auc_top10": 0.813, "lift_top1": 0.591}, "200": {"r2_abs": 0.22, "spearman": 0.531, "auc_top10": 0.859, "lift_top1": 0.646}}
+error model 'age'
+  epoch 0: train 0.8792 val 0.8761 best 0.8761
+  epoch 10: train 0.8724 val 0.8748 best 0.8748
+  epoch 20: train 0.8724 val 0.8748 best 0.8748
+{"pooled": {"r2_abs": -0.641, "spearman": 0.385, "auc_top10": 0.823, "lift_top1": 0.779}, "25": {"r2_abs": -0.086, "spearman": 0.055, "auc_top10": 0.542, "lift_top1": 0.12}, "50": {"r2_abs": -0.342, "spearman": 0.078, "auc_top10": 0.559, "lift_top1": 0.169}, "100": {"r2_abs": -0.712, "spearman": 0.093, "auc_top10": 0.565, "lift_top1": 0.215}, "150": {"r2_abs": -1.667, "spearman": 0.155, "auc_top10": 0.608, "lift_top1": 0.212}, "200": {"r2_abs": -1.604, "spearman": 0.367, "auc_top10": 0.758, "lift_top1": 0.188}}
+error model 'range'
+  epoch 0: train 0.8817 val 0.8764 best 0.8764
+  epoch 10: train 0.8698 val 0.8713 best 0.8713
+  epoch 20: train 0.8697 val 0.8713 best 0.8713
+{"pooled": {"r2_abs": -0.06, "spearman": 0.146, "auc_top10": 0.585, "lift_top1": 0.175}, "25": {"r2_abs": 0.016, "spearman": 0.156, "auc_top10": 0.602, "lift_top1": 0.19}, "50": {"r2_abs": 0.007, "spearman": 0.135, "auc_top10": 0.578, "lift_top1": 0.21}, "100": {"r2_abs": -0.256, "spearman": 0.065, "auc_top10": 0.543, "lift_top1": 0.194}, "150": {"r2_abs": -0.358, "spearman": 0.073, "auc_top10": 0.546, "lift_top1": 0.182}, "200": {"r2_abs": -0.64, "spearman": 0.114, "auc_top10": 0.584, "lift_top1": 0.167}}
+wrote results/phaseB/gpred_nf0.0_datagenL.json

@@ -1,0 +1,82 @@
+loaded {'train': (2400000, 26), 'val': (300000, 26), 'test': (300000, 26)} 31s
+error model 'full'
+  epoch 0: train 0.6186 val 0.6046 best 0.6046
+  epoch 10: train 0.5347 val 0.5393 best 0.5393
+  epoch 20: train 0.5205 val 0.5264 best 0.5250
+  epoch 30: train 0.5142 val 0.5226 best 0.5222
+  epoch 40: train 0.5099 val 0.5191 best 0.5171
+  epoch 50: train 0.5070 val 0.5145 best 0.5131
+  epoch 60: train 0.5047 val 0.5117 best 0.5117
+  epoch 70: train 0.5031 val 0.5123 best 0.5108
+  epoch 80: train 0.5017 val 0.5114 best 0.5074
+{"pooled": {"r2_abs": 0.436, "spearman": 0.601, "auc_top10": 0.907, "lift_top1": 0.89}, "25": {"r2_abs": 0.214, "spearman": 0.462, "auc_top10": 0.81, "lift_top1": 0.724}, "50": {"r2_abs": 0.183, "spearman": 0.39, "auc_top10": 0.781, "lift_top1": 0.77}, "100": {"r2_abs": 0.24, "spearman": 0.459, "auc_top10": 0.817, "lift_top1": 0.783}, "150": {"r2_abs": 0.331, "spearman": 0.485, "auc_top10": 0.843, "lift_top1": 0.843}, "200": {"r2_abs": 0.348, "spearman": 0.557, "auc_top10": 0.863, "lift_top1": 0.766}}
+error model 'age'
+  epoch 0: train 0.9065 val 0.9088 best 0.9088
+  epoch 10: train 0.9000 val 0.9047 best 0.9045
+  epoch 20: train 0.8999 val 0.9049 best 0.9045
+{"pooled": {"r2_abs": 0.067, "spearman": 0.448, "auc_top10": 0.842, "lift_top1": 0.65}, "25": {"r2_abs": 0.0, "spearman": 0.043, "auc_top10": 0.527, "lift_top1": 0.134}, "50": {"r2_abs": -0.021, "spearman": 0.084, "auc_top10": 0.552, "lift_top1": 0.148}, "100": {"r2_abs": -0.048, "spearman": 0.093, "auc_top10": 0.579, "lift_top1": 0.227}, "150": {"r2_abs": -0.169, "spearman": 0.178, "auc_top10": 0.648, "lift_top1": 0.195}, "200": {"r2_abs": -0.212, "spearman": 0.377, "auc_top10": 0.748, "lift_top1": 0.234}}
+error model 'range'
+  epoch 0: train 0.9374 val 0.9320 best 0.9320
+  epoch 10: train 0.9268 val 0.9270 best 0.9264
+  epoch 20: train 0.9257 val 0.9248 best 0.9248
+  epoch 30: train 0.9243 val 0.9244 best 0.9236
+  epoch 40: train 0.9242 val 0.9238 best 0.9235
+{"pooled": {"r2_abs": -0.04, "spearman": 0.159, "auc_top10": 0.594, "lift_top1": 0.242}, "25": {"r2_abs": -0.062, "spearman": 0.174, "auc_top10": 0.615, "lift_top1": 0.223}, "50": {"r2_abs": 0.012, "spearman": 0.141, "auc_top10": 0.595, "lift_top1": 0.238}, "100": {"r2_abs": -0.116, "spearman": 0.122, "auc_top10": 0.579, "lift_top1": 0.177}, "150": {"r2_abs": -0.217, "spearman": 0.09, "auc_top10": 0.564, "lift_top1": 0.259}, "200": {"r2_abs": -0.447, "spearman": 0.112, "auc_top10": 0.577, "lift_top1": 0.304}}
+  epoch 0: train 0.9544 val 0.9447 best 0.9447
+  epoch 10: train 0.8531 val 0.8767 best 0.8714
+  epoch 20: train 0.8207 val 0.8387 best 0.8387
+  epoch 30: train 0.7994 val 0.8194 best 0.8188
+  epoch 40: train 0.7838 val 0.8064 best 0.8052
+  epoch 50: train 0.7740 val 0.8039 best 0.8006
+  epoch 60: train 0.7669 val 0.7922 best 0.7908
+  epoch 70: train 0.7612 val 0.7898 best 0.7874
+  epoch 80: train 0.7572 val 0.7904 best 0.7841
+  epoch 90: train 0.7544 val 0.7808 best 0.7808
+  epoch 100: train 0.7512 val 0.7877 best 0.7788
+  epoch 110: train 0.7493 val 0.7821 best 0.7788
+  epoch 0: train 0.8991 val 0.8725 best 0.8725
+  epoch 10: train 0.8325 val 0.8368 best 0.8368
+  epoch 20: train 0.8065 val 0.8147 best 0.8147
+  epoch 30: train 0.7831 val 0.7889 best 0.7889
+  epoch 40: train 0.7706 val 0.7841 best 0.7818
+  epoch 50: train 0.7635 val 0.7866 best 0.7777
+  epoch 60: train 0.7588 val 0.7813 best 0.7769
+  epoch 70: train 0.7547 val 0.7824 best 0.7742
+  epoch 80: train 0.7513 val 0.7733 best 0.7719
+  epoch 90: train 0.7491 val 0.7755 best 0.7719
+  epoch 0: train 0.8520 val 0.8340 best 0.8340
+  epoch 10: train 0.7522 val 0.7518 best 0.7518
+  epoch 20: train 0.7323 val 0.7422 best 0.7396
+  epoch 30: train 0.7145 val 0.7224 best 0.7224
+  epoch 40: train 0.7009 val 0.7120 best 0.7120
+  epoch 50: train 0.6920 val 0.7073 best 0.7057
+  epoch 60: train 0.6856 val 0.6990 best 0.6990
+  epoch 70: train 0.6815 val 0.7025 best 0.6988
+  epoch 80: train 0.6772 val 0.6996 best 0.6981
+  epoch 90: train 0.6736 val 0.6992 best 0.6959
+  epoch 100: train 0.6707 val 0.7009 best 0.6951
+  epoch 110: train 0.6683 val 0.6980 best 0.6939
+  epoch 0: train 0.7451 val 0.7219 best 0.7219
+  epoch 10: train 0.6494 val 0.6587 best 0.6587
+  epoch 20: train 0.6303 val 0.6403 best 0.6403
+  epoch 30: train 0.6195 val 0.6328 best 0.6328
+  epoch 40: train 0.6093 val 0.6336 best 0.6309
+  epoch 50: train 0.5971 val 0.6198 best 0.6168
+  epoch 60: train 0.5895 val 0.6171 best 0.6141
+  epoch 70: train 0.5840 val 0.6131 best 0.6090
+  epoch 80: train 0.5802 val 0.6093 best 0.6074
+  epoch 90: train 0.5768 val 0.6033 best 0.6033
+  epoch 100: train 0.5738 val 0.6085 best 0.6033
+  epoch 0: train 0.6732 val 0.6566 best 0.6566
+  epoch 10: train 0.5823 val 0.5898 best 0.5898
+  epoch 20: train 0.5661 val 0.5757 best 0.5757
+  epoch 30: train 0.5570 val 0.5702 best 0.5702
+  epoch 40: train 0.5506 val 0.5710 best 0.5675
+  epoch 50: train 0.5437 val 0.5637 best 0.5637
+  epoch 60: train 0.5375 val 0.5588 best 0.5587
+  epoch 70: train 0.5314 val 0.5528 best 0.5528
+  epoch 80: train 0.5258 val 0.5493 best 0.5487
+  epoch 90: train 0.5218 val 0.5464 best 0.5459
+  epoch 100: train 0.5182 val 0.5453 best 0.5429
+  epoch 110: train 0.5162 val 0.5489 best 0.5429
+wrote results/phaseB/gpred_D_datagenL.json

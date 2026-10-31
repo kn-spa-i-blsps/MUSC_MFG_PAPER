@@ -1,0 +1,37 @@
+datagen exact_equal_per_N: {'25': False, '50': False, '100': False, '150': False, '200': False}
+  N=25 real: old 0.0117342 new 0.0117342
+  N=25 cv: old 0.0299266 new 0.0299266
+  N=25 learned_new: old 0.00767234 new 0.00767234
+  N=50 real: old 0.0223997 new 0.0223997
+  N=50 cv: old 0.0550798 new 0.0550798
+  N=50 learned_new: old 0.0156188 new 0.0156188
+  N=100 real: old 0.462524 new 0.462524
+  N=100 cv: old 0.73481 new 0.73481
+  N=100 learned_new: old 0.241703 new 0.241703
+  N=150 real: old 1.52853 new 1.52853
+  N=150 cv: old 2.39447 new 2.39447
+  N=150 learned_new: old 0.61145 new 0.61145
+  N=200 real: old 3.17033 new 3.17033
+  N=200 cv: old 5.1619 new 5.1619
+  N=200 learned_new: old 0.972469 new 0.972469
+datagenL exact_equal_per_N: {'25': True, '50': True, '100': False, '150': True, '200': True}
+  N=25 real: old 0.0114275 new 0.0114275
+  N=25 cv: old 0.0290069 new 0.0290069
+  N=25 noise_only: old 0.010779 new 0.010779
+  N=25 learned_new: old 0.007654 new 0.007654
+  N=50 real: old 0.0130366 new 0.0130366
+  N=50 cv: old 0.0307619 new 0.0307619
+  N=50 noise_only: old 0.010845 new 0.010845
+  N=50 learned_new: old 0.0103987 new 0.0103987
+  N=100 real: old 0.0197324 new 0.0197324
+  N=100 cv: old 0.0423233 new 0.0423233
+  N=100 noise_only: old 0.0107385 new 0.0107385
+  N=100 learned_new: old 0.0223928 new 0.0223928
+  N=150 real: old 0.0317092 new 0.0317092
+  N=150 cv: old 0.0619509 new 0.0619509
+  N=150 noise_only: old 0.0107779 new 0.0107779
+  N=150 learned_new: old 0.0305171 new 0.0305171
+  N=200 real: old 0.0696262 new 0.0696262
+  N=200 cv: old 0.123714 new 0.123714
+  N=200 noise_only: old 0.010779 new 0.010779
+  N=200 learned_new: old 0.0489869 new 0.0489869

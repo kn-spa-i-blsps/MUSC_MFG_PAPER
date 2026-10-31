@@ -1,0 +1,28 @@
+loaded {'train': (2400000, 26), 'val': (300000, 26), 'test': (300000, 26)} 32s
+error model 'full'
+  epoch 0: train 0.5116 val 0.5017 best 0.5017
+  epoch 10: train 0.4698 val 0.4713 best 0.4713
+  epoch 20: train 0.4638 val 0.4666 best 0.4660
+  epoch 30: train 0.4610 val 0.4665 best 0.4646
+  epoch 40: train 0.4593 val 0.4638 best 0.4638
+  epoch 50: train 0.4581 val 0.4631 best 0.4631
+  epoch 60: train 0.4573 val 0.4626 best 0.4626
+  epoch 70: train 0.4566 val 0.4630 best 0.4625
+  epoch 80: train 0.4561 val 0.4630 best 0.4623
+  epoch 90: train 0.4556 val 0.4620 best 0.4620
+{"pooled": {"r2_abs": 0.499, "spearman": 0.789, "auc_top10": 0.928, "lift_top1": 0.805}, "25": {"r2_abs": 0.212, "spearman": 0.46, "auc_top10": 0.823, "lift_top1": 0.729}, "50": {"r2_abs": 0.181, "spearman": 0.383, "auc_top10": 0.786, "lift_top1": 0.776}, "100": {"r2_abs": 0.184, "spearman": 0.547, "auc_top10": 0.817, "lift_top1": 0.503}, "150": {"r2_abs": 0.212, "spearman": 0.575, "auc_top10": 0.786, "lift_top1": 0.367}, "200": {"r2_abs": 0.27, "spearman": 0.59, "auc_top10": 0.804, "lift_top1": 0.586}}
+error model 'age'
+  epoch 0: train 0.5714 val 0.5737 best 0.5737
+  epoch 10: train 0.5652 val 0.5625 best 0.5623
+  epoch 20: train 0.5650 val 0.5625 best 0.5623
+{"pooled": {"r2_abs": 0.475, "spearman": 0.726, "auc_top10": 0.919, "lift_top1": 0.812}, "25": {"r2_abs": 0.002, "spearman": 0.048, "auc_top10": 0.525, "lift_top1": 0.097}, "50": {"r2_abs": 0.018, "spearman": 0.125, "auc_top10": 0.615, "lift_top1": 0.191}, "100": {"r2_abs": 0.106, "spearman": 0.395, "auc_top10": 0.748, "lift_top1": 0.322}, "150": {"r2_abs": 0.196, "spearman": 0.503, "auc_top10": 0.765, "lift_top1": 0.392}, "200": {"r2_abs": 0.237, "spearman": 0.533, "auc_top10": 0.775, "lift_top1": 0.344}}
+error model 'range'
+  epoch 0: train 1.0741 val 1.0682 best 1.0682
+  epoch 10: train 1.0536 val 1.0547 best 1.0546
+  epoch 20: train 1.0532 val 1.0546 best 1.0536
+  epoch 30: train 1.0531 val 1.0545 best 1.0536
+  epoch 40: train 1.0530 val 1.0544 best 1.0535
+  epoch 50: train 1.0529 val 1.0537 best 1.0535
+  epoch 60: train 1.0529 val 1.0535 best 1.0535
+{"pooled": {"r2_abs": -0.049, "spearman": 0.334, "auc_top10": 0.732, "lift_top1": 0.646}, "25": {"r2_abs": -1.881, "spearman": 0.155, "auc_top10": 0.593, "lift_top1": 0.226}, "50": {"r2_abs": -0.43, "spearman": 0.104, "auc_top10": 0.571, "lift_top1": 0.187}, "100": {"r2_abs": -0.241, "spearman": 0.159, "auc_top10": 0.621, "lift_top1": 0.366}, "150": {"r2_abs": -0.536, "spearman": 0.221, "auc_top10": 0.674, "lift_top1": 0.404}, "200": {"r2_abs": -0.727, "spearman": 0.294, "auc_top10": 0.7, "lift_top1": 0.548}}
+wrote results/phaseB/gpred_D_datagen.json

@@ -1,0 +1,26 @@
+loaded {'train': (2400000, 26), 'val': (300000, 26), 'test': (300000, 26)} 31s
+error model 'full'
+  epoch 0: train 0.6095 val 0.5974 best 0.5974
+  epoch 10: train 0.5093 val 0.5150 best 0.5150
+  epoch 20: train 0.4972 val 0.5076 best 0.5049
+  epoch 30: train 0.4902 val 0.5085 best 0.5040
+  epoch 40: train 0.4858 val 0.5068 best 0.4998
+  epoch 50: train 0.4825 val 0.5041 best 0.4998
+{"pooled": {"r2_abs": 0.393, "spearman": 0.612, "auc_top10": 0.906, "lift_top1": 0.882}, "25": {"r2_abs": 0.245, "spearman": 0.486, "auc_top10": 0.806, "lift_top1": 0.671}, "50": {"r2_abs": 0.204, "spearman": 0.411, "auc_top10": 0.785, "lift_top1": 0.758}, "100": {"r2_abs": 0.178, "spearman": 0.48, "auc_top10": 0.822, "lift_top1": 0.739}, "150": {"r2_abs": 0.31, "spearman": 0.499, "auc_top10": 0.842, "lift_top1": 0.838}, "200": {"r2_abs": 0.258, "spearman": 0.561, "auc_top10": 0.861, "lift_top1": 0.713}}
+error model 'age'
+  epoch 0: train 0.9058 val 0.9062 best 0.9062
+  epoch 10: train 0.9001 val 0.9047 best 0.9047
+  epoch 20: train 0.9000 val 0.9052 best 0.9046
+  epoch 30: train 0.9000 val 0.9047 best 0.9046
+  epoch 40: train 0.8999 val 0.9047 best 0.9046
+  epoch 50: train 0.8999 val 0.9047 best 0.9046
+{"pooled": {"r2_abs": 0.073, "spearman": 0.448, "auc_top10": 0.842, "lift_top1": 0.653}, "25": {"r2_abs": -0.001, "spearman": 0.043, "auc_top10": 0.527, "lift_top1": 0.134}, "50": {"r2_abs": -0.022, "spearman": 0.084, "auc_top10": 0.552, "lift_top1": 0.148}, "100": {"r2_abs": -0.049, "spearman": 0.092, "auc_top10": 0.579, "lift_top1": 0.227}, "150": {"r2_abs": -0.175, "spearman": 0.178, "auc_top10": 0.648, "lift_top1": 0.195}, "200": {"r2_abs": -0.192, "spearman": 0.377, "auc_top10": 0.748, "lift_top1": 0.234}}
+error model 'range'
+  epoch 0: train 0.9342 val 0.9299 best 0.9299
+  epoch 10: train 0.9267 val 0.9271 best 0.9262
+  epoch 20: train 0.9245 val 0.9235 best 0.9235
+  epoch 30: train 0.9242 val 0.9256 best 0.9235
+  epoch 40: train 0.9240 val 0.9246 best 0.9234
+  epoch 50: train 0.9241 val 0.9235 best 0.9234
+{"pooled": {"r2_abs": -0.036, "spearman": 0.159, "auc_top10": 0.592, "lift_top1": 0.241}, "25": {"r2_abs": -0.066, "spearman": 0.176, "auc_top10": 0.614, "lift_top1": 0.219}, "50": {"r2_abs": 0.008, "spearman": 0.14, "auc_top10": 0.592, "lift_top1": 0.238}, "100": {"r2_abs": -0.113, "spearman": 0.12, "auc_top10": 0.575, "lift_top1": 0.182}, "150": {"r2_abs": -0.211, "spearman": 0.088, "auc_top10": 0.559, "lift_top1": 0.259}, "200": {"r2_abs": -0.438, "spearman": 0.11, "auc_top10": 0.578, "lift_top1": 0.304}}
+wrote results/phaseB/gpred_cap3x256_datagenL.json
