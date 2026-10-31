@@ -213,3 +213,16 @@ closed-loop learned-v3 histories (the evaluation distribution).
   (random 0.10), Spearman 0.51–0.54, R²(log) 0.24–0.27, corr²(|e|) 0.21–0.24; top-σ-decile mean error 4.5–4.8× the
   bottom decile. Age-only (staleness) model reaches AUC 0.775 → most of the information is per-neighbour staleness.
   Ranking WITHIN the top decile is weak (Spearman 0.12–0.19).
+
+## 2026-10-31 — Phase B step 1 (G-pred, real gate) resume attempt
+- RunPod reads: list-pods = [] (no pods; xby8jnv4zqwvn2 and its 250 GB volume no longer exist), list-network-volumes = [],
+  last billed day 2026-10-26. The pooled-geometry histories (datagen/datagenL N 25–200) and caches are LOST → must be regenerated.
+- create-pod (A100-SXM4-80GB SECURE, $1.79/h) → 402 "Your account balance is too low to rent a pod". COMPUTE BLOCKED again.
+- Gate criteria unchanged (phaseB_gpred_gate.md, sha bd2ffb7d…, commit b020562, fixed before any gate data). Note for the PI:
+  the brief's example thresholds (R² > 0.5 AND AUC > 0.75) are NOT the registered ones; registered = AUC_top10 ≥ 0.80 at
+  N ≥ 100 (≥ 0.70 at N ≤ 50), lift_top1 ≥ 0.40 at N 150/200, pooled r2_log ≥ 0.25. Not moved.
+- Prepared (no data seen): experiments/phaseB_gpred.py gains a per-σ-decile reliability table (reporting only, not a
+  criterion); logs/overnight/phaseB_gpred_chain_pod.sh (5 solves → real + learned-v3 datagen seeds 100–111 → integrity check
+  vs committed open-loop numbers → D (+per-N ceiling) and the full §C ladder → secondary D on real histories → commit/push,
+  DONE/FAILED marker); logs/overnight/phaseB_pod_bootstrap.sh (run locally: `bash logs/overnight/phaseB_pod_bootstrap.sh IP PORT`).
+  Estimated ~2.5 h A100 ≈ $5.

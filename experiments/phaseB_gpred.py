@@ -161,7 +161,18 @@ def metrics(E, slog, q90):
             "corr2_abs": float(np.corrcoef(np.exp(slog), E)[0, 1] ** 2),
             "spearman_tail": float(spearmanr(slog[t10], E[t10])[0]),
             "q90_coverage_raw": float(np.mean(E <= q90)),
-            "e_ratio_top_vs_bottom_sdecile": float(E[s_top10].mean() / E[slog < np.quantile(slog, 0.1)].mean())}
+            "e_ratio_top_vs_bottom_sdecile": float(E[s_top10].mean() / E[slog < np.quantile(slog, 0.1)].mean()),
+            "reliability": reliability(E, slog, q90)}
+
+
+def reliability(E, slog, q90, nbins=10):
+    """Per predicted-sigma decile: predicted median |e| (exp of log head), predicted q0.9 vs realized median / p90 /
+    coverage of the q0.9 head. Reporting only (not a gate criterion)."""
+    edges = np.quantile(slog, np.linspace(0, 1, nbins + 1))
+    b = np.clip(np.searchsorted(edges, slog, side="right") - 1, 0, nbins - 1)
+    return [{"n": int(k.sum()), "pred_med_m": float(np.exp(np.median(slog[k]))), "real_med_m": float(np.median(E[k])),
+             "pred_q90_m": float(np.mean(q90[k])), "real_p90_m": float(np.quantile(E[k], 0.9)),
+             "q90_cov": float(np.mean(E[k] <= q90[k]))} for k in (b == i for i in range(nbins)) if k.sum() > 0]
 
 
 def main():
