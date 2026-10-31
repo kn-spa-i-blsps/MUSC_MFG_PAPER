@@ -52,9 +52,10 @@ def load_predictor(path):
 
 def make_arm_rollout(arm, sc, rcfg, sol, weights=None):
     kw = {}
-    if arm == "smith":
+    parts = arm.split(":", 1)[1].split("/") if arm.startswith("split:") else [arm]   # amend27 layer split
+    if "smith" in parts:
         kw["field_params"] = field_params_for(sol)
-    if arm == "learned":
+    if "learned" in parts:
         kw["predictor_params"] = load_predictor(weights)
     return make_rollout(arm, sc, rcfg, **kw)
 
@@ -84,7 +85,7 @@ def main():
     fields.update(dt=sol["dt"], step=sol["step"])
     arm = a.datagen_arm if a.mode == "datagen" else a.arm
     out_dir = render.ensure_dir(os.path.join(ROOT, "results", cfg["run_name"],
-                                             "datagen" if a.mode == "datagen" else arm))
+                                             "datagen" if a.mode == "datagen" else arm.replace(":", "_").replace("/", "-")))
     run = make_arm_rollout(arm, sc, rcfg, sol, a.weights)
     for seed in a.seeds:
         t0 = time.time()

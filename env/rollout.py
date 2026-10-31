@@ -34,15 +34,23 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     adaptive = prm.margin_k is not None                                # amend17 staleness-aware margin
     closing = adaptive and prm.margin_mode == "closing"                # amend19 closure-gated margin
     iu = jnp.triu_indices(N, 1)
+    # amend27 layer split: condition "split:<mfg>/<cbf>" feeds the MFG nominal law (density term, hold) with one
+    # perception arm and the CBF (+ adaptive margin, x_hat logs) with another; both from the same key -> same m=0
+    # observation. Any other condition string = unchanged single-x_hat path.
+    split = condition.split(":", 1)[1].split("/") if condition.startswith("split:") else None
 
     def step_fn(carry, k, macro):
         positions, history, key, warm = carry
         history = history.at[k].set(positions)
         key, pk = jax.random.split(key)
-        x_hat = perceive(condition, history, k, dt_exec, N, pk,
-                         predictor_params=predictor_params, field_params=field_params)
+        if split is None:
+            x_hat = x_hat_mfg = perceive(condition, history, k, dt_exec, N, pk,
+                                         predictor_params=predictor_params, field_params=field_params)
+        else:
+            x_hat_mfg, x_hat = (perceive(c, history, k, dt_exec, N, pk, predictor_params=predictor_params,
+                                         field_params=field_params) for c in split)
         t_sim = k * dt_exec
-        u_nom, mdiag = nominal_control(positions, x_hat, t_sim, N, macro, c_w=cfg["c_w"],
+        u_nom, mdiag = nominal_control(positions, x_hat_mfg, t_sim, N, macro, c_w=cfg["c_w"],
                                        w_bar=cfg["w_bar"], m_bar=cfg["m_bar"], c_dens=cfg["c_dens"],
                                        hold=hold)
         nrm = jnp.linalg.norm(u_nom, axis=-1, keepdims=True)
