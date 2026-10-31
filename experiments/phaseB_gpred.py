@@ -133,6 +133,10 @@ def train_error_model(Ztr, Etr, Zva, Eva, hidden, depth):
     def predict(Z):
         o = np.asarray(mlp(bp, nz(Z)), np.float64)
         return o[:, 0] * lsd + lmu, o[:, 1] * Etr.std() + Etr.mean()
+    # amend31: frozen export for the closed loop (env.rollout.sigma_logerr reads the log head only)
+    predict.export = {"mu": mu.astype(np.float32), "sd": sd.astype(np.float32), "lmu": np.float32(lmu),
+                      "lsd": np.float32(lsd), **{f"{n}{i}": np.asarray(v, np.float32) for i, (W, b) in enumerate(bp)
+                                                  for n, v in (("W", W), ("b", b))}}
     return predict, {"epochs": ep + 1, "best_val": best}
 
 

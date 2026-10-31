@@ -52,6 +52,10 @@ class CBFParams(NamedTuple):
                                     # max(margin_floor, D_COLLISION + margin_k * max(0, v_closing_ij) * margin_h), no cap
     margin_floor: float = 0.55     # amend19 floor
     margin_h: float = 0.3          # amend19 look-ahead horizon (s)
+    margin_q: float = 1.0          # amend31 "sigma": conformal multiplier q_N(alpha) on the error model's exp(log|e|);
+                                   # d_safe_ij = max(margin_floor, D_COLLISION + margin_k * margin_q * sigma_ij), no cap
+    margin_q_edges: tuple | None = None  # amend31 sigma_bin: log-sigma bin edges (4); q = margin_q_vals[bin] per pair
+    margin_q_vals: tuple | None = None   # (5); None = the scalar margin_q
 
 
 def _closest_on_segments(p, segs):

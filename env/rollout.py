@@ -9,14 +9,15 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-from compensation.perception import neighbour_abs_velocity, perceive, staleness_and_rel_velocity
+from compensation.perception import (learned_window_and_pred, neighbour_abs_velocity, perceive,
+                                     staleness_and_rel_velocity)
 from control.cbf import CBFParams, cbf_filter, init_warm_start
 from control.law import local_density_and_grad
 from control.macro import nominal_control
-from control.params import D_COLLISION, V_MAX
+from control.params import D_COLLISION, V_MAX, t_frame
 
 
-def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_params=None):
+def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_params=None, sigma_params=None):
     """Returns run(key, macro) -> logs; macro = {phi_grad, m_star, m_star_grad} (passed to jit as
     arguments) + python floats dt, step. cfg keys: dt_exec, n_steps, nu, cbf_on, c_w, w_bar, m_bar, c_dens, cbf (dict of CBFParams);
     optional (amend7): hold_on_arrival (bool; d_hold = cbf d_safe), log_xhat (bool: log x_hat - own
@@ -33,6 +34,9 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     log_xhat = cfg.get("log_xhat", False)
     adaptive = prm.margin_k is not None                                # amend17 staleness-aware margin
     closing = adaptive and prm.margin_mode == "closing"                # amend19 closure-gated margin
+    sig_mode = adaptive and prm.margin_mode == "sigma"                 # amend31 conformal sigma-CBF margin
+    if sig_mode and (sigma_params is None or predictor_params is None):
+        raise ValueError("margin_mode='sigma' requires sigma_params and predictor_params")
     iu = jnp.triu_indices(N, 1)
     # amend27 layer split: condition "split:<mfg>/<cbf>" feeds the MFG nominal law (density term, hold) with one
     # perception arm and the CBF (+ adaptive margin, x_hat logs) with another; both from the same key -> same m=0
@@ -55,8 +59,16 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
                                        hold=hold)
         nrm = jnp.linalg.norm(u_nom, axis=-1, keepdims=True)
         u_nom = u_nom * jnp.minimum(1.0, V_MAX / jnp.maximum(nrm, 1e-9))
-        d_safe_pair = v_closing = None
-        if adaptive and closing:   # amend19: d_safe_ij = max(floor, D_COLLISION + k * max(0, v_closing_ij) * h)
+        d_safe_pair = v_closing = sigma_c = None
+        if sig_mode:   # amend31: sigma_ij = q_N(alpha) * exp(g(Z_ij)), g = frozen error model of v3 (phaseB_sigma.py)
+            hb, pkb = jax.lax.optimization_barrier((history, pk))
+            Xw, Fw = learned_window_and_pred(hb, k, dt_exec, N, pkb, predictor_params)
+            slog = sigma_logerr(sigma_params, Xw, Fw, N)
+            q = (prm.margin_q if prm.margin_q_edges is None else   # amend31 sigma_bin: Mondrian (N, sigma-quintile) q
+                 jnp.asarray(prm.margin_q_vals)[jnp.searchsorted(jnp.asarray(prm.margin_q_edges), slog, side="right")])
+            sigma_c = q * jnp.exp(slog)
+            d_safe_pair = jnp.maximum(prm.margin_floor, D_COLLISION + prm.margin_k * sigma_c)
+        elif adaptive and closing:   # amend19: d_safe_ij = max(floor, D_COLLISION + k * max(0, v_closing_ij) * h)
             hb, pkb = jax.lax.optimization_barrier((history, pk))
             v_hat_j = neighbour_abs_velocity(hb, k, dt_exec, N, pkb)            # (N_i,N_j,2) heard abs velocity of j
             v_i = jnp.where(k > 0, history[k] - history[jnp.maximum(k - 1, 0)], 0.0) / dt_exec   # own velocity (N,2)
@@ -104,6 +116,15 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
             y["d_safe_hist"] = jnp.zeros(DSAFE_NBINS, jnp.int32).at[b.reshape(-1)].add(ok.reshape(-1).astype(jnp.int32))
             y["d_safe_sum"] = jnp.sum(jnp.where(ok, ds, 0.0))
             y["d_safe_n"] = jnp.sum(ok)
+            if sig_mode:  # amend31: closed-loop coverage of sigma_c on the CBF rows (all valid / true distance < 2 m)
+                err = jnp.take_along_axis(jnp.linalg.norm(x_hat - positions[None], axis=-1), info["nb_idx"], axis=1)
+                sg = jnp.take_along_axis(sigma_c, info["nb_idx"], axis=1)
+                near2 = ok & (jnp.take_along_axis(dfull, info["nb_idx"], axis=1) < 2.0)
+                y["sig_cov_n"], y["sig_cov_hit"] = jnp.sum(ok), jnp.sum(ok & (err <= sg))
+                y["sig_cov_n2"], y["sig_cov_hit2"] = jnp.sum(near2), jnp.sum(near2 & (err <= sg))
+                y["sig_sum"] = jnp.sum(jnp.where(ok, sg, 0.0))
+                bind = ok & (ds > prm.margin_floor)   # rows where the sigma margin, not the floor, sets d_safe
+                y["sig_cov_nb"], y["sig_cov_hitb"] = jnp.sum(bind), jnp.sum(bind & (err <= sg))
             if closing:   # amend19: v_closing on the same valid neighbour rows, 0.05 m/s histogram + exact sum
                 vc = jnp.take_along_axis(v_closing, info["nb_idx"], axis=1)
                 bv = jnp.clip(jnp.round(vc / VCLOSE_BIN).astype(jnp.int32), 0, VCLOSE_NBINS - 1)
@@ -137,6 +158,20 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
     return run
 
 
+def sigma_logerr(sp, X, F, N):
+    """amend31: the error model g of experiments.phaseB_sigma (recipe D of the G-pred gate) on the (N_i, N_j) pair
+    tensors: Z = X (20) + F (2) + (|F|, stale range, |F - stale|, T_frame) -> predicted log|e| [log m]."""
+    stale = jnp.stack([X[..., 0] * jnp.cos(X[..., 1]), X[..., 0] * jnp.sin(X[..., 1])], -1)
+    der = jnp.stack([jnp.linalg.norm(F, axis=-1), X[..., 0], jnp.linalg.norm(F - stale, axis=-1),
+                     jnp.full(X.shape[:-1], t_frame(N))], -1)
+    Z = (jnp.concatenate([X, F, der], -1) - sp["mu"]) / sp["sd"]
+    n_layers = sum(1 for k in sp if k.startswith("W"))
+    for li in range(n_layers - 1):
+        Z = jax.nn.relu(Z @ sp[f"W{li}"] + sp[f"b{li}"])
+    o = Z @ sp[f"W{n_layers - 1}"] + sp[f"b{n_layers - 1}"]
+    return o[..., 0] * sp["lsd"] + sp["lmu"]
+
+
 DSAFE_BIN, DSAFE_NBINS = 0.01, 1001   # realized-d_safe histogram: bins D_COLLISION + 0.01 b, b = 0..1000
                                       # (241 bins in amend17; widened in amend19, closing margins reach ~10 m)
 VCLOSE_BIN, VCLOSE_NBINS = 0.05, 341  # amend19 v_closing histogram: bins 0.05 b m/s, b = 0..340 (top bin = clip)
@@ -152,7 +187,21 @@ def dsafe_stats(logs):
     centres = D_COLLISION + DSAFE_BIN * np.arange(DSAFE_NBINS)
     return {"d_safe_mean": float(np.sum(np.asarray(logs["d_safe_sum"], np.float64)) / np.sum(logs["d_safe_n"])),
             "d_safe_p50": float(centres[np.searchsorted(c, 0.50)]), "d_safe_p95": float(centres[np.searchsorted(c, 0.95)]),
-            **vclosing_stats(logs)}
+            **vclosing_stats(logs), **sigma_cov_stats(logs)}
+
+
+def sigma_cov_stats(logs):
+    """amend31: closed-loop coverage P(|x_hat - x| <= sigma_c) on the CBF's valid neighbour rows (all; true distance
+    < 2 m) and the mean sigma_c there. Empty dict for runs without the sigma margin."""
+    if "sig_cov_n" not in logs:
+        return {}
+    n, n2 = (int(np.sum(np.asarray(logs[k], np.int64))) for k in ("sig_cov_n", "sig_cov_n2"))
+    return {"sigma_cov_rows": float(np.sum(np.asarray(logs["sig_cov_hit"], np.int64)) / max(n, 1)),
+            "sigma_cov_rows_near2m": float(np.sum(np.asarray(logs["sig_cov_hit2"], np.int64)) / max(n2, 1)),
+            "sigma_cov_n_near2m": n2, "sigma_bind_frac": int(np.sum(np.asarray(logs["sig_cov_nb"], np.int64))) / max(n, 1),
+            "sigma_cov_binding": float(np.sum(np.asarray(logs["sig_cov_hitb"], np.int64))
+                                       / max(int(np.sum(np.asarray(logs["sig_cov_nb"], np.int64))), 1)),
+            "sigma_mean_rows_m": float(np.sum(np.asarray(logs["sig_sum"], np.float64)) / max(n, 1))}
 
 
 def vclosing_stats(logs):

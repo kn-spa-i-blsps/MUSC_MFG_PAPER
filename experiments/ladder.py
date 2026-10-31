@@ -36,7 +36,7 @@ def setup(cfg):
     rcfg = dict(dt_exec=cfg["dt_exec"], n_steps=n_steps, nu=float(cfg.get("nu", 0.0)), cbf_on=cfg.get("cbf_on", True), c_w=cost.c_w,
                 w_bar=cost.w_bar, m_bar=cost.m_bar, c_dens=cfg["control"]["c_dens"],
                 cbf=copy.deepcopy(cfg["cbf"]), hold_on_arrival=cfg["control"].get("hold_on_arrival", False),
-                log_xhat=cfg.get("log_xhat", False))
+                log_xhat=cfg.get("log_xhat", False), sigma_weights=cfg.get("sigma_weights"))
     return sc, grid, sol, rcfg, path
 
 
@@ -50,8 +50,16 @@ def load_predictor(path):
     return {k: jnp.asarray(v) for k, v in np.load(path).items()}
 
 
+def load_sigma(path):
+    """amend31: frozen error model (experiments.phaseB_sigma export): normalisers + MLP layers W0,b0,..."""
+    return {k: jnp.asarray(v) for k, v in np.load(path).items()}
+
+
 def make_arm_rollout(arm, sc, rcfg, sol, weights=None):
     kw = {}
+    if rcfg["cbf"].get("margin_mode") == "sigma":   # amend31: error model input needs v3 whatever the arm
+        kw["sigma_params"] = load_sigma(rcfg["sigma_weights"])
+        kw["predictor_params"] = load_predictor(weights)
     parts = arm.split(":", 1)[1].split("/") if arm.startswith("split:") else [arm]   # amend27 layer split
     if "smith" in parts:
         kw["field_params"] = field_params_for(sol)

@@ -244,3 +244,10 @@ closed-loop learned-v3 histories (the evaluation distribution).
 - Limitations: per-N r2_log only 0.15–0.28 (the PI's example R²>0.5 is not met; not the registered criterion); tail
   magnitude not regressed (r2_tail_log < 0), tail ranking strong. → review_gpred.md.
 - Queue continues: amend27 → 28 → 29 → 30. Phase B step 2 (conformal σ, G-cal) to be pre-registered next.
+
+## 2026-11-01 — amend31 registered (Phase B steps 2–3, queued after amend30)
+- Code: CBF margin_mode "sigma" (+ binned q), env.rollout.sigma_logerr, perception.learned_window_and_pred,
+  experiments/phaseB_sigma.py (sigma head + conformal + G-cal), experiments/amend31_sigma_cbf.py, chain.
+- Checks before commit: CPU N=25 80 steps, k=0 bit-identical to fixed 0.70 (18/18 arrays, real and learned); k=5 the
+  margin is active (d_safe mean 1.30); pod CPU dry-run of phaseB_sigma on 4k windows + write-cells (41 cells) +
+  ladder plumbing with the trained head. Aneks sha256 12678c58087e2e4c2a5a342f715b76237ff336d7e9b5cc9e4249b04ebd2cc677.

@@ -242,6 +242,26 @@ def staleness_and_rel_velocity(history: jnp.ndarray, k_now: int, dt_exec: float,
     return age, v_hat
 
 
+def learned_window_and_pred(history: jnp.ndarray, k_now: int, dt_exec: float, N: int, key: jax.Array,
+                            predictor_params: dict) -> tuple[jnp.ndarray, jnp.ndarray]:
+    """amend31 (sigma-CBF): (X_full (N_i,N_j,20), F (N_i,N_j,2)) = the learned window and the frozen predictor's
+    relative-position output, recomputed with perceive()'s exact key splits (same key -> the same m=0..3 draws every
+    arm received). Read-only: x_hat is unaffected. Used for the error model's input whatever arm feeds x_hat."""
+    positions_now = history[k_now]
+    T_frame = t_frame(N)
+    T_frame_steps = max(1, int(round(T_frame / dt_exec)))
+    age = tdma_age(k_now * dt_exec, N)
+    k_then = jnp.maximum(k_now - jnp.round(age / dt_exec).astype(jnp.int32), 0)
+    H_then = history[k_then]
+    true_rel_now = H_then[jnp.arange(N), jnp.arange(N)][:, None, :] - H_then
+    key, k_now_noise = jax.random.split(key)
+    rel_now_ij = jnp.transpose(_noisy_rel_vec(jnp.zeros_like(true_rel_now), true_rel_now, k_now_noise), (1, 0, 2))
+    X_full, _ = learned_features_dense(history, k_now, dt_exec, N, key, rel_now_ij=rel_now_ij, H_then=H_then,
+                                        age=age, k_then=k_then, T_frame=T_frame, T_frame_steps=T_frame_steps,
+                                        positions_now=positions_now)
+    return X_full, _mlp_forward(predictor_params, X_full)
+
+
 def neighbour_abs_velocity(history: jnp.ndarray, k_now: int, dt_exec: float, N: int,
                            key: jax.Array) -> jnp.ndarray:
     """amend19 (closure-gated margin): v_hat (N_i, N_j, 2) = finite difference of i's last two HEARD ABSOLUTE positions
