@@ -341,6 +341,21 @@ def perceive(condition: str, history: jnp.ndarray, k_now: int, dt_exec: float, N
         rel_pred_ij = _mlp_forward(predictor_params, X_full)  # (N_i, N_j, 2)
         return positions_now[:, None, :] + rel_pred_ij
 
+    if condition == "cvls":
+        # amend32: classical constant-velocity least-squares fit through the SAME 4-broadcast window the learned arm
+        # receives (same draws). Per block m: j's position relative to i's CURRENT position at j's broadcast instant
+        # = rel_m - ego_disp_m, at time tau_m = -age_m; x_hat = the fitted line's intercept at tau = 0.
+        X_full, _ = learned_features_dense(history, k_now, dt_exec, N, key,
+                                            rel_now_ij=rel_now_ij, H_then=H_then, age=age,
+                                            k_then=k_then, T_frame=T_frame, T_frame_steps=T_frame_steps,
+                                            positions_now=positions_now)
+        B = X_full.reshape(N, N, K_WINDOW_LEARNED, 5)
+        p = jnp.stack([B[..., 0] * jnp.cos(B[..., 1]), B[..., 0] * jnp.sin(B[..., 1])], -1) - B[..., 3:5]
+        tau = -B[..., 2:3]                                                       # (N,N,K,1)
+        tc, pc = tau - tau.mean(2, keepdims=True), p - p.mean(2, keepdims=True)
+        slope = jnp.sum(tc * pc, 2) / jnp.maximum(jnp.sum(tc * tc, 2), 1e-12)   # (N,N,2)
+        return positions_now[:, None, :] + p.mean(2) - slope * tau.mean(2)
+
     if condition == "smith":
         # Phase 2d (prereg_phase2d_smith.md): principled model-based compensation. Forward-
         # integrates x_hat_real (the same stale/noisy m=0 estimate 'real' uses) under agent i's

@@ -2,7 +2,7 @@
 physics / geometry, amend21 arena, precision=highest, seeds 0-9. One module, two experiments (--exp amend29|amend30).
 
 Arms: real, cv, smith (each at its better d_safe from the amend27 report at the same N, by mean safe-success; tie ->
-0.70), learned v3 d0.70, noise_only d0.70 (delay-free reference); amend30 also fresh d0.70 and fresh_nomfg d0.70
+0.70), cvls (amend32: its better d_safe from the amend32 report, same rule), learned v3 d0.70, noise_only d0.70 (delay-free reference); amend30 also fresh d0.70 and fresh_nomfg d0.70
 (decoupled routing, N=100 only).
 
 amend29 settings (one knob at a time from the default; N in {100, 150}):
@@ -30,6 +30,7 @@ from experiments.smoke import ROOT, build_scenario
 
 SRC = os.path.join(ROOT, "experiments", "amend21_cells")
 A27 = os.path.join(ROOT, "results", "amend27_ladder_layers", "report.json")
+A32 = os.path.join(ROOT, "results", "amend32_cvls", "report.json")   # amend32: cvls margin per N (same rule)
 SEEDS = list(range(10))
 NS = (100, 150)
 SETTINGS = {
@@ -41,7 +42,7 @@ SETTINGS = {
 }
 RUN = {"amend29": "amend29_physical_limits", "amend30": "amend30_layouts"}
 ANEKS = {"amend29": "prereg_projectA_amend29_physical_limits.md", "amend30": "prereg_projectA_amend30_layouts.md"}
-COND = {"real": "real", "cv": "cv", "smith": "smith", "learned": "learned", "noise_only": "noise_only",
+COND = {"real": "real", "cv": "cv", "smith": "smith", "cvls": "cvls", "learned": "learned", "noise_only": "noise_only",
         "fresh": "fresh", "fresh_nomfg": "fresh"}
 
 
@@ -54,11 +55,12 @@ def best_margins():
         for m in ("real", "cv", "smith"):
             s55, s70 = r[f"{m}_d0.55"]["safe_success"]["mean"], r[f"{m}_d0.70"]["safe_success"]["mean"]
             out[(N, m)] = 0.55 if s55 > s70 else 0.70
+        out[(N, "cvls")] = json.load(open(A32))["margin"][str(N)]   # amend32 (aneks: cvls added to amend29/30)
     return out
 
 
 def arms(exp, N):
-    a = ["real", "cv", "smith", "learned", "noise_only"]
+    a = ["real", "cv", "smith", "cvls", "learned", "noise_only"]
     if exp == "amend30":
         a += ["fresh"] + (["fresh_nomfg"] if N == 100 else [])
     return a
@@ -126,10 +128,10 @@ def cmd_report(a):
             out["rows"][key] = rows
             out["diffs"][key] = {f"learned_minus_{m}": {k: diff_ci(ps(rows["learned"], k), ps(rows[m], k))
                                                         for k in ("safe_success", "ever_collided", "completeness")}
-                                 for m in ("real", "cv", "smith", "noise_only")}
+                                 for m in ("real", "cv", "smith", "cvls", "noise_only")}
             gap = rows["noise_only"]["safe_success"]["mean"] - rows["real"]["safe_success"]["mean"]
             out["recovery"][key] = {m: ((rows[m]["safe_success"]["mean"] - rows["real"]["safe_success"]["mean"]) / gap
-                                        if abs(gap) > 1e-9 else None) for m in ("cv", "smith", "learned")}
+                                        if abs(gap) > 1e-9 else None) for m in ("cv", "smith", "cvls", "learned")}
     res = os.path.join(ROOT, "results", RUN[a.exp])
     os.makedirs(res, exist_ok=True)
     json.dump(out, open(os.path.join(res, "report.json"), "w"), indent=1)

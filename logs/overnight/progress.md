@@ -251,3 +251,14 @@ closed-loop learned-v3 histories (the evaluation distribution).
 - Checks before commit: CPU N=25 80 steps, k=0 bit-identical to fixed 0.70 (18/18 arrays, real and learned); k=5 the
   margin is active (d_safe mean 1.30); pod CPU dry-run of phaseB_sigma on 4k windows + write-cells (41 cells) +
   ladder plumbing with the trained head. Aneks sha256 12678c58087e2e4c2a5a342f715b76237ff336d7e9b5cc9e4249b04ebd2cc677.
+
+## 2026-11-01 — amend27 DONE (commit 2edfe32) → review_amend27.md; amend32 registered
+- Identity PASS. Delay-free baseline safe at every N (noise_only ever 0 at N 25–200; fresh N=200 liveness 0.763).
+- Delay damage: real safe-success 1.00 / 0.28 / 0 / 0 / 0 (N 25..200). NN v3 0.99 / 0.88 / 0.48 / 0.14 at N 50–200,
+  best vs every comparator at N ≥ 50 (CIs exclude 0); safe_N learned 50 vs real/cv 25.
+- Layer split: compensation in the MFG layer alone has exactly 0 safety effect (also with the oracle); the CBF layer
+  carries it (NN CBF-only 104/105/72 % of both). At N=200 both layers are needed (CBF-only −0.039 vs both).
+- Smith collapses (completeness → 0): open-loop check shows a congestion-blind model mismatch (4.6 vs 1.03 m² near-pair
+  MSE at crossing), not a code bug. cv is worse than real at N=50 (noise amplification).
+- → amend32: classical window-matched baseline cvls (LS constant-velocity over the NN's 4 broadcasts), also added to
+  amend29/30; pod order now amend28 → 32 → 29 → 30 → 31.
