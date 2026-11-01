@@ -1,0 +1,15 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+/workspace/venv/lib/python3.12/site-packages/jax/_src/interpreters/mlir.py:1333: UserWarning: A large amount of constants were captured during lowering (5.50GB total). If this is intentional, disable this warning by setting JAX_CAPTURED_CONSTANTS_WARN_BYTES=-1. To obtain a report of where these constants were encountered, set JAX_CAPTURED_CONSTANTS_REPORT_FRAMES=-1.
+  warnings.warn(message)
+[smith seed=0] 56s compl=1.000 coll=2 minsep=0.286 p5=0.308 interv=0.570 slack=0.0819
+[smith seed=1] 16s compl=0.320 coll=25 minsep=0.222 p5=0.268 interv=0.798 slack=0.0497
+[smith seed=2] 14s compl=1.000 coll=0 minsep=0.359 p5=0.435 interv=0.566 slack=0.0718
+[smith seed=3] 16s compl=0.360 coll=22 minsep=0.221 p5=0.268 interv=0.787 slack=0.0518
+[smith seed=4] 14s compl=0.320 coll=42 minsep=0.200 p5=0.269 interv=0.796 slack=0.0431
+[smith seed=5] 16s compl=1.000 coll=1 minsep=0.287 p5=0.333 interv=0.570 slack=0.0747
+[smith seed=6] 14s compl=0.360 coll=12 minsep=0.246 p5=0.298 interv=0.793 slack=0.0393
+[smith seed=7] 8s compl=0.320 coll=40 minsep=0.226 p5=0.261 interv=0.814 slack=0.0525
+[smith seed=8] 7s compl=0.360 coll=10 minsep=0.229 p5=0.306 interv=0.782 slack=0.0525
+[smith seed=9] 9s compl=1.000 coll=0 minsep=0.344 p5=0.394 interv=0.577 slack=0.0775

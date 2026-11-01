@@ -1,0 +1,13 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[split:real/noise_only seed=0] 24s compl=0.975 coll=0 minsep=0.566 p5=0.593 interv=0.948 slack=0.3207
+[split:real/noise_only seed=1] 18s compl=0.950 coll=0 minsep=0.554 p5=0.584 interv=0.947 slack=0.3205
+[split:real/noise_only seed=2] 21s compl=0.970 coll=0 minsep=0.559 p5=0.591 interv=0.948 slack=0.3234
+[split:real/noise_only seed=3] 26s compl=0.965 coll=0 minsep=0.557 p5=0.587 interv=0.946 slack=0.3170
+[split:real/noise_only seed=4] 26s compl=0.965 coll=0 minsep=0.559 p5=0.581 interv=0.947 slack=0.3222
+[split:real/noise_only seed=5] 21s compl=0.970 coll=0 minsep=0.560 p5=0.592 interv=0.948 slack=0.3223
+[split:real/noise_only seed=6] 18s compl=0.950 coll=0 minsep=0.551 p5=0.597 interv=0.948 slack=0.3214
+[split:real/noise_only seed=7] 18s compl=0.975 coll=0 minsep=0.572 p5=0.595 interv=0.948 slack=0.3178
+[split:real/noise_only seed=8] 23s compl=0.960 coll=0 minsep=0.573 p5=0.586 interv=0.948 slack=0.3217
+[split:real/noise_only seed=9] 26s compl=0.975 coll=0 minsep=0.568 p5=0.599 interv=0.950 slack=0.3214

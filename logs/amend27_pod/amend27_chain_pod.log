@@ -1,0 +1,104 @@
+2026-10-31 23:32:36 chain start gpu=NVIDIA A100-SXM4-80GB HEAD 01701efc3ba1eddb950bf4feeceb326a565b1d7d
+2026-10-31 23:32:36 aneks sha256 d13f98ca1ee0bc1a7add50e91f10e0f4feb7c31aaf9b15e6fe9d892f9eab04f5; weights sha256 9583cb7ce53bc33a5b739459c51efcf7cc7cb18f761f2d4115f6eee202b2ffb5
+2026-10-31 23:33:53 N100_real_d0.70.yaml (real) exit=0 1 seeds
+2026-10-31 23:34:32 N100_split_real-real_d0.70.yaml (split:real/real) exit=0 1 seeds
+2026-10-31 23:34:37 identity PASS: {"real": true, "split:real/real": true}
+2026-10-31 23:36:47 N025_cv_d0.70.yaml (cv) exit=0 10 seeds
+2026-10-31 23:36:53 N025_cv_d0.55.yaml (cv) exit=0 10 seeds
+2026-10-31 23:38:08 N025_fresh_d0.70.yaml (fresh) exit=0 10 seeds
+2026-10-31 23:40:56 N025_smith_d0.55.yaml (smith) exit=0 10 seeds
+2026-10-31 23:41:21 N025_smith_d0.70.yaml (smith) exit=0 10 seeds
+2026-10-31 23:43:22 N050_cv_d0.55.yaml (cv) exit=0 10 seeds
+2026-10-31 23:43:46 N050_cv_d0.70.yaml (cv) exit=0 10 seeds
+2026-10-31 23:45:11 N050_fresh_d0.70.yaml (fresh) exit=0 10 seeds
+2026-10-31 23:47:39 N050_smith_d0.55.yaml (smith) exit=0 10 seeds
+2026-10-31 23:49:31 N050_smith_d0.70.yaml (smith) exit=0 10 seeds
+2026-10-31 23:51:18 N100_cv_d0.55.yaml (cv) exit=0 10 seeds
+2026-10-31 23:53:04 N100_cv_d0.70.yaml (cv) exit=0 10 seeds
+2026-10-31 23:53:54 N100_fresh_d0.70.yaml (fresh) exit=0 10 seeds
+2026-10-31 23:59:19 N100_smith_d0.55.yaml (smith) exit=0 10 seeds
+2026-11-01 00:00:14 N100_smith_d0.70.yaml (smith) exit=0 10 seeds
+2026-11-01 00:03:01 N100_split_learned-real_d0.70.yaml (split:learned/real) exit=0 10 seeds
+2026-11-01 00:03:30 N100_split_noise_only-real_d0.70.yaml (split:noise_only/real) exit=0 10 seeds
+2026-11-01 00:06:42 N100_split_real-learned_d0.70.yaml (split:real/learned) exit=0 10 seeds
+2026-11-01 00:06:46 N100_split_real-noise_only_d0.70.yaml (split:real/noise_only) exit=0 10 seeds
+2026-11-01 00:11:51 N150_cv_d0.55.yaml (cv) exit=0 10 seeds
+2026-11-01 00:12:01 N150_cv_d0.70.yaml (cv) exit=0 10 seeds
+2026-11-01 00:23:55 N150_smith_d0.55.yaml (smith) exit=0 10 seeds
+2026-11-01 00:24:04 N150_smith_d0.70.yaml (smith) exit=0 10 seeds
+2026-11-01 00:28:31 N150_split_noise_only-real_d0.70.yaml (split:noise_only/real) exit=0 10 seeds
+2026-11-01 00:28:50 N150_split_learned-real_d0.70.yaml (split:learned/real) exit=0 10 seeds
+2026-11-01 00:33:10 N150_split_real-noise_only_d0.70.yaml (split:real/noise_only) exit=0 10 seeds
+2026-11-01 00:33:14 N150_split_real-learned_d0.70.yaml (split:real/learned) exit=0 10 seeds
+2026-11-01 00:39:00 N200_cv_d0.55.yaml (cv) exit=0 10 seeds
+2026-11-01 00:39:08 N200_cv_d0.70.yaml (cv) exit=0 10 seeds
+2026-11-01 00:51:48 N200_smith_d0.55.yaml (smith) exit=0 10 seeds
+2026-11-01 00:52:16 N200_smith_d0.70.yaml (smith) exit=0 10 seeds
+2026-11-01 00:57:35 N200_split_learned-real_d0.70.yaml (split:learned/real) exit=0 10 seeds
+2026-11-01 00:57:49 N200_split_noise_only-real_d0.70.yaml (split:noise_only/real) exit=0 10 seeds
+2026-11-01 01:02:54 N200_split_real-noise_only_d0.70.yaml (split:real/noise_only) exit=0 10 seeds
+2026-11-01 01:03:18 N200_split_real-learned_d0.70.yaml (split:real/learned) exit=0 10 seeds
+2026-11-01 01:03:18 rollouts: 352 (expected 352 incl. the 2 identity seeds)
+2026-11-01 01:03:19 precision: 352  "matmul_precision": "highest",
+2026-11-01 01:32:29 report exit=0
+N=150 smith_d0.55                safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.003 [0.000,0.005]
+N=150 smith_d0.70                safe_success=0.002 [0.000,0.004] ever_collided=0.998 [0.996,1.000] completeness=0.002 [0.000,0.004]
+N=150 split_learned-real_d0.70   safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.909 [0.896,0.922]
+N=150 split_real-learned_d0.70   safe_success=0.503 [0.470,0.538] ever_collided=0.471 [0.438,0.503] completeness=0.922 [0.915,0.929]
+N=150 split_noise_only-real_d0.70 safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.938 [0.926,0.950]
+N=150 split_real-noise_only_d0.70 safe_success=1.000 [1.000,1.000] ever_collided=0.000 [0.000,0.000] completeness=1.000 [1.000,1.000]
+N=200 real_d0.55                 safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.883 [0.867,0.897]
+N=200 real_d0.70                 safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.793 [0.783,0.803]
+N=200 learned_pooled_d0.70       safe_success=0.137 [0.121,0.154] ever_collided=0.827 [0.807,0.846] completeness=0.599 [0.593,0.605]
+N=200 noise_only_d0.70           safe_success=0.968 [0.963,0.973] ever_collided=0.000 [0.000,0.000] completeness=0.968 [0.963,0.973]
+N=200 fresh_d0.70                safe_success=0.763 [0.658,0.822] ever_collided=0.000 [0.000,0.000] completeness=0.763 [0.658,0.822]
+N=200 cv_d0.55                   safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.972 [0.968,0.978]
+N=200 cv_d0.70                   safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.940 [0.927,0.950]
+N=200 smith_d0.55                safe_success=0.001 [0.000,0.002] ever_collided=1.000 [0.998,1.000] completeness=0.003 [0.001,0.005]
+N=200 smith_d0.70                safe_success=0.001 [0.000,0.002] ever_collided=1.000 [0.998,1.000] completeness=0.001 [0.000,0.002]
+N=200 split_learned-real_d0.70   safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.776 [0.758,0.794]
+N=200 split_real-learned_d0.70   safe_success=0.098 [0.088,0.108] ever_collided=0.875 [0.863,0.887] completeness=0.599 [0.590,0.611]
+N=200 split_noise_only-real_d0.70 safe_success=0.000 [0.000,0.000] ever_collided=1.000 [1.000,1.000] completeness=0.811 [0.802,0.821]
+N=200 split_real-noise_only_d0.70 safe_success=0.965 [0.959,0.971] ever_collided=0.000 [0.000,0.000] completeness=0.965 [0.959,0.971]
+safe_N: {'real_d0.55': 25, 'real_d0.70': 25, 'cv_d0.55': 25, 'cv_d0.70': 25, 'smith_d0.55': None, 'smith_d0.70': None, 'learned_pooled_d0.70': 50, 'noise_only_d0.70': 200, 'fresh_d0.70': 150}
+N=25 learned_minus_best_real (real_d0.55): safe {'diff': 0.0, 'ci95': [0.0, 0.0]}
+N=25 learned_minus_best_cv (cv_d0.55): safe {'diff': 0.0, 'ci95': [0.0, 0.0]}
+N=25 learned_minus_best_smith (smith_d0.55): safe {'diff': 0.09199999999999997, 'ci95': [0.04800000000000004, 0.1359999999999999]}
+N=50 learned_minus_best_real (real_d0.55): safe {'diff': 0.708, 'ci95': [0.638, 0.78]}
+N=50 learned_minus_best_cv (cv_d0.55): safe {'diff': 0.992, 'ci95': [0.9800000000000001, 1.0]}
+N=50 learned_minus_best_smith (smith_d0.55): safe {'diff': 0.924, 'ci95': [0.9, 0.948]}
+N=100 learned_minus_best_real (real_d0.55): safe {'diff': 0.8800000000000001, 'ci95': [0.8480000000000001, 0.9079999999999998]}
+N=100 learned_minus_best_cv (cv_d0.55): safe {'diff': 0.8800000000000001, 'ci95': [0.8480000000000001, 0.9079999999999998]}
+N=100 learned_minus_best_smith (smith_d0.55): safe {'diff': 0.8740000000000001, 'ci95': [0.842, 0.9019999999999999]}
+N=150 learned_minus_best_real (real_d0.55): safe {'diff': 0.47866666666666663, 'ci95': [0.4446666666666667, 0.5113333333333333]}
+N=150 learned_minus_best_cv (cv_d0.55): safe {'diff': 0.47866666666666663, 'ci95': [0.4446666666666667, 0.5113333333333333]}
+N=150 learned_minus_best_smith (smith_d0.70): safe {'diff': 0.4766666666666666, 'ci95': [0.44331666666666664, 0.5093333333333333]}
+N=200 learned_minus_best_real (real_d0.55): safe {'diff': 0.13699999999999998, 'ci95': [0.12050000000000001, 0.1545]}
+N=200 learned_minus_best_cv (cv_d0.55): safe {'diff': 0.13699999999999998, 'ci95': [0.12050000000000001, 0.1545]}
+N=200 learned_minus_best_smith (smith_d0.55): safe {'diff': 0.13649999999999998, 'ci95': [0.12, 0.154]}
+N=100 learned_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -0.8800000000000001, 'ci95': [-0.908, -0.8470000000000001]} recovered 0.0
+N=100 learned_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 0.924, 'ci95': [0.892, 0.952]} recovered -0.0
+N=100 learned_cbf_only_safe_success: -none {'diff': 0.9179999999999999, 'ci95': [0.9029999999999999, 0.933]} -both {'diff': 0.03799999999999981, 'ci95': [0.006000000000000116, 0.07399999999999984]} recovered 1.043181818181818
+N=100 learned_cbf_only_ever_collided: -none {'diff': -0.918, 'ci95': [-0.933, -0.903]} -both {'diff': 0.006000000000000005, 'ci95': [-0.029000000000000012, 0.03699999999999999]} recovered 0.9935064935064934
+N=100 noise_only_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -1.0, 'ci95': [-1.0, -1.0]} recovered 0.0
+N=100 noise_only_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 1.0, 'ci95': [1.0, 1.0]} recovered -0.0
+N=100 noise_only_cbf_only_safe_success: -none {'diff': 1.0, 'ci95': [1.0, 1.0]} -both {'diff': 0.0, 'ci95': [0.0, 0.0]} recovered 1.0
+N=100 noise_only_cbf_only_ever_collided: -none {'diff': -1.0, 'ci95': [-1.0, -1.0]} -both {'diff': 0.0, 'ci95': [0.0, 0.0]} recovered 1.0
+N=150 learned_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -0.47866666666666663, 'ci95': [-0.5119999999999999, -0.4453333333333334]} recovered 0.0
+N=150 learned_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 0.5266666666666666, 'ci95': [0.4886666666666667, 0.5666666666666667]} recovered -0.0
+N=150 learned_cbf_only_safe_success: -none {'diff': 0.5033333333333333, 'ci95': [0.47000000000000003, 0.538]} -both {'diff': 0.02466666666666667, 'ci95': [-0.02200000000000002, 0.07333333333333336]} recovered 1.051532033426184
+N=150 learned_cbf_only_ever_collided: -none {'diff': -0.5286666666666667, 'ci95': [-0.562, -0.49731666666666685]} -both {'diff': -0.0020000000000000573, 'ci95': [-0.053333333333333344, 0.048666666666666636]} recovered 1.0037974683544306
+N=150 noise_only_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -1.0, 'ci95': [-1.0, -1.0]} recovered 0.0
+N=150 noise_only_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 1.0, 'ci95': [1.0, 1.0]} recovered -0.0
+N=150 noise_only_cbf_only_safe_success: -none {'diff': 1.0, 'ci95': [1.0, 1.0]} -both {'diff': 0.0, 'ci95': [0.0, 0.0]} recovered 1.0
+N=150 noise_only_cbf_only_ever_collided: -none {'diff': -1.0, 'ci95': [-1.0, -1.0]} -both {'diff': 0.0, 'ci95': [0.0, 0.0]} recovered 1.0
+N=200 learned_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -0.13699999999999998, 'ci95': [-0.1545, -0.12050000000000001]} recovered 0.0
+N=200 learned_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 0.1735, 'ci95': [0.15400000000000014, 0.1935]} recovered -0.0
+N=200 learned_cbf_only_safe_success: -none {'diff': 0.098, 'ci95': [0.088, 0.1085]} -both {'diff': -0.03899999999999998, 'ci95': [-0.059000000000000025, -0.019500000000000003]} recovered 0.7153284671532848
+N=200 learned_cbf_only_ever_collided: -none {'diff': -0.125, 'ci95': [-0.13700000000000012, -0.11250000000000004]} -both {'diff': 0.04849999999999999, 'ci95': [0.025500000000000078, 0.0724999999999999]} recovered 0.7204610951008646
+N=200 noise_only_mfg_only_safe_success: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': -0.968, 'ci95': [-0.9734999999999999, -0.9629999999999999]} recovered 0.0
+N=200 noise_only_mfg_only_ever_collided: -none {'diff': 0.0, 'ci95': [0.0, 0.0]} -both {'diff': 1.0, 'ci95': [1.0, 1.0]} recovered -0.0
+N=200 noise_only_cbf_only_safe_success: -none {'diff': 0.9654999999999999, 'ci95': [0.9594999999999999, 0.9709999999999999]} -both {'diff': -0.0025000000000000577, 'ci95': [-0.010500000000000065, 0.0050000000000000044]} recovered 0.9974173553719008
+N=200 noise_only_cbf_only_ever_collided: -none {'diff': -1.0, 'ci95': [-1.0, -1.0]} -both {'diff': 0.0, 'ci95': [0.0, 0.0]} recovered 1.0
+aneks sha256: d13f98ca1ee0bc1a7add50e91f10e0f4feb7c31aaf9b15e6fe9d892f9eab04f5
+2026-11-01 01:32:29 finish status=DONE
