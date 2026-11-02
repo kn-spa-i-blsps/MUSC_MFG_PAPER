@@ -1,0 +1,17 @@
+{
+ "definition": "q_raw(N) = ceil((n+1)*0.95)-th smallest raw error ||v3(X) - Y|| over CAL windows (seeds 108-109, 200k uniform draws / seed / N, true distance < 2 m); d_safe = max(0.70, 0.30 + q_raw)",
+ "per_N": {
+  "150": {
+   "n_cal": 43904,
+   "k": 41710,
+   "q_raw": 0.3199395218392931,
+   "d_safe": 0.7
+  },
+  "200": {
+   "n_cal": 31397,
+   "k": 29829,
+   "q_raw": 0.46859075573256076,
+   "d_safe": 0.7685907557325607
+  }
+ }
+}

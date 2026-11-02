@@ -1,0 +1,41 @@
+{
+ "note": "frozen after the registered amend31 report, seeds 0-9 only",
+ "per_N": {
+  "150": {
+   "best_fixed": "fixed0.85",
+   "best_fixed_d": 0.85,
+   "sigma_bin_dsafe_mean_rows_all_valid": 14.740846537021952,
+   "sigma_bin_dsafe_rows": 155278095,
+   "arms": {
+    "conf_const_a0.05": {
+     "d_safe": 0.7,
+     "d_safe_f32": 0.699999988079071,
+     "alias": "fixed0.70"
+    },
+    "fixed_match": {
+     "d_safe": 14.740846537021952,
+     "d_safe_f32": 14.740846633911133,
+     "alias": null
+    }
+   }
+  },
+  "200": {
+   "best_fixed": "fixed0.85",
+   "best_fixed_d": 0.85,
+   "sigma_bin_dsafe_mean_rows_all_valid": 64.63413077299354,
+   "sigma_bin_dsafe_rows": 204509403,
+   "arms": {
+    "conf_const_a0.05": {
+     "d_safe": 0.7685907557325607,
+     "d_safe_f32": 0.7685907483100891,
+     "alias": null
+    },
+    "fixed_match": {
+     "d_safe": 64.63413077299354,
+     "d_safe_f32": 64.6341323852539,
+     "alias": null
+    }
+   }
+  }
+ }
+}
