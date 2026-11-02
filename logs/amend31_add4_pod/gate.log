@@ -1,0 +1,1 @@
+{"g1": true, "g2": false, "g3": true} {"changed": true, "first_divergence_step_pos": 0, "step0_agent0_x": ["np.float32(4.4533367)", "np.float32(4.453337)"], "step0_other_entries_equal": true, "pass": true}

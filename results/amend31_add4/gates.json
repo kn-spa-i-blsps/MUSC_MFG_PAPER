@@ -1,0 +1,80 @@
+{
+ "g1": {
+  "keys": {
+   "completeness_final": [
+    1.0,
+    1.0
+   ],
+   "collision_pair_steps": [
+    46961,
+    46961
+   ],
+   "min_sep_overall_m": [
+    0.00013077861513011158,
+    0.00013077861513011158
+   ],
+   "p5_sep_worst_step_m": [
+    0.042758189141750336,
+    0.042758189141750336
+   ],
+   "cbf_intervention_rate": [
+    0.7096653483419532,
+    0.7096653483419532
+   ],
+   "slack_active_rate": [
+    0.23309248554913295,
+    0.23309248554913295
+   ],
+   "closedloop_xhat_mse_near": [
+    0.8842593431472778,
+    0.8842593431472778
+   ]
+  },
+  "pass": true
+ },
+ "g2": {
+  "arrays": 30,
+  "not_equal": [
+   "d_safe_hist",
+   "d_safe_n",
+   "d_safe_sum",
+   "intervention",
+   "m_hat",
+   "m_star_at",
+   "min_sep",
+   "n_coll_pairs",
+   "n_near",
+   "p5_sep_pairs",
+   "pos",
+   "pos_final",
+   "qp_iters",
+   "rho_true",
+   "row_violation",
+   "sig_cov_hit",
+   "sig_cov_hit2",
+   "sig_cov_hitb",
+   "sig_cov_n",
+   "sig_cov_n2",
+   "sig_cov_nb",
+   "sig_sum",
+   "slack_max",
+   "u",
+   "u_nom",
+   "xhat_err_all",
+   "xhat_err_near",
+   "arrived_frac"
+  ],
+  "pass": false,
+  "first_divergence_step_pos": 20
+ },
+ "g3": {
+  "changed": true,
+  "first_divergence_step_pos": 0,
+  "step0_agent0_x": [
+   "np.float32(4.4533367)",
+   "np.float32(4.453337)"
+  ],
+  "step0_other_entries_equal": true,
+  "pass": true
+ }
+}

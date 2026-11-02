@@ -1,0 +1,5 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[add4] init_perturb_agent = 0: x of agent 0 -> nextafter(+inf) in f32
+[learned seed=0] 39s compl=0.847 coll=1877 minsep=0.001 p5=0.396 interv=0.917 slack=0.2360
