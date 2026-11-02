@@ -1,0 +1,1072 @@
+{
+ "label": "SUPPLEMENTARY inventory for logs/overnight/review_amend31_add4.md (CPU, existing files only, no rollouts)",
+ "addendum4_sha256": "7b8abd149ca7998d0a116f71f7668f194a6268f01a8358fcc18efa964bada48c",
+ "registered_amend31": {
+  "N025/fixed0.70": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/fixed0.85": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/fixed1.00": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/fixed1.20": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/sigma_a0.01": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/sigma_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/sigma_a0.1": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N025/sigma_bin_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/fixed0.70": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/fixed0.85": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/fixed1.00": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/fixed1.20": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/sigma_a0.01": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/sigma_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/sigma_a0.1": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N050/sigma_bin_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/fixed0.70": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/fixed0.85": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/fixed1.00": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/fixed1.20": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/sigma_a0.01": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/sigma_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/sigma_a0.1": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N100/sigma_bin_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/fixed0.70": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/fixed0.85": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/fixed1.00": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/fixed1.20": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/sigma_a0.01": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/sigma_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/sigma_a0.1": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N150/sigma_bin_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/fixed0.70": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/fixed0.85": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/fixed1.00": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/fixed1.20": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/sigma_a0.01": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/sigma_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/sigma_a0.1": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  },
+  "N200/sigma_bin_a0.05": {
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  }
+ },
+ "A": {
+  "N150/conf_const_a0.05": {
+   "d_safe": 0.7,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "source": "results/amend31_sigma_cbf/N150/fixed0.70/learned",
+   "run_in_add4": false
+  },
+  "N150/fixed_match": {
+   "d_safe": 14.740846537021952,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "source": "results/amend31_add4/main/N150/fixed_match/learned",
+   "run_in_add4": true
+  },
+  "N200/conf_const_a0.05": {
+   "d_safe": 0.7685907557325607,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "source": "results/amend31_add4/main/N200/conf_const_a0.05/learned",
+   "run_in_add4": true
+  },
+  "N200/fixed_match": {
+   "d_safe": 64.63413077299354,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "source": "results/amend31_add4/main/N200/fixed_match/learned",
+   "run_in_add4": true
+  }
+ },
+ "B": {
+  "N150/sigma_bin_a0.05": {
+   "d_safe": null,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N150/sigma_bin_a0.05/learned"
+  },
+  "N150/best_fixed": {
+   "d_safe": 0.85,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N150/d0.850000/learned"
+  },
+  "N150/conf_const_a0.05": {
+   "d_safe": 0.7,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N150/d0.700000/learned"
+  },
+  "N150/fixed_match": {
+   "d_safe": 14.740846537021952,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N150/d14.740847/learned"
+  },
+  "N200/sigma_bin_a0.05": {
+   "d_safe": null,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N200/sigma_bin_a0.05/learned"
+  },
+  "N200/best_fixed": {
+   "d_safe": 0.85,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N200/d0.850000/learned"
+  },
+  "N200/conf_const_a0.05": {
+   "d_safe": 0.7685907557325607,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N200/d0.768591/learned"
+  },
+  "N200/fixed_match": {
+   "d_safe": 64.63413077299354,
+   "expected": 10,
+   "actual": 10,
+   "seeds": [
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+   ],
+   "source": "results/amend31_add4/rep/N200/d64.634132/learned"
+  }
+ },
+ "C": {
+  "N150/sigma_bin_a0.05/m1": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/sigma_bin_a0.05/m2": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/sigma_bin_a0.05/m3": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/sigma_bin_a0.05/m4": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/sigma_bin_a0.05/m5": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/best_fixed/m1": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/best_fixed/m2": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/best_fixed/m3": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/best_fixed/m4": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N150/best_fixed/m5": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/sigma_bin_a0.05/m1": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/sigma_bin_a0.05/m2": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/sigma_bin_a0.05/m3": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/sigma_bin_a0.05/m4": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/sigma_bin_a0.05/m5": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/best_fixed/m1": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/best_fixed/m2": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/best_fixed/m3": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/best_fixed/m4": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  },
+  "N200/best_fixed/m5": {
+   "expected": 10,
+   "actual": 0,
+   "seeds": []
+  }
+ },
+ "gates": {
+  "g1": true,
+  "g2": false,
+  "g3": true
+ },
+ "first_divergence_step_pos": {
+  "g2_perturb_off_vs_base": 20,
+  "g3_perturb_on_vs_base": 0
+ },
+ "g2_arrays_not_equal": 28,
+ "g2_arrays_total": 30,
+ "rules": {
+  "sigma_beats_constant_per_N_schedule": {
+   "inputs": [
+    {
+     "set": "main",
+     "N": "150",
+     "vs": "conf_const_a0.05",
+     "safe_paired_lo": -0.2,
+     "compl_paired_lo": -0.002666666666666684,
+     "ok": false
+    },
+    {
+     "set": "main",
+     "N": "150",
+     "vs": "fixed_match",
+     "safe_paired_lo": 0.15333333333333338,
+     "compl_paired_lo": 0.7146666666666668,
+     "ok": true
+    },
+    {
+     "set": "main",
+     "N": "200",
+     "vs": "conf_const_a0.05",
+     "safe_paired_lo": -0.19150000000000003,
+     "compl_paired_lo": -0.15399999999999997,
+     "ok": false
+    },
+    {
+     "set": "main",
+     "N": "200",
+     "vs": "fixed_match",
+     "safe_paired_lo": -0.0365,
+     "compl_paired_lo": 0.2985,
+     "ok": false
+    },
+    {
+     "set": "rep",
+     "N": "150",
+     "vs": "conf_const_a0.05",
+     "safe_paired_lo": -0.25000000000000006,
+     "compl_paired_lo": -0.0026666666666666622,
+     "ok": false
+    },
+    {
+     "set": "rep",
+     "N": "150",
+     "vs": "fixed_match",
+     "safe_paired_lo": 0.12533333333333335,
+     "compl_paired_lo": 0.7306666666666668,
+     "ok": true
+    },
+    {
+     "set": "rep",
+     "N": "200",
+     "vs": "conf_const_a0.05",
+     "safe_paired_lo": -0.21349999999999997,
+     "compl_paired_lo": -0.1615,
+     "ok": false
+    },
+    {
+     "set": "rep",
+     "N": "200",
+     "vs": "fixed_match",
+     "safe_paired_lo": -0.036500000000000005,
+     "compl_paired_lo": 0.2915,
+     "ok": false
+    }
+   ],
+   "met": false
+  },
+  "effect_above_chaos": {
+   "150": "UNDECIDABLE (priority C not run: gate g2 failed)",
+   "200": "UNDECIDABLE (priority C not run: gate g2 failed)"
+  },
+  "calibration_transfers_closed_loop": {
+   "inputs": {
+    "150": {
+     "sigma_cov_rows_near2m": 0.9375618635600359,
+     "sigma_cov_binding": 0.90289491755592
+    },
+    "200": {
+     "sigma_cov_rows_near2m": 0.7006739882478519,
+     "sigma_cov_binding": 0.6490199515388503
+    }
+   },
+   "threshold": 0.93,
+   "met": false
+  }
+ }
+}
