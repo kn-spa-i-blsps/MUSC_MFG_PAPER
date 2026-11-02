@@ -262,3 +262,13 @@ closed-loop learned-v3 histories (the evaluation distribution).
   MSE at crossing), not a code bug. cv is worse than real at N=50 (noise amplification).
 - → amend32: classical window-matched baseline cvls (LS constant-velocity over the NN's 4 broadcasts), also added to
   amend29/30; pod order now amend28 → 32 → 29 → 30 → 31.
+
+## 2026-11-02 — status check; durability fix (no run)
+- Pod mc4847t30028lq EXITED; billing stops 2026-11-01 03:00 UTC (≈1.5 h into amend28, nothing pushed; partial seeds only
+  on its volume, if it survives). `start` → 402 (balance too low). amend28/32/29/30/31 not run / not reported.
+- Durability fix (3rd mid-run balance stop): logs/overnight/push_lib.sh (`checkpoint` = add -f json/logs, commit,
+  pull --rebase, push, flock-serialised; `validate_run_dirs` = json parse + full npz read, invalid seeds deleted so
+  skip-existing re-runs them). Every chain: volume validation at start, checkpoint per N (amend28/31/32) or per setting
+  (amend29/30), checkpoint immediately after its report, before the next amendment; EXIT trap kept as backup.
+  logs/overnight/queue_B_pod.sh runs amend28 → 32 → 29 → 30 → 31 strictly in sequence (skips *_DONE).
+  Checkpoint commits are labelled "partial rollouts, not a result". Design, cells and aneksy unchanged.

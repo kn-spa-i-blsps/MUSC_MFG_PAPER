@@ -6,6 +6,7 @@ EXP=$1
 cd /workspace/MUSC_MFG_PAPER
 mkdir -p ~/.ssh && cp -n /workspace/.ssh/id_ed25519* ~/.ssh/ 2>/dev/null; chmod 600 ~/.ssh/id_ed25519
 . logs/env.sh
+. logs/overnight/push_lib.sh
 M="experiments.amend29_physical_limits --exp $EXP"; L=logs/${EXP}_pod; CD=experiments/${EXP}_cells
 R=results/$( [ $EXP = amend29 ] && echo amend29_physical_limits || echo amend30_layouts )
 W=results/overnight_p1/predictor_v3/predictor_weights.npz
@@ -25,6 +26,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && log "commit $(git re
 }
 trap finish EXIT
 log "chain start $EXP gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader) HEAD $(git rev-parse HEAD) disk $(du -sh /workspace | cut -f1)"
+log "volume check: $(validate_run_dirs $R | tail -1)"
 log "aneks sha256 $(sha256sum prereg/prereg_projectA_${EXP}_*.md | cut -c1-64)"
 python -m $M write-cells > $L/write_cells.log 2>&1 || { log "write-cells FAILED (amend27 report missing?)"; tail -3 $L/write_cells.log; exit 1; }
 log "margins $(cat $CD/margins_from_amend27.json | tr -d '\n ')"
@@ -51,9 +53,11 @@ for sdir in $CD/*/; do
     for f in $(comm -13 <(echo "$before") <(ls results/cache/*.npz | sort)); do rm -f $f; log "deleted layout cache $f"; done
   fi
   log "setting $setting done; disk $(du -sh /workspace | cut -f1)"
+  checkpoint "$EXP checkpoint setting $setting (partial rollouts, not a result)" $R/$setting/N*/*/*/metrics_seed*.json $CD $L/*.log
 done
 n=$(ls $R/*/N*/*/*/metrics_seed*.json | wc -l); log "rollouts: $n/$expected"
 grep -h '"matmul_precision"' $R/*/N*/*/*/metrics_seed*.json | sort | uniq -c | while read l; do log "precision: $l"; done
 python -m $M report > $L/report.log 2>&1; rc=$?
 log "report exit=$rc"; tail -80 $L/report.log
+checkpoint "$EXP report (exit $rc, $n/$expected rollouts): pushed before the next amendment" $R/report.json $R/*/N*/*/*/metrics_seed*.json $CD $L/*.log
 [ $rc = 0 ] && [ "$n" = "$expected" ] && STATUS=DONE
