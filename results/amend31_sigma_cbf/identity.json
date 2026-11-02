@@ -1,78 +1,78 @@
 {
  "completeness_final": {
   "ref": 1.0,
-  "amend31": 0.98,
-  "equal": false
+  "amend31": 1.0,
+  "equal": true
  },
  "collision_pair_steps": {
   "ref": 46961,
-  "amend31": 46844,
-  "equal": false
+  "amend31": 46961,
+  "equal": true
  },
  "min_sep_overall_m": {
   "ref": 0.00013077861513011158,
-  "amend31": 0.0005257479497231543,
-  "equal": false
+  "amend31": 0.00013077861513011158,
+  "equal": true
  },
  "p5_sep_worst_step_m": {
   "ref": 0.042758189141750336,
-  "amend31": 0.050264663994312286,
-  "equal": false
+  "amend31": 0.042758189141750336,
+  "equal": true
  },
  "cbf_intervention_rate": {
   "ref": 0.7096653483419532,
-  "amend31": 0.7036773653787648,
-  "equal": false
+  "amend31": 0.7096653483419532,
+  "equal": true
  },
  "slack_active_rate": {
   "ref": 0.23309248554913295,
-  "amend31": 0.23095984180103438,
-  "equal": false
+  "amend31": 0.23309248554913295,
+  "equal": true
  },
  "closedloop_xhat_mse_near": {
   "ref": 0.8842593431472778,
-  "amend31": 0.8778759837150574,
-  "equal": false
+  "amend31": 0.8842593431472778,
+  "equal": true
  },
- "d_safe_mean": 0.6999998538882315,
+ "d_safe_mean": 0.6999998546029778,
  "d_safe_p95": 0.7,
- "all_equal": false,
+ "all_equal": true,
  "ref_kind": "amend22",
  "vs_amend22_reported": {
   "completeness_final": {
    "amend22": 1.0,
-   "amend31": 0.98,
-   "equal": false
+   "amend31": 1.0,
+   "equal": true
   },
   "collision_pair_steps": {
    "amend22": 46961,
-   "amend31": 46844,
-   "equal": false
+   "amend31": 46961,
+   "equal": true
   },
   "min_sep_overall_m": {
    "amend22": 0.00013077861513011158,
-   "amend31": 0.0005257479497231543,
-   "equal": false
+   "amend31": 0.00013077861513011158,
+   "equal": true
   },
   "p5_sep_worst_step_m": {
    "amend22": 0.042758189141750336,
-   "amend31": 0.050264663994312286,
-   "equal": false
+   "amend31": 0.042758189141750336,
+   "equal": true
   },
   "cbf_intervention_rate": {
    "amend22": 0.7096653483419532,
-   "amend31": 0.7036773653787648,
-   "equal": false
+   "amend31": 0.7096653483419532,
+   "equal": true
   },
   "slack_active_rate": {
    "amend22": 0.23309248554913295,
-   "amend31": 0.23095984180103438,
-   "equal": false
+   "amend31": 0.23309248554913295,
+   "equal": true
   },
   "closedloop_xhat_mse_near": {
    "amend22": 0.8842593431472778,
-   "amend31": 0.8778759837150574,
-   "equal": false
+   "amend31": 0.8842593431472778,
+   "equal": true
   }
  }
 }
