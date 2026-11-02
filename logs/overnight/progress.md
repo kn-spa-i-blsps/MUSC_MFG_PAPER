@@ -272,3 +272,10 @@ closed-loop learned-v3 histories (the evaluation distribution).
   (amend29/30), checkpoint immediately after its report, before the next amendment; EXIT trap kept as backup.
   logs/overnight/queue_B_pod.sh runs amend28 → 32 → 29 → 30 → 31 strictly in sequence (skips *_DONE).
   Checkpoint commits are labelled "partial rollouts, not a result". Design, cells and aneksy unchanged.
+
+## 2026-11-02 — amend31 moved first (PI), addendum 1 (sha256 7278e98b9288a03e1c58c50e9838d369bfb077bb90c569f3356d501c6b031682)
+- Queue: amend31 → 28 → 32 → 29 → 30. amend31 chain: stage 0 inputs (caches + datagenL regen if lost) → stage 1 σ head +
+  G-cal + reliability.png → stage 2 identity → stage 3 per-N rollouts → report; push after every stage.
+- G-win now also requires completeness non-inferiority (CI95 lower of diff ≥ −0.02) at N 150 and 200; registered v1
+  verdict kept alongside. Code: reporting only (phaseB_sigma coverage_table/reliability_figure, amend31 report);
+  synthetic test of the figure/table OK. Pod start still 402 (balance).

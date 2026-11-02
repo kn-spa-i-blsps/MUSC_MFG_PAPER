@@ -49,8 +49,9 @@ def qfun_bins(edges, vals):
     return lambda N, s: np.asarray(vals[N])[np.searchsorted(edges[N], s, side="right")]
 
 
-def coverage_table(E, slog, qf, Nv, age):
-    """Marginal coverage per N, per sigma-decile (within N), per age tercile (within N), and where the margin binds."""
+def coverage_table(E, slog, qf, Nv, age, alpha=None):
+    """Marginal coverage per N, per sigma-decile (within N), per age tercile (within N), and where the margin binds.
+    Reliability (addendum 1, reporting only): per sigma-decile mean sigma_c vs the realised (1 - alpha) error quantile."""
     out = {}
     for N in NS:
         k = Nv == N
@@ -63,10 +64,42 @@ def coverage_table(E, slog, qf, Nv, age):
         out[str(N)] = {"n": int(k.sum()), "coverage": float(cov.mean()), "sigma_c_mean_m": float(sig.mean()),
                        "sigma_c_p90_m": float(np.quantile(sig, 0.9)),
                        "decile_coverage": [float(cov[dec == i].mean()) for i in range(10)],
+                       "decile_sigma_c_mean_m": [float(sig[dec == i].mean()) for i in range(10)],
+                       "decile_e_q_realised_m": ([float(np.quantile(e[dec == i], 1 - alpha)) for i in range(10)]
+                                                 if alpha is not None else None),
+                       "decile_n": [int((dec == i).sum()) for i in range(10)],
                        "age_tercile_coverage": [float(cov[ter == i].mean()) for i in range(3)],
                        "binding_frac": float((sig > 0.40).mean()),
                        "binding_coverage": float(cov[sig > 0.40].mean()) if (sig > 0.40).any() else None}
     return out
+
+
+def reliability_figure(res, out):
+    """Addendum 1 (reporting only): per N, per sigma-decile, predicted sigma_c vs realised (1-alpha) error quantile
+    (per-N and (N, sigma-quintile) conformal), and per-decile coverage vs the 1-alpha target."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(2, len(NS), figsize=(3.2 * len(NS), 6.2), squeeze=False)
+    for j, N in enumerate(NS):
+        for al, c in zip(ALPHAS, ("C0", "C1", "C2")):
+            for tab, ls, lab in (("test_coverage", "-", "per-N"), ("test_coverage_bins", "--", "N x sigma-bin")):
+                r = res[tab][str(al)][str(N)]
+                ax[0, j].plot(r["decile_sigma_c_mean_m"], r["decile_e_q_realised_m"], ls, color=c, marker="o", ms=3,
+                              label=f"a={al} {lab}" if j == 0 else None)
+                ax[1, j].plot(range(1, 11), r["decile_coverage"], ls, color=c, marker="o", ms=3)
+            ax[1, j].axhline(1 - al, color=c, lw=0.6, alpha=0.6)
+        lim = ax[0, j].get_xlim()[1]
+        ax[0, j].plot([0, lim], [0, lim], "k:", lw=0.8)
+        ax[0, j].set_title(f"N={N}")
+        ax[0, j].set_xlabel("predicted sigma_c [m]")
+        ax[1, j].axhline(0.85, color="r", lw=0.8, ls=":")
+        ax[1, j].set_xlabel("sigma decile (within N)")
+    ax[0, 0].set_ylabel("realised (1-a) quantile of e [m]")
+    ax[1, 0].set_ylabel("coverage (TEST)")
+    ax[0, 0].legend(fontsize=6)
+    fig.tight_layout()
+    fig.savefig(os.path.join(out, "reliability.png"), dpi=130)
 
 
 def main():
@@ -116,9 +149,9 @@ def main():
         res["q"][str(al)] = {str(N): v for N, v in qN.items()}
         res["q_pooled"][str(al)] = qp
         res["q_bins"][str(al)] = {str(N): v for N, v in qb.items()}
-        res["test_coverage"][str(al)] = coverage_table(Et, st, qfun_scalar(qN), Nt, at)
-        res["test_coverage_pooled_q"][str(al)] = coverage_table(Et, st, qfun_scalar({N: qp for N in NS}), Nt, at)
-        res["test_coverage_bins"][str(al)] = coverage_table(Et, st, qfun_bins(edges, qb), Nt, at)
+        res["test_coverage"][str(al)] = coverage_table(Et, st, qfun_scalar(qN), Nt, at, al)
+        res["test_coverage_pooled_q"][str(al)] = coverage_table(Et, st, qfun_scalar({N: qp for N in NS}), Nt, at, al)
+        res["test_coverage_bins"][str(al)] = coverage_table(Et, st, qfun_bins(edges, qb), Nt, at, al)
 
     def gate(tab):   # G-cal (registered): marginal per N within TOL, every alpha; per decile >= 0.85 at alpha 0.10
         marg = {f"{al}/{N}": abs(tab[str(al)][str(N)]["coverage"] - (1 - al)) <= TOL[al] for al in ALPHAS for N in NS}
@@ -133,6 +166,7 @@ def main():
                                                                           "sigma_a0.05")}
     res["wall_s"] = time.time() - t0
     json.dump(res, open(os.path.join(a.out, "calibration.json"), "w"), indent=1)
+    reliability_figure(res, a.out)
     for al in ALPHAS:
         print(f"alpha {al}: q_N", {N: round(v, 3) for N, v in res["q"][str(al)].items()},
               "coverage", {N: round(v["coverage"], 4) for N, v in res["test_coverage"][str(al)].items()}, flush=True)

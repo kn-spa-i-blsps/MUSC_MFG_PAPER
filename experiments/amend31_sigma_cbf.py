@@ -31,6 +31,8 @@ CELL_DIR = os.path.join(ROOT, "experiments", "amend31_cells")
 RUN = "amend31_sigma_cbf"
 RES = os.path.join(ROOT, "results", RUN)
 ANEKS = os.path.join(ROOT, "prereg", "prereg_projectA_amend31_sigma_cbf.md")
+ADDENDUM1 = os.path.join(ROOT, "prereg", "prereg_projectA_amend31_addendum1.md")
+NI_MARGIN = 0.02   # addendum 1: completeness non-inferiority margin (absolute fraction of agents)
 SIG = os.path.join(ROOT, "results", "phaseB", "sigma_v3")
 NS = (25, 50, 100, 150, 200)
 FIXED = (0.70, 0.85, 1.00, 1.20)
@@ -115,6 +117,15 @@ def cmd_report(a):
     win = {N: out["gwin"][str(N)][prim]["safe_success"]["ci95"][0] > 0 for N in (150, 200)}
     out["gwin_verdict"] = {"primary_arm": prim, "per_N": win, "verdict": "PASS" if all(win.values()) else ("PARTIAL" if any(win.values())
                                                                                         else "NOT_MET")}
+    # Addendum 1 (PI 2026-11-02, registered before any run): G-win also requires NOT worse completeness vs the same
+    # best-fixed comparator = non-inferiority, completeness difference CI95 lower bound >= -NI_MARGIN, at N 150 and 200.
+    ni = {N: out["gwin"][str(N)][prim]["completeness"]["ci95"][0] >= -NI_MARGIN for N in (150, 200)}
+    both = {N: win[N] and ni[N] for N in (150, 200)}
+    out["gwin_verdict_addendum1"] = {"primary_arm": prim, "ni_margin": NI_MARGIN, "safe_win": win,
+                                     "completeness_noninferior": ni, "per_N": both,
+                                     "verdict": "PASS" if all(both.values()) else ("PARTIAL" if any(both.values())
+                                                                                  else "NOT_MET")}
+    out["addendum1_sha256"] = sha256(ADDENDUM1)
     os.makedirs(RES, exist_ok=True)
     json.dump(out, open(os.path.join(RES, "report.json"), "w"), indent=1)
     fmt = lambda x: f"{x['mean']:.3f} [{x['ci95'][0]:.3f},{x['ci95'][1]:.3f}]"
@@ -128,7 +139,8 @@ def cmd_report(a):
             s = v["safe_success"]
             print(f"N{N:3d} {arm} - best fixed ({out['best_fixed'][str(N)]}): safe {s['diff']:+.3f} "
                   f"[{s['ci95'][0]:+.3f},{s['ci95'][1]:+.3f}]")
-    print("G-cal:", cal["gcal"]["verdict"], "| G-win:", json.dumps(out["gwin_verdict"]))
+    print("G-cal:", cal["gcal"]["verdict"], "| G-win (registered, safe-success only):", json.dumps(out["gwin_verdict"]))
+    print("G-win (addendum 1, + completeness non-inferiority):", json.dumps(out["gwin_verdict_addendum1"]))
     print("aneks sha256:", out["aneks_sha256"])
 
 
