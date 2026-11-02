@@ -1,0 +1,15 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[datagen seed=100] 39s
+[datagen seed=101] 27s
+[datagen seed=102] 25s
+[datagen seed=103] 28s
+[datagen seed=104] 25s
+[datagen seed=105] 28s
+[datagen seed=106] 24s
+[datagen seed=107] 28s
+[datagen seed=108] 16s
+[datagen seed=109] 13s
+[datagen seed=110] 11s
+[datagen seed=111] 23s
