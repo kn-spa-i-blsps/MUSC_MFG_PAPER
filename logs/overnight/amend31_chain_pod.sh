@@ -68,7 +68,14 @@ python -m $M write-cells > $L/write_cells.log 2>&1 || { log "write-cells FAILED"
 y=$CD/identity/N100_sigma_a0.05_real_k0.yaml
 python -m experiments.ladder --config $y --mode eval --arm real --weights $W --seeds 0 > $L/eval_identity.log 2>&1
 log "identity rollout exit=$?"
-python -m $M identity > $L/identity.log 2>&1 || { log "identity FAILED: $(cat $L/identity.log | tail -2)"; exit 1; }
+# addendum 2: off-A100 the gating reference is fixed 0.70 real seed 0 on the same GPU
+GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader); REF=amend22
+if ! echo "$GPU" | grep -q "A100-SXM4-80GB"; then
+  REF=local
+  python -m experiments.ladder --config $CD/identity/N100_fixed0.70_real_ref.yaml --mode eval --arm real --weights $W --seeds 0 > $L/eval_identity_ref.log 2>&1
+  log "identity same-GPU reference rollout ($GPU) exit=$?"
+fi
+python -m $M identity --ref $REF > $L/identity.log 2>&1 || { log "identity FAILED: $(cat $L/identity.log | tail -2)"; exit 1; }
 log "identity PASS: $(tail -1 $L/identity.log)"
 checkpoint "amend31 stage 2: identity PASS" $R/identity.json $CD $L/*.log
 # ---- stage 3: sigma-CBF vs fixed frontier, per N, pushed per N; then the report (G-win)

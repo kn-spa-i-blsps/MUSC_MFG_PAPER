@@ -66,12 +66,14 @@ def cell_cfg(N, arm, cal, cond="learned", k=1.0):
 def cmd_write_cells(a):
     cal = json.load(open(os.path.join(SIG, "calibration.json")))
     os.makedirs(os.path.join(CELL_DIR, "identity"), exist_ok=True)
-    jobs = [(N, arm, "learned", 1.0, "") for N in NS for arm in arms()] + [(100, "sigma_a0.05", "real", 0.0, "identity")]
+    jobs = [(N, arm, "learned", 1.0, "") for N in NS for arm in arms()] + [(100, "sigma_a0.05", "real", 0.0, "identity"),
+                                                                            (100, "fixed0.70", "real", 0.0, "identity")]
     for N, arm, cond, k, sub in jobs:
         c = cell_cfg(N, arm, cal, cond, k)
+        tag = "_real_k0" if arm.startswith("sigma") else "_real_ref"   # addendum 2: same-GPU fixed-0.70 reference
         if sub:
-            c["run_name"] = f"{RUN}/identity/N100_real_sigma_k0"
-        p = os.path.join(CELL_DIR, sub, f"N{N:03d}_{arm}{'_real_k0' if sub else ''}.yaml")
+            c["run_name"] = f"{RUN}/identity/N100_real_{'sigma_k0' if arm.startswith('sigma') else 'fixed0.70'}"
+        p = os.path.join(CELL_DIR, sub, f"N{N:03d}_{arm}{tag if sub else ''}.yaml")
         with open(p, "w") as f:
             f.write(f"# AMEND31 cell N{N:03d} {arm} ({cond}, k={k}): amend21_cells/N{N:03d}_real.yaml + cbf margin, "
                     f"sigma_weights sha {cal['sigma_weights_sha256'][:12]}, run_name, chain_arm\n")
@@ -80,12 +82,18 @@ def cmd_write_cells(a):
 
 
 def cmd_identity(a):
-    ref = json.load(open(os.path.join(ROOT, "results", "amend22_N_crossover_pooled", "N100", "real_d0.70", "real",
+    """Registered: k=0 real seed 0 bit-equal to amend22 real_d0.70 seed 0 (A100). Addendum 2: on another GPU type the
+    gating reference is fixed 0.70 real seed 0 run on the SAME GPU in this chain (--ref local); amend22 is reported."""
+    a22 = json.load(open(os.path.join(ROOT, "results", "amend22_N_crossover_pooled", "N100", "real_d0.70", "real",
                                       "metrics_seed0.json")))
     m = json.load(open(os.path.join(ROOT, "results", RUN, "identity", "N100_real_sigma_k0", "real", "metrics_seed0.json")))
-    out = {k: {"amend22": ref[k], "amend31": m[k], "equal": ref[k] == m[k]} for k in IDENTITY_KEYS}
+    ref = a22 if a.ref == "amend22" else json.load(open(os.path.join(ROOT, "results", RUN, "identity",
+                                                                     "N100_real_fixed0.70", "real", "metrics_seed0.json")))
+    out = {k: {"ref": ref[k], "amend31": m[k], "equal": ref[k] == m[k]} for k in IDENTITY_KEYS}
     out["d_safe_mean"], out["d_safe_p95"] = m["d_safe_mean"], m["d_safe_p95"]
     out["all_equal"] = all(v["equal"] for v in out.values() if isinstance(v, dict))
+    out["ref_kind"] = a.ref
+    out["vs_amend22_reported"] = {k: {"amend22": a22[k], "amend31": m[k], "equal": a22[k] == m[k]} for k in IDENTITY_KEYS}
     os.makedirs(RES, exist_ok=True)
     json.dump(out, open(os.path.join(RES, "identity.json"), "w"), indent=1)
     print(json.dumps({"all_equal": out["all_equal"], "d_safe_mean": m["d_safe_mean"], "d_safe_p95": m["d_safe_p95"]}))
@@ -148,6 +156,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["write-cells", "identity", "report"])
     ap.add_argument("--seeds", type=int, nargs="+", default=SEEDS)
+    ap.add_argument("--ref", choices=["amend22", "local"], default="amend22")   # addendum 2
     a = ap.parse_args()
     {"write-cells": cmd_write_cells, "identity": cmd_identity, "report": cmd_report}[a.cmd](a)
 
