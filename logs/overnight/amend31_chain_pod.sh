@@ -26,6 +26,7 @@ trap finish EXIT
 log "chain start gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader) HEAD $(git rev-parse HEAD)"
 log "volume check: $(validate_run_dirs $R | tail -1)"
 log "aneks sha256 $(sha256sum prereg/prereg_projectA_amend31_sigma_cbf.md | cut -c1-64); v3 sha256 $(sha256sum $W | cut -c1-64)"
+log "addendum3 sha256 $(sha256sum prereg/prereg_projectA_amend31_addendum3.md | cut -c1-64)"
 log "addendum1 sha256 $(sha256sum prereg/prereg_projectA_amend31_addendum1.md | cut -c1-64)"
 git config user.name Gio; git config user.email mikojasiek@gmail.com
 # ---- stage 0 (addendum 1): amend31 now runs FIRST, so regenerate its inputs if the volume lost them, with the unchanged
@@ -60,7 +61,11 @@ nd=$(ls $D/datagenL_N*/datagen/pos_seed*.npz | wc -l); log "stage0 datagenL file
 [ "$nd" = 60 ] || { log "stage0 FAILED: datagenL incomplete"; exit 1; }
 checkpoint "amend31 stage 0: inputs ready (caches + datagenL 60/60), logs only" $L/*.log
 # ---- stage 1: sigma head (recipe D) + conformal calibration, gate G-cal (+ reliability diagram per N)
+if [ -f $S/calibration.json ] && [ -f $S/sigma_weights.npz ] && git log --oneline -1 -- $S/calibration.json | grep -q "stage 1"; then
+  log "stage 1 REUSED (addendum 3): committed sigma head sha $(sha256sum $S/sigma_weights.npz | cut -c1-12), no retraining"
+else
 python -m experiments.phaseB_sigma --out $S > $L/sigma_train.log 2>&1 || { log "phaseB_sigma FAILED"; tail -5 $L/sigma_train.log; exit 1; }
+fi
 checkpoint "amend31 stage 1: sigma head + G-cal ($(grep -oE '^G-cal [A-Z_]+' $L/sigma_train.log)), before the sigma-CBF rollouts" $S/sigma_weights.npz $S/calibration.json $S/reliability.png $L/*.log
 # ---- stage 2: identity (k=0 == fixed 0.70, real arm, bit-equal to amend22); aborts the chain on failure
 log "sigma head: $(grep -E '^alpha|^G-cal' $L/sigma_train.log | tr '\n' ' ')"

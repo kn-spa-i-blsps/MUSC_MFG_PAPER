@@ -82,7 +82,12 @@ def build_rows(p_i, x_hat_i, self_idx, goal, arena, segs, prm: CBFParams, d_safe
     rel_k = rel[idx]
     valid = d2_k < prm.r_sense ** 2                                    # (inf / padded -> False)
     d_safe_k = prm.d_safe if d_safe_i is None else d_safe_i[idx]
-    h = d2_k - d_safe_k ** 2
+    d_safe_sq = d_safe_k ** 2
+    if d_safe_i is not None and prm.margin_mode == "sigma":
+        # amend31 addendum 3: rows at the floor use the constant path's square (python float64 0.7**2 -> f32 0.49), not
+        # the f32 product 0.7f*0.7f = 0.48999998 (1 ulp lower), so k=0 is bit-identical to fixed d_safe = floor.
+        d_safe_sq = jnp.where(d_safe_k == jnp.float32(prm.margin_floor), jnp.float32(prm.margin_floor ** 2), d_safe_sq)
+    h = d2_k - d_safe_sq
     r_i = jnp.linalg.norm(goal - p_i)
     r_j = jnp.linalg.norm(goal[None] - x_hat_i[idx], axis=-1)
     share = jax.nn.sigmoid(prm.prio_gain * (r_j - r_i))
