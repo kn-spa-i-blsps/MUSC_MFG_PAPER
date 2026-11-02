@@ -279,3 +279,8 @@ closed-loop learned-v3 histories (the evaluation distribution).
 - G-win now also requires completeness non-inferiority (CI95 lower of diff ≥ −0.02) at N 150 and 200; registered v1
   verdict kept alongside. Code: reporting only (phaseB_sigma coverage_table/reliability_figure, amend31 report);
   synthetic test of the figure/table OK. Pod start still 402 (balance).
+
+## 2026-11-02 — amend31 on new A100 pod sbk37l6nvrg36q
+- Run 1: stage 0 + stage 1 OK (G-cal PASS_AFTER_FIX, 1349c30); identity FAILED (f32 d_safe² 1-ulp) → addendum 3 fix,
+  verified bit-equal; amend28 auto-started then stopped (no rollouts). Run 2 started 15:37 UTC with stage 1 reused.
+- G-cal details: review_amend31.md.
