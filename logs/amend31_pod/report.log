@@ -1,0 +1,63 @@
+N 25 fixed0.70    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 25 fixed0.85    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 25 fixed1.00    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 25 fixed1.20    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 25 sigma_a0.1   safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000] d_mean=0.701 cov2m=0.9003
+N 25 sigma_a0.05  safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000] d_mean=0.702 cov2m=0.9496
+N 25 sigma_a0.01  safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000] d_mean=0.706 cov2m=0.9897
+N 25 sigma_bin_a0.05 safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000] d_mean=0.701 cov2m=0.9509
+N 25 sigma_a0.1 - best fixed (fixed0.70): safe +0.000 [+0.000,+0.000]
+N 25 sigma_a0.05 - best fixed (fixed0.70): safe +0.000 [+0.000,+0.000]
+N 25 sigma_a0.01 - best fixed (fixed0.70): safe +0.000 [+0.000,+0.000]
+N 25 sigma_bin_a0.05 - best fixed (fixed0.70): safe +0.000 [+0.000,+0.000]
+N 50 fixed0.70    safe=0.992 [0.980,1.000] ever=0.008 [0.000,0.020] compl=1.000 [1.000,1.000]
+N 50 fixed0.85    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 50 fixed1.00    safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000]
+N 50 fixed1.20    safe=0.960 [0.950,0.970] ever=0.000 [0.000,0.000] compl=0.960 [0.950,0.970]
+N 50 sigma_a0.1   safe=0.996 [0.988,1.000] ever=0.004 [0.000,0.012] compl=1.000 [1.000,1.000] d_mean=0.703 cov2m=0.8974
+N 50 sigma_a0.05  safe=0.996 [0.988,1.000] ever=0.004 [0.000,0.012] compl=1.000 [1.000,1.000] d_mean=0.705 cov2m=0.9480
+N 50 sigma_a0.01  safe=0.980 [0.960,0.996] ever=0.020 [0.004,0.040] compl=1.000 [1.000,1.000] d_mean=0.715 cov2m=0.9880
+N 50 sigma_bin_a0.05 safe=1.000 [1.000,1.000] ever=0.000 [0.000,0.000] compl=1.000 [1.000,1.000] d_mean=0.703 cov2m=0.9491
+N 50 sigma_a0.1 - best fixed (fixed0.85): safe -0.004 [-0.012,+0.000]
+N 50 sigma_a0.05 - best fixed (fixed0.85): safe -0.004 [-0.012,+0.000]
+N 50 sigma_a0.01 - best fixed (fixed0.85): safe -0.020 [-0.040,-0.004]
+N 50 sigma_bin_a0.05 - best fixed (fixed0.85): safe +0.000 [+0.000,+0.000]
+N100 fixed0.70    safe=0.892 [0.862,0.919] ever=0.072 [0.046,0.102] compl=0.958 [0.949,0.967]
+N100 fixed0.85    safe=0.747 [0.734,0.759] ever=0.020 [0.010,0.030] compl=0.764 [0.755,0.773]
+N100 fixed1.00    safe=0.686 [0.675,0.696] ever=0.010 [0.004,0.016] compl=0.692 [0.682,0.702]
+N100 fixed1.20    safe=0.642 [0.632,0.652] ever=0.000 [0.000,0.000] compl=0.642 [0.632,0.652]
+N100 sigma_a0.1   safe=0.730 [0.705,0.754] ever=0.231 [0.202,0.262] compl=0.950 [0.945,0.955] d_mean=0.715 cov2m=0.8923
+N100 sigma_a0.05  safe=0.686 [0.668,0.708] ever=0.272 [0.250,0.291] compl=0.947 [0.941,0.953] d_mean=1.552 cov2m=0.9401
+N100 sigma_a0.01  safe=0.429 [0.386,0.471] ever=0.517 [0.478,0.555] compl=0.909 [0.898,0.921] d_mean=5.005 cov2m=0.9817
+N100 sigma_bin_a0.05 safe=0.750 [0.722,0.776] ever=0.211 [0.184,0.237] compl=0.959 [0.951,0.966] d_mean=0.821 cov2m=0.9433
+N100 sigma_a0.1 - best fixed (fixed0.70): safe -0.162 [-0.199,-0.124]
+N100 sigma_a0.05 - best fixed (fixed0.70): safe -0.206 [-0.239,-0.169]
+N100 sigma_a0.01 - best fixed (fixed0.70): safe -0.463 [-0.513,-0.412]
+N100 sigma_bin_a0.05 - best fixed (fixed0.70): safe -0.142 [-0.181,-0.102]
+N150 fixed0.70    safe=0.479 [0.445,0.511] ever=0.473 [0.433,0.511] compl=0.857 [0.853,0.862]
+N150 fixed0.85    safe=0.486 [0.463,0.504] ever=0.213 [0.187,0.239] compl=0.577 [0.569,0.586]
+N150 fixed1.00    safe=0.411 [0.398,0.425] ever=0.099 [0.082,0.115] compl=0.453 [0.446,0.461]
+N150 fixed1.20    safe=0.363 [0.356,0.371] ever=0.025 [0.020,0.031] compl=0.372 [0.367,0.377]
+N150 sigma_a0.1   safe=0.350 [0.299,0.397] ever=0.603 [0.549,0.659] compl=0.868 [0.863,0.873] d_mean=8.203 cov2m=0.8880
+N150 sigma_a0.05  safe=0.185 [0.139,0.239] ever=0.799 [0.739,0.850] compl=0.877 [0.870,0.884] d_mean=49.320 cov2m=0.9323
+N150 sigma_a0.01  safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.364 [0.349,0.379] d_mean=66.154 cov2m=0.8346
+N150 sigma_bin_a0.05 safe=0.327 [0.294,0.369] ever=0.617 [0.565,0.657] compl=0.863 [0.853,0.871] d_mean=14.745 cov2m=0.9376
+N150 sigma_a0.1 - best fixed (fixed0.85): safe -0.136 [-0.191,-0.085]
+N150 sigma_a0.05 - best fixed (fixed0.85): safe -0.301 [-0.351,-0.243]
+N150 sigma_a0.01 - best fixed (fixed0.85): safe -0.486 [-0.503,-0.463]
+N150 sigma_bin_a0.05 - best fixed (fixed0.85): safe -0.159 [-0.197,-0.112]
+N200 fixed0.70    safe=0.137 [0.121,0.154] ever=0.827 [0.807,0.846] compl=0.599 [0.593,0.605]
+N200 fixed0.85    safe=0.188 [0.173,0.200] ever=0.608 [0.580,0.638] compl=0.408 [0.401,0.416]
+N200 fixed1.00    safe=0.175 [0.159,0.190] ever=0.483 [0.457,0.511] compl=0.330 [0.327,0.334]
+N200 fixed1.20    safe=0.180 [0.170,0.191] ever=0.456 [0.445,0.468] compl=0.260 [0.254,0.265]
+N200 sigma_a0.1   safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.346 [0.336,0.355] d_mean=108.558 cov2m=0.6780
+N200 sigma_a0.05  safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.321 [0.308,0.333] d_mean=44.190 cov2m=0.7343
+N200 sigma_a0.01  safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.297 [0.284,0.310] d_mean=27.683 cov2m=0.8284
+N200 sigma_bin_a0.05 safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.348 [0.332,0.366] d_mean=64.640 cov2m=0.7007
+N200 sigma_a0.1 - best fixed (fixed0.85): safe -0.188 [-0.200,-0.173]
+N200 sigma_a0.05 - best fixed (fixed0.85): safe -0.188 [-0.200,-0.173]
+N200 sigma_a0.01 - best fixed (fixed0.85): safe -0.188 [-0.200,-0.173]
+N200 sigma_bin_a0.05 - best fixed (fixed0.85): safe -0.188 [-0.200,-0.173]
+G-cal: PASS_AFTER_FIX | G-win (registered, safe-success only): {"primary_arm": "sigma_bin_a0.05", "per_N": {"150": false, "200": false}, "verdict": "NOT_MET"}
+G-win (addendum 1, + completeness non-inferiority): {"primary_arm": "sigma_bin_a0.05", "ni_margin": 0.02, "safe_win": {"150": false, "200": false}, "completeness_noninferior": {"150": true, "200": false}, "per_N": {"150": false, "200": false}, "verdict": "NOT_MET"}
+aneks sha256: 12678c58087e2e4c2a5a342f715b76237ff336d7e9b5cc9e4249b04ebd2cc677
