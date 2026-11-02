@@ -1,0 +1,13 @@
+[ladder] jax_default_matmul_precision = 'highest'
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[learned seed=200] 33s compl=0.415 coll=2274 minsep=0.003 p5=0.347 interv=0.967 slack=0.3672
+[learned seed=201] 32s compl=0.400 coll=2544 minsep=0.002 p5=0.321 interv=0.966 slack=0.3536
+[learned seed=202] 29s compl=0.415 coll=2293 minsep=0.004 p5=0.347 interv=0.969 slack=0.3547
+[learned seed=203] 21s compl=0.410 coll=2783 minsep=0.007 p5=0.334 interv=0.968 slack=0.3553
+[learned seed=204] 32s compl=0.405 coll=2051 minsep=0.009 p5=0.354 interv=0.969 slack=0.3584
+[learned seed=205] 28s compl=0.420 coll=2921 minsep=0.004 p5=0.365 interv=0.965 slack=0.3651
+[learned seed=206] 21s compl=0.430 coll=1989 minsep=0.002 p5=0.353 interv=0.968 slack=0.3553
+[learned seed=207] 32s compl=0.415 coll=2038 minsep=0.015 p5=0.374 interv=0.966 slack=0.3478
+[learned seed=208] 28s compl=0.415 coll=2172 minsep=0.011 p5=0.321 interv=0.968 slack=0.3544
+[learned seed=209] 20s compl=0.405 coll=1966 minsep=0.009 p5=0.332 interv=0.968 slack=0.3531
