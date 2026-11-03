@@ -1,0 +1,4 @@
+[ladder] jax_default_matmul_precision = None
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[fresh seed=4] 3s compl=1.000 coll=824896 minsep=0.000 p5=0.000 interv=0.000 slack=0.0000

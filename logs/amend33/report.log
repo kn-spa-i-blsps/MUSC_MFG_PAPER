@@ -1,0 +1,20 @@
+arm           n  safe_succ  ever_coll   compl   coll_ps    intW makespan
+fresh         5      0.934      0.000   0.934         0   188.0     68.9
+fresh_nocbf   5      0.002      0.998   1.000    820519   342.5     28.2
+fresh_nomfg   5      0.602      0.000   0.602         0   381.2      nan
+noise_only    5      0.862      0.000   0.862         0   152.9     67.8
+real          5      0.000      1.000   0.718     45182    70.8     27.0
+cv            5      0.000      1.000   0.730     58604    88.5     31.3
+learned       5      0.168      0.734   0.678      1152   205.7      nan
+smith         5      0.004      0.996   0.036    649902   887.0      nan
+identity real seed0 vs amend11: True
+safe_success  Q2_nocbf_minus_fresh       -0.932 [-0.948, -0.914] n=5
+safe_success  Q3_fresh_minus_nomfg       +0.332 [+0.280, +0.388] n=5
+safe_success  Q4_real_minus_noise_only   -0.862 [-0.870, -0.854] n=5
+safe_success  Q5_learned_minus_real      +0.168 [+0.118, +0.226] n=5
+safe_success  noise_only_minus_fresh     -0.072 [-0.082, -0.062] n=5
+completeness  Q2_nocbf_minus_fresh       +0.066 [+0.052, +0.080] n=5
+completeness  Q3_fresh_minus_nomfg       +0.332 [+0.280, +0.388] n=5
+completeness  Q4_real_minus_noise_only   -0.144 [-0.174, -0.108] n=5
+completeness  Q5_learned_minus_real      -0.040 [-0.070, -0.008] n=5
+completeness  noise_only_minus_fresh     -0.072 [-0.082, -0.062] n=5
