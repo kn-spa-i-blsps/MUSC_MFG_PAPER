@@ -56,3 +56,5 @@ N200 sigma_a0.01 - best fixed (fixed1.00): safe -0.183 [-0.195,-0.171]  compl +0
 N200 sigma_bin_a0.05 - best fixed (fixed1.00): safe -0.189 [-0.200,-0.177]  compl +0.218 [+0.207,+0.229]  PRIMARY
 G-win (amend35): {"primary_arm": "sigma_bin_a0.05", "safe_win": {"150": true, "200": false}, "completeness_noninferior": {"150": true, "200": true}, "per_N": {"150": true, "200": false}, "verdict": "NOT_MET"}
 aneks sha256: d3b3b46a362a7f7198c233a91445355e42f0e4557b0e908e2fdff9e2d4cf37b2
+2026-11-03 16:30:29 checkpoint committed locally (NO_PUSH) 14049bb: amend35 report (exit 0, 80/80 rollouts): capped sigma-CBF G-win, pushed immediately
+2026-11-03 16:30:29 finish status=DONE
