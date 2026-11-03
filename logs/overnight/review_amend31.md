@@ -57,5 +57,35 @@ Pod sbk37l6nvrg36q (A100-SXM4-80GB, new volume). Aneks 12678c58… + addenda 1 (
 **Classification:** the per-N conditional failure at N=200 is PLUMBING, resolved by the registered calibration fix.
 G-cal is not a thesis-critical negative.
 
-## G-win
-(pending — stage 3 / report)
+## G-win (registered report 29e1496, filled in 2026-11-03 from saved results only; no new run)
+
+Primary arm sigma_bin_a0.05; comparator = best fixed per N by mean safe-success (fixed0.85 at N=150 and N=200);
+10 seeds (0–9); seed-level bootstrap 95 % CI. PASS needed: lower CI of the advantage > 0 at N=150 AND N=200, with
+completeness non-inferior (−0.02, addendum 1).
+
+| N | σ-CBF safe / ever / compl | best fixed (0.85) safe / ever / compl | Δ safe [CI95] | Δ compl [CI95] |
+|---|---|---|---|---|
+| 150 | 0.327 / 0.617 / 0.863 | 0.486 / 0.213 / 0.577 | −0.159 [−0.197, −0.112] | +0.285 [+0.273, +0.297] |
+| 200 | 0.000 / 1.000 / 0.348 | 0.188 / 0.608 / 0.408 | −0.188 [−0.200, −0.174] | −0.060 [−0.078, −0.041] |
+
+- **Verdict: NOT_MET** (registered v1 and addendum 1). Every σ arm (α 0.10 / 0.05 / 0.01 / binned) loses to the best
+  fixed margin at N = 100, 150 and 200. At N = 200 every σ arm has every drone collide (ever 1.000).
+- Replication on seeds 200–209 (addendum 4, supplementary) gives the same sign and size.
+- σ-CBF does **not** move off the fixed-margin frontier at N ≥ 150. At N=150 it trades ~0.16 safe-success for
+  +0.29 completeness, i.e. it behaves like a smaller fixed margin (it matches fixed0.70 / conf_const). At N=200 it is
+  strictly worse on both.
+
+**Closed-loop coverage (the real test of the guarantee, addendum 4 §4):** offline TEST 0.955 at α=0.05; in closed
+loop 0.938 at N=150 but 0.701 at N=200 (pairs < 2 m), 0.649 on binding rows. The conformal guarantee does not survive
+the distribution shift that the σ-CBF itself creates at N=200.
+
+## Classification
+
+- **G-cal per-N conditional miss at N=200 → PLUMBING**, fixed by the registered (N, σ-quintile) calibration.
+- **Identity-gate failure in run 1 (d_safe² in f32) → PLUMBING**, fixed, not waived.
+- **G-win NOT_MET → THESIS-CRITICAL.** The σ-CBF as registered gives no safety advantage over a fixed margin at the
+  densities it was built for, and its guarantee breaks in closed loop at N=200.
+- **Known implementation defects that may contribute** (review_amend31_diag.md, read-only): no cap on σ_c / d_safe
+  (mean d_safe in one step up to 2.8e5 m at N=200), no ḋ_safe term in the CBF row, σ_ij ≠ σ_ji without a shared
+  pair margin. The logs (log_xhat false) cannot decide whether these or the method itself drive the failure (H1–H5
+  UNDECIDED). Fixing them is a design change and would need a new prereg; it would not change this verdict.

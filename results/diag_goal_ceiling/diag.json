@@ -1,0 +1,1886 @@
+{
+ "label": "DESCRIPTIVE, log-only (no rollouts)",
+ "r_goal_m": 4.200300543234657,
+ "hex_capacity_density_per_m2": 1.8042195912175802,
+ "macro": {
+  "horizon_s": 70.376,
+  "mstar_mass_in_disc_by_time_s": {
+   "10.0": 99.85645294189453,
+   "20.0": 99.85645294189453,
+   "30.0": 99.8564453125,
+   "40.0": 99.85645294189453,
+   "50.0": 99.8564453125,
+   "60.0": 99.8564453125,
+   "70.4": 99.8564453125
+  },
+  "mstar_final_mass_by_radius": {
+   "edges_m": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5,
+    6.0
+   ],
+   "mass": [
+    2.49525785446167,
+    6.445027828216553,
+    11.049521446228027,
+    13.252363204956055,
+    16.688600540161133,
+    17.553380966186523,
+    18.418760299682617,
+    13.930635452270508,
+    0.022891640663146973,
+    2.552323847570364e-32,
+    0.0,
+    0.0
+   ]
+  },
+  "mstar_final_peak_in_disc": 5.3741350173950195
+ },
+ "arms": {
+  "fresh": [
+   {
+    "seed": 0,
+    "n_out": 4,
+    "out_ever_inside": 4,
+    "out_last_inside_s_min_med_max": [
+     48.17,
+     63.875,
+     70.33
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.0724648199552087,
+     0.26128947481202447,
+     0.2647575785504417
+    ],
+    "out_within_0p5m_of_rim": 4,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.18490993976593018,
+     0.20124495029449463,
+     0.37668195366859436
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.09990817602184829,
+     -0.040008973989507673,
+     0.11127498614993238
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.1563146745597691,
+     0.1962088342882141,
+     0.37651474528500406
+    ],
+    "out_unom_norm_med": [
+     0.08702436089515686,
+     0.17383530735969543,
+     0.31753185391426086
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.09134747833013535,
+     0.2977108657360077,
+     0.4473651647567749
+    ],
+    "out_nearest_nb_m_med": [
+     0.6575106420993393,
+     0.7158242624553207,
+     0.8029048079392851
+    ],
+    "in_unom_radial_med": [
+     -6.504368959319649,
+     -0.07230059751694876,
+     0.8868912176358729
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499931586703072,
+     0.5502082124900525,
+     1.304175191940794
+    ],
+    "in_count": 96,
+    "in_density_per_m2": 1.7320508075688765,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 44,
+    "core_count_r_lt_2": 13,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     2,
+     9,
+     12,
+     16,
+     23,
+     32,
+     4,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.04
+   },
+   {
+    "seed": 1,
+    "n_out": 7,
+    "out_ever_inside": 6,
+    "out_last_inside_s_min_med_max": [
+     28.94,
+     70.1,
+     70.35000000000001
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.04439141404218461,
+     0.17471622161045985,
+     0.27765032563963565
+    ],
+    "out_within_0p5m_of_rim": 7,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.15706662833690643,
+     0.2336193025112152,
+     0.2998449206352234
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.3572273744656008,
+     0.19558160728232918,
+     0.2351892384685404
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.10801921139156918,
+     0.22233724418022627,
+     0.2351892534683943
+    ],
+    "out_unom_norm_med": [
+     0.2179127186536789,
+     0.2451906055212021,
+     0.3952863812446594
+    ],
+    "out_intervention_rate_last1s_med": [
+     7.452936046092873e-08,
+     9.625536989688044e-08,
+     0.4774361848831177
+    ],
+    "out_nearest_nb_m_med": [
+     0.6499290871422504,
+     0.8026913732171498,
+     0.8737180859110723
+    ],
+    "in_unom_radial_med": [
+     -3.3186412511212104,
+     -0.05654558138330025,
+     1.096810188110068
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499961071438583,
+     0.5511287428158266,
+     1.470212812143484
+    ],
+    "in_count": 93,
+    "in_density_per_m2": 1.6779242198323492,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 41,
+    "core_count_r_lt_2": 11,
+    "radial_counts_0.5m": [
+     0,
+     1,
+     1,
+     9,
+     12,
+     16,
+     20,
+     34,
+     7,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.06060606060606061
+   },
+   {
+    "seed": 2,
+    "n_out": 9,
+    "out_ever_inside": 8,
+    "out_last_inside_s_min_med_max": [
+     28.02,
+     62.955,
+     70.32000000000001
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.08674738000499715,
+     0.22047588553733988,
+     0.29345420587708837
+    ],
+    "out_within_0p5m_of_rim": 9,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.1786622405052185,
+     0.2546900510787964,
+     0.33717048168182373
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.3423920865122089,
+     0.16290471457278533,
+     0.22534122568022333
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.10515042898771612,
+     0.17868775522808453,
+     0.2253412703406102
+    ],
+    "out_unom_norm_med": [
+     0.14044655859470367,
+     0.254690021276474,
+     0.42867955565452576
+    ],
+    "out_intervention_rate_last1s_med": [
+     8.576378718316846e-08,
+     0.01947997510433197,
+     0.5239896178245544
+    ],
+    "out_nearest_nb_m_med": [
+     0.6915068784348953,
+     0.7541752686190791,
+     0.9317531815697815
+    ],
+    "in_unom_radial_med": [
+     -4.1185364309603525,
+     -0.05050653020564244,
+     2.004483608434817
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499995921030587,
+     0.5500361605668194,
+     0.8970661270789805
+    ],
+    "in_count": 91,
+    "in_density_per_m2": 1.6418398280079975,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 43,
+    "core_count_r_lt_2": 9,
+    "radial_counts_0.5m": [
+     1,
+     0,
+     1,
+     7,
+     12,
+     21,
+     16,
+     33,
+     9,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.08080808080808081
+   },
+   {
+    "seed": 3,
+    "n_out": 7,
+    "out_ever_inside": 5,
+    "out_last_inside_s_min_med_max": [
+     53.01,
+     70.18,
+     70.33
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.06551788251769608,
+     0.17910302862970173,
+     0.2963227823606971
+    ],
+    "out_within_0p5m_of_rim": 7,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.18203116953372955,
+     0.23242925107479095,
+     0.42377331852912903
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.2545321871010321,
+     0.15201704520626855,
+     0.23539317520656183
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.1310325347905497,
+     0.17293995658859174,
+     0.24067702369464322
+    ],
+    "out_unom_norm_med": [
+     0.18203116953372955,
+     0.2354118824005127,
+     0.42377331852912903
+    ],
+    "out_intervention_rate_last1s_med": [
+     6.855465528587956e-08,
+     0.004775159526616335,
+     0.41044625639915466
+    ],
+    "out_nearest_nb_m_med": [
+     0.7247803085927366,
+     0.7734126623399867,
+     0.8469214308280348
+    ],
+    "in_unom_radial_med": [
+     -4.700014441442357,
+     -0.06654784371987343,
+     1.6320991665403584
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5500007409020049,
+     0.5505512160946598,
+     1.334025174697739
+    ],
+    "in_count": 93,
+    "in_density_per_m2": 1.6779242198323492,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 40,
+    "core_count_r_lt_2": 14,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     3,
+     9,
+     12,
+     17,
+     20,
+     30,
+     7,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.05102040816326531
+   },
+   {
+    "seed": 4,
+    "n_out": 6,
+    "out_ever_inside": 5,
+    "out_last_inside_s_min_med_max": [
+     52.72,
+     66.38,
+     70.29
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.11800157983441295,
+     0.19780017426213625,
+     0.2744994785311272
+    ],
+    "out_within_0p5m_of_rim": 6,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.14108221232891083,
+     0.20215582847595215,
+     0.39238959550857544
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.30295131864667174,
+     0.15767085240399623,
+     0.24155161819914805
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.13996868675533614,
+     0.18554294359673354,
+     0.2446019433389583
+    ],
+    "out_unom_norm_med": [
+     0.14108221232891083,
+     0.23366156220436096,
+     0.3909863829612732
+    ],
+    "out_intervention_rate_last1s_med": [
+     5.917285861301025e-08,
+     0.00836634449660778,
+     0.45368942618370056
+    ],
+    "out_nearest_nb_m_med": [
+     0.6560077384078971,
+     0.7782289998739704,
+     0.907709740078683
+    ],
+    "in_unom_radial_med": [
+     -3.0370850299761827,
+     -0.04368956044698153,
+     4.108577211614092
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499997644100313,
+     0.5503568463786668,
+     1.3339916578681954
+    ],
+    "in_count": 94,
+    "in_density_per_m2": 1.695966415744525,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 41,
+    "core_count_r_lt_2": 13,
+    "radial_counts_0.5m": [
+     1,
+     2,
+     2,
+     8,
+     15,
+     15,
+     20,
+     30,
+     7,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.050505050505050504
+   }
+  ],
+  "noise_only": [
+   {
+    "seed": 0,
+    "n_out": 13,
+    "out_ever_inside": 11,
+    "out_last_inside_s_min_med_max": [
+     47.68,
+     66.35,
+     70.32000000000001
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.075291113000576,
+     0.32307719666754053,
+     0.520928803610146
+    ],
+    "out_within_0p5m_of_rim": 12,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.08755370229482651,
+     0.26738354563713074,
+     0.36607104539871216
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.4086178247709636,
+     -0.049212935372157124,
+     0.22101799776426
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.07668117694115717,
+     0.23885934265842906,
+     0.2973497369785264
+    ],
+    "out_unom_norm_med": [
+     0.055467795580625534,
+     0.22336682677268982,
+     0.4241501986980438
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.09285248070955276,
+     0.2761036157608032,
+     0.5247666835784912
+    ],
+    "out_nearest_nb_m_med": [
+     0.6975301229806689,
+     0.7632085726045351,
+     0.8823906311008419
+    ],
+    "in_unom_radial_med": [
+     -7.95285772366273,
+     -0.15344004177765388,
+     0.6441682230591779
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5360582173098215,
+     0.615921609643295,
+     0.7935004713198187
+    ],
+    "in_count": 87,
+    "in_density_per_m2": 1.5696710443592943,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 49,
+    "core_count_r_lt_2": 8,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     1,
+     5,
+     8,
+     17,
+     18,
+     33,
+     7,
+     9,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.11224489795918367
+   },
+   {
+    "seed": 1,
+    "n_out": 13,
+    "out_ever_inside": 13,
+    "out_last_inside_s_min_med_max": [
+     28.02,
+     70.22,
+     70.37
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.016380777726207718,
+     0.15567325091063822,
+     0.29493953538647855
+    ],
+    "out_within_0p5m_of_rim": 13,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.08837068825960159,
+     0.1747448593378067,
+     0.24651901423931122
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.42480447306452773,
+     -0.20953575291705728,
+     0.15077988688328092
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.05188720296009727,
+     0.15611195779526632,
+     0.2115474914341322
+    ],
+    "out_unom_norm_med": [
+     0.05110865458846092,
+     0.2206025868654251,
+     0.6886876821517944
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.016027916222810745,
+     0.33481547236442566,
+     0.7102097272872925
+    ],
+    "out_nearest_nb_m_med": [
+     0.6818732062835083,
+     0.7961874038632758,
+     0.9088438234549902
+    ],
+    "in_unom_radial_med": [
+     -3.486630304566135,
+     -0.15944939697321803,
+     0.8251910265363224
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5818638816582267,
+     0.6219853584306746,
+     1.0661450710441311
+    ],
+    "in_count": 87,
+    "in_density_per_m2": 1.5696710443592943,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 41,
+    "core_count_r_lt_2": 11,
+    "radial_counts_0.5m": [
+     1,
+     2,
+     1,
+     7,
+     10,
+     17,
+     14,
+     35,
+     13,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.13
+   },
+   {
+    "seed": 2,
+    "n_out": 15,
+    "out_ever_inside": 14,
+    "out_last_inside_s_min_med_max": [
+     37.37,
+     69.75,
+     70.3
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.07159270027981268,
+     0.2224807926738137,
+     0.3381824523481525
+    ],
+    "out_within_0p5m_of_rim": 15,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.14638660848140717,
+     0.2296762466430664,
+     0.33353832364082336
+    ],
+    "out_unom_radial_min_med_max": [
+     -1.1986841394944778,
+     0.04370429500034956,
+     0.2620676063202706
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.008985150421066818,
+     0.1706256050356896,
+     0.27910384867722515
+    ],
+    "out_unom_norm_med": [
+     0.0836891233921051,
+     0.21769335865974426,
+     1.2239325046539307
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.017074311152100563,
+     0.21043738722801208,
+     1.313613772392273
+    ],
+    "out_nearest_nb_m_med": [
+     0.6591741674081224,
+     0.7739606025069851,
+     0.8950120151512089
+    ],
+    "in_unom_radial_med": [
+     -7.216111415512327,
+     -0.11627254092066112,
+     0.8029143546214117
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5490395663786954,
+     0.6246341045377957,
+     1.4708487977363316
+    ],
+    "in_count": 85,
+    "in_density_per_m2": 1.5335866525349426,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 44,
+    "core_count_r_lt_2": 8,
+    "radial_counts_0.5m": [
+     0,
+     1,
+     1,
+     6,
+     11,
+     17,
+     16,
+     32,
+     14,
+     2,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.1414141414141414
+   },
+   {
+    "seed": 3,
+    "n_out": 15,
+    "out_ever_inside": 14,
+    "out_last_inside_s_min_med_max": [
+     42.050000000000004,
+     64.67500000000001,
+     70.3
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.08360399563681575,
+     0.27580212112689484,
+     0.35485882425852733
+    ],
+    "out_within_0p5m_of_rim": 15,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.15698134899139404,
+     0.2223343700170517,
+     0.3184047341346741
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.6923974006985927,
+     0.023966968963491764,
+     0.22244992749826123
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.1059813226594475,
+     0.20237887911201521,
+     0.2524224490559909
+    ],
+    "out_unom_norm_med": [
+     0.009743974544107914,
+     0.20552992820739746,
+     0.7008940577507019
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.006924092769622803,
+     0.14295057952404022,
+     0.8086939454078674
+    ],
+    "out_nearest_nb_m_med": [
+     0.7214246256235093,
+     0.787713148258185,
+     0.8544015322028486
+    ],
+    "in_unom_radial_med": [
+     -5.185582501921376,
+     -0.14960796193129494,
+     0.922359623615113
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5469550164285342,
+     0.6103871537740946,
+     1.072120523776063
+    ],
+    "in_count": 85,
+    "in_density_per_m2": 1.5335866525349426,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 46,
+    "core_count_r_lt_2": 8,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     1,
+     5,
+     7,
+     16,
+     20,
+     31,
+     13,
+     5,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.1414141414141414
+   },
+   {
+    "seed": 4,
+    "n_out": 13,
+    "out_ever_inside": 12,
+    "out_last_inside_s_min_med_max": [
+     41.96,
+     69.63,
+     70.29
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.08632562565571877,
+     0.21767360727693497,
+     0.2896161429615818
+    ],
+    "out_within_0p5m_of_rim": 13,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.07597815245389938,
+     0.21684759855270386,
+     0.3984754979610443
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.9608432063534311,
+     -0.17328656390328095,
+     0.05522804274025711
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.054628525316899226,
+     0.1770841677896215,
+     0.28158904101265503
+    ],
+    "out_unom_norm_med": [
+     0.036819711327552795,
+     0.20690001547336578,
+     1.269549012184143
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.16510187089443207,
+     0.3266041874885559,
+     1.383151888847351
+    ],
+    "out_nearest_nb_m_med": [
+     0.6564481177453984,
+     0.7607243711492515,
+     0.84657503244574
+    ],
+    "in_unom_radial_med": [
+     -6.706251264760928,
+     -0.08563458801801797,
+     0.6176578752695845
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5337364914233598,
+     0.6205083546471188,
+     1.5221971576547708
+    ],
+    "in_count": 87,
+    "in_density_per_m2": 1.5696710443592943,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 45,
+    "core_count_r_lt_2": 7,
+    "radial_counts_0.5m": [
+     0,
+     1,
+     2,
+     4,
+     12,
+     16,
+     18,
+     31,
+     16,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.12121212121212122
+   }
+  ],
+  "A_cbf_fresh": [
+   {
+    "seed": 0,
+    "n_out": 15,
+    "out_ever_inside": 14,
+    "out_last_inside_s_min_med_max": [
+     32.24,
+     68.61000000000001,
+     70.36
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.028538270307800317,
+     0.32880939953568333,
+     0.61570285669284
+    ],
+    "out_within_0p5m_of_rim": 10,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.11303547024726868,
+     0.2784949541091919,
+     0.565109133720398
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.949833211430051,
+     0.08298497373442695,
+     0.529218202391313
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.061764957779460436,
+     0.2638846983654777,
+     0.5560971789044818
+    ],
+    "out_unom_norm_med": [
+     0.08111756294965744,
+     0.3071102499961853,
+     1.0917764902114868
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.03696057200431824,
+     0.22347550094127655,
+     1.1155085563659668
+    ],
+    "out_nearest_nb_m_med": [
+     0.723737438803853,
+     0.8602106077927691,
+     1.0231785115045695
+    ],
+    "in_unom_radial_med": [
+     -5.941620004882434,
+     -0.1838210448680378,
+     0.5791615833631634
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5246935089696084,
+     0.6145988543289279,
+     1.3860955413659748
+    ],
+    "in_count": 85,
+    "in_density_per_m2": 1.5335866525349426,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 46,
+    "core_count_r_lt_2": 7,
+    "radial_counts_0.5m": [
+     0,
+     0,
+     1,
+     6,
+     12,
+     16,
+     17,
+     33,
+     6,
+     9,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.1414141414141414
+   },
+   {
+    "seed": 1,
+    "n_out": 17,
+    "out_ever_inside": 16,
+    "out_last_inside_s_min_med_max": [
+     46.88,
+     69.95,
+     70.34
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.06507126558137255,
+     0.3410568678399084,
+     0.5928597375740257
+    ],
+    "out_within_0p5m_of_rim": 14,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.09866490215063095,
+     0.3727430999279022,
+     0.6236239671707153
+    ],
+    "out_unom_radial_min_med_max": [
+     -1.6450331484757077,
+     -0.01582538332380451,
+     0.37211963284442234
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.02082975397641148,
+     0.32293427066846364,
+     0.6227388371934289
+    ],
+    "out_unom_norm_med": [
+     0.049017611891031265,
+     0.3127928078174591,
+     1.6792488098144531
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.0374302864074707,
+     0.30306240916252136,
+     2.4480783939361572
+    ],
+    "out_nearest_nb_m_med": [
+     0.6618187727775277,
+     0.8268877149307285,
+     1.0905087052141844
+    ],
+    "in_unom_radial_med": [
+     -5.254394898149594,
+     -0.10902377353801684,
+     0.6693935602960732
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5585542614846379,
+     0.6250615487816211,
+     1.498424301938325
+    ],
+    "in_count": 83,
+    "in_density_per_m2": 1.4975022607105912,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 46,
+    "core_count_r_lt_2": 9,
+    "radial_counts_0.5m": [
+     0,
+     1,
+     2,
+     6,
+     6,
+     16,
+     20,
+     32,
+     7,
+     10,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.16161616161616163
+   },
+   {
+    "seed": 2,
+    "n_out": 15,
+    "out_ever_inside": 14,
+    "out_last_inside_s_min_med_max": [
+     26.580000000000002,
+     68.92,
+     70.31
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.1140513997935706,
+     0.3769752726120048,
+     0.5572370868383212
+    ],
+    "out_within_0p5m_of_rim": 12,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.09388814121484756,
+     0.31632867455482483,
+     0.49584826827049255
+    ],
+    "out_unom_radial_min_med_max": [
+     -0.4702893413036866,
+     0.18315227674299875,
+     0.40184212114578527
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.050259584717145284,
+     0.3124151279287728,
+     0.4501342498524727
+    ],
+    "out_unom_norm_med": [
+     0.15616124868392944,
+     0.2846197783946991,
+     0.5331946015357971
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.018156517297029495,
+     0.15661418437957764,
+     0.7741503715515137
+    ],
+    "out_nearest_nb_m_med": [
+     0.7362370338929923,
+     0.8951860555081212,
+     1.022128928759635
+    ],
+    "in_unom_radial_med": [
+     -7.705497383035376,
+     -0.10423379722758669,
+     0.813011451512703
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5447593739874719,
+     0.6191337074529442,
+     1.330667358178733
+    ],
+    "in_count": 85,
+    "in_density_per_m2": 1.5335866525349426,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 46,
+    "core_count_r_lt_2": 8,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     1,
+     5,
+     7,
+     16,
+     20,
+     33,
+     7,
+     9,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.1414141414141414
+   },
+   {
+    "seed": 3,
+    "n_out": 11,
+    "out_ever_inside": 10,
+    "out_last_inside_s_min_med_max": [
+     28.61,
+     70.15,
+     70.35000000000001
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.06154603500396849,
+     0.21529640932001914,
+     0.4179272380727923
+    ],
+    "out_within_0p5m_of_rim": 11,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.10538088530302048,
+     0.25742581486701965,
+     0.52118319272995
+    ],
+    "out_unom_radial_min_med_max": [
+     -1.2359461863334138,
+     -0.12536078801745162,
+     0.2217180017989686
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     0.10481759882006389,
+     0.21954480763301318,
+     0.5140590986600234
+    ],
+    "out_unom_norm_med": [
+     0.13895727694034576,
+     0.25586116313934326,
+     1.2385857105255127
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.020633572712540627,
+     0.330551415681839,
+     1.7669436931610107
+    ],
+    "out_nearest_nb_m_med": [
+     0.7018328928993509,
+     0.7911878927201328,
+     0.903016007999649
+    ],
+    "in_unom_radial_med": [
+     -4.726737775892158,
+     -0.10380666998236891,
+     1.0299220387078518
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5801794653814892,
+     0.6302629751720447,
+     1.0627631231682266
+    ],
+    "in_count": 89,
+    "in_density_per_m2": 1.605755436183646,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 40,
+    "core_count_r_lt_2": 11,
+    "radial_counts_0.5m": [
+     1,
+     1,
+     2,
+     7,
+     10,
+     17,
+     19,
+     32,
+     10,
+     1,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.10101010101010101
+   },
+   {
+    "seed": 4,
+    "n_out": 14,
+    "out_ever_inside": 13,
+    "out_last_inside_s_min_med_max": [
+     56.32,
+     66.21000000000001,
+     70.35000000000001
+    ],
+    "out_excess_r_m_min_med_max": [
+     0.06058413613386193,
+     0.3695181065786737,
+     0.5943037537774609
+    ],
+    "out_within_0p5m_of_rim": 13,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     0.09078245609998703,
+     0.30590158700942993,
+     0.4472923278808594
+    ],
+    "out_unom_radial_min_med_max": [
+     -1.5163367698934733,
+     0.07788017293659788,
+     0.42015964213661894
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.1486999497083488,
+     0.29063628416569154,
+     0.4385853747311548
+    ],
+    "out_unom_norm_med": [
+     0.08064820617437363,
+     0.30367612838745117,
+     1.5968602895736694
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.03195972740650177,
+     0.1794414222240448,
+     1.4199641942977905
+    ],
+    "out_nearest_nb_m_med": [
+     0.703293464769825,
+     0.8714481419776234,
+     1.0093261788282504
+    ],
+    "in_unom_radial_med": [
+     -7.07867811842544,
+     -0.1640985850090388,
+     0.8760540950400005
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5563928445258308,
+     0.6233147956442453,
+     1.2299399095104566
+    ],
+    "in_count": 86,
+    "in_density_per_m2": 1.5516288484471186,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 42,
+    "core_count_r_lt_2": 12,
+    "radial_counts_0.5m": [
+     1,
+     2,
+     2,
+     7,
+     9,
+     11,
+     20,
+     31,
+     6,
+     11,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.13131313131313133
+   }
+  ],
+  "fresh_nocbf": [
+   {
+    "seed": 0,
+    "n_out": 0,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": null,
+    "out_within_0p5m_of_rim": 0,
+    "out_upstream": 0,
+    "out_speed_last1s_med": null,
+    "out_unom_radial_min_med_max": null,
+    "out_route_radial_min_med_max": null,
+    "out_u_radial_min_med_max": null,
+    "out_unom_norm_med": null,
+    "out_intervention_rate_last1s_med": null,
+    "out_nearest_nb_m_med": null,
+    "in_unom_radial_med": [
+     -0.36110128819778475,
+     0.022771023626836015,
+     0.3841806541707165
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.0,
+     0.0,
+     1.066240299940009e-06
+    ],
+    "in_count": 100,
+    "in_density_per_m2": 1.8042195912175798,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 37,
+    "core_count_r_lt_2": 26,
+    "radial_counts_0.5m": [
+     4,
+     5,
+     0,
+     17,
+     17,
+     10,
+     13,
+     34,
+     0,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 1,
+    "n_out": 0,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": null,
+    "out_within_0p5m_of_rim": 0,
+    "out_upstream": 0,
+    "out_speed_last1s_med": null,
+    "out_unom_radial_min_med_max": null,
+    "out_route_radial_min_med_max": null,
+    "out_u_radial_min_med_max": null,
+    "out_unom_norm_med": null,
+    "out_intervention_rate_last1s_med": null,
+    "out_nearest_nb_m_med": null,
+    "in_unom_radial_med": [
+     -0.38804735135727025,
+     -0.006252365721716549,
+     0.33353156356515534
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.0,
+     0.0,
+     0.0034958349671900704
+    ],
+    "in_count": 100,
+    "in_density_per_m2": 1.8042195912175798,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 29,
+    "core_count_r_lt_2": 34,
+    "radial_counts_0.5m": [
+     6,
+     4,
+     12,
+     12,
+     18,
+     11,
+     8,
+     29,
+     0,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 2,
+    "n_out": 0,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": null,
+    "out_within_0p5m_of_rim": 0,
+    "out_upstream": 0,
+    "out_speed_last1s_med": null,
+    "out_unom_radial_min_med_max": null,
+    "out_route_radial_min_med_max": null,
+    "out_u_radial_min_med_max": null,
+    "out_unom_norm_med": null,
+    "out_intervention_rate_last1s_med": null,
+    "out_nearest_nb_m_med": null,
+    "in_unom_radial_med": [
+     -0.19913898289239618,
+     0.014866785457292463,
+     0.17738673249184275
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.0,
+     0.0,
+     0.49152743067100724
+    ],
+    "in_count": 100,
+    "in_density_per_m2": 1.8042195912175798,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 45,
+    "core_count_r_lt_2": 27,
+    "radial_counts_0.5m": [
+     2,
+     5,
+     4,
+     16,
+     11,
+     14,
+     19,
+     29,
+     0,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 3,
+    "n_out": 0,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": null,
+    "out_within_0p5m_of_rim": 0,
+    "out_upstream": 0,
+    "out_speed_last1s_med": null,
+    "out_unom_radial_min_med_max": null,
+    "out_route_radial_min_med_max": null,
+    "out_u_radial_min_med_max": null,
+    "out_unom_norm_med": null,
+    "out_intervention_rate_last1s_med": null,
+    "out_nearest_nb_m_med": null,
+    "in_unom_radial_med": [
+     -0.25952129818238767,
+     -0.014250461993253593,
+     0.7578573087130771
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.0,
+     0.0,
+     0.43702118301833237
+    ],
+    "in_count": 100,
+    "in_density_per_m2": 1.8042195912175798,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 33,
+    "core_count_r_lt_2": 36,
+    "radial_counts_0.5m": [
+     0,
+     10,
+     8,
+     18,
+     12,
+     15,
+     8,
+     29,
+     0,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 4,
+    "n_out": 0,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": null,
+    "out_within_0p5m_of_rim": 0,
+    "out_upstream": 0,
+    "out_speed_last1s_med": null,
+    "out_unom_radial_min_med_max": null,
+    "out_route_radial_min_med_max": null,
+    "out_u_radial_min_med_max": null,
+    "out_unom_norm_med": null,
+    "out_intervention_rate_last1s_med": null,
+    "out_nearest_nb_m_med": null,
+    "in_unom_radial_med": [
+     -0.36169693288440247,
+     0.041268752063945646,
+     0.23544230150650766
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.0,
+     0.0,
+     0.5752374148029917
+    ],
+    "in_count": 100,
+    "in_density_per_m2": 1.8042195912175798,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 40,
+    "core_count_r_lt_2": 34,
+    "radial_counts_0.5m": [
+     0,
+     9,
+     3,
+     22,
+     9,
+     8,
+     15,
+     34,
+     0,
+     0,
+     0,
+     0
+    ],
+    "frac_left_after_arrival": 0.0
+   }
+  ],
+  "fresh_nomfg": [
+   {
+    "seed": 0,
+    "n_out": 40,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": [
+     0.004711755650731675,
+     1.3301383855625564,
+     3.225813472883992
+    ],
+    "out_within_0p5m_of_rim": 8,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     8.756338502280414e-06,
+     4.898606857750565e-05,
+     0.00011814099707407877
+    ],
+    "out_unom_radial_min_med_max": [
+     -3.4294728005216024,
+     -2.198436682045952,
+     -1.0045303891400106
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.00010510416625543532,
+     -4.2297259417991705e-05,
+     -4.365935327614931e-06
+    ],
+    "out_unom_norm_med": [
+     1.004534125328064,
+     2.1984500885009766,
+     3.429481029510498
+    ],
+    "out_intervention_rate_last1s_med": [
+     1.0044854879379272,
+     2.1984291076660156,
+     3.4294614791870117
+    ],
+    "out_nearest_nb_m_med": [
+     0.5499970214786494,
+     0.549999823178303,
+     0.5500064789960192
+    ],
+    "in_unom_radial_med": [
+     -2.890853136488336,
+     -0.994624951931556,
+     0.0020217444370589296
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.549994472025397,
+     0.5499997233399442,
+     0.5500029846842382
+    ],
+    "in_count": 60,
+    "in_density_per_m2": 1.0825317547305477,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 15,
+    "core_count_r_lt_2": 24,
+    "radial_counts_0.5m": [
+     1,
+     7,
+     8,
+     8,
+     9,
+     8,
+     8,
+     9,
+     7,
+     8,
+     6,
+     6
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 1,
+    "n_out": 40,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": [
+     0.0562456432310805,
+     1.4884440954363942,
+     3.799528818199401
+    ],
+    "out_within_0p5m_of_rim": 6,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     3.8063994907133747e-06,
+     6.844858580734581e-05,
+     0.2207917422056198
+    ],
+    "out_unom_radial_min_med_max": [
+     -3.5044909484799094,
+     -2.023155440152637,
+     -1.0020280601395304
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.21436017501993174,
+     -6.753010385130288e-05,
+     3.097544680494973e-06
+    ],
+    "out_unom_norm_med": [
+     1.0020304918289185,
+     2.023176670074463,
+     3.504821300506592
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.9725469350814819,
+     2.0230016708374023,
+     3.4660449028015137
+    ],
+    "out_nearest_nb_m_med": [
+     0.5499979245820991,
+     0.5500000440778403,
+     0.5799048338297885
+    ],
+    "in_unom_radial_med": [
+     -3.009200473985015,
+     -0.9950626907559982,
+     0.002000744423314351
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499938786885409,
+     0.5499999117029474,
+     0.5500092730965352
+    ],
+    "in_count": 60,
+    "in_density_per_m2": 1.0825317547305477,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 17,
+    "core_count_r_lt_2": 23,
+    "radial_counts_0.5m": [
+     1,
+     7,
+     8,
+     7,
+     8,
+     8,
+     8,
+     10,
+     9,
+     7,
+     6,
+     6
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 2,
+    "n_out": 34,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": [
+     0.1737190596943483,
+     1.4402027882088286,
+     3.8181952639061416
+    ],
+    "out_within_0p5m_of_rim": 7,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     1.1013403309334535e-05,
+     4.8467860324308276e-05,
+     5.2360992413014174e-05
+    ],
+    "out_unom_radial_min_med_max": [
+     -3.4542366237535944,
+     -2.0770345870605276,
+     -1.0020581925269176
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -4.982853322383211e-05,
+     -4.0854879989744165e-05,
+     3.789505892766389e-05
+    ],
+    "out_unom_norm_med": [
+     1.0020604133605957,
+     2.077045440673828,
+     3.454411268234253
+    ],
+    "out_intervention_rate_last1s_med": [
+     1.0020174980163574,
+     2.077017307281494,
+     3.4544079303741455
+    ],
+    "out_nearest_nb_m_med": [
+     0.5499970418016249,
+     0.5499989266778054,
+     0.5500056850343209
+    ],
+    "in_unom_radial_med": [
+     -2.981182932478583,
+     -0.9934123898887739,
+     0.0019524681083668443
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499910238273436,
+     0.5499986551044658,
+     0.5500127044425556
+    ],
+    "in_count": 66,
+    "in_density_per_m2": 1.1907849302036027,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 19,
+    "core_count_r_lt_2": 29,
+    "radial_counts_0.5m": [
+     1,
+     9,
+     10,
+     9,
+     7,
+     10,
+     7,
+     8,
+     9,
+     6,
+     6,
+     5
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 3,
+    "n_out": 36,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": [
+     0.12621652359521285,
+     1.1508488953907814,
+     2.9874256710828497
+    ],
+    "out_within_0p5m_of_rim": 8,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     9.314458111475687e-06,
+     4.8919435357674956e-05,
+     0.4358137547969818
+    ],
+    "out_unom_radial_min_med_max": [
+     -3.4581578595795603,
+     -2.4001657790840403,
+     -1.012228458468454
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.42777294139091476,
+     -4.113415523577844e-05,
+     9.29020388700069e-06
+    ],
+    "out_unom_norm_med": [
+     1.0123212337493896,
+     2.400174379348755,
+     3.4581716060638428
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.679389476776123,
+     2.40018367767334,
+     3.458184003829956
+    ],
+    "out_nearest_nb_m_med": [
+     0.5499990698391467,
+     0.5500020364337268,
+     0.5543468415047214
+    ],
+    "in_unom_radial_med": [
+     -2.862917931568697,
+     -0.9952841462612316,
+     0.002046361558124048
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499927947844784,
+     0.5499997035846478,
+     0.5500065977878441
+    ],
+    "in_count": 64,
+    "in_density_per_m2": 1.154700538379251,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 16,
+    "core_count_r_lt_2": 26,
+    "radial_counts_0.5m": [
+     1,
+     7,
+     8,
+     10,
+     7,
+     11,
+     7,
+     11,
+     8,
+     7,
+     7,
+     6
+    ],
+    "frac_left_after_arrival": 0.0
+   },
+   {
+    "seed": 4,
+    "n_out": 49,
+    "out_ever_inside": 0,
+    "out_last_inside_s_min_med_max": null,
+    "out_excess_r_m_min_med_max": [
+     0.12430966284819878,
+     2.1604977865486523,
+     5.322138480850218
+    ],
+    "out_within_0p5m_of_rim": 6,
+    "out_upstream": 0,
+    "out_speed_last1s_med": [
+     4.834203082282329e-06,
+     4.936471668770537e-05,
+     0.03617432340979576
+    ],
+    "out_unom_radial_min_med_max": [
+     -3.4172034635128012,
+     -1.3783259991919259,
+     -1.0019110346817717
+    ],
+    "out_route_radial_min_med_max": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "out_u_radial_min_med_max": [
+     -0.03524589635624543,
+     -4.22654340655859e-05,
+     3.616133186642627e-05
+    ],
+    "out_unom_norm_med": [
+     1.001913070678711,
+     1.378350019454956,
+     3.417219877243042
+    ],
+    "out_intervention_rate_last1s_med": [
+     0.9838122725486755,
+     1.37831711769104,
+     3.4171907901763916
+    ],
+    "out_nearest_nb_m_med": [
+     0.5499983735091611,
+     0.5499997608582462,
+     0.5500110586854348
+    ],
+    "in_unom_radial_med": [
+     -2.8387477771255583,
+     -0.9943204222628492,
+     0.001980555609917661
+    ],
+    "in_nearest_nb_m_min_med_max": [
+     0.5499956002439135,
+     0.549998923158054,
+     0.5500023827304074
+    ],
+    "in_count": 51,
+    "in_density_per_m2": 0.9201519915209656,
+    "rim_shell_count_r_in_[r_goal-1,r_goal]": 14,
+    "core_count_r_lt_2": 23,
+    "radial_counts_0.5m": [
+     1,
+     7,
+     8,
+     7,
+     6,
+     6,
+     7,
+     6,
+     7,
+     7,
+     5,
+     5
+    ],
+    "frac_left_after_arrival": 0.0
+   }
+  ]
+ }
+}
