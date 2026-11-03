@@ -18,3 +18,12 @@
 2026-11-03 15:56:42 N150_fixed0.85 exit=0 10 seeds
 2026-11-03 15:59:46 N150_fixed1.00 exit=0 10 seeds
 2026-11-03 15:59:57 N150_fixed1.20 exit=0 10 seeds
+2026-11-03 15:59:59 checkpoint committed locally (NO_PUSH) ef7872b: amend35 N=150 capped sigma (+ fixed re-run if off-A100) rollouts (partial, not a result)
+2026-11-03 16:05:33 N200_sigma_a0.01 exit=0 10 seeds
+2026-11-03 16:05:34 N200_sigma_a0.05 exit=0 10 seeds
+2026-11-03 16:09:56 N200_sigma_bin_a0.05 exit=0 10 seeds
+2026-11-03 16:10:04 N200_sigma_a0.1 exit=0 10 seeds
+2026-11-03 16:13:26 N200_fixed0.70 exit=0 10 seeds
+2026-11-03 16:13:36 N200_fixed0.85 exit=0 10 seeds
+2026-11-03 16:17:06 N200_fixed1.00 exit=0 10 seeds
+2026-11-03 16:17:16 N200_fixed1.20 exit=0 10 seeds
