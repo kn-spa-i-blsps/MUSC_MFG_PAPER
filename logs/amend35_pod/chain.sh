@@ -20,12 +20,16 @@ GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader)
 log "chain start gpu=$GPU HEAD $(git rev-parse HEAD)"
 log "aneks sha256 $(sha256sum prereg/prereg_projectA_amend35_sigma_cap.md | cut -c1-64)"
 log "sigma weights sha256 $(sha256sum results/phaseB/sigma_v3/sigma_weights.npz | cut -c1-64)"
-echo "$GPU" | grep -q "A100-SXM4-80GB" || { log "ABORT: GPU is not A100-SXM4-80GB; the aneks requires re-running the fixed arms (manual)"; exit 1; }
-log "amend31 fixed rows: $(validate_run_dirs $A31/N150 $A31/N200 | tail -1)"
-nf=0; for N in 150 200; do for d in 0.70 0.85 1.00 1.20; do for s in 0 1 2 3 4 5 6 7 8 9; do
-  [ -f $A31/N$N/fixed$d/learned/logs_seed$s.npz ] && nf=$((nf+1)); done; done; done
-log "amend31 fixed npz present: $nf/80"
-[ "$nf" = 80 ] || { log "ABORT: amend31 fixed comparator rows missing on the volume"; exit 1; }
+RERUN=0
+if echo "$GPU" | grep -q "A100-SXM4-80GB"; then
+  log "amend31 fixed rows: $(validate_run_dirs $A31/N150 $A31/N200 | tail -1)"
+  nf=0; for N in 150 200; do for d in 0.70 0.85 1.00 1.20; do for s in 0 1 2 3 4 5 6 7 8 9; do
+    [ -f $A31/N$N/fixed$d/learned/logs_seed$s.npz ] && nf=$((nf+1)); done; done; done
+  log "amend31 fixed npz present: $nf/80"
+  [ "$nf" = 80 ] || { log "ABORT: amend31 fixed comparator rows missing on the volume"; exit 1; }
+else
+  RERUN=1; log "GPU is not A100-SXM4-80GB: per the aneks the fixed arms are re-run on this GPU (experiments/amend35_cells/fixed_rerun)"
+fi
 for N in 150 200; do
   python -m experiments.amend21_N_crossover solve --N $N > $L/solve_N$N.log 2>&1
   log "solve N=$N exit=$? $(tail -n 1 $L/solve_N$N.log | cut -c1-160)"
@@ -59,16 +63,16 @@ checkpoint "amend35 sanity (rc=$rc), before any capped rollout" $R/sanity.json $
 # ---- capped sigma-CBF, per N, pushed per N
 export L W
 for N in 150 200; do
-  ls $CD/N${N}_*.yaml | xargs -P 2 -L 1 bash -c '
+  { ls $CD/N${N}_*.yaml; [ $RERUN = 1 ] && ls $CD/fixed_rerun/N${N}_*.yaml; } | xargs -P 2 -L 1 bash -c '
     y=$0; c=$(basename $y .yaml)
     rn=$(python -c "import yaml; print(yaml.safe_load(open(\"$y\"))[\"run_name\"])")
     miss=""; for s in 0 1 2 3 4 5 6 7 8 9; do [ -f results/$rn/learned/metrics_seed$s.json ] || miss="$miss $s"; done
     [ -z "$miss" ] && exit 0
     python -m experiments.ladder --config $y --mode eval --arm learned --weights $W --seeds $miss > $L/eval_$c.log 2>&1
     echo "$(date "+%F %T") $c exit=$? $(grep -c "seed=" $L/eval_$c.log) seeds"'
-  checkpoint "amend35 N=$N capped sigma rollouts (partial, not a result)" $R/N$N/*/*/metrics_seed*.json $L/*.log
+  checkpoint "amend35 N=$N capped sigma (+ fixed re-run if off-A100) rollouts (partial, not a result)" $R/N$N/*/*/metrics_seed*.json $L/*.log
 done
-n=$(ls $R/N*/*/learned/metrics_seed*.json | wc -l); log "capped rollouts: $n/80"
+n=$(ls $R/N*/sigma*/learned/metrics_seed*.json | wc -l); log "capped rollouts: $n/80; fixed re-run rows: $(ls $R/N*/fixed*/learned/metrics_seed*.json 2>/dev/null | wc -l)"
 python -m $M report > $L/report.log 2>&1; rc=$?
 log "report exit=$rc"; tail -30 $L/report.log
 checkpoint "amend35 report (exit $rc, $n/80 rollouts): capped sigma-CBF G-win, pushed immediately" $R/report.json $L/*.log

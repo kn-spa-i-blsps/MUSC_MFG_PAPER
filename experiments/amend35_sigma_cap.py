@@ -54,6 +54,14 @@ def cmd_write_cells(a):
                 f.write(f"# AMEND35 cell N{N:03d} {arm}: amend31 cell (cell_cfg, same calibration) + cbf.margin_cap {D_MAX}, "
                         f"run_name\n")
                 yaml.safe_dump(c, f, sort_keys=False)
+    os.makedirs(os.path.join(CELL_DIR, "fixed_rerun"), exist_ok=True)
+    for N in NS:                             # aneks: off-A100 the fixed arms are re-run on the same GPU
+        for arm in fixed_arms():
+            c = cell_cfg(N, arm, cal)
+            c["run_name"] = f"{RUN}/N{N:03d}/{arm}"
+            with open(os.path.join(CELL_DIR, "fixed_rerun", f"N{N:03d}_{arm}.yaml"), "w") as f:
+                f.write(f"# AMEND35 fixed re-run cell N{N:03d} {arm}: amend31 cell unchanged except run_name\n")
+                yaml.safe_dump(c, f, sort_keys=False)
     c = cell_cfg(150, PRIMARY, cal)          # sanity: NO cap (margin_cap absent) = the amend31 cell, own run_name
     c["run_name"] = f"{RUN}/sanity/N150_{PRIMARY}_nocap"
     with open(os.path.join(CELL_DIR, "sanity", f"N150_{PRIMARY}_nocap.yaml"), "w") as f:
@@ -118,7 +126,10 @@ def cmd_report(a):
     ps = lambda r, k: r[k]["per_seed"]
     for N in NS:
         sc = build_scenario(yaml.safe_load(open(os.path.join(CELL_DIR, f"N{N:03d}_{PRIMARY}.yaml"))), N)
-        rows = {arm: run_rows(os.path.join(A31, f"N{N:03d}", arm, "learned"), sc, a.seeds, 0.30) for arm in fixed_arms()}
+        rer = os.path.exists(os.path.join(RES, f"N{N:03d}", "fixed0.70", "learned", "metrics_seed0.json"))
+        out.setdefault("fixed_source", {})[str(N)] = "re-run on this GPU (amend35)" if rer else "amend31 (A100)"
+        fsrc = RES if rer else A31
+        rows = {arm: run_rows(os.path.join(fsrc, f"N{N:03d}", arm, "learned"), sc, a.seeds, 0.30) for arm in fixed_arms()}
         rows.update({arm: run_rows(os.path.join(RES, f"N{N:03d}", arm, "learned"), sc, a.seeds, 0.30, extra=SIG_EXTRA)
                      for arm in sigma_arms()})
         out["rows"][str(N)] = rows
