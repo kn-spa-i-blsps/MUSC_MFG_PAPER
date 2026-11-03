@@ -9,3 +9,12 @@
 2026-11-03 15:44:46 S2 old-code rollout exit=0 (worktree 459d624)
 2026-11-03 15:45:16 S2 new-code rollout exit=0
 2026-11-03 15:45:19 S2 sanity rc=0: {"S1_pass": false, "S2_pass": true, "pass": true} S1 differing keys: {'completeness_final': {'amend31': 0.86, 'new': 0.8933333333333333, 'equal': False}, 'collision_pair_steps': {'amend31': 1296, 'new': 1716, 'equal': False}, 'min_sep_overall_m': {'amend31': 6.9141387939453125e-06, 'new': 8.996945325634442e-06, 'equal': False}, 'p5_sep_worst_step_m': {'amend31': 0.43033409118652344, 'new': 0.43444
+2026-11-03 15:45:19 checkpoint committed locally (NO_PUSH) 9fec57d: amend35 sanity (rc=0), before any capped rollout
+2026-11-03 15:49:29 N150_sigma_a0.01 exit=0 10 seeds
+2026-11-03 15:49:29 N150_sigma_a0.05 exit=0 10 seeds
+2026-11-03 15:53:26 N150_sigma_a0.1 exit=0 10 seeds
+2026-11-03 15:53:29 N150_sigma_bin_a0.05 exit=0 10 seeds
+2026-11-03 15:56:32 N150_fixed0.70 exit=0 10 seeds
+2026-11-03 15:56:42 N150_fixed0.85 exit=0 10 seeds
+2026-11-03 15:59:46 N150_fixed1.00 exit=0 10 seeds
+2026-11-03 15:59:57 N150_fixed1.20 exit=0 10 seeds
