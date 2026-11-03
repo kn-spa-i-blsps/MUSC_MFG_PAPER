@@ -56,6 +56,7 @@ class CBFParams(NamedTuple):
                                    # d_safe_ij = max(margin_floor, D_COLLISION + margin_k * margin_q * sigma_ij), no cap
     margin_q_edges: tuple | None = None  # amend31 sigma_bin: log-sigma bin edges (4); q = margin_q_vals[bin] per pair
     margin_q_vals: tuple | None = None   # (5); None = the scalar margin_q
+    margin_cap: float | None = None      # amend35 sigma mode: cap on d_safe_ij (and sigma_c <= (cap - D_COLLISION)/k); None = amend31 (no cap)
 
 
 def _closest_on_segments(p, segs):

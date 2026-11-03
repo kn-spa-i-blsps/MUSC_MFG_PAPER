@@ -67,7 +67,11 @@ def make_rollout(condition, scenario, cfg, *, predictor_params=None, field_param
             q = (prm.margin_q if prm.margin_q_edges is None else   # amend31 sigma_bin: Mondrian (N, sigma-quintile) q
                  jnp.asarray(prm.margin_q_vals)[jnp.searchsorted(jnp.asarray(prm.margin_q_edges), slog, side="right")])
             sigma_c = q * jnp.exp(slog)
+            if prm.margin_cap is not None:   # amend35: cap sigma_c and d_safe_ij at d_max; None = amend31 graph unchanged
+                sigma_c = jnp.minimum(sigma_c, (prm.margin_cap - D_COLLISION) / prm.margin_k)
             d_safe_pair = jnp.maximum(prm.margin_floor, D_COLLISION + prm.margin_k * sigma_c)
+            if prm.margin_cap is not None:
+                d_safe_pair = jnp.minimum(d_safe_pair, prm.margin_cap)
         elif adaptive and closing:   # amend19: d_safe_ij = max(floor, D_COLLISION + k * max(0, v_closing_ij) * h)
             hb, pkb = jax.lax.optimization_barrier((history, pk))
             v_hat_j = neighbour_abs_velocity(hb, k, dt_exec, N, pkb)            # (N_i,N_j,2) heard abs velocity of j
