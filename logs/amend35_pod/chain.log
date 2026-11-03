@@ -1,0 +1,11 @@
+2026-11-03 15:27:16 chain start gpu=NVIDIA RTX PRO 6000 Blackwell Server Edition HEAD 30653832909742b2ee2fbddf6e78857bf48ee1db
+2026-11-03 15:27:16 aneks sha256 d3b3b46a362a7f7198c233a91445355e42f0e4557b0e908e2fdff9e2d4cf37b2
+2026-11-03 15:27:16 sigma weights sha256 26aff908862c352c94a2a18fcbdb83908ee5c107b37c658d6021cade510e83bb
+2026-11-03 15:27:16 GPU is not A100-SXM4-80GB: per the aneks the fixed arms are re-run on this GPU (experiments/amend35_cells/fixed_rerun)
+2026-11-03 15:35:19 solve N=150 exit=0 {"N": 150, "cache": "results/cache/macro_N150_cw1_2f21768897.npz", "wall_s_this_call": 478.57885098457336, "solve_seconds": 466.6953911781311, "horizon_s": 131.
+2026-11-03 15:43:20 solve N=200 exit=0 {"N": 200, "cache": "results/cache/macro_N200_cw1_6490094688.npz", "wall_s_this_call": 477.9699013233185, "solve_seconds": 466.597749710083, "horizon_s": 131.48
+2026-11-03 15:44:06 S1 rollout exit=0
+2026-11-03 15:44:09 S1 sanity rc=2: {"S1_pass": false, "pass": false} S1 differing keys: {'completeness_final': {'amend31': 0.86, 'new': 0.8933333333333333, 'equal': False}, 'collision_pair_steps': {'amend31': 1296, 'new': 1716, 'equal': False}, 'min_sep_overall_m': {'amend31': 6.9141387939453125e-06, 'new': 8.996945325634442e-06, 'equal': False}, 'p5_sep_worst_step_m': {'amend31': 0.43033409118652344, 'new': 0.434444785118103, 'equ
+2026-11-03 15:44:46 S2 old-code rollout exit=0 (worktree 459d624)
+2026-11-03 15:45:16 S2 new-code rollout exit=0
+2026-11-03 15:45:19 S2 sanity rc=0: {"S1_pass": false, "S2_pass": true, "pass": true} S1 differing keys: {'completeness_final': {'amend31': 0.86, 'new': 0.8933333333333333, 'equal': False}, 'collision_pair_steps': {'amend31': 1296, 'new': 1716, 'equal': False}, 'min_sep_overall_m': {'amend31': 6.9141387939453125e-06, 'new': 8.996945325634442e-06, 'equal': False}, 'p5_sep_worst_step_m': {'amend31': 0.43033409118652344, 'new': 0.43444
