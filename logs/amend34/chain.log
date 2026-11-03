@@ -1,0 +1,16 @@
+start 2026-11-03T10:22:39+01:00 HEAD 02cc47a
+stopped by user 2026-11-03T10:26:27+01:00 (computer shutdown); no rollout finished
+start 2026-11-03T11:08:41+01:00 HEAD 02cc47a
+done ab split:noise_only/noise_only s0 rc=0 2026-11-03T11:35:59+01:00
+done check_real split:real/real s0 rc=0 2026-11-03T11:36:06+01:00
+done ab split:real/noise_only s0 rc=0 2026-11-03T11:55:52+01:00
+done ab split:noise_only/real s0 rc=0 2026-11-03T11:55:53+01:00
+done ab split:real/noise_only s1 rc=0 2026-11-03T12:15:56+01:00
+done ab split:noise_only/real s1 rc=0 2026-11-03T12:16:00+01:00
+done ab split:real/noise_only s2 rc=0 2026-11-03T12:35:44+01:00
+done ab split:noise_only/real s2 rc=0 2026-11-03T12:36:01+01:00
+done ab split:real/noise_only s3 rc=0 2026-11-03T12:55:49+01:00
+done ab split:noise_only/real s3 rc=0 2026-11-03T12:56:03+01:00
+done ab split:real/noise_only s4 rc=0 2026-11-03T13:15:30+01:00
+done ab split:noise_only/real s4 rc=0 2026-11-03T13:15:58+01:00
+report rc=0 2026-11-03T13:16:20+01:00

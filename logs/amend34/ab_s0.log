@@ -1,0 +1,12 @@
+[ladder] jax_default_matmul_precision = None
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[split:noise_only/noise_only seed=0] 1607s compl=0.870 coll=0 minsep=0.460 p5=0.506 interv=0.748 slack=0.1355
+[ladder] jax_default_matmul_precision = None
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[ladder] jax_default_matmul_precision = None
+[ladder] t_slot = 0.005
+[ladder] sigma_r = 0.1 sigma_theta = 0.03490658503988659 p_loss = 0.0 nu = 0.0
+[split:real/noise_only seed=0] 1188s compl=0.850 coll=0 minsep=0.471 p5=0.505 interv=0.757 slack=0.1413
+[split:noise_only/real seed=0] 1182s compl=0.750 coll=37791 minsep=0.001 p5=0.028 interv=0.740 slack=0.2162

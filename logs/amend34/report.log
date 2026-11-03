@@ -1,0 +1,42 @@
+EXPLORATORY. check: {"real": {"pos": true, "keys": true}, "noise_only": {"pos": true, "keys": true}}
+real         s0 fleet=0 reached=0.74 ever_coll=100 coll_ps= 44881 t90=None makespan=32.07 not_arr=26 (moving 25, gate 0, other 1: up 0 / down 1)
+real         s1 fleet=0 reached=0.68 ever_coll=100 coll_ps= 46165 t90=None makespan=26.07 not_arr=32 (moving 32, gate 0, other 0: up 0 / down 0)
+real         s2 fleet=0 reached=0.77 ever_coll=100 coll_ps= 43296 t90=None makespan=25.41 not_arr=23 (moving 22, gate 0, other 1: up 0 / down 1)
+real         s3 fleet=0 reached=0.70 ever_coll=100 coll_ps= 45299 t90=None makespan=26.560000000000002 not_arr=30 (moving 28, gate 0, other 2: up 0 / down 2)
+real         s4 fleet=0 reached=0.70 ever_coll=100 coll_ps= 46271 t90=None makespan=24.87 not_arr=30 (moving 30, gate 0, other 0: up 0 / down 0)
+noise_only   s0 fleet=0 reached=0.87 ever_coll=  0 coll_ps=     0 t90=None makespan=None not_arr=13 (moving 9, gate 0, other 4: up 0 / down 4)
+noise_only   s1 fleet=0 reached=0.87 ever_coll=  0 coll_ps=     0 t90=67.97 makespan=67.79 not_arr=13 (moving 6, gate 0, other 7: up 0 / down 7)
+noise_only   s2 fleet=0 reached=0.85 ever_coll=  0 coll_ps=     0 t90=67.59 makespan=None not_arr=15 (moving 5, gate 0, other 10: up 0 / down 10)
+noise_only   s3 fleet=0 reached=0.85 ever_coll=  0 coll_ps=     0 t90=None makespan=None not_arr=15 (moving 4, gate 0, other 11: up 0 / down 11)
+noise_only   s4 fleet=0 reached=0.87 ever_coll=  0 coll_ps=     0 t90=69.47 makespan=None not_arr=13 (moving 8, gate 0, other 5: up 0 / down 5)
+A_cbf_fresh  s0 fleet=0 reached=0.85 ever_coll=  0 coll_ps=     0 t90=67.63 makespan=None not_arr=15 (moving 9, gate 0, other 6: up 0 / down 6)
+A_cbf_fresh  s1 fleet=0 reached=0.83 ever_coll=  0 coll_ps=     0 t90=69.97 makespan=None not_arr=17 (moving 9, gate 0, other 8: up 0 / down 8)
+A_cbf_fresh  s2 fleet=0 reached=0.85 ever_coll=  0 coll_ps=     0 t90=68.92 makespan=None not_arr=15 (moving 9, gate 0, other 6: up 0 / down 6)
+A_cbf_fresh  s3 fleet=0 reached=0.89 ever_coll=  0 coll_ps=     0 t90=67.88 makespan=None not_arr=11 (moving 6, gate 0, other 5: up 0 / down 5)
+A_cbf_fresh  s4 fleet=0 reached=0.86 ever_coll=  0 coll_ps=     0 t90=69.49 makespan=None not_arr=14 (moving 8, gate 0, other 6: up 0 / down 6)
+B_mfg_fresh  s0 fleet=0 reached=0.75 ever_coll=100 coll_ps= 37791 t90=None makespan=26.09 not_arr=25 (moving 23, gate 0, other 2: up 0 / down 2)
+B_mfg_fresh  s1 fleet=0 reached=0.76 ever_coll=100 coll_ps= 39109 t90=None makespan=28.38 not_arr=24 (moving 23, gate 0, other 1: up 0 / down 1)
+B_mfg_fresh  s2 fleet=0 reached=0.78 ever_coll=100 coll_ps= 38168 t90=None makespan=25.310000000000002 not_arr=22 (moving 22, gate 0, other 0: up 0 / down 0)
+B_mfg_fresh  s3 fleet=0 reached=0.68 ever_coll=100 coll_ps= 37935 t90=None makespan=29.5 not_arr=32 (moving 31, gate 0, other 1: up 0 / down 1)
+B_mfg_fresh  s4 fleet=0 reached=0.75 ever_coll=100 coll_ps= 39544 t90=None makespan=30.53 not_arr=25 (moving 24, gate 0, other 1: up 0 / down 1)
+A_cbf_fresh_minus_real       fleet_success              +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+A_cbf_fresh_minus_real       reached_goal               +0.138 [+0.102, +0.170] p_signflip=0.0625 per_seed=[0.11, 0.15, 0.08, 0.19, 0.16]
+A_cbf_fresh_minus_real       drones_ever_collided     -100.000 [-100.000, -100.000] p_signflip=0.0625 per_seed=[-100.0, -100.0, -100.0, -100.0, -100.0]
+A_cbf_fresh_minus_real       collision_pair_steps   -45182.400 [-46013.000, -44186.800] p_signflip=0.0625 per_seed=[-44881.0, -46165.0, -43296.0, -45299.0, -46271.0]
+A_cbf_fresh_minus_noise_only fleet_success              +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+A_cbf_fresh_minus_noise_only reached_goal               -0.006 [-0.028, +0.020] p_signflip=0.7500 per_seed=[-0.02, -0.04, 0.0, 0.04, -0.01]
+A_cbf_fresh_minus_noise_only drones_ever_collided       +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+A_cbf_fresh_minus_noise_only collision_pair_steps       +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+A_cbf_fresh_minus_noise_only t90_s                      +1.117 [+0.020, +2.000] p_signflip=0.2500 per_seed=[2.0, 1.33, 0.02]
+B_mfg_fresh_minus_real       fleet_success              +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+B_mfg_fresh_minus_real       reached_goal               +0.026 [-0.002, +0.054] p_signflip=0.3125 per_seed=[0.01, 0.08, 0.01, -0.02, 0.05]
+B_mfg_fresh_minus_real       drones_ever_collided       +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+B_mfg_fresh_minus_real       collision_pair_steps    -6673.000 [-7192.800, -5895.000] p_signflip=0.0625 per_seed=[-7090.0, -7056.0, -5128.0, -7364.0, -6727.0]
+B_mfg_fresh_minus_real       makespan_s                 +0.966 [-2.664, +3.964] p_signflip=0.7500 per_seed=[-5.98, 2.31, -0.1, 2.94, 5.66]
+B_mfg_fresh_minus_noise_only fleet_success              +0.000 [+0.000, +0.000] p_signflip=1.0000 per_seed=[0.0, 0.0, 0.0, 0.0, 0.0]
+B_mfg_fresh_minus_noise_only reached_goal               -0.118 [-0.148, -0.090] p_signflip=0.0625 per_seed=[-0.12, -0.11, -0.07, -0.17, -0.12]
+B_mfg_fresh_minus_noise_only drones_ever_collided     +100.000 [+100.000, +100.000] p_signflip=0.0625 per_seed=[100.0, 100.0, 100.0, 100.0, 100.0]
+B_mfg_fresh_minus_noise_only collision_pair_steps   +38509.400 [+37924.000, +39106.400] p_signflip=0.0625 per_seed=[37791.0, 39109.0, 38168.0, 37935.0, 39544.0]
+B_mfg_fresh_minus_noise_only makespan_s                -39.410 [-39.410, -39.410] p_signflip=1.0000 per_seed=[-39.41]
+recovered fraction: {"A_cbf_fresh": {"drones_ever_collided": 1.0, "collision_pair_steps": 1.0, "reached_goal": 0.9583333333333348, "fleet_success": null}, "B_mfg_fresh": {"drones_ever_collided": -0.0, "collision_pair_steps": 0.14769025107121356, "reached_goal": 0.18055555555555583, "fleet_success": null}}
+readings: {"A_close_to_noise_only_on_collisions": true, "B_moves_reached_goal_toward_noise_only": false, "neither_alone_recovers": false}

@@ -1,0 +1,796 @@
+{
+ "label": "EXPLORATORY",
+ "aneks_sha256": "9f2c0642ecc419fe0cabaccffce9a23f410dcd2d2d2c9a665371422fdeb394f2",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "check": {
+  "real": {
+   "pos_bit_equal": true,
+   "keys_equal": true,
+   "keys": {
+    "completeness_final": [
+     0.74,
+     0.74
+    ],
+    "collision_pair_steps": [
+     44881,
+     44881
+    ],
+    "min_sep_overall_m": [
+     0.0015665253158658743,
+     0.0015665253158658743
+    ],
+    "p5_sep_worst_step_m": [
+     0.020574308931827545,
+     0.020574308931827545
+    ],
+    "cbf_intervention_rate": [
+     0.7487468030690537,
+     0.7487468030690537
+    ],
+    "slack_active_rate": [
+     0.23601875532821825,
+     0.23601875532821825
+    ],
+    "integral_W_true": [
+     69.95906066894531,
+     69.95906066894531
+    ]
+   }
+  },
+  "noise_only": {
+   "pos_bit_equal": true,
+   "keys_equal": true,
+   "keys": {
+    "completeness_final": [
+     0.87,
+     0.87
+    ],
+    "collision_pair_steps": [
+     0,
+     0
+    ],
+    "min_sep_overall_m": [
+     0.4599347412586212,
+     0.4599347412586212
+    ],
+    "p5_sep_worst_step_m": [
+     0.5064423680305481,
+     0.5064423680305481
+    ],
+    "cbf_intervention_rate": [
+     0.7479724353509519,
+     0.7479724353509519
+    ],
+    "slack_active_rate": [
+     0.13547314578005115,
+     0.13547314578005115
+    ],
+    "integral_W_true": [
+     152.3473358154297,
+     152.3473358154297
+    ]
+   }
+  }
+ },
+ "per_seed": {
+  "real": [
+   {
+    "seed": 0,
+    "fleet_success": 0,
+    "reached_goal": 0.74,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 44881,
+    "makespan_s": 32.07,
+    "t90_s": null,
+    "n_not_arrived": 26,
+    "na_still_moving": 25,
+    "na_jammed_gate": 0,
+    "na_other": 1,
+    "na_other_upstream": 0,
+    "na_other_downstream": 1,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 1,
+    "fleet_success": 0,
+    "reached_goal": 0.68,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 46165,
+    "makespan_s": 26.07,
+    "t90_s": null,
+    "n_not_arrived": 32,
+    "na_still_moving": 32,
+    "na_jammed_gate": 0,
+    "na_other": 0,
+    "na_other_upstream": 0,
+    "na_other_downstream": 0,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 2,
+    "fleet_success": 0,
+    "reached_goal": 0.77,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 43296,
+    "makespan_s": 25.41,
+    "t90_s": null,
+    "n_not_arrived": 23,
+    "na_still_moving": 22,
+    "na_jammed_gate": 0,
+    "na_other": 1,
+    "na_other_upstream": 0,
+    "na_other_downstream": 1,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 3,
+    "fleet_success": 0,
+    "reached_goal": 0.7,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 45299,
+    "makespan_s": 26.560000000000002,
+    "t90_s": null,
+    "n_not_arrived": 30,
+    "na_still_moving": 28,
+    "na_jammed_gate": 0,
+    "na_other": 2,
+    "na_other_upstream": 0,
+    "na_other_downstream": 2,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 4,
+    "fleet_success": 0,
+    "reached_goal": 0.7,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 46271,
+    "makespan_s": 24.87,
+    "t90_s": null,
+    "n_not_arrived": 30,
+    "na_still_moving": 30,
+    "na_jammed_gate": 0,
+    "na_other": 0,
+    "na_other_upstream": 0,
+    "na_other_downstream": 0,
+    "check_completeness_equal": true
+   }
+  ],
+  "noise_only": [
+   {
+    "seed": 0,
+    "fleet_success": 0,
+    "reached_goal": 0.87,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": null,
+    "n_not_arrived": 13,
+    "na_still_moving": 9,
+    "na_jammed_gate": 0,
+    "na_other": 4,
+    "na_other_upstream": 0,
+    "na_other_downstream": 4,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 1,
+    "fleet_success": 0,
+    "reached_goal": 0.87,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": 67.79,
+    "t90_s": 67.97,
+    "n_not_arrived": 13,
+    "na_still_moving": 6,
+    "na_jammed_gate": 0,
+    "na_other": 7,
+    "na_other_upstream": 0,
+    "na_other_downstream": 7,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 2,
+    "fleet_success": 0,
+    "reached_goal": 0.85,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 67.59,
+    "n_not_arrived": 15,
+    "na_still_moving": 5,
+    "na_jammed_gate": 0,
+    "na_other": 10,
+    "na_other_upstream": 0,
+    "na_other_downstream": 10,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 3,
+    "fleet_success": 0,
+    "reached_goal": 0.85,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": null,
+    "n_not_arrived": 15,
+    "na_still_moving": 4,
+    "na_jammed_gate": 0,
+    "na_other": 11,
+    "na_other_upstream": 0,
+    "na_other_downstream": 11,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 4,
+    "fleet_success": 0,
+    "reached_goal": 0.87,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 69.47,
+    "n_not_arrived": 13,
+    "na_still_moving": 8,
+    "na_jammed_gate": 0,
+    "na_other": 5,
+    "na_other_upstream": 0,
+    "na_other_downstream": 5,
+    "check_completeness_equal": true
+   }
+  ],
+  "A_cbf_fresh": [
+   {
+    "seed": 0,
+    "fleet_success": 0,
+    "reached_goal": 0.85,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 67.63,
+    "n_not_arrived": 15,
+    "na_still_moving": 9,
+    "na_jammed_gate": 0,
+    "na_other": 6,
+    "na_other_upstream": 0,
+    "na_other_downstream": 6,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 1,
+    "fleet_success": 0,
+    "reached_goal": 0.83,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 69.97,
+    "n_not_arrived": 17,
+    "na_still_moving": 9,
+    "na_jammed_gate": 0,
+    "na_other": 8,
+    "na_other_upstream": 0,
+    "na_other_downstream": 8,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 2,
+    "fleet_success": 0,
+    "reached_goal": 0.85,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 68.92,
+    "n_not_arrived": 15,
+    "na_still_moving": 9,
+    "na_jammed_gate": 0,
+    "na_other": 6,
+    "na_other_upstream": 0,
+    "na_other_downstream": 6,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 3,
+    "fleet_success": 0,
+    "reached_goal": 0.89,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 67.88,
+    "n_not_arrived": 11,
+    "na_still_moving": 6,
+    "na_jammed_gate": 0,
+    "na_other": 5,
+    "na_other_upstream": 0,
+    "na_other_downstream": 5,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 4,
+    "fleet_success": 0,
+    "reached_goal": 0.86,
+    "drones_ever_collided": 0,
+    "collision_pair_steps": 0,
+    "makespan_s": null,
+    "t90_s": 69.49,
+    "n_not_arrived": 14,
+    "na_still_moving": 8,
+    "na_jammed_gate": 0,
+    "na_other": 6,
+    "na_other_upstream": 0,
+    "na_other_downstream": 6,
+    "check_completeness_equal": true
+   }
+  ],
+  "B_mfg_fresh": [
+   {
+    "seed": 0,
+    "fleet_success": 0,
+    "reached_goal": 0.75,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 37791,
+    "makespan_s": 26.09,
+    "t90_s": null,
+    "n_not_arrived": 25,
+    "na_still_moving": 23,
+    "na_jammed_gate": 0,
+    "na_other": 2,
+    "na_other_upstream": 0,
+    "na_other_downstream": 2,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 1,
+    "fleet_success": 0,
+    "reached_goal": 0.76,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 39109,
+    "makespan_s": 28.38,
+    "t90_s": null,
+    "n_not_arrived": 24,
+    "na_still_moving": 23,
+    "na_jammed_gate": 0,
+    "na_other": 1,
+    "na_other_upstream": 0,
+    "na_other_downstream": 1,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 2,
+    "fleet_success": 0,
+    "reached_goal": 0.78,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 38168,
+    "makespan_s": 25.310000000000002,
+    "t90_s": null,
+    "n_not_arrived": 22,
+    "na_still_moving": 22,
+    "na_jammed_gate": 0,
+    "na_other": 0,
+    "na_other_upstream": 0,
+    "na_other_downstream": 0,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 3,
+    "fleet_success": 0,
+    "reached_goal": 0.68,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 37935,
+    "makespan_s": 29.5,
+    "t90_s": null,
+    "n_not_arrived": 32,
+    "na_still_moving": 31,
+    "na_jammed_gate": 0,
+    "na_other": 1,
+    "na_other_upstream": 0,
+    "na_other_downstream": 1,
+    "check_completeness_equal": true
+   },
+   {
+    "seed": 4,
+    "fleet_success": 0,
+    "reached_goal": 0.75,
+    "drones_ever_collided": 100,
+    "collision_pair_steps": 39544,
+    "makespan_s": 30.53,
+    "t90_s": null,
+    "n_not_arrived": 25,
+    "na_still_moving": 24,
+    "na_jammed_gate": 0,
+    "na_other": 1,
+    "na_other_upstream": 0,
+    "na_other_downstream": 1,
+    "check_completeness_equal": true
+   }
+  ]
+ },
+ "means": {
+  "real": {
+   "fleet_success": 0.0,
+   "reached_goal": 0.718,
+   "drones_ever_collided": 100.0,
+   "collision_pair_steps": 45182.4,
+   "t90_s": null,
+   "makespan_s": 26.996
+  },
+  "noise_only": {
+   "fleet_success": 0.0,
+   "reached_goal": 0.8619999999999999,
+   "drones_ever_collided": 0.0,
+   "collision_pair_steps": 0.0,
+   "t90_s": 68.34333333333333,
+   "makespan_s": 67.79
+  },
+  "A_cbf_fresh": {
+   "fleet_success": 0.0,
+   "reached_goal": 0.8560000000000001,
+   "drones_ever_collided": 0.0,
+   "collision_pair_steps": 0.0,
+   "t90_s": 68.77799999999999,
+   "makespan_s": null
+  },
+  "B_mfg_fresh": {
+   "fleet_success": 0.0,
+   "reached_goal": 0.744,
+   "drones_ever_collided": 100.0,
+   "collision_pair_steps": 38509.4,
+   "t90_s": null,
+   "makespan_s": 27.962
+  }
+ },
+ "contrasts": {
+  "A_cbf_fresh_minus_real": {
+   "fleet_success": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "reached_goal": {
+    "mean": 0.13799999999999998,
+    "per_seed": [
+     0.10999999999999999,
+     0.1499999999999999,
+     0.07999999999999996,
+     0.19000000000000006,
+     0.16000000000000003
+    ],
+    "n": 5,
+    "ci95": [
+     0.10199999999999998,
+     0.17
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "drones_ever_collided": {
+    "mean": -100.0,
+    "per_seed": [
+     -100.0,
+     -100.0,
+     -100.0,
+     -100.0,
+     -100.0
+    ],
+    "n": 5,
+    "ci95": [
+     -100.0,
+     -100.0
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "collision_pair_steps": {
+    "mean": -45182.4,
+    "per_seed": [
+     -44881.0,
+     -46165.0,
+     -43296.0,
+     -45299.0,
+     -46271.0
+    ],
+    "n": 5,
+    "ci95": [
+     -46013.0,
+     -44186.8
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "t90_s": null,
+   "makespan_s": null
+  },
+  "A_cbf_fresh_minus_noise_only": {
+   "fleet_success": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "reached_goal": {
+    "mean": -0.006000000000000005,
+    "per_seed": [
+     -0.020000000000000018,
+     -0.040000000000000036,
+     0.0,
+     0.040000000000000036,
+     -0.010000000000000009
+    ],
+    "n": 5,
+    "ci95": [
+     -0.028000000000000025,
+     0.020000000000000018
+    ],
+    "signflip_p": 0.75,
+    "signflip_min_p": 0.0625
+   },
+   "drones_ever_collided": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "collision_pair_steps": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "t90_s": {
+    "mean": 1.1166666666666647,
+    "per_seed": [
+     2.0,
+     1.3299999999999983,
+     0.01999999999999602
+    ],
+    "n": 3,
+    "ci95": [
+     0.01999999999999602,
+     2.0
+    ],
+    "signflip_p": 0.25,
+    "signflip_min_p": 0.25
+   },
+   "makespan_s": null
+  },
+  "B_mfg_fresh_minus_real": {
+   "fleet_success": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "reached_goal": {
+    "mean": 0.026000000000000023,
+    "per_seed": [
+     0.010000000000000009,
+     0.07999999999999996,
+     0.010000000000000009,
+     -0.019999999999999907,
+     0.050000000000000044
+    ],
+    "n": 5,
+    "ci95": [
+     -0.0019999999999999575,
+     0.054000000000000006
+    ],
+    "signflip_p": 0.3125,
+    "signflip_min_p": 0.0625
+   },
+   "drones_ever_collided": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "collision_pair_steps": {
+    "mean": -6673.0,
+    "per_seed": [
+     -7090.0,
+     -7056.0,
+     -5128.0,
+     -7364.0,
+     -6727.0
+    ],
+    "n": 5,
+    "ci95": [
+     -7192.8,
+     -5895.0
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "t90_s": null,
+   "makespan_s": {
+    "mean": 0.9659999999999996,
+    "per_seed": [
+     -5.98,
+     2.3099999999999987,
+     -0.09999999999999787,
+     2.9399999999999977,
+     5.66
+    ],
+    "n": 5,
+    "ci95": [
+     -2.6640000000000006,
+     3.964
+    ],
+    "signflip_p": 0.75,
+    "signflip_min_p": 0.0625
+   }
+  },
+  "B_mfg_fresh_minus_noise_only": {
+   "fleet_success": {
+    "mean": 0.0,
+    "per_seed": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "n": 5,
+    "ci95": [
+     0.0,
+     0.0
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 0.0625
+   },
+   "reached_goal": {
+    "mean": -0.11799999999999997,
+    "per_seed": [
+     -0.12,
+     -0.10999999999999999,
+     -0.06999999999999995,
+     -0.16999999999999993,
+     -0.12
+    ],
+    "n": 5,
+    "ci95": [
+     -0.14799999999999996,
+     -0.08999999999999997
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "drones_ever_collided": {
+    "mean": 100.0,
+    "per_seed": [
+     100.0,
+     100.0,
+     100.0,
+     100.0,
+     100.0
+    ],
+    "n": 5,
+    "ci95": [
+     100.0,
+     100.0
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "collision_pair_steps": {
+    "mean": 38509.4,
+    "per_seed": [
+     37791.0,
+     39109.0,
+     38168.0,
+     37935.0,
+     39544.0
+    ],
+    "n": 5,
+    "ci95": [
+     37924.0,
+     39106.4
+    ],
+    "signflip_p": 0.0625,
+    "signflip_min_p": 0.0625
+   },
+   "t90_s": null,
+   "makespan_s": {
+    "mean": -39.41000000000001,
+    "per_seed": [
+     -39.41000000000001
+    ],
+    "n": 1,
+    "ci95": [
+     -39.41000000000001,
+     -39.41000000000001
+    ],
+    "signflip_p": 1.0,
+    "signflip_min_p": 1.0
+   }
+  }
+ },
+ "recovered_fraction": {
+  "A_cbf_fresh": {
+   "drones_ever_collided": 1.0,
+   "collision_pair_steps": 1.0,
+   "reached_goal": 0.9583333333333348,
+   "fleet_success": null
+  },
+  "B_mfg_fresh": {
+   "drones_ever_collided": -0.0,
+   "collision_pair_steps": 0.14769025107121356,
+   "reached_goal": 0.18055555555555583,
+   "fleet_success": null
+  }
+ },
+ "readings": {
+  "A_close_to_noise_only_on_collisions": true,
+  "B_moves_reached_goal_toward_noise_only": false,
+  "neither_alone_recovers": false
+ }
+}

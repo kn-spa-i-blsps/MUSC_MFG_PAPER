@@ -1,0 +1,12 @@
+check_real split:real/real 0
+ab split:noise_only/noise_only 0
+ab split:real/noise_only 0
+ab split:noise_only/real 0
+ab split:real/noise_only 1
+ab split:noise_only/real 1
+ab split:real/noise_only 2
+ab split:noise_only/real 2
+ab split:real/noise_only 3
+ab split:noise_only/real 3
+ab split:real/noise_only 4
+ab split:noise_only/real 4
