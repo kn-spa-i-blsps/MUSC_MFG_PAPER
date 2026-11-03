@@ -2,9 +2,10 @@
 # amend35 chain (capped sigma-CBF G-win, one shot): solves (cache hit = load) -> sanity S1 (no cap vs amend31 seed 0;
 # S2 fallback = amend31 code vs new code, both autotune 0) -> N=150 (push) -> N=200 (push) -> report (push) -> STOP.
 cd /workspace/MUSC_MFG_PAPER
-mkdir -p ~/.ssh && cp -n /workspace/.ssh/id_ed25519* ~/.ssh/ 2>/dev/null; chmod 600 ~/.ssh/id_ed25519
+[ -n "$NO_PUSH" ] || { mkdir -p ~/.ssh && cp -n /workspace/.ssh/id_ed25519* ~/.ssh/ 2>/dev/null; chmod 600 ~/.ssh/id_ed25519; }
 . logs/env.sh
 . logs/overnight/push_lib.sh
+export NO_PUSH=${NO_PUSH:-}
 M=experiments.amend35_sigma_cap; L=logs/amend35_pod; CD=experiments/amend35_cells; R=results/amend35_sigma_cap
 A31=results/amend31_sigma_cbf; W=results/overnight_p1/predictor_v3/predictor_weights.npz
 mkdir -p $L; STATUS=FAILED

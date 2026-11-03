@@ -12,6 +12,7 @@ checkpoint() {
     git commit -q -m "$msg
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || exit 0
+    if [ -n "$NO_PUSH" ]; then echo "$(date '+%F %T') checkpoint committed locally (NO_PUSH) $(git rev-parse --short HEAD): $msg"; exit 0; fi
     for i in 1 2 3 4 5; do
       git pull -q --rebase --autostash origin main && git push -q origin HEAD:main && {
         echo "$(date '+%F %T') checkpoint pushed $(git rev-parse --short HEAD): $msg"; exit 0; }
