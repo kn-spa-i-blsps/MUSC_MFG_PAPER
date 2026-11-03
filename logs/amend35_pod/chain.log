@@ -27,3 +27,32 @@
 2026-11-03 16:13:36 N200_fixed0.85 exit=0 10 seeds
 2026-11-03 16:17:06 N200_fixed1.00 exit=0 10 seeds
 2026-11-03 16:17:16 N200_fixed1.20 exit=0 10 seeds
+2026-11-03 16:17:18 checkpoint committed locally (NO_PUSH) e7ace94: amend35 N=200 capped sigma (+ fixed re-run if off-A100) rollouts (partial, not a result)
+2026-11-03 16:17:18 capped rollouts: 80/80; fixed re-run rows: 80
+2026-11-03 16:30:28 report exit=0
+N150 fixed0.70        safe=0.478 [0.463,0.495] ever=0.479 [0.463,0.495] compl=0.857 [0.851,0.864]
+N150 fixed0.85        safe=0.487 [0.467,0.509] ever=0.206 [0.181,0.229] compl=0.575 [0.569,0.582]
+N150 fixed1.00        safe=0.411 [0.401,0.421] ever=0.091 [0.083,0.100] compl=0.448 [0.439,0.457]
+N150 fixed1.20        safe=0.367 [0.359,0.375] ever=0.024 [0.016,0.031] compl=0.378 [0.369,0.387]
+N150 sigma_a0.1       safe=0.511 [0.477,0.543] ever=0.417 [0.378,0.456] compl=0.857 [0.853,0.863] d_mean=0.721 d_max=1.50 cov2m=0.8899
+N150 sigma_a0.05      safe=0.529 [0.484,0.564] ever=0.407 [0.368,0.461] compl=0.859 [0.854,0.865] d_mean=0.732 d_max=1.50 cov2m=0.9395
+N150 sigma_a0.01      safe=0.465 [0.432,0.497] ever=0.485 [0.452,0.515] compl=0.897 [0.888,0.905] d_mean=0.790 d_max=1.50 cov2m=0.9758
+N150 sigma_bin_a0.05  safe=0.527 [0.499,0.555] ever=0.404 [0.370,0.439] compl=0.856 [0.849,0.862] d_mean=0.725 d_max=1.50 cov2m=0.9402
+N150 sigma_a0.1 - best fixed (fixed0.85): safe +0.023 [-0.016,+0.061]  compl +0.282 [+0.273,+0.291]  secondary
+N150 sigma_a0.05 - best fixed (fixed0.85): safe +0.041 [-0.008,+0.083]  compl +0.284 [+0.275,+0.293]  secondary
+N150 sigma_a0.01 - best fixed (fixed0.85): safe -0.022 [-0.061,+0.016]  compl +0.322 [+0.311,+0.333]  secondary
+N150 sigma_bin_a0.05 - best fixed (fixed0.85): safe +0.039 [+0.005,+0.075]  compl +0.281 [+0.271,+0.290]  PRIMARY
+N200 fixed0.70        safe=0.140 [0.125,0.156] ever=0.825 [0.811,0.839] compl=0.591 [0.585,0.597]
+N200 fixed0.85        safe=0.172 [0.158,0.184] ever=0.626 [0.609,0.642] compl=0.409 [0.403,0.415]
+N200 fixed1.00        safe=0.189 [0.177,0.201] ever=0.459 [0.427,0.492] compl=0.330 [0.323,0.338]
+N200 fixed1.20        safe=0.184 [0.178,0.191] ever=0.453 [0.433,0.473] compl=0.258 [0.251,0.265]
+N200 sigma_a0.1       safe=0.000 [0.000,0.000] ever=1.000 [1.000,1.000] compl=0.564 [0.553,0.573] d_mean=0.968 d_max=1.50 cov2m=0.7274
+N200 sigma_a0.05      safe=0.001 [0.000,0.002] ever=1.000 [0.998,1.000] compl=0.526 [0.512,0.537] d_mean=1.064 d_max=1.50 cov2m=0.7796
+N200 sigma_a0.01      safe=0.006 [0.003,0.009] ever=0.994 [0.991,0.996] compl=0.443 [0.434,0.451] d_mean=1.205 d_max=1.50 cov2m=0.8774
+N200 sigma_bin_a0.05  safe=0.001 [0.000,0.002] ever=1.000 [0.998,1.000] compl=0.548 [0.540,0.556] d_mean=0.959 d_max=1.50 cov2m=0.7723
+N200 sigma_a0.1 - best fixed (fixed1.00): safe -0.189 [-0.201,-0.178]  compl +0.233 [+0.221,+0.245]  secondary
+N200 sigma_a0.05 - best fixed (fixed1.00): safe -0.189 [-0.200,-0.177]  compl +0.196 [+0.180,+0.210]  secondary
+N200 sigma_a0.01 - best fixed (fixed1.00): safe -0.183 [-0.195,-0.171]  compl +0.112 [+0.101,+0.123]  secondary
+N200 sigma_bin_a0.05 - best fixed (fixed1.00): safe -0.189 [-0.200,-0.177]  compl +0.218 [+0.207,+0.229]  PRIMARY
+G-win (amend35): {"primary_arm": "sigma_bin_a0.05", "safe_win": {"150": true, "200": false}, "completeness_noninferior": {"150": true, "200": true}, "per_N": {"150": true, "200": false}, "verdict": "NOT_MET"}
+aneks sha256: d3b3b46a362a7f7198c233a91445355e42f0e4557b0e908e2fdff9e2d4cf37b2
