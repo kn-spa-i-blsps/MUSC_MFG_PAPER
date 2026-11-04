@@ -1,161 +1,135 @@
-# Review draftu v1 (paper/draft_v1.tex) — 2026-11-04
+# Review draftu v1 (paper/draft_v1.tex) — aktualizacja 2026-11-05
 
-Format: IJCAI-27 (`ijcai27.sty`, `named.bst`, skopiowane z FormattingGuidelines-IJCAI-27). Kompiluje się bez błędów
-i bez niezdefiniowanych cytowań. PDF ma 7 stron razem z bibliografią, czyli mieści się w limicie 7 + 2. Build nie
-jest commitowany. Przy każdej kluczowej liczbie w .tex stoi komentarz `% SRC:` z plikiem i commitem.
+## 0. Stan blokad przed wysłaniem
 
-Dwie konfiguracje, których draft nigdy nie miesza w jednym porównaniu:
-- **Config G** (geometria crossovera amend21/22): N = 25–200, d_safe 0.70, 10 seedów, A100, metryka @T.
-  **Surowe trajektorie stracone.**
-- **Config S** (amend11/33/34/38): N = 100, d_safe 0.55, 5 seedów, CPU. Trajektorie są, settled liczony dokładnie.
-
----
-
-## 1. Liczby twarde (nie zależą od metryki albo są policzone pod settled)
-
-| claim w drafcie | liczba | źródło | dlaczego twarde |
-|---|---|---|---|
-| noise_only bez kolizji do N=200 | ever = 0.000 [0,0] przy każdym N | review_amend24 (eacfb15), review_amend27 (2edfe32) | ever_collided nie zależy od metryki przybycia |
-| real koliduje od N=50 | ever 0.716–1.000 | review_amend22 (c24e62f) | jw. |
-| learned ever w N-sweepie | 0.000 / 0.008 / 0.076 / 0.473 / 0.827 | review_amend22 | jw. |
-| dekompozycja τ: learned ever przy stałym N = wartość N-sweepu przy równym T_frame | 0.014/0.072/0.455/0.822 vs 0.008/0.076/0.473/0.827 | review_amend26 Q3 (ac32b09) | jw. (część o completeness jest @T, patrz §2) |
-| gate = słaba dźwignia (ever learned 0.07–0.13, real 1.000 wszędzie) | jw. | review_amend25 (1ce2b21) | jw. |
-| MFG-only kompensacja = 0.000 (Config G, learned i oracle) | 0.000 [0,0] | review_amend27 Q3; amend38 report.json A1_bound (upper bound = 0.0) | ograniczenie safe ≤ 1−ever jest tu ciasne i wynosi 0, więc zero trzyma pod każdą metryką |
-| warstwy pod settled (Config S, **oracle**) | CBF-clean +0.802 [0.788, 0.818]; MFG-clean +0.000 [0,0]; noise_only +0.800 | review_amend38 A2 (c201490), report.json A2_contrasts | policzone dokładnie z npz |
-| MFG vs CBF-only (Config S, fresh) | +0.318 [0.274, 0.370] settled; 0 kolizji | jw. | jw. |
-| learned − real (Config S) | +0.154 [0.106, 0.208] settled | jw. | jw. |
-| delay-free settled | fresh 0.920, noise_only 0.800 | review_amend37 (814bd2d), amend38 | jw. |
-| non-settlery: 40 (8/run), wszystkie ≤ 0.30 m od brzegu, mediana 0.18 m na zewnątrz, klasy 50/30/8/12 % | jw. | review_amend38 B | jw. |
-| terminal cost ON gorszy o ~0.10 pod settled → revert | −0.106 [−0.116, −0.096] | review_amend37 | zarejestrowana reguła |
-| tabela open-loop (OOD predyktora, v3/real 0.66…0.31; old 5.95 / 25.2) | jw. | progress.md L57–88, openloop_v3.json (5cd4443) | open-loop nie zależy od metryki przybycia |
-| G-pred (AUC 0.781–0.863, R²_log 0.346, R²_tail < 0) | jw. | review_gpred (01701ef) | offline, metryka niezmieniona |
-| G-cal (pokrycie offline 0.955 przy α=0.05) | jw. | review_amend31 | jw. |
-| pokrycie w pętli: 0.77 near / 0.69 binding przy N=200 | jw. | review_amend35, report.json | jw. |
-
-## 2. Liczby, które czekają na regenerację pod settled (w drafcie oznaczone)
-
-| claim | liczba w drafcie (@T) | dlaczego czeka | co da się powiedzieć już teraz |
-|---|---|---|---|
-| safe_N: real 25, learned 50 (Config G) | @T | trajektorie amend22 stracone | real nie może wzrosnąć ponad 25. Learned 50 trzyma **wtedy i tylko wtedy, gdy** settled completeness przy N=25 i N=50 wynosi ≥ 0.90 (amend38 A1). **Nierozstrzygnięte.** |
-| learned − real safe +0.936/+0.880/+0.479/+0.137 | @T | jw. | górne ograniczenia ze 1−ever: 0.992 / 0.924 / 0.527 / 0.173 dla learned. Real ma 0 przy N ≥ 100 pod każdą metryką. |
-| „odzyskuje 88 % luki przy N=100” (abstrakt) | @T | jw. | **Pod settled nie zweryfikowane w Config G.** W Config S tylko 0.154 / 0.800 ≈ 19 % (inny predyktor, patrz §3.3). |
-| τ-sweep safe 0.986 → 0.178 i completeness stała przy N=100 | @T | trajektorie amend26 stracone, brak per-agent ever w potrzebnej formie | część ever jest twarda (§1). **Completeness**, a więc i „completeness = gęstość”, czeka na regen. |
-| warstwy z learned w Config G (CBF-only 0.918/0.503/0.098) | @T | trajektorie amend27 stracone | górne ograniczenia settled: 0.918 / 0.529 / 0.125 |
-| tabela marginesów (0.70 optymalne) | @T | amend23 na pod volume | wybór 0.70 może się przesunąć pod settled, bo completeness przy 0.85/1.00 jest już niska |
-| σ-CBF G-win (+0.039 / −0.189) | @T | zarejestrowane @T | werdykt NOT_MET i tak trzyma: przy N=200 każdy agent koliduje (ever 1.000), więc settled ≤ 0 |
-| Fig. 1 (crossover) | @T | jw. | podpis to zaznacza |
-
-## 3. Gdzie draft albo brief mówi więcej, niż dane pozwalają
-
-Każdy punkt jest albo złagodzony w drafcie, albo wymaga decyzji PI.
-
-1. **„safe_N=50 potwierdzone przy N=100” (brief): nieprawda w tej formie.**
-   - Punkt N=100 zweryfikowany pod settled (amend38 A2) pochodzi z **Config S**, a nie z geometrii crossovera.
-   - Ma d_safe 0.55, 5 seedów i **inny predyktor**: model N=100-only z amend11, a nie pooled v3.
-   - Potwierdza dwie rzeczy: relację learned > real oraz podział warstw.
-   - **Nie potwierdza safe_N.** Draft pisze safe_N jako „zarejestrowane @T, pod settled tylko bound, w regeneracji”.
-2. **„CBF +0.802” to kompensacja oracle (noise_only), nie predyktor.**
-   - Brief podaje +0.802 obok MFG 0.000, jakby to był wynik kompensacji uczonej.
-   - W drafcie: tabela warstw, wiersz Config S, jest jawnie podpisana „oracle (noise_only)”.
-   - Podziału warstw z learned pod settled nie ma (Config G stracony). Są tylko upper boundy z §2.
-3. **Rozjazd wielkości efektu między konfiguracjami.**
-   - learned − real: +0.880 (Config G @T, v3) vs **+0.154** (Config S settled, predyktor N=100-only).
-   - Draft podaje obie liczby z adnotacją o różnym predyktorze. Recenzent zapyta, która jest „prawdziwa”.
-   - Uczciwa odpowiedź: kompensacja dużo pomaga w geometrii G z v3, mało w S ze starym predyktorem. Nie ma
-     komórki, która rozdziela wpływ predyktora od wpływu konfiguracji.
-4. **Pasmo tolerancji 0.30 m NIE jest policzone.**
-   - Brief: „pasmo ratuje no-delay, a NIE opóźnione — dlatego szkoda realna”.
-   - Druga połowa („nie ratuje opóźnionych”) jest twarda dla safe-success przez ograniczenie safe ≤ 1−ever: real 0,
-     learned ≤ 0.266 w Config S. Draft to pisze.
-   - Pierwsza połowa („ratuje no-delay”) jest **niepoliczona**. d(T) non-settlerów ≤ +0.30 m nie implikuje, że będą
-     „settled” w pasmie, bo kryterium to 90 % okna, a nie chwila T.
-   - Draft pisze pasmo jako „proponowane, do policzenia”.
-   - **Flaga z reguły 5:** to nowa metryka po zobaczeniu wyników. Brief PI jej żąda, więc wolno, ale PI powinien
-     zatwierdzić ją jawnie, zanim padnie pierwsza liczba (prereg log-only jak amend37/38).
-5. **„Nie zatłoczenie” (tytuł i headline) jest szersze niż dane.**
-   - Trzyma dla kolizji przy noise_only i dla kompensowanego roju (dekompozycja τ).
-   - Dla niekompensowanego roju liczba sąsiadów ma znaczenie przy tym samym T_frame (real ever 1.000 przy N=100 vs
-     0.944 przy N=50, T_frame 0.25 s).
-   - Completeness zależy od gęstości.
-   - Draft precyzuje to w treści („collisions track staleness, completeness tracks density”), ale tytuł jest
-     chwytliwy. Do rozważenia: „Staleness, Not Density, Limits Safety …”.
-6. **„MFG zarabia na anti-deadlock”.**
-   - Porównanie fresh vs fresh_nomfg dotyczy tylko oracle, Config S, 5 seedów.
-   - CBF-only to „decoupled single-agent routing” (c_w = w_bar = 0), a nie brak routingu.
-   - Wniosek jest więc o sprzężeniu MFG wobec routingu niesprzężonego. Draft tak go opisuje.
-   - „Zamrożone” opiera się na niezmienności względem okna (amend37) i na liczbie 34–49 zamrożonych agentów z
-     amend36. Ta druga pochodzi z kontrolera z terminal cost ON, dlatego w drafcie jej nie ma.
-7. **Mechanizm σ-CBF „concentrated vs broad” to interpretacja, nie wynik.**
-   - Liczby są twarde: binding 12.6 % vs 75.2 % wierszy, średnia σ 0.30 vs 0.64 m.
-   - Przyczynowość nie była testowana. H1–H5 z review_amend31_diag są NIEROZSTRZYGNIĘTE.
-   - Draft pisze to wprost.
-8. **σ-CBF +0.039 przy N=150** pochodzi z innego GPU (RTX PRO 6000).
-   - Na A100 bez capu wyszło −0.159.
-   - Komparatory przepuszczono na tym samym GPU, więc porównanie jest wewnątrz GPU, ale replikacji capu na A100 nie ma.
-9. **Link 1 nie jest spełniony.**
-   - Kryterium sukcesu PI („każdy dron dociera i nigdy nie koliduje”) nie spełnia żaden wariant, również oracle
-     (0.920).
-   - Draft mówi to w §6 i w Limitations. Główne wkłady są sformułowane wokół bezpieczeństwa, a nie pełnego sukcesu.
-     PI powinien świadomie przyjąć taką ramę.
-10. **Zmiana tezy (CLAUDE.md).**
-    - Pierwotna teza: kompensacja dla warstwy MFG.
-    - Wkład (2) draftu to negacja tej tezy.
-    - Draft jest z tym spójny i nie próbuje ratować starej tezy. To jednak decyzja PI o ramie pracy, nie moja.
-11. **„NN beats classical”** jest prawdziwe tylko względem cv i smith, które zawodzą z identyfikowalnych powodów.
-    cvls (amend32) jest zarejestrowany, nieuruchomiony. Draft to kwalifikuje.
-12. **Related work.**
-    - Bibliografia (`refs.bib`) jest pisana z pamięci. Każdy wpis trzeba sprawdzić z rekordem wydawcy (strony,
-      tomy, rok Molnar 2023 / Elamvazhuthi 2019 vs 2020).
-    - Zdanie „prior work … treats the predictor as an input to one layer” to uogólnienie bez przeglądu literatury.
-      Do potwierdzenia albo złagodzenia.
-    - W repo nie znalazłem listy cytowań prior work z prereg §2.
-13. **Brakujące detale modelu.**
-    - Horyzont Config G, wagi kosztu MFG (w_goal 2.0, w_hold 8.0, c_w 1.0), siatka 0.2 m, solver.
-    - Są w `experiments/amend21_cells/*.yaml`, ale w drafcie ich nie ma. Do dopisania w appendixie albo supplemencie.
-
-## 3a. Figury (stan po commicie z figurami)
-
-Wszystkie pliki leżą w `paper/figs/` (paper jest samowystarczalny). Fig. 6–8 generuje `python -m viz.paper_figures`
-wyłącznie z commitowanych report.json, bez nowych runów. Wszystkie narysowane liczby są w
-`paper/figs/figure_data_paper.csv` z plikiem źródłowym.
-
-| fig | treść | metryka | status |
-|---|---|---|---|
-| 1 | crossover N (safe / ever / completeness) | @T, ever niezależne od metryki | czeka na regen pod settled |
-| 2 | open-loop MSE, OOD predyktora (zastąpiła tabelę) | open-loop | twarda |
-| 3 | trade-off marginesu | @T | czeka na regen |
-| 4 | szerokość bramki | @T, ever niezależne | czeka na regen (część safe) |
-| 5 | τ-sweep | @T, prawy panel (ever) niezależny | czeka na regen (część safe) |
-| 6 | podział warstw (NOWA) | Config G @T + Config S settled (oracle) | G czeka na regen, S twarda |
-| 7 | non-settlery przy brzegu (NOWA) | klasy z okna 5 s, odległość tylko w chwili T | twarda; oś x to d(T), a nie odległość w oknie |
-| 8 | σ-CBF vs front stałego marginesu (NOWA) | @T | werdykt twardy (N=200: ever 1.000) |
-
-Uwagi:
-- W Fig. 4 i 5 seria real d_safe 0.55 pokrywa się z 0.70 (identyczne wartości). Podpisy to mówią.
-- Fig. 1–5 mają stary styl z `viz/overnight_figures.py`. Przy regeneracji pod settled trzeba je przerysować w
-  jednym stylu z 6–8.
-- Floaty lądują późno (Fig. 1 na s. 5). To kosmetyka na wersję finalną.
-- Główny tekst kończy się na s. 7, referencje zajmują s. 7–8, więc limit IJCAI 7 + 2 jest zachowany.
-
-## 4. Regeneracja i brakujące liczby
-
-Jedno zdanie celu na pozycję (reguła 1). Nic tu nie jest uruchomione ani zarejestrowane; to wymaga decyzji PI.
-
-| co | koszt | jak służy celowi |
+| blokada | stan | commit |
 |---|---|---|
-| pasmo 0.30 m na istniejących logach Config S | log-only, CPU | czy „delay-free works” pod uczciwą, ale sensowną definicją przybycia (link 1) |
-| regen Config G: crossover (real/learned/noise_only), N=25–200, z zapisem trajektorii | GPU | potwierdza albo obala safe_N i „88 %” pod settled (linki 2–3) |
-| regen τ-sweep (amend26) | GPU | „completeness = gęstość” pod settled (link 2) |
-| regen podziału warstw z learned (amend27 Q3) | GPU | podział warstw z predyktorem, nie tylko z oracle, pod settled (link 4) |
-| cvls (amend32, już zarejestrowany) | GPU | czy NN jest potrzebny, czy wystarcza klasyczny estymator (link 3) |
+| Bibliografia `[?]` | **ZAMKNIĘTA**, szczegóły poniżej | f1e0a0b |
+| Figury i liczby headline pod settled + pasmo 0.30 m | **ZAPLANOWANE, NIE URUCHOMIONE.** Prereg amend39, kod, 69 komórek, chain na pod. Uruchomienie wymaga poda (koszt). | 888e57e |
+| Polish (ton double-blind, §7, Config G/S, limit stron, statements) | **ZAMKNIĘTE** | f1e0a0b |
 
-## 5. Werdykt
+**Bibliografia.**
+- `[?]` pochodziło z kompilacji bez BibTeX: w repo nie było `.bbl`.
+- Teraz w repo jest `paper/draft_v1.bbl` i `paper/latexmkrc`. Samo `pdflatex` pokazuje cytowania, a `latexmk` robi
+  pełny przebieg.
+- Sprawdzone: 0 `[?]` w PDF, bibtex bez ostrzeżeń.
+- Dodane albo zweryfikowane online:
+  - Ballotta & Talak: IEEE TVT 74(7), 2025, preprint arXiv 2024.
+  - Angelopoulos & Bates: FnT ML 16(4), 2023.
+  - Molnar i in.: TCST 31(4):1507–1520.
+- Brief podaje kolejność „Huang, Caines, Malhamé 2006”, ale praca z 2006 (CIS) ma autorów Huang, **Malhamé**, Caines.
+  Zostawiłem kolejność poprawną.
+- Pozostałe wpisy są standardowe. Strony konferencyjne nadal warto sprawdzić z rekordem wydawcy.
 
-Draft jest uczciwy wobec danych. Twarde są bezpieczeństwo (ever), mechanizm, podział warstw z oracle i negatyw σ-CBF.
-Wielkości sukcesu w Config G są @T i jawnie czekają na regenerację.
+**Limit stron (CFP IJCAI'27, 2027.ijcai.org, sprawdzone 2026-11-05).**
+- Maksymalnie 9 stron: 7 na treść + do 2 na referencje. Przekroczenie oznacza odrzucenie bez recenzji.
+- Ethics statement jest opcjonalny i może stać na stronach referencji.
+- Obowiązują wytyczne reproducibility. Sekcja „Reproducibility” w pracy je spełnia.
+- Double-blind: zero podziękowań i contribution statement. Supplementary do 50 MB, zanonimizowane.
+- Stan draftu: treść razem z Reproducibility i Ethical Statement kończy się na s. 7, referencje sięgają s. 8. 8 ≤ 9: OK.
+  Cięcie nie było potrzebne.
 
-Przed wysyłką trzeba jeszcze:
-- (i) zregenerować Config G pod settled;
-- (ii) policzyć pasmo po zatwierdzeniu go przez PI;
-- (iii) zweryfikować bibliografię;
-- (iv) zdecydować o tytule (punkt 3.5) i o ramie wobec niespełnionego linku 1 (punkty 3.9–3.10).
+## 1. Liczby twarde (nie zależą od metryki albo policzone dokładnie pod settled)
+
+| claim | liczba | źródło |
+|---|---|---|
+| noise_only bez kolizji do N=200 (Config G) | ever 0.000 [0,0] przy każdym N | review_amend24 (eacfb15), review_amend27 (2edfe32) |
+| real koliduje od N=50; learned ever 0.000/0.008/0.076/0.473/0.827 | jw. | review_amend22 (c24e62f) |
+| dekompozycja τ, część kolizyjna: learned ever przy stałym N = wartość z N-sweepu przy równym T_frame | 0.014/0.072/0.455/0.822 vs 0.008/0.076/0.473/0.827 | review_amend26 (ac32b09) |
+| bramka to słaba dźwignia (ever learned 0.07–0.13, real 1.000) | jw. | review_amend25 (1ce2b21) |
+| MFG-only = 0.000 (Config G, learned i oracle) | ograniczenie safe ≤ 1−ever jest ciasne i równe 0, więc trzyma pod każdą metryką | review_amend27; amend38 A1_bound |
+| warstwy pod settled (Config S, oracle): CBF-clean +0.802 [0.788, 0.818], MFG-clean +0.000 | jw. | review_amend38 A2 (c201490) |
+| MFG vs CBF-only (Config S, fresh) +0.318 [0.274, 0.370] | jw. | jw. |
+| learned − real (Config S) +0.154 [0.106, 0.208] settled | jw. | jw. |
+| delay-free settled 0.920 / 0.800; non-settlery na brzegu (mediana 0.18 m) | jw. | review_amend37/38 |
+| open-loop / OOD predyktora (Fig. 2) | v3/real 0.66…0.31; old 5.95 / 25.2 | progress.md, openloop_v3.json |
+| G-pred, G-cal, pokrycie w pętli 0.77 / 0.69 | jw. | review_gpred, review_amend31, review_amend35 |
+| σ-CBF: werdykt NOT_MET | przy N=200 ever 1.000, więc settled ≤ 0 | review_amend35 |
+
+## 2. Liczby czekające na amend39 (wszystkie @T w drafcie, oznaczone w tekście i podpisach)
+
+| element draftu | co amend39 rozstrzyga (pytanie z preregu) | etap |
+|---|---|---|
+| Tabela 1 (crossover), Fig. 1, safe_N (real 25, learned 50) | Q1: safe_N pod settled (b=0 główne, b=0.30 pomocnicze). Learned 50 potwierdzone **tylko** przy b=0. | A |
+| luka kompensacji +0.936/+0.880/+0.479/+0.137 i „88 %” w abstrakcie | Q2: learned − real safe_settled per N | A |
+| mechanizm: noise_only settled-complete w Config G? | Q3 (nowe: dotąd wiemy tylko, że noise_only nie koliduje) | A |
+| Fig. 5, „completeness śledzi gęstość” | Q4 | B |
+| Fig. 3, wybór marginesu 0.70 | Q5: ta sama reguła z completeness_settled. Jeśli 0.70 wypadnie, zmienia się tekst. | C |
+| Fig. 4 | Q6 | C |
+| Fig. 6, panele Config G | Q7 | D |
+
+**Czego amend39 nie pokrywa:** pasma 0.30 m dla Config S (Fig. 7 i wiersz Config S w Fig. 6).
+- To ma być log-only, ale **pliki trajektorii Config S (`logs_seed*.npz` z amend11/33/34) nie istnieją na tej
+  maszynie.** Bieżące repo to świeży klon z 2026-11-04 23:24, a npz nigdy nie były w git.
+- amend38 liczył je na innej kopii roboczej.
+- **Pytanie do Ciebie:** gdzie jest tamta kopia? Jeśli zniknęła, to Config S też trzeba przeliczyć (CPU, ok. 4 h za
+  15 rolloutów według amend36).
+
+## 3. Gdzie claim > dane (aktualne)
+
+1. **NOWE, najważniejsze: prior art Ballotta & Talak (TVT 2025).**
+   - Robią predyktor wieku informacji, który przywraca bezpieczeństwo rozproszonego CBF przy opóźnieniu komunikacji,
+     w multi-robot collision avoidance.
+   - Dla roju płaskiego to zasadniczo nasza „kompensacja przywraca bezpieczeństwo”.
+   - W drafcie to już **nie jest wkład**. „How we differ” przeformułowane na:
+     - (i) która warstwa w hierarchii MFG+CBF;
+     - (ii) staleness vs gęstość przy skalowaniu TDMA z N;
+     - (iii) negatyw kalibrowanego marginesu.
+   - Recenzent i tak może uznać wkład (2) za oczywisty („CBF jest warstwą bezpieczeństwa, więc kompensacja tam”).
+   - Najmocniejsza obrona to wynik oracle: zero dla MFG nawet z idealną estymatą. Warto to wyeksponować w intro.
+2. **Tytuł „Staleness, Not Crowding” jest szerszy niż dane.**
+   - Trzyma dla kolizji (noise_only, dekompozycja τ).
+   - Nie trzyma dla roju bez kompensacji: przy tym samym T_frame liczba sąsiadów ma znaczenie.
+   - Completeness zależy od gęstości.
+   - Propozycja: „Staleness, Not Density, Limits Safety …”.
+3. **safe_N=50 jest zarejestrowane @T.** Punkt N=100 pod settled pochodzi z Config S (inny predyktor, d_safe, seedy), więc
+   safe_N **nie jest** zweryfikowane. Rozstrzyga amend39 Q1.
+4. **„+0.802 CBF” to oracle, nie predyktor.** Podział warstw z learned pod settled istnieje tylko jako upper bound,
+   dopóki amend39 D nie przejdzie.
+5. **Rozjazd Config G vs S:** +0.880 vs +0.154. Draft tłumaczy teraz w §3, dlaczego konfiguracje są nieporównywalne
+   (geometria, cel, horyzont, margines, seedy, predyktor). Komórki rozdzielającej wpływ predyktora od konfiguracji nadal
+   nie ma.
+6. **Pasmo 0.30 m to metryka wprowadzona po zobaczeniu wyników (reguła 5).**
+   - Zażądana w briefie 2026-11-05, zarejestrowana w amend39 jako *pomocnicza*.
+   - Żaden claim nie może stać na samym b=0.30.
+   - Twarde jest tylko to, że pasmo nie ratuje bezpieczeństwa opóźnionych (safe ≤ 1−ever).
+7. **Mechanizm σ-CBF „concentrated vs broad”** to interpretacja; w drafcie opisana jako „plausible, untested”.
+8. **Link 1 niespełniony.** Kryterium „każdy dron dociera” nie spełnia nawet oracle (0.920). Wkłady są sformułowane
+   wokół bezpieczeństwa. Ta rama to decyzja PI.
+9. **Teza się zmieniła.** Wkład (2) to negacja pierwotnej tezy (CLAUDE.md). Draft jest z tym spójny.
+10. **„NN beats classical”** dotyczy tylko cv i smith. cvls (amend32) jest zarejestrowany i nieuruchomiony.
+
+## 4. Plan compute (amend39), do uruchomienia przez Ciebie
+
+- **Pod:** A100-80GB, wolumen ≥ 200 GB, repo na HEAD ≥ 888e57e, wagi v3 na wolumenie (sha sprawdzane w chainie).
+- **Start:** `nohup bash logs/overnight/amend39_chain_pod.sh > /workspace/amend39_chain.log 2>&1 &`
+  - Bez klucza GitHub: `NO_PUSH=1`.
+  - Etapy przez `STAGES="A B"`, jeśli najpierw tylko blokery.
+- **Czas:** ok. 4 h (9 solve'ów ok. 1.2 h + 690 rolloutów ok. 2.5 h). Według poprzednich stawek A100 to mniej niż
+  $15.
+- **Archiwum:** w trakcie albo po wykonaniu na stacji roboczej
+  `bash logs/overnight/amend39_pull_archive.sh <host> <port>`. Wolumen poda kasować dopiero po „VERIFIED”.
+- **Bramka reprodukcji:** real d0.70 N=100 seed 0 bit-równy amend22. Na innym GPU porównania z rejestrem są tylko opisowe
+  (tak stoi w preregu).
+- **Po raporcie:**
+  - review_amend39 (Q1–Q7);
+  - STOP i rozmowa z PI, jeśli zmiana jest na poziomie tezy (learned safe_N < 50 przy b=0 albo noise_only nie
+    settled-complete);
+  - dopiero potem regeneracja Tabeli 1 i Fig. 1, 3, 4, 5, 6 z `report.json` i zmiana tekstu.
+- **Test lokalny:** kod przeszedł tylko na syntetycznych logach (cells, settle, report). Na GPU jeszcze nie działał.
+  Pierwszym realnym testem jest bramka reprodukcji.
+
+## 5. Figury
+
+| fig | metryka | status |
+|---|---|---|
+| 1 crossover | @T (ever niezależne) | → amend39 A |
+| 2 open-loop | open-loop | twarda |
+| 3 margines | @T | → amend39 C |
+| 4 bramka | @T (ever niezależne) | → amend39 C |
+| 5 τ-sweep | @T (ever niezależne) | → amend39 B |
+| 6 warstwy | G @T + S settled (oracle) | G → amend39 D; S twarda |
+| 7 brzeg | settled (S) | twarda; pasmo wymaga npz Config S (§2) |
+| 8 σ-CBF | @T | werdykt twardy |
+
+Fig. 1–5 trzeba przy regeneracji przerysować w jednym stylu z 6–8 (`viz/paper_figures.py`).
