@@ -113,6 +113,30 @@ Każdy punkt jest albo złagodzony w drafcie, albo wymaga decyzji PI.
     - Horyzont Config G, wagi kosztu MFG (w_goal 2.0, w_hold 8.0, c_w 1.0), siatka 0.2 m, solver.
     - Są w `experiments/amend21_cells/*.yaml`, ale w drafcie ich nie ma. Do dopisania w appendixie albo supplemencie.
 
+## 3a. Figury (stan po commicie z figurami)
+
+Wszystkie pliki leżą w `paper/figs/` (paper jest samowystarczalny). Fig. 6–8 generuje `python -m viz.paper_figures`
+wyłącznie z commitowanych report.json, bez nowych runów. Wszystkie narysowane liczby są w
+`paper/figs/figure_data_paper.csv` z plikiem źródłowym.
+
+| fig | treść | metryka | status |
+|---|---|---|---|
+| 1 | crossover N (safe / ever / completeness) | @T, ever niezależne od metryki | czeka na regen pod settled |
+| 2 | open-loop MSE, OOD predyktora (zastąpiła tabelę) | open-loop | twarda |
+| 3 | trade-off marginesu | @T | czeka na regen |
+| 4 | szerokość bramki | @T, ever niezależne | czeka na regen (część safe) |
+| 5 | τ-sweep | @T, prawy panel (ever) niezależny | czeka na regen (część safe) |
+| 6 | podział warstw (NOWA) | Config G @T + Config S settled (oracle) | G czeka na regen, S twarda |
+| 7 | non-settlery przy brzegu (NOWA) | klasy z okna 5 s, odległość tylko w chwili T | twarda; oś x to d(T), a nie odległość w oknie |
+| 8 | σ-CBF vs front stałego marginesu (NOWA) | @T | werdykt twardy (N=200: ever 1.000) |
+
+Uwagi:
+- W Fig. 4 i 5 seria real d_safe 0.55 pokrywa się z 0.70 (identyczne wartości). Podpisy to mówią.
+- Fig. 1–5 mają stary styl z `viz/overnight_figures.py`. Przy regeneracji pod settled trzeba je przerysować w
+  jednym stylu z 6–8.
+- Floaty lądują późno (Fig. 1 na s. 5). To kosmetyka na wersję finalną.
+- Główny tekst kończy się na s. 7, referencje zajmują s. 7–8, więc limit IJCAI 7 + 2 jest zachowany.
+
 ## 4. Regeneracja i brakujące liczby
 
 Jedno zdanie celu na pozycję (reguła 1). Nic tu nie jest uruchomione ani zarejestrowane; to wymaga decyzji PI.

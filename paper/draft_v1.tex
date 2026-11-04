@@ -36,7 +36,7 @@
 \linenumbers
 \urlstyle{same}
 
-\graphicspath{{../results/overnight_figures/}}
+\graphicspath{{figs/}}
 
 \newcommand{\Tf}{T_{\mathrm{frame}}}
 \newcommand{\tslot}{t_{\mathrm{slot}}}
@@ -265,38 +265,39 @@ distance $<1$\,m) position MSE is 5.95\,m$^2$ at $N=25$ and 25.2\,m$^2$ at $N=20
 We therefore train one predictor on histories pooled over all five $N$, oversampling near pairs.
 Of three variants judged by an open-loop gate fixed in advance, the third (v3, hidden width 128)
 was the first to pass. v1 and v2 failed the gate and were never used in closed loop. v3 has the
-lowest error at every $N$; Table~\ref{tab:openloop} shows its ratio to the stale estimate.
+lowest error at every $N$; Fig.~\ref{fig:openloop} compares it with the stale estimate.
 % SRC: logs/overnight/progress.md L57-88 (v1 FAIL G1/G2, v2 FAIL G1, v3 PASS; sha256 9583cb7c...); commit 5cd4443
 A DAgger-style retraining on closed-loop learned trajectories~\cite{ross2011reduction} (v4a/v4b)
 lowered the mean error but failed the pre-declared tail criterion at $N=200$, so v3 is used
 throughout.
 % SRC: logs/overnight/SUMMARY.md "Not resolved / negative" (p99 0.399 / 0.357 vs v3 0.351); commit ee33aee
 
-\begin{table}[t]
-\centering\small
-\resizebox{\columnwidth}{!}{\begin{tabular}{lccccc}
-\toprule
-$N$ & 25 & 50 & 100 & 150 & 200\\
-$\Tf$ [s] & 0.125 & 0.25 & 0.5 & 0.75 & 1.0\\
-\midrule
-stale (real) & 0.0117 & 0.0224 & 0.4625 & 1.5285 & 3.1703\\
-$N{=}100$-only NN & 5.952 & 4.189 & 0.2446 & 5.213 & 25.22\\
-pooled NN (v3) & 0.0077 & 0.0156 & 0.2417 & 0.6114 & 0.9725\\
-v3 / real & 0.66 & 0.70 & 0.52 & 0.40 & 0.31\\
-\bottomrule
-\end{tabular}}
-\caption{Open-loop near-pair ($<1$\,m) position MSE [m$^2$] on held-out real-arm histories
-(Config G). Pooled training removes the out-of-distribution failure of the single-$N$ predictor.}
-\label{tab:openloop}
-% SRC: logs/overnight/progress.md L57-63, L79-86; results/overnight_p1/openloop_v3.json; figure_data.csv fig2
-\end{table}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig2_mechanism_openloop.png}
+\caption{Open-loop near-pair ($<1$\,m) position MSE on held-out real-arm histories (Config G, log scale).
+The predictor trained only at $N{=}100$ fails out of distribution (5.95\,m$^2$ at $N{=}25$, 25.2\,m$^2$ at
+$N{=}200$); the pooled v3 is below the stale estimate at every $N$ (ratio 0.66, 0.70, 0.52, 0.40, 0.31).}
+\label{fig:openloop}
+% SRC: results/overnight_figures/fig2_mechanism_openloop.png; figure_data.csv fig2_openloop_mse; progress.md L57-88
+\end{figure}
 
 \paragraph{Choice of the safety margin.}
 With v3 at $N=100$ (Config G), a larger $\dsafe$ lowers ever-collided monotonically
 (0.325, 0.072, 0.020, 0.010 for $\dsafe = 0.55$, 0.70, 0.85, 1.00) but also lowers completeness
 (1.000, 0.958, 0.764, 0.692). Safe success peaks at $\dsafe = 0.70$ (0.892\ci{0.862}{0.919}).
 The pre-registered rule selects 0.70, which we use for every Config G learned arm.
-At $N=150$ no margin is both safe and complete, and 0.70 vs 0.85 is a tie (0.479 vs 0.486).
+At $N=150$ no margin is both safe and complete, and 0.70 vs 0.85 is a tie (0.479 vs 0.486)
+(Fig.~\ref{fig:margin}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig3_margin_tradeoff.png}
+\caption{Constant-margin trade-off with the learned predictor (Config G, @T). A larger $\dsafe$ buys
+safety only by freezing the swarm.}
+\label{fig:margin}
+% SRC: results/overnight_figures/fig3_margin_tradeoff.png; figure_data.csv fig3_margin; review_amend23
+\end{figure}
 % SRC: logs/overnight/review_amend23.md Data table + Selection (result commit 118e4bd); figure_data.csv fig3
 
 \paragraph{A margin helps only on a good estimate.}
@@ -376,14 +377,14 @@ safe\_N $=50$ survives if and only if its settled completeness at $N\in\{25,50\}
 That cannot be decided from the surviving per-seed summaries; the cells are being regenerated.
 % SRC: logs/overnight/review_amend38.md A1 (commit c201490)
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{fig1_N_crossover.png}
+\includegraphics[width=0.9\textwidth]{fig1_N_crossover.png}
 \caption{$N$ crossover (Config G, @T metric; regeneration under the settled metric pending).
 Removing the delay (noise\_only) keeps every agent collision-free up to $N=200$.}
 \label{fig:crossover}
-% SRC: results/overnight_figures/fig1_N_crossover.png (data: figure_data.csv fig1_crossover)
-\end{figure}
+% SRC: paper/figs/fig1_N_crossover.png (copy of results/overnight_figures/fig1_N_crossover.png) (data: figure_data.csv fig1_crossover)
+\end{figure*}
 
 \paragraph{Pure staleness at fixed $N$.}
 To separate staleness from density, we fix $N=100$, the geometry and the start packing, and vary
@@ -400,15 +401,34 @@ neighbour count differ by up to $2\times$. Learned completeness, in contrast, st
 For the compensated swarm, \emph{collisions track staleness and completeness tracks density}.
 For the uncompensated swarm the number of neighbours also matters. At $\Tf=0.25$\,s it collides
 everywhere at $N=100$ (ever 1.000), against 0.944 at $N=50$ ($\dsafe=0.70$). The stale swarm is
-unsafe either way.
+unsafe either way (Fig.~\ref{fig:tslot}).
 % SRC: review_amend26 Q3 table (real 0.70: 1.000 / 0.944) and Step A last bullet
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig5_staleness_tslot_sweep.png}
+\caption{Pure staleness: TDMA slot length at fixed $N{=}100$, geometry and packing (Config G, @T; the
+right panel is metric-independent). real at $\dsafe$ 0.55 and 0.70 coincide.}
+\label{fig:tslot}
+% SRC: results/overnight_figures/fig5_staleness_tslot_sweep.png; figure_data.csv fig5_tslot; review_amend26
+\end{figure}
 
 \paragraph{Gate width is a weak lever.}
 At $N=100$ we vary the gate from 1.5 to 7.0\,m, a $4.7\times$ change in gate flux (66.7 to 14.3
 agents/m). The stale swarm collides at every gate. Learned ever-collided stays within 0.07--0.13,
 and only the 1.5\,m gate is measurably worse (0.126\ci{0.107}{0.147} vs 0.072 at 3.5 and 7.0\,m).
 Learned minus real safe@T is $+0.874$ to $+0.928$ at every gate. The open-loop error ratio is flat
-at 0.52--0.53, so gate flux does not change the estimation error that drives collisions.
+at 0.52--0.53, so gate flux does not change the estimation error that drives collisions
+(Fig.~\ref{fig:gate}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig4_density_gate_sweep.png}
+\caption{Gate width at $N{=}100$ (Config G, @T): a $4.7\times$ change in gate flux barely moves
+either arm. real at $\dsafe$ 0.55 and 0.70 coincide.}
+\label{fig:gate}
+% SRC: results/overnight_figures/fig4_density_gate_sweep.png; figure_data.csv fig4_gate; review_amend25
+\end{figure}
 % SRC: logs/overnight/review_amend25.md data + open-loop table (result commit 1ce2b21); figure_data.csv fig4
 
 \subsection{Compensation recovers safety, and only through the CBF}
@@ -432,7 +452,7 @@ $N=100/150/200$ (noise\_only minus learned).
 
 \paragraph{Layer split.}
 We feed the compensated (or oracle) estimate to one layer only and the stale estimate to the other.
-In Config G at the @T metric (Table~\ref{tab:layers}, top), compensation fed \emph{only} to the MFG
+In Config G at the @T metric (Fig.~\ref{fig:layers}, left and centre), compensation fed \emph{only} to the MFG
 density term changes safe@T by exactly $0.000$\ci{0}{0} relative to no compensation, at every
 $N$, for both the learned and the oracle estimate. Fed only to the CBF, it recovers
 104\% / 105\% / 72\% (learned) and 100\% / 100\% / 100\% (oracle) of the both-layers gain at
@@ -442,33 +462,22 @@ The MFG-only zero is metric-independent: in those cells every agent collides, so
 upper bound $1-\text{ever}$ is exactly 0.
 % SRC: results/amend38_settled_recompute/report.json A1_bound/amend27/cells/N*/split_learned-real_d0.70 (safe_settled_upper_bound 0.0)
 In Config S, where trajectories exist, the split is recomputed exactly under the settled metric
-(Table~\ref{tab:layers}, bottom). An oracle-clean CBF with a delayed MFG gives $+0.802$\ci{0.788}{0.818}
+(Fig.~\ref{fig:layers}, right). An oracle-clean CBF with a delayed MFG gives $+0.802$\ci{0.788}{0.818}
 safe-settled over the stale swarm, matching full delay removal ($+0.800$). A clean MFG with a
 delayed CBF gives $+0.000$\ci{0}{0}. Safety is identical under both metrics in all 51 Config S
 rollouts.
 % SRC: logs/overnight/review_amend38.md A2 + relative claims; results/amend38_settled_recompute/report.json A2_contrasts (commit c201490)
 
-\begin{table}[t]
-\centering\small
-\setlength{\tabcolsep}{3.5pt}
-\resizebox{\columnwidth}{!}{\begin{tabular}{lcccc}
-\toprule
-\multicolumn{5}{l}{\emph{Config G, $\dsafe=0.70$, safe@T (10 seeds)}}\\
-$N$ & MFG-only & CBF-only & both & none (real)\\
-\midrule
-100 learned / oracle & 0.000 / 0.000 & 0.918 / 1.000 & 0.880 / 1.000 & 0.000\\
-150 learned / oracle & 0.000 / 0.000 & 0.503 / 1.000 & 0.479 / 1.000 & 0.000\\
-200 learned / oracle & 0.000 / 0.000 & 0.098 / 0.965 & 0.137 / 0.968 & 0.000\\
-\midrule
-\multicolumn{5}{l}{\emph{Config S, $N=100$, $\dsafe=0.55$, oracle (noise\_only), safe settled 5\,s (5 seeds)}}\\
-& 0.000 & 0.802 & 0.800 & 0.000\\
-\bottomrule
-\end{tabular}}
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{fig6_layer_split.png}
 \caption{Layer split. ``MFG-only'' feeds the compensated (or oracle) estimate to the MFG density term
-and the stale estimate to the CBF; ``CBF-only'' does the reverse.}
-\label{tab:layers}
-% SRC: review_amend27.md Q3 (Config G); review_amend38.md A2 table (Config S: split rows, noise_only, real)
-\end{table}
+and the stale estimate to the CBF; ``CBF-only'' does the reverse. Left, centre: Config G, $\dsafe=0.70$,
+safe@T, 10 seeds. Right: Config S, $N=100$, $\dsafe=0.55$, oracle, safe settled (5\,s window), 5 seeds,
+exact. MFG-only equals no compensation (0.000) in every cell, under both metrics.}
+\label{fig:layers}
+% SRC: paper/figs/fig6_layer_split.png <- viz/paper_figures.py from results/amend27_ladder_layers/report.json (rows) and results/amend38_settled_recompute/report.json (A2); data in paper/figs/figure_data_paper.csv
+\end{figure*}
 
 At $N=100$ in Config G, the CBF-only learned split is \emph{above} feeding both layers by
 $+0.038$\ci{0.006}{0.074}. At $N=200$ it is below, by $-0.039$\ci{-0.059}{-0.020}. The MFG-layer
@@ -530,10 +539,20 @@ $-0.02$\,m/s): at the rim, goal attraction and crowd aversion balance. Only 3 of
 blocked by the CBF. With sensor noise, the outer ring jitters instead: 59\% of non-settlers
 oscillate, crossing the rim a median of 7 times in 5\,s, as the CBF cuts an inward MFG command of
 $-0.40$ to $-0.13$\,m/s. At most 12\% of non-settlers are still approaching, and those are already
-inside at $T$, so a longer horizon is not expected to help.
+inside at $T$, so a longer horizon is not expected to help (Fig.~\ref{fig:rim}).
 % SRC: review_amend38.md B table + "Where they are" + "Mechanism" (commit c201490); report.json B (d_T quantiles)
 The shortfall is a property of the equilibrium formation, whose outer ring lies on the disc
 boundary. It is not a delay effect.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig7_rim_nonsettlers.png}
+\caption{Delay-free agents that do not settle (Config S, 5 seeds), by class, against their signed
+distance to the goal rim at $T$. The dashed line marks one drone body (0.30\,m) outside the rim.
+Class is decided over the last 5\,s, distance at $T$ only.}
+\label{fig:rim}
+% SRC: paper/figs/fig7_rim_nonsettlers.png <- viz/paper_figures.py from results/amend38_settled_recompute/report.json B.agents
+\end{figure}
 
 \paragraph{A goal-tolerance band (to be computed).}
 The non-settlers sit about one drone body (0.30\,m) outside the disc. We therefore propose to
@@ -585,7 +604,17 @@ We re-ran it once with the margin capped at 1.5\,m. That was the only code chang
 bit-equal with the cap disabled. The capped $\sigma$-CBF gives $+0.039$\ci{+0.005}{+0.075} safe@T
 over the best constant margin (0.85) at $N=150$, with $+0.281$ completeness. At $N=200$ it gives
 $-0.189$\ci{-0.200}{-0.177} against the best constant margin (1.00), with every agent colliding
-in every $\sigma$ arm. \textbf{Verdict: not met.}
+in every $\sigma$ arm (Fig.~\ref{fig:sigma}). \textbf{Verdict: not met.}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig8_sigma_frontier.png}
+\caption{Capped $\sigma$-CBF against the constant-margin frontier (same GPU, 10 seeds, @T). At $N{=}150$ the
+primary arm sits slightly above the frontier; at $N{=}200$ every $\sigma$ arm falls below it and every agent
+collides.}
+\label{fig:sigma}
+% SRC: paper/figs/fig8_sigma_frontier.png <- viz/paper_figures.py from results/amend35_sigma_cap/report.json rows
+\end{figure}
 % SRC: logs/overnight/review_amend35.md G-win table + S2 sanity (report commit 14049bb); results/amend35_sigma_cap/report.json
 The capped run used a different GPU (RTX PRO 6000) from the A100 runs, and all constant-margin
 comparators were re-run on that GPU.
