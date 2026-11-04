@@ -1,2 +1,17 @@
 start 2026-11-04T12:54:03+01:00 HEAD f6f2415
 solves done 2026-11-04T14:03:33+01:00
+done noise_only s0 rc=0 2026-11-04T14:23:28+01:00
+done fresh s0 rc=0 2026-11-04T14:23:42+01:00
+done fresh_nomfg s0 rc=0 2026-11-04T14:50:07+01:00
+done fresh s1 rc=0 2026-11-04T14:50:24+01:00
+done noise_only s1 rc=0 2026-11-04T15:09:48+01:00
+done fresh_nomfg s1 rc=0 2026-11-04T15:10:12+01:00
+done fresh s2 rc=0 2026-11-04T15:29:32+01:00
+done noise_only s2 rc=0 2026-11-04T15:29:33+01:00
+done fresh s3 rc=0 2026-11-04T15:49:04+01:00
+done fresh_nomfg s2 rc=0 2026-11-04T15:49:17+01:00
+done noise_only s3 rc=0 2026-11-04T16:08:48+01:00
+done fresh_nomfg s3 rc=0 2026-11-04T16:09:03+01:00
+done fresh s4 rc=0 2026-11-04T16:28:19+01:00
+done noise_only s4 rc=0 2026-11-04T16:28:23+01:00
+done fresh_nomfg s4 rc=0 2026-11-04T16:46:19+01:00

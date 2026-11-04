@@ -1,0 +1,15 @@
+fresh fresh 0
+noise_only noise_only 0
+fresh_nomfg fresh 0
+fresh fresh 1
+noise_only noise_only 1
+fresh_nomfg fresh 1
+fresh fresh 2
+noise_only noise_only 2
+fresh_nomfg fresh 2
+fresh fresh 3
+noise_only noise_only 3
+fresh_nomfg fresh 3
+fresh fresh 4
+noise_only noise_only 4
+fresh_nomfg fresh 4
