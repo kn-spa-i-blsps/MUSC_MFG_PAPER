@@ -1,0 +1,6 @@
+{
+ "old_path_phi_grad_bit_equal_to_cache": true,
+ "max|grad Phi(T)| terminal0": 0.0,
+ "max|grad Phi(T)| terminal_goal": 16.32329750061035,
+ "finite": true
+}

@@ -38,9 +38,14 @@ class MacroCost:
 
 
 def solve_macro(scenario, grid: Grid, cost: MacroCost, *, damping: float, max_iters: int,
-                tol: float, burn_in: int) -> dict:
+                tol: float, burn_in: int, terminal: str | None = None) -> dict:
     v_goal, v_obs = scenario.potentials(grid)
-    cp = CostParams(V_goal=v_goal, V_obs=v_obs, W_fn=cost.total)
+    v_term = None
+    if terminal == "goal":                   # amend36: terminal cost g = goal potential (at T if time-dependent)
+        v_term = v_goal[-1] if v_goal.ndim == 3 else v_goal
+    elif terminal is not None:
+        raise ValueError(f"unknown terminal cost {terminal!r}")
+    cp = CostParams(V_goal=v_goal, V_obs=v_obs, W_fn=cost.total, V_terminal=v_term)
     t0 = time.time()
     m_star, _, diag = solve_equilibrium_cesaro(scenario, cp, grid, damping=damping,
                                                max_iters=max_iters, tol=tol, burn_in=burn_in)

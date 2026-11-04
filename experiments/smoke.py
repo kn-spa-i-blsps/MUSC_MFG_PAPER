@@ -91,6 +91,9 @@ def get_macro(cfg, sc, grid, c_w, cache_dir):
     tag = {"N": sc.N, "scenario": cfg["scenario"], "cost": cost.__dict__, "fp": fp, "step": cfg["grid_step"]}
     if "horizon" in cfg:                     # only non-default horizons enter the key (old keys stay valid)
         tag["horizon"] = [cfg["horizon"], grid.horizon]
+    terminal = mc.get("terminal")            # amend36; absent = terminal cost 0 (old keys stay valid)
+    if terminal is not None:
+        tag["terminal"] = terminal
     tag = json.dumps(tag, sort_keys=True)
     key = f"macro_N{sc.N}_cw{c_w:g}_{hashlib.sha1(tag.encode()).hexdigest()[:10]}"
     path = os.path.join(cache_dir, key + ".npz")
@@ -98,7 +101,7 @@ def get_macro(cfg, sc, grid, c_w, cache_dir):
         return load_macro(path), cost, path
     print(f"[macro] solving c_w={c_w} ...", flush=True)
     sol = solve_macro(sc, grid, cost, damping=fp["damping"], max_iters=fp["max_iters"],
-                      tol=fp["tol"], burn_in=fp["burn_in"])
+                      tol=fp["tol"], burn_in=fp["burn_in"], terminal=terminal)
     save_macro(path, sol)
     with open(path + ".json", "w") as f:
         f.write(tag)

@@ -18,7 +18,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" || exit 0
         echo "$(date '+%F %T') checkpoint pushed $(git rev-parse --short HEAD): $msg"; exit 0; }
       echo "$(date '+%F %T') checkpoint push failed (try $i)"; sleep 30
     done
-  ) 9>/workspace/.musc_git.lock
+  ) 9>"${MUSC_LOCK:-/workspace/.musc_git.lock}"
 }
 
 validate_run_dirs() {
