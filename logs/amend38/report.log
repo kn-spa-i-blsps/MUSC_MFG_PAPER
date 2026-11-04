@@ -1,0 +1,108 @@
+== A2 exact, N=100 stage-1 config (means over seeds)
+arm                                               n compl_T complSet5  safe_T safeSet3 safeSet5 safeSet10   ever  coll_ps ident
+real                                              5   0.718     0.426   0.000    0.000    0.000     0.000  1.000    45182 True
+cv                                                5   0.730     0.440   0.000    0.000    0.000     0.000  1.000    58604 True
+learned                                           5   0.678     0.634   0.168    0.160    0.154     0.144  0.734     1152 True
+smith                                             5   0.036     0.036   0.004    0.004    0.004     0.004  0.996   649902 True
+fresh                                             5   0.934     0.920   0.934    0.930    0.920     0.900  0.000        0 True
+noise_only                                        5   0.862     0.800   0.862    0.826    0.800     0.756  0.000        0 True
+fresh_nomfg                                       5   0.602     0.602   0.602    0.602    0.602     0.602  0.000        0 True
+fresh_nocbf                                       5   1.000     1.000   0.002    0.002    0.002     0.002  0.998   820519 True
+split_noise_only-real (MFG clean, CBF delayed)    5   0.744     0.452   0.000    0.000    0.000     0.000  1.000    38509 True
+split_real-noise_only (MFG delayed, CBF clean)    5   0.856     0.802   0.856    0.836    0.802     0.750  0.000        0 True
+split_real-real (check)                           1   0.740     0.420   0.000    0.000    0.000     0.000  1.000    44881 True
+== A2 contrasts (paired, CI95)
+  learned - real                                               safe_T +0.168 [+0.118,+0.226]  safeSet5 +0.154 [+0.106,+0.208]  set3 +0.160 [+0.114,+0.218]  set10 +0.144 [+0.096,+0.196]
+  cv - real                                                    safe_T +0.000 [+0.000,+0.000]  safeSet5 +0.000 [+0.000,+0.000]  set3 +0.000 [+0.000,+0.000]  set10 +0.000 [+0.000,+0.000]
+  smith - real                                                 safe_T +0.004 [+0.000,+0.008]  safeSet5 +0.004 [+0.000,+0.008]  set3 +0.004 [+0.000,+0.008]  set10 +0.004 [+0.000,+0.008]
+  noise_only - real                                            safe_T +0.862 [+0.854,+0.870]  safeSet5 +0.800 [+0.788,+0.812]  set3 +0.826 [+0.810,+0.842]  set10 +0.756 [+0.742,+0.770]
+  split_real-noise_only (MFG delayed, CBF clean) - real        safe_T +0.856 [+0.840,+0.874]  safeSet5 +0.802 [+0.788,+0.818]  set3 +0.836 [+0.822,+0.848]  set10 +0.750 [+0.732,+0.768]
+  split_noise_only-real (MFG clean, CBF delayed) - real        safe_T +0.000 [+0.000,+0.000]  safeSet5 +0.000 [+0.000,+0.000]  set3 +0.000 [+0.000,+0.000]  set10 +0.000 [+0.000,+0.000]
+  fresh - fresh_nomfg                                          safe_T +0.332 [+0.280,+0.388]  safeSet5 +0.318 [+0.274,+0.370]  set3 +0.328 [+0.284,+0.378]  set10 +0.298 [+0.250,+0.352]
+== A1 bounds (safe_settled <= 1 - ever)
+  amend22 registered safe_N {'real_d0.55': 25, 'real_d0.70': 25, 'learned_pooled_d0.70': 50}
+    N25/real_d0.55                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/real_d0.70                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/learned_pooled_d0.70                 safe_T 1.000 compl_T 1.000 bound 1.000
+    N50/real_d0.55                           safe_T 0.284 compl_T 1.000 bound 0.284
+    N50/real_d0.70                           safe_T 0.056 compl_T 1.000 bound 0.056
+    N50/learned_pooled_d0.70                 safe_T 0.992 compl_T 1.000 bound 0.992
+    N100/real_d0.55                          safe_T 0.000 compl_T 1.000 bound 0.000
+    N100/real_d0.70                          safe_T 0.000 compl_T 0.994 bound 0.000
+    N100/learned_pooled_d0.70                safe_T 0.880 compl_T 0.950 bound 0.924
+    N150/real_d0.55                          safe_T 0.000 compl_T 0.972 bound 0.000
+    N150/real_d0.70                          safe_T 0.000 compl_T 0.924 bound 0.000
+    N150/learned_pooled_d0.70                safe_T 0.479 compl_T 0.857 bound 0.527
+    N200/real_d0.55                          safe_T 0.000 compl_T 0.883 bound 0.000
+    N200/real_d0.70                          safe_T 0.000 compl_T 0.793 bound 0.000
+    N200/learned_pooled_d0.70                safe_T 0.137 compl_T 0.599 bound 0.173
+  amend24 registered safe_N None
+    N25/noise_only                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N50/noise_only                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N100/noise_only                          safe_T 1.000 compl_T 1.000 bound 1.000
+    N150/noise_only                          safe_T 1.000 compl_T 1.000 bound 1.000
+    N150/fresh                               safe_T 0.998 compl_T 0.998 bound 1.000
+    N200/noise_only                          safe_T 0.968 compl_T 0.968 bound 1.000
+    N200/fresh                               safe_T 0.763 compl_T 0.763 bound 1.000
+  amend27 registered safe_N {'real_d0.55': 25, 'real_d0.70': 25, 'cv_d0.55': 25, 'cv_d0.70': 25, 'smith_d0.55': None, 'smith_d0.70': None, 'learned_pooled_d0.70': 50, 'noise_only_d0.70': 200, 'fresh_d0.70': 150}
+    N25/real_d0.55                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/real_d0.70                           safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/learned_pooled_d0.70                 safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/noise_only_d0.70                     safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/cv_d0.55                             safe_T 1.000 compl_T 1.000 bound 1.000
+    N25/cv_d0.70                             safe_T 0.976 compl_T 1.000 bound 0.976
+    N25/smith_d0.55                          safe_T 0.908 compl_T 1.000 bound 0.908
+    N25/smith_d0.70                          safe_T 0.588 compl_T 0.604 bound 0.808
+    N25/fresh_d0.70                          safe_T 1.000 compl_T 1.000 bound 1.000
+    N50/real_d0.55                           safe_T 0.284 compl_T 1.000 bound 0.284
+    N50/real_d0.70                           safe_T 0.056 compl_T 1.000 bound 0.056
+    N50/learned_pooled_d0.70                 safe_T 0.992 compl_T 1.000 bound 0.992
+    N50/noise_only_d0.70                     safe_T 1.000 compl_T 1.000 bound 1.000
+    N50/cv_d0.55                             safe_T 0.000 compl_T 1.000 bound 0.000
+    N50/cv_d0.70                             safe_T 0.000 compl_T 1.000 bound 0.000
+    N50/smith_d0.55                          safe_T 0.068 compl_T 0.144 bound 0.068
+    N50/smith_d0.70                          safe_T 0.054 compl_T 0.328 bound 0.054
+    N50/fresh_d0.70                          safe_T 1.000 compl_T 1.000 bound 1.000
+    N100/real_d0.55                          safe_T 0.000 compl_T 1.000 bound 0.000
+    N100/real_d0.70                          safe_T 0.000 compl_T 0.994 bound 0.000
+    N100/learned_pooled_d0.70                safe_T 0.880 compl_T 0.950 bound 0.924
+    N100/noise_only_d0.70                    safe_T 1.000 compl_T 1.000 bound 1.000
+    N100/cv_d0.55                            safe_T 0.000 compl_T 1.000 bound 0.000
+    N100/cv_d0.70                            safe_T 0.000 compl_T 1.000 bound 0.000
+    N100/smith_d0.55                         safe_T 0.006 compl_T 0.028 bound 0.006
+    N100/smith_d0.70                         safe_T 0.001 compl_T 0.053 bound 0.001
+    N100/fresh_d0.70                         safe_T 1.000 compl_T 1.000 bound 1.000
+    N100/split_learned-real_d0.70            safe_T 0.000 compl_T 0.998 bound 0.000
+    N100/split_real-learned_d0.70            safe_T 0.918 compl_T 1.000 bound 0.918
+    N100/split_noise_only-real_d0.70         safe_T 0.000 compl_T 1.000 bound 0.000
+    N100/split_real-noise_only_d0.70         safe_T 1.000 compl_T 1.000 bound 1.000
+    N150/real_d0.55                          safe_T 0.000 compl_T 0.972 bound 0.000
+    N150/real_d0.70                          safe_T 0.000 compl_T 0.924 bound 0.000
+    N150/learned_pooled_d0.70                safe_T 0.479 compl_T 0.857 bound 0.527
+    N150/noise_only_d0.70                    safe_T 1.000 compl_T 1.000 bound 1.000
+    N150/fresh_d0.70                         safe_T 0.998 compl_T 0.998 bound 1.000
+    N150/cv_d0.55                            safe_T 0.000 compl_T 0.999 bound 0.000
+    N150/cv_d0.70                            safe_T 0.000 compl_T 0.981 bound 0.000
+    N150/smith_d0.55                         safe_T 0.000 compl_T 0.003 bound 0.000
+    N150/smith_d0.70                         safe_T 0.002 compl_T 0.002 bound 0.002
+    N150/split_learned-real_d0.70            safe_T 0.000 compl_T 0.909 bound 0.000
+    N150/split_real-learned_d0.70            safe_T 0.503 compl_T 0.922 bound 0.529
+    N150/split_noise_only-real_d0.70         safe_T 0.000 compl_T 0.938 bound 0.000
+    N150/split_real-noise_only_d0.70         safe_T 1.000 compl_T 1.000 bound 1.000
+    N200/real_d0.55                          safe_T 0.000 compl_T 0.883 bound 0.000
+    N200/real_d0.70                          safe_T 0.000 compl_T 0.793 bound 0.000
+    N200/learned_pooled_d0.70                safe_T 0.137 compl_T 0.599 bound 0.173
+    N200/noise_only_d0.70                    safe_T 0.968 compl_T 0.968 bound 1.000
+    N200/fresh_d0.70                         safe_T 0.763 compl_T 0.763 bound 1.000
+    N200/cv_d0.55                            safe_T 0.000 compl_T 0.972 bound 0.000
+    N200/cv_d0.70                            safe_T 0.000 compl_T 0.940 bound 0.000
+    N200/smith_d0.55                         safe_T 0.001 compl_T 0.003 bound 0.000
+    N200/smith_d0.70                         safe_T 0.001 compl_T 0.001 bound 0.000
+    N200/split_learned-real_d0.70            safe_T 0.000 compl_T 0.776 bound 0.000
+    N200/split_real-learned_d0.70            safe_T 0.098 compl_T 0.599 bound 0.125
+    N200/split_noise_only-real_d0.70         safe_T 0.000 compl_T 0.811 bound 0.000
+    N200/split_real-noise_only_d0.70         safe_T 0.965 compl_T 0.965 bound 1.000
+== B non-settlers (amend33, terminal 0)
+  fresh: n=40 per_seed=[7, 9, 8, 9, 7] classes={'in_transit': 5, 'parked_CBF_blocked': 3, 'oscillating': 20, 'parked_MFG_stalled': 12} transit<=10s=5 dT_q=[-0.4202335662941912, 0.06023626539881821, 0.1764003978805171, 0.24878619977144312, 0.2963227823606971] -> mixed
+  noise_only: n=100 per_seed=[21, 18, 19, 22, 20] classes={'oscillating': 59, 'parked_other': 22, 'in_transit': 10, 'other': 4, 'parked_CBF_blocked': 5} transit<=10s=10 dT_q=[-0.6425399318259246, -0.2307585318288542, 0.15028664843479733, 0.2760194095496016, 0.520928803610146] -> mixed
+aneks sha256: 42318aa5ee66813f96c963ad205800ff4f471e6d3d9c677da0e2a02a98c6cdee
