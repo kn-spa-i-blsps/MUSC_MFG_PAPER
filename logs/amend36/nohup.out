@@ -1,0 +1,3 @@
+2026-11-04 14:03:42 checkpoint pushed 671cb04: amend36 macro solves done (terminal cost = goal potential, c_w 1 and 0); not a result
+2026-11-04 16:46:24 checkpoint pushed 6770441: amend36 rollouts done (15 = 3 delay-free arms x seeds 0-4); not a result until the report
+2026-11-04 16:47:01 checkpoint pushed 50cbf6e: amend36 report: MFG terminal cost = goal potential, link 1 (delay-free) verdict in report.json
