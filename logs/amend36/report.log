@@ -1,0 +1,17 @@
+arm                     n   safe   ever  compl  out_T left.2s  coll_ps makespan    intW
+new fresh               5  0.994  0.000  0.994    0.6     0.0        0     70.3   213.0
+new noise_only          5  0.888  0.000  0.888   11.2     0.0        0      nan   177.9
+new fresh_nomfg         5  0.594  0.000  0.594   40.6     0.0        0      nan   369.8
+old fresh               5  0.934  0.000  0.934    6.6     2.2        0     68.9   188.0
+old noise_only          5  0.862  0.000  0.862   13.8     3.4        0     67.8   152.9
+old fresh_nomfg         5  0.602  0.000  0.602   39.8     0.0        0      nan   381.2
+completeness  fresh_new_minus_old        +0.060 [+0.048, +0.072] n=5
+completeness  noise_only_new_minus_old   +0.026 [+0.016, +0.034] n=5
+completeness  fresh_nomfg_new_minus_old  -0.008 [-0.036, +0.012] n=5
+completeness  fresh_minus_nomfg_new      +0.400 [+0.346, +0.456] n=5
+safe_success  fresh_new_minus_old        +0.060 [+0.048, +0.072] n=5
+safe_success  noise_only_new_minus_old   +0.026 [+0.016, +0.034] n=5
+safe_success  fresh_nomfg_new_minus_old  -0.008 [-0.036, +0.012] n=5
+safe_success  fresh_minus_nomfg_new      +0.400 [+0.346, +0.456] n=5
+link 1: {"fresh": {"verdict": "HOLDS", "completeness_mean": 0.994, "completeness_min": 0.99, "collisions_zero_all_seeds": true, "n_seeds": 5}, "noise_only": {"verdict": "IMPROVED, NOT MET", "completeness_mean": 0.8880000000000001, "completeness_min": 0.87, "collisions_zero_all_seeds": true, "n_seeds": 5}}
+aneks sha256: 66fd45f020b94e5b3fba61e764991b0ffe9043b296dd138a45d245b08cdf096b

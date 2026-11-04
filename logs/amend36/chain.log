@@ -15,3 +15,4 @@ done fresh_nomfg s3 rc=0 2026-11-04T16:09:03+01:00
 done fresh s4 rc=0 2026-11-04T16:28:19+01:00
 done noise_only s4 rc=0 2026-11-04T16:28:23+01:00
 done fresh_nomfg s4 rc=0 2026-11-04T16:46:19+01:00
+report rc=0 2026-11-04T16:46:57+01:00
