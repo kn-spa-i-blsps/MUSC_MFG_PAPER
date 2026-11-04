@@ -148,15 +148,18 @@ Robust CBFs tighten the constraint by a bound on the model or measurement
 error~\cite{jankovic2018robust}. Measurement-robust CBFs do the same for learned perception
 errors~\cite{dean2020guaranteeing,cosner2021measurement}. Sampled-data and input-delay
 formulations handle delay in the agent's own actuation
-loop~\cite{singletary2020sampled,molnar2023delay}. In our setting the delay sits in the
-\emph{neighbour} information, its size is set by the communication schedule ($\Tf = N\tslot$), and
-it differs between neighbours (each has its own slot phase). A worst-case bound on it is
-very conservative. We find that a constant margin larger than the best one makes an
+loop~\cite{singletary2020sampled,molnar2023delay}. Closest to our setting,
+\citeauthor{ballotta2025safe}~\shortcite{ballotta2025safe} study distributed CBFs under
+\emph{communication} delay and show that predicting neighbours' current states from delayed
+messages and their age of information restores the safety of a learned multi-robot controller.
+We take that predictor-into-CBF mechanism as given. In our setting the delay is set by the TDMA
+schedule ($\Tf = N\tslot$), grows with swarm size, and differs between neighbours (each has its own
+slot phase). A worst-case bound on it is very conservative. We find that a constant margin larger than the best one makes an
 \emph{uncompensated} swarm worse (Sec.~\ref{sec:method}).
 
 \paragraph{Stochastic and conformal safety.}
 Stochastic CBFs give probabilistic invariance under process noise~\cite{clark2021stochastic}.
-Conformal prediction~\cite{vovk2005algorithmic,angelopoulos2021gentle} turns a learned
+Conformal prediction~\cite{vovk2005algorithmic,angelopoulos2023conformal} turns a learned
 predictor into distribution-free prediction regions. It has been used to plan safely around
 predicted agents~\cite{lindemann2023safe,dixit2023adaptive}. Our negative result
 (Sec.~\ref{sec:sigma}) is a concrete instance of the known caveat: the coverage guarantee is
@@ -164,10 +167,12 @@ marginal and assumes exchangeability between calibration and deployment. A contr
 consumes the margin changes the distribution it is applied to.
 
 \paragraph{How we differ.}
-Prior work that feeds a neighbour predictor into a safety filter treats the predictor as an input
-to one layer. Our question is \emph{which layer of a hierarchical controller} the compensation
-belongs to. We answer it with a layer-split ablation under both a learned and an oracle estimate,
-and the answer is a negative one for the MFG layer. Classical compensators (constant-velocity
+Predictor-based delay compensation for a safety filter is established for flat distributed
+controllers~\cite{ballotta2025safe}. Our questions are different. (i) In a \emph{hierarchical}
+MFG+CBF controller, \emph{which layer} must receive the compensation? We answer this with a
+layer-split ablation under both a learned and an oracle estimate, and the answer is negative for the
+MFG layer. (ii) Is the limit staleness or density? A matched-staleness sweep separates the two.
+(iii) Can a calibrated uncertainty margin replace accurate compensation? It cannot. Classical compensators (constant-velocity
 extrapolation and a Smith-type model predictor~\cite{smith1957closer}) are included as comparators.
 
 %=====================================================================
@@ -228,8 +233,15 @@ from 0.125 to 1.0\,s. Minimum initial spacing is 1.669 / 1.075 / 0.788 / 0.626 /
 \emph{Config S (stage-1 configuration).} $N=100$, sparse goal of radius 4.20\,m, horizon 70.4\,s,
 $\dsafe=0.55$, 5 seeds, CPU.
 % SRC: prereg/prereg_projectA_amend11_ladder_safe.md L12-14; prereg/prereg_projectA_amend33_n100_baseline_cpu.md
-Raw trajectories exist only for Config S. Results from the two configurations are never compared
-directly.
+\emph{Why two configurations.} Config G is the only geometry that holds every $N$ up to 200 in one
+arena, so it is used for every scaling claim ($N$, $\Tf$, gate, margin, layer split across $N$). It
+needs a GPU and was run at the @T metric. Config S is the stage-1 reference controller, which fits on
+a CPU. It is the configuration in which the delay-free baseline, the layer ablations and the
+settled metric were developed, and its raw trajectories are kept, so every settled number is exact.
+The two differ in geometry, goal size, horizon, margin (0.70 vs 0.55), seed count and, for the
+learned arm, the predictor (pooled v3 vs an $N{=}100$-only model). A difference between them
+therefore cannot be attributed to any single factor, and we never compare their numbers directly.
+Each claim is checked within one configuration; claims that hold in both are marked.
 
 \paragraph{Metrics.}
 \emph{Ever-collided}: the fraction of agents whose true distance to any other agent ever drops
@@ -244,9 +256,9 @@ never collided.
 bound of ever-collided is at most 0.10 and the mean completeness is at least 0.90.
 % SRC: prereg/prereg_projectA_amend22_N_crossover_pooled.md L40-41
 CIs are 95\% seed-level cluster bootstrap. Config S contrasts are paired by seed.
-We fixed the settled metric (and its reference implementation) \emph{after} seeing results at $T$, at
-the PI's request, and pre-registered it before any settled number was computed
-(Sec.~\ref{sec:metric}).
+The settled metric was introduced after results at $T$ had been inspected, because scoring at a
+single instant rewarded a last-second inflow (Sec.~\ref{sec:metric}). Its definition was fixed and
+recorded before any settled number was computed.
 
 %=====================================================================
 \section{Method}
@@ -516,59 +528,45 @@ every delayed arm.
 \section{Evaluation Metric: Settled Arrival and the Rim}
 \label{sec:metric}
 %=====================================================================
-\emph{[Link 1: delay-free works --- not met in full.]}
-
-Scoring arrival at a single instant $T$ rewards transients. In Config S, adding a terminal goal
-cost to the MFG raised completeness@T of the oracle swarm from 0.934 to 0.994. Fourteen to eighteen
-agents were still outside the disc 1\,s before $T$ and rushed in during the last half second.
-% SRC: review_amend36.md (commit 50cbf6e) flag table
-Under the settled metric that controller was \emph{worse} by about 0.10 (fresh $-0.106$\ci{-0.116}{-0.096}),
-and it was reverted by a pre-registered rule.
-% SRC: review_amend37.md (commit 814bd2d)
-We adopt the settled metric (inside in at least 90\% of the last 5\,s) as the standard.
-Verdicts are identical at 3\,s and 10\,s.
-
-\paragraph{Delay-free success is limited by the goal rim.}
-Even without delay, the swarm does not fully settle. Safe settled is 0.920 with exact positions and
-0.800 with sensor noise, with zero collisions in both cases.
-% SRC: review_amend37.md / review_amend38.md A2
-The non-settlers are not stuck far away. All 40 exact-position non-settlers (8 per run) end within
-0.30\,m of the 4.20\,m rim, at a median of 0.18\,m outside. Half of them oscillate across the rim.
-30\% are parked because the MFG gives almost no inward push there (median radial command
-$-0.02$\,m/s): at the rim, goal attraction and crowd aversion balance. Only 3 of the 40 are
-blocked by the CBF. With sensor noise, the outer ring jitters instead: 59\% of non-settlers
-oscillate, crossing the rim a median of 7 times in 5\,s, as the CBF cuts an inward MFG command of
-$-0.40$ to $-0.13$\,m/s. At most 12\% of non-settlers are still approaching, and those are already
-inside at $T$, so a longer horizon is not expected to help (Fig.~\ref{fig:rim}).
-% SRC: review_amend38.md B table + "Where they are" + "Mechanism" (commit c201490); report.json B (d_T quantiles)
-The shortfall is a property of the equilibrium formation, whose outer ring lies on the disc
-boundary. It is not a delay effect.
+\section{Can a Calibrated Margin Replace Compensation? No}
+\label{sec:sigma}
+%=====================================================================
+\emph{[Link 4 for a predictor-driven margin layer: not earned.]}
+We replace the constant margin with a per-neighbour one,
+$\dsafe^{ij} = \max\big(\text{floor},\,D_{\mathrm{COLL}} + k\,q_\alpha\,\sigma_{ij}\big)$, where
+$\sigma_{ij}$ is a learned estimate of v3's error for neighbour $j$ and $q_\alpha$ a split-conformal
+quantile. Every gate below was fixed before its data existed.
+% SRC: control/cbf.py L56 (sigma mode); logs/overnight/phaseB_gpred_gate.md (commit b020562)
+\emph{The error model ranks but does not size:} it finds the top-10\% errors with AUC 0.78--0.86 per
+$N$, but explains little of their magnitude (pooled $R^2_{\log}=0.35$, negative within the top decile).
+% SRC: logs/overnight/review_gpred.md PRIMARY table + Tail (result commit 01701ef)
+\emph{Calibration holds offline} (coverage 0.955 at $\alpha=0.05$ after $(N,\sigma)$-binned calibration).
+% SRC: logs/overnight/review_amend31.md G-cal
+\emph{It does not beat the best constant margin} (Fig.~\ref{fig:sigma}). With the margin capped at
+1.5\,m (the only change from a first run whose margin diverged), the registered comparison gives
+$+0.039$\ci{+0.005}{+0.075} safe@T at $N=150$ but $-0.189$\ci{-0.200}{-0.177} at $N=200$, where every
+agent collides in every $\sigma$ arm. Verdict: not met.
+% SRC: logs/overnight/review_amend35.md G-win (report commit 14049bb); review_amend31.md (uncapped -0.159/-0.188, report 29e1496)
+\emph{The guarantee does not survive closed loop:} at $N=200$ the coverage drops to 0.77 on near
+pairs and 0.69 where the margin binds. The controller that consumes the margin changes the
+distribution it was calibrated on.
+% SRC: review_amend35.md "Closed-loop coverage"
+A plausible, untested reading: at $N=150$ the margin binds on 12.6\% of CBF rows and selectively
+protects risky pairs; at $N=200$ it binds on 75.2\% and acts as a broad, large margin on
+out-of-calibration estimates, the regime in which a larger margin hurts (Sec.~\ref{sec:method}).
+% SRC: results/amend35_sigma_cap/report.json rows/{150,200}/sigma_bin_a0.05 sigma_bind_frac 0.126/0.752
+The capped run used a different GPU from the A100 runs; its constant-margin comparators were
+re-run on that GPU.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{fig7_rim_nonsettlers.png}
-\caption{Delay-free agents that do not settle (Config S, 5 seeds), by class, against their signed
-distance to the goal rim at $T$. The dashed line marks one drone body (0.30\,m) outside the rim.
-Class is decided over the last 5\,s, distance at $T$ only.}
-\label{fig:rim}
-% SRC: paper/figs/fig7_rim_nonsettlers.png <- viz/paper_figures.py from results/amend38_settled_recompute/report.json B.agents
+\includegraphics[width=\columnwidth]{fig8_sigma_frontier.png}
+\caption{Capped $\sigma$-CBF against the constant-margin frontier (same GPU, 10 seeds, @T). Only at
+$N{=}150$ does the primary arm sit slightly above the frontier.}
+\label{fig:sigma}
+% SRC: paper/figs/fig8_sigma_frontier.png <- viz/paper_figures.py from results/amend35_sigma_cap/report.json rows
 \end{figure}
 
-\paragraph{A goal-tolerance band (to be computed).}
-The non-settlers sit about one drone body (0.30\,m) outside the disc. We therefore propose to
-report safe-settled success also with a goal tolerance of $D_{\mathrm{COLL}} = 0.30$\,m added to the
-radius. This band has \textbf{not yet been computed}; it will be evaluated from the existing
-Config S logs and in the regenerated Config G cells. One consequence is already fixed by a bound
-that holds for any tolerance. Safe success of an agent requires that it never collided, so
-$\text{safe} \le 1 - \text{ever}$. In Config S that caps the stale swarm at $0$
-(ever $=1.000$) and the learned swarm at $1-0.734 = 0.266$, while the delay-free arms are uncapped
-(ever $=0$). However generous the arrival criterion, it cannot remove the damage the delay does to
-safety.
-% SRC: review_amend38.md A1 bound logic + A2 ever_collided column (real 1.000, learned 0.734, noise_only/fresh 0)
-
-%=====================================================================
-\section{Negative Result: A Conformal $\sigma$-CBF Does Not Beat a Constant Margin}
-\label{sec:sigma}
 %=====================================================================
 \emph{[Link 4 for a predictor-driven margin layer: not earned.]}
 
@@ -694,6 +692,22 @@ apart. Event-triggered or priority TDMA slots would shorten the age of the neigh
 closing.
 Before either, the Config G cells will be regenerated under the settled metric and the goal-tolerance
 band, and the noise-optimal classical baseline will be run.
+
+\section*{Reproducibility}
+All experiment code (MFG solver, rollout, perception and TDMA model, CBF-QP, predictor training,
+analysis and figure scripts) and every pre-registered analysis plan will be released with the paper.
+Each reported cell lists its configuration file, random seeds (0--9, Config G; 0--4, Config S) and
+numerical precision. The predictor weights are fixed by hash, and every number in this paper is traced
+to a stored result file. Config G rollouts ran on single NVIDIA A100-80GB GPUs (the capped
+$\sigma$-CBF run on an RTX PRO 6000) with JAX at highest matmul precision. Config S ran on CPU.
+Confidence intervals are 95\% seed-level bootstrap with $10^4$ resamples. The learned-arm GPU path is
+not bit-deterministic across runs; replicates agree within CI.
+% SRC: review_amend22/27/35 headers (GPU, precision, seeds); review_amend27 (bootstrap 10k)
+
+\section*{Ethical Statement}
+This is a simulation study of collision avoidance for small drones. It involves no human subjects
+or personal data. Its results concern the safety of drone swarms, and the paper states plainly
+where safety is not achieved (Sec.~\ref{sec:limits}).
 
 \bibliographystyle{named}
 \bibliography{refs}

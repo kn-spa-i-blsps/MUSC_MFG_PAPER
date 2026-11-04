@@ -1,0 +1,143 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Achdou and
+  Capuzzo-Dolcetta}{2010}]{achdou2010mean}
+Yves Achdou and Italo Capuzzo-Dolcetta.
+\newblock Mean field games: numerical methods.
+\newblock {\em SIAM Journal on Numerical Analysis}, 48(3):1136--1162, 2010.
+
+\bibitem[\protect\citeauthoryear{Ames \bgroup \em et al.\egroup
+  }{2017}]{ames2017cbf}
+Aaron~D. Ames, Xiangru Xu, Jessy~W. Grizzle, and Paulo Tabuada.
+\newblock Control barrier function based quadratic programs for safety critical
+  systems.
+\newblock {\em IEEE Transactions on Automatic Control}, 62(8):3861--3876, 2017.
+
+\bibitem[\protect\citeauthoryear{Ames \bgroup \em et al.\egroup
+  }{2019}]{ames2019cbf}
+Aaron~D. Ames, Samuel Coogan, Magnus Egerstedt, Gennaro Notomista, Koushil
+  Sreenath, and Paulo Tabuada.
+\newblock Control barrier functions: theory and applications.
+\newblock In {\em European Control Conference (ECC)}, 2019.
+
+\bibitem[\protect\citeauthoryear{Angelopoulos and
+  Bates}{2023}]{angelopoulos2023conformal}
+Anastasios~N. Angelopoulos and Stephen Bates.
+\newblock Conformal prediction: A gentle introduction.
+\newblock {\em Foundations and Trends in Machine Learning}, 16(4):494--591,
+  2023.
+
+\bibitem[\protect\citeauthoryear{Ballotta and Talak}{2025}]{ballotta2025safe}
+Luca Ballotta and Rajat Talak.
+\newblock Safe distributed control of multi-robot systems with communication
+  delays.
+\newblock {\em IEEE Transactions on Vehicular Technology}, 74(7):10137--10150,
+  2025.
+\newblock Preprint arXiv:2402.09382 (2024).
+
+\bibitem[\protect\citeauthoryear{Borrmann \bgroup \em et al.\egroup
+  }{2015}]{borrmann2015control}
+Urs Borrmann, Li~Wang, Aaron~D. Ames, and Magnus Egerstedt.
+\newblock Control barrier certificates for safe swarm behavior.
+\newblock In {\em IFAC Conference on Analysis and Design of Hybrid Systems
+  (ADHS)}, 2015.
+
+\bibitem[\protect\citeauthoryear{Clark}{2021}]{clark2021stochastic}
+Andrew Clark.
+\newblock Control barrier functions for stochastic systems.
+\newblock {\em Automatica}, 130, 2021.
+
+\bibitem[\protect\citeauthoryear{Cosner \bgroup \em et al.\egroup
+  }{2021}]{cosner2021measurement}
+Ryan~K. Cosner, Andrew~W. Singletary, Andrew~J. Taylor, Tamas~G. Molnar,
+  Katherine~L. Bouman, and Aaron~D. Ames.
+\newblock Measurement-robust control barrier functions: certainty in safety
+  with uncertainty in state.
+\newblock In {\em IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 2021.
+
+\bibitem[\protect\citeauthoryear{Dean \bgroup \em et al.\egroup
+  }{2020}]{dean2020guaranteeing}
+Sarah Dean, Andrew~J. Taylor, Ryan~K. Cosner, Benjamin Recht, and Aaron~D.
+  Ames.
+\newblock Guaranteeing safety of learned perception modules via
+  measurement-robust control barrier functions.
+\newblock In {\em Conference on Robot Learning (CoRL)}, 2020.
+
+\bibitem[\protect\citeauthoryear{Dixit \bgroup \em et al.\egroup
+  }{2023}]{dixit2023adaptive}
+Anushri Dixit, Lars Lindemann, Skylar~X. Wei, Matthew Cleaveland, George~J.
+  Pappas, and Joel~W. Burdick.
+\newblock Adaptive conformal prediction for motion planning among dynamic
+  agents.
+\newblock In {\em Learning for Dynamics and Control Conference (L4DC)}, 2023.
+
+\bibitem[\protect\citeauthoryear{Elamvazhuthi and
+  Berman}{2019}]{elamvazhuthi2019mean}
+Karthik Elamvazhuthi and Spring Berman.
+\newblock Mean-field models in swarm robotics: a survey.
+\newblock {\em Bioinspiration \& Biomimetics}, 15(1), 2019.
+
+\bibitem[\protect\citeauthoryear{Huang \bgroup \em et al.\egroup
+  }{2006}]{huang2006large}
+Minyi Huang, Roland~P. Malham{\'e}, and Peter~E. Caines.
+\newblock Large population stochastic dynamic games: closed-loop
+  {McKean}--{Vlasov} systems and the {Nash} certainty equivalence principle.
+\newblock {\em Communications in Information and Systems}, 6(3):221--252, 2006.
+
+\bibitem[\protect\citeauthoryear{Jankovic}{2018}]{jankovic2018robust}
+Mrdjan Jankovic.
+\newblock Robust control barrier functions for constrained stabilization of
+  nonlinear systems.
+\newblock {\em Automatica}, 96:359--367, 2018.
+
+\bibitem[\protect\citeauthoryear{Lasry and Lions}{2007}]{lasry2007mean}
+Jean-Michel Lasry and Pierre-Louis Lions.
+\newblock Mean field games.
+\newblock {\em Japanese Journal of Mathematics}, 2(1):229--260, 2007.
+
+\bibitem[\protect\citeauthoryear{Lindemann \bgroup \em et al.\egroup
+  }{2023}]{lindemann2023safe}
+Lars Lindemann, Matthew Cleaveland, Gihyun Shim, and George~J. Pappas.
+\newblock Safe planning in dynamic environments using conformal prediction.
+\newblock {\em IEEE Robotics and Automation Letters}, 8(8), 2023.
+
+\bibitem[\protect\citeauthoryear{Molnar \bgroup \em et al.\egroup
+  }{2023}]{molnar2023delay}
+Tamas~G. Molnar, Adam~K. Kiss, Aaron~D. Ames, and G{\'a}bor Orosz.
+\newblock Safety-critical control with input delay in dynamic environment.
+\newblock {\em IEEE Transactions on Control Systems Technology},
+  31(4):1507--1520, 2023.
+
+\bibitem[\protect\citeauthoryear{Ross \bgroup \em et al.\egroup
+  }{2011}]{ross2011reduction}
+St{\'e}phane Ross, Geoffrey Gordon, and Drew Bagnell.
+\newblock A reduction of imitation learning and structured prediction to
+  no-regret online learning.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics (AISTATS)}, 2011.
+
+\bibitem[\protect\citeauthoryear{Singletary \bgroup \em et al.\egroup
+  }{2020}]{singletary2020sampled}
+Andrew Singletary, Yuxiao Chen, and Aaron~D. Ames.
+\newblock Control barrier functions for sampled-data systems with input delays.
+\newblock In {\em IEEE Conference on Decision and Control (CDC)}, 2020.
+
+\bibitem[\protect\citeauthoryear{Smith}{1957}]{smith1957closer}
+Otto J.~M. Smith.
+\newblock Closer control of loops with dead time.
+\newblock {\em Chemical Engineering Progress}, 53(5):217--219, 1957.
+
+\bibitem[\protect\citeauthoryear{Vovk \bgroup \em et al.\egroup
+  }{2005}]{vovk2005algorithmic}
+Vladimir Vovk, Alex Gammerman, and Glenn Shafer.
+\newblock {\em Algorithmic Learning in a Random World}.
+\newblock Springer, 2005.
+
+\bibitem[\protect\citeauthoryear{Wang \bgroup \em et al.\egroup
+  }{2017}]{wang2017safety}
+Li~Wang, Aaron~D. Ames, and Magnus Egerstedt.
+\newblock Safety barrier certificates for collisions-free multirobot systems.
+\newblock {\em IEEE Transactions on Robotics}, 33(3):661--674, 2017.
+
+\end{thebibliography}
