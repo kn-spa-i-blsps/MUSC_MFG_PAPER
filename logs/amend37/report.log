@@ -1,0 +1,30 @@
+ctrl arm          compl_T  safeSet3  safeSet5 safeSet10 coll_ps  per-seed safe_settled_5s
+ON   fresh          0.994     0.830     0.814     0.800       0  [0.81, 0.82, 0.8, 0.81, 0.83]
+ON   noise_only     0.888     0.724     0.702     0.676       0  [0.73, 0.68, 0.69, 0.7, 0.71]
+ON   fresh_nomfg    0.594     0.594     0.594     0.594       0  [0.54, 0.62, 0.66, 0.64, 0.51]
+OFF  fresh          0.934     0.930     0.920     0.900       0  [0.93, 0.91, 0.92, 0.91, 0.93]
+OFF  noise_only     0.862     0.826     0.800     0.756       0  [0.79, 0.82, 0.81, 0.78, 0.8]
+OFF  fresh_nomfg    0.602     0.602     0.602     0.602       0  [0.6, 0.6, 0.66, 0.64, 0.51]
+--- W=3s  link1 {'ON': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}, 'OFF': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}}
+  ON-OFF fresh        -0.100 [-0.108, -0.092]
+  ON-OFF noise_only   -0.102 [-0.128, -0.074]
+  ON-OFF fresh_nomfg  -0.008 [-0.036, +0.012]
+  MFG-CBFonly ON  +0.236 [+0.178, +0.294]
+  MFG-CBFonly OFF +0.328 [+0.284, +0.378]
+  decision: OFF >= ON: revert terminal cost, no re-baseline
+--- W=5s  link1 {'ON': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}, 'OFF': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}}
+  ON-OFF fresh        -0.106 [-0.116, -0.096]
+  ON-OFF noise_only   -0.098 [-0.124, -0.074]
+  ON-OFF fresh_nomfg  -0.008 [-0.036, +0.012]
+  MFG-CBFonly ON  +0.220 [+0.164, +0.280]
+  MFG-CBFonly OFF +0.318 [+0.274, +0.370]
+  decision: OFF >= ON: revert terminal cost, no re-baseline
+--- W=10s  link1 {'ON': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}, 'OFF': {'fresh': 'NOT MET', 'noise_only': 'NOT MET'}}
+  ON-OFF fresh        -0.100 [-0.106, -0.094]
+  ON-OFF noise_only   -0.080 [-0.122, -0.038]
+  ON-OFF fresh_nomfg  -0.008 [-0.036, +0.012]
+  MFG-CBFonly ON  +0.206 [+0.148, +0.270]
+  MFG-CBFonly OFF +0.298 [+0.250, +0.352]
+  decision: OFF >= ON: revert terminal cost, no re-baseline
+window_robust: True | FINAL: OFF >= ON: revert terminal cost, no re-baseline
+aneks sha256: d4aa87ec90f49a08092a04ac2acbda5602aee5dd7720fd534e33e5e3ff69a964
