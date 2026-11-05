@@ -284,3 +284,14 @@ closed-loop learned-v3 histories (the evaluation distribution).
 - Run 1: stage 0 + stage 1 OK (G-cal PASS_AFTER_FIX, 1349c30); identity FAILED (f32 d_safe² 1-ulp) → addendum 3 fix,
   verified bit-equal; amend28 auto-started then stopped (no rollouts). Run 2 started 15:37 UTC with stage 1 reused.
 - G-cal details: review_amend31.md.
+
+## 2026-11-05 — RA-L pass (new agent, brief NEW_AGENT_ONBOARDING): HEAD a04863c verified
+- Brief targets IEEE RA-L (prior agent formatted for IJCAI'27) -> paper/ral_v1.tex (IEEEtran); draft_v1.tex kept, superseded.
+- amend39 addendum 1 (9f8921c, sha 296e700e…) before any data: headline = settled 5 s + 0.30 m band, b=0 alongside.
+- RunPod start sbk37l6nvrg36q -> 402 (balance too low). amend39 NOT run. Generators prepared (viz/paper_numbers.py,
+  viz/paper_figures.py fig_staleness) so Table I / Fig. 1 / abstract macros switch automatically after the report.
+- Config S trajectories found on this workstation -> amend39 addendum 2 (b843808, log-only): b=0 reproduces amend38
+  exactly; band: fresh 1.000, noise_only 0.988, CBF-clean +0.968, MFG-clean 0, MFG vs CBF-only +0.350 (7d14f2e).
+  THESIS-LEVEL flag for PI: link 1 met only under the post-hoc band.
+- refs.bib stray brace fixed, Shafer & Vovk 2008 added, pages added (from memory, unverified). No TeX engine here
+  (download blocked) -> compile/page count unverified. Review: paper/review_ral_v1.md. STOP.

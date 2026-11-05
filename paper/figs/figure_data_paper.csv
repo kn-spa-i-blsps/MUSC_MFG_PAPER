@@ -23,10 +23,10 @@ fig6_layers_G_noise_only,CBF-only,N=200,0.9654999999999999,0.9594999999999999,0.
 fig6_layers_G_noise_only,both layers,N=100,1.0,1.0,1.0,results/amend27_ladder_layers/report.json
 fig6_layers_G_noise_only,both layers,N=150,1.0,1.0,1.0,results/amend27_ladder_layers/report.json
 fig6_layers_G_noise_only,both layers,N=200,0.968,0.9629999999999999,0.9734999999999999,results/amend27_ladder_layers/report.json
-fig6_layers_S_oracle_settled,none (stale to both),N=100,0.0,0.0,0.0,results/amend38_settled_recompute/report.json
-fig6_layers_S_oracle_settled,MFG-only,N=100,0.0,0.0,0.0,results/amend38_settled_recompute/report.json
-fig6_layers_S_oracle_settled,CBF-only,N=100,0.8019999999999999,0.788,0.818,results/amend38_settled_recompute/report.json
-fig6_layers_S_oracle_settled,both layers,N=100,0.8,0.788,0.812,results/amend38_settled_recompute/report.json
+fig6_layers_S_oracle_settled_band,none (stale to both),N=100,0.0,0.0,0.0,results/amend39_configS_band/report.json
+fig6_layers_S_oracle_settled_band,MFG-only,N=100,0.0,0.0,0.0,results/amend39_configS_band/report.json
+fig6_layers_S_oracle_settled_band,CBF-only,N=100,0.968,0.962,0.974,results/amend39_configS_band/report.json
+fig6_layers_S_oracle_settled_band,both layers,N=100,0.9879999999999999,0.978,0.998,results/amend39_configS_band/report.json
 fig7_rim,fresh,oscillating,0,56,-0.35085247590612534,results/amend38_settled_recompute/report.json
 fig7_rim,fresh,oscillating,0,74,0.26163196642807485,results/amend38_settled_recompute/report.json
 fig7_rim,fresh,oscillating,1,5,0.23005818420246182,results/amend38_settled_recompute/report.json
@@ -183,3 +183,49 @@ fig8_sigma,200,sigma_a0.1,0.5635,0.0,,results/amend35_sigma_cap/report.json
 fig8_sigma,200,sigma_a0.05,0.526,0.0005,,results/amend35_sigma_cap/report.json
 fig8_sigma,200,sigma_a0.01,0.4425,0.006,,results/amend35_sigma_cap/report.json
 fig8_sigma,200,sigma_bin_a0.05,0.5485,0.0005,,results/amend35_sigma_cap/report.json
+fig1a_crossover,"real, d 0.55",25,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.55",50,0.284,0.284,0.284,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.55",100,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.55",150,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.55",200,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.70",25,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.70",50,0.05600000000000001,0.05600000000000001,0.05600000000000001,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.70",100,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.70",150,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,"real, d 0.70",200,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,learned v3,25,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,learned v3,50,0.992,0.992,0.992,results/overnight_figures/figure_data.csv
+fig1a_crossover,learned v3,100,0.8800000000000001,0.8800000000000001,0.8800000000000001,results/overnight_figures/figure_data.csv
+fig1a_crossover,learned v3,150,0.47866666666666663,0.47866666666666663,0.47866666666666663,results/overnight_figures/figure_data.csv
+fig1a_crossover,learned v3,200,0.13699999999999998,0.13699999999999998,0.13699999999999998,results/overnight_figures/figure_data.csv
+fig1a_crossover,delay removed,25,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,delay removed,50,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,delay removed,100,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,delay removed,150,1.0,1.0,1.0,results/overnight_figures/figure_data.csv
+fig1a_crossover,delay removed,200,0.968,0.968,0.968,results/overnight_figures/figure_data.csv
+fig1b_ever_Nsweep,"learned, N-sweep",0.125,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1b_ever_Nsweep,"learned, N-sweep",0.25,0.008,0.008,0.008,results/overnight_figures/figure_data.csv
+fig1b_ever_Nsweep,"learned, N-sweep",0.5,0.076,0.076,0.076,results/overnight_figures/figure_data.csv
+fig1b_ever_Nsweep,"learned, N-sweep",0.75,0.47333333333333333,0.47333333333333333,0.47333333333333333,results/overnight_figures/figure_data.csv
+fig1b_ever_Nsweep,"learned, N-sweep",1.0,0.8265,0.8265,0.8265,results/overnight_figures/figure_data.csv
+fig1b_ever_tslot,"learned, N=100 fixed",0.25,0.014000000000000002,0.014000000000000002,0.014000000000000002,results/overnight_figures/figure_data.csv
+fig1b_ever_tslot,"learned, N=100 fixed",0.5,0.072,0.072,0.072,results/overnight_figures/figure_data.csv
+fig1b_ever_tslot,"learned, N=100 fixed",0.75,0.45500000000000007,0.45500000000000007,0.45500000000000007,results/overnight_figures/figure_data.csv
+fig1b_ever_tslot,"learned, N=100 fixed",1.0,0.8220000000000001,0.8220000000000001,0.8220000000000001,results/overnight_figures/figure_data.csv
+fig1b_ever_noise,delay removed,0.125,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1b_ever_noise,delay removed,0.25,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1b_ever_noise,delay removed,0.5,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1b_ever_noise,delay removed,0.75,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1b_ever_noise,delay removed,1.0,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.55",0.25,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.55",0.5,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.55",0.75,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.55",1.0,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.70",0.25,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.70",0.5,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.70",0.75,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,"real, d 0.70",1.0,0.0,0.0,0.0,results/overnight_figures/figure_data.csv
+fig1c_tslot,learned v3,0.25,0.986,0.986,0.986,results/overnight_figures/figure_data.csv
+fig1c_tslot,learned v3,0.5,0.892,0.892,0.892,results/overnight_figures/figure_data.csv
+fig1c_tslot,learned v3,0.75,0.5449999999999999,0.5449999999999999,0.5449999999999999,results/overnight_figures/figure_data.csv
+fig1c_tslot,learned v3,1.0,0.178,0.178,0.178,results/overnight_figures/figure_data.csv

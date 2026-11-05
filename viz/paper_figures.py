@@ -28,6 +28,11 @@ C_FIXED, C_SIGMA = "#2a78d6", "#eb6834"
 A27 = "results/amend27_ladder_layers/report.json"
 A38 = "results/amend38_settled_recompute/report.json"
 A35 = "results/amend35_sigma_cap/report.json"
+A39S = "results/amend39_configS_band/report.json"
+A39G = "results/amend39_settled_regen/figure_data_amend39.csv"
+LEGACY = "results/overnight_figures/figure_data.csv"
+C_REAL, C_LEARN, C_NOISE = "#eb6834", "#2a78d6", "#1baf7a"   # validated light: all checks pass, contrast WARN -> direct labels
+HEAD_W, HEAD_B = "5", "0.30"   # paper headline metric: settled 5 s, 0.30 m band (prereg amend39 addendum 1)
 
 
 def load(p):
@@ -80,13 +85,14 @@ def fig_layers(rec):
         bar_group(ax, [f"N={N}" for N in Ns], groups, rec, f"fig6_layers_G_{est}", A27)
         style(ax, "", "safe success"); ax.set_title(title, fontsize=9, color=INK)
     ax = axs[2]
-    s = lambda arm: [mci(a38[arm]["safe_settled_5s"])]  # noqa: E731
+    a39s = load(A39S)["arms"]
+    s = lambda arm: [mci(a39s[arm][f"safe_settled_{HEAD_W}s_b{HEAD_B}"])]  # noqa: E731
     groups = [("none (stale to both)", C_NONE, s("real")),
               ("MFG-only", C_MFG, s("split_noise_only-real (MFG clean, CBF delayed)")),
               ("CBF-only", C_CBF, s("split_real-noise_only (MFG delayed, CBF clean)")),
               ("both layers", C_BOTH, s("noise_only"))]
-    bar_group(ax, ["N=100"], groups, rec, "fig6_layers_S_oracle_settled", A38)
-    style(ax, "", ""); ax.set_title("oracle, Config S,\nsafe settled 5 s", fontsize=9, color=INK)
+    bar_group(ax, ["N=100"], groups, rec, "fig6_layers_S_oracle_settled_band", A39S)
+    style(ax, "", ""); ax.set_title("oracle, Config S, safe\nsettled 5 s + 0.30 m band", fontsize=9, color=INK)
     h, l = axs[0].get_legend_handles_labels()
     fig.legend(h, l, frameon=False, fontsize=8, loc="lower center", ncol=4)
     fig.tight_layout(rect=(0, 0.08, 1, 1)); fig.savefig(os.path.join(OUT, "fig6_layer_split.png"), dpi=200)
@@ -162,6 +168,100 @@ def fig_sigma(rec):
     plt.close(fig)
 
 
+def g39():
+    """{(cell, metric): (mean, lo, hi)} from the amend39 report CSV, or None if amend39 has not run."""
+    p = os.path.join(ROOT, A39G)
+    if not os.path.exists(p):
+        return None
+    out = {}
+    for r in csv.DictReader(open(p)):
+        out[(r["cell"], r["metric"])] = (float(r["mean"]), float(r["ci_lo"]), float(r["ci_hi"]))
+    return out
+
+
+def legacy():
+    out = {}
+    for r in csv.DictReader(open(os.path.join(ROOT, LEGACY))):
+        m = float(r["mean"])
+        out[(r["figure"], r["metric"], r["series"], float(r["x"]))] = (m, m, m)
+    return out
+
+
+def fig_staleness(rec):
+    """Fig. 1 (RA-L): (a) safe success vs N, (b) ever-collided vs T_frame for the N-sweep and the fixed-N t_slot sweep
+    (the decomposition), (c) safe success vs T_frame at fixed N=100. amend39 settled+band if available, else legacy @T."""
+    G = g39()
+    Ns, TF = [25, 50, 100, 150, 200], [0.25, 0.5, 0.75, 1.0]
+    ts = {0.25: "ts2.50ms", 0.5: "ts5.00ms", 0.75: "ts7.50ms", 1.0: "ts10.00ms"}
+    arms = [("real_d0.55", "real, d 0.55", C_REAL, "--", "s"), ("real_d0.70", "real, d 0.70", C_REAL, "-", "o"),
+            ("learned_pooled_d0.70", "learned v3", C_LEARN, "-", "D"), ("noise_only_d0.70", "delay removed", C_NOISE, "-", "^")]
+    if G is not None:
+        hm, hb = f"safe_settled_{HEAD_W}s_b{HEAD_B}", "safe_settled_5s_b0.00"
+        src, ylab = A39G, "safe settled"
+
+        def cx(arm, N, m):
+            stg, a = ("A", "amend24") if arm.startswith("noise") else ("A", "amend22")
+            return G.get((f"{stg}__{a}__N{N:03d}_{arm}", m))
+
+        def tx(arm, tf, m):
+            return G.get((f"B__amend26__{ts[tf]}_{arm}", m))
+    else:
+        L = legacy(); hm, hb = "safe_success", None
+        src, ylab = LEGACY, "safe success @T (legacy)"
+        lname = {"real_d0.55": "real_d0.55", "real_d0.70": "real_d0.70", "learned_pooled_d0.70": "learned",
+                 "noise_only_d0.70": "noise_only"}
+
+        def cx(arm, N, m):
+            return L.get(("fig1_crossover", m, lname[arm], float(N)))
+
+        def tx(arm, tf, m):
+            return L.get(("fig5_tslot", m, lname[arm], float(tf)))
+    fig, axs = plt.subplots(1, 3, figsize=(7.16, 2.35))
+
+    def line(ax, xs, vals, col, ls, mk, lab, fid, hollow=False):
+        pts = [(x, v) for x, v in zip(xs, vals) if v is not None]
+        if not pts:
+            return
+        x = [p[0] for p in pts]; m = [p[1][0] for p in pts]
+        err = [[p[1][0] - p[1][1] for p in pts], [p[1][2] - p[1][0] for p in pts]]
+        ax.errorbar(x, m, yerr=err, color=col, ls=ls, lw=2 if not hollow else 1.2, marker=mk, ms=6,
+                    mfc="white" if hollow else col, mec=col if hollow else "white", mew=1.2 if hollow else 1,
+                    elinewidth=0.8, capsize=2, zorder=3, label=lab)
+        for p in pts:
+            rec.append((fid, lab, p[0], p[1][0], p[1][1], p[1][2], src))
+    ax = axs[0]
+    for arm, lab, col, ls, mk in arms:
+        line(ax, Ns, [cx(arm, N, hm) for N in Ns], col, ls, mk, lab, "fig1a_crossover")
+        if hb:
+            line(ax, Ns, [cx(arm, N, hb) for N in Ns], col, ":", mk, None, "fig1a_crossover_b0", hollow=True)
+    style(ax, "N  (T_frame = N·5 ms)", ylab); ax.set_title("(a) N-sweep", fontsize=9, color=INK)
+    ax.set_xticks(Ns); ax.set_ylim(-0.04, 1.08)
+    ax = axs[1]
+    line(ax, [N * 0.005 for N in Ns], [cx("learned_pooled_d0.70", N, "ever_collided") for N in Ns], C_LEARN, "-", "D",
+         "learned, N-sweep", "fig1b_ever_Nsweep")
+    line(ax, TF, [tx("learned_pooled_d0.70", t, "ever_collided") for t in TF], C_LEARN, "--", "D",
+         "learned, N=100 fixed", "fig1b_ever_tslot", hollow=True)
+    line(ax, [N * 0.005 for N in Ns], [cx("noise_only_d0.70", N, "ever_collided") for N in Ns], C_NOISE, "-", "^",
+         "delay removed", "fig1b_ever_noise")
+    style(ax, "T_frame [s]", "ever collided"); ax.set_title("(b) collisions track T_frame",
+                                                                                fontsize=9, color=INK)
+    ax.set_ylim(-0.04, 1.08); ax.legend(frameon=False, fontsize=6.5, loc="upper left")
+    ax = axs[2]
+    for arm, lab, col, ls, mk in arms[:3]:
+        line(ax, TF, [tx(arm, t, hm) for t in TF], col, ls, mk, lab, "fig1c_tslot")
+        if hb:
+            line(ax, TF, [tx(arm, t, hb) for t in TF], col, ":", mk, None, "fig1c_tslot_b0", hollow=True)
+    style(ax, "T_frame [s], N=100 fixed", ""); ax.set_title("(c) pure staleness", fontsize=9, color=INK)
+    ax.set_xticks(TF); ax.set_ylim(-0.04, 1.08)
+    h, l = axs[0].get_legend_handles_labels()
+    if hb:
+        h.append(plt.Line2D([], [], color=MUTED, ls=":", marker="o", mfc="white", mec=MUTED)); l.append("same, no band (b=0)")
+    fig.legend(h, l, frameon=False, fontsize=7.5, loc="lower center", ncol=5)
+    fig.tight_layout(rect=(0, 0.1, 1, 1)); fig.savefig(os.path.join(OUT, "fig1_staleness.png"), dpi=300)
+    plt.close(fig)
+    return G is not None
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     src = os.path.join(ROOT, "results", "overnight_figures")
@@ -170,6 +270,7 @@ def main():
             shutil.copy(os.path.join(src, f), os.path.join(OUT, f))
     rec = []
     fig_layers(rec); fig_rim(rec); fig_sigma(rec)
+    print("fig1_staleness source:", "amend39 settled+band" if fig_staleness(rec) else "LEGACY @T (amend39 not run)")
     with open(os.path.join(OUT, "figure_data_paper.csv"), "w", newline="") as fh:
         w = csv.writer(fh); w.writerow(["figure", "a", "b", "c", "d", "e", "source"]); w.writerows(rec)
 

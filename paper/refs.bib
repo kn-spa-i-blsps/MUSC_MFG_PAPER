@@ -1,7 +1,10 @@
 % Verified online 2026-11-05: ballotta2025safe (TU Delft repository / arXiv 2402.09382),
 % molnar2023delay (dblp: TCST 31(4):1507-1520), angelopoulos2023conformal (FnT ML 16(4):494-591).
-% Remaining entries are standard references entered from memory; a final check against publisher
-% records (pages for the conference papers) is still listed in paper/review_draft.md.
+% 2026-11-05 (RA-L pass): stray brace after angelopoulos2023conformal removed; pages added for ames2019cbf,
+% borrmann2015control, dean2020guaranteeing, cosner2021measurement, clark2021stochastic, elamvazhuthi2019mean,
+% lindemann2023safe, dixit2023adaptive, ross2011reduction; shafer2008tutorial added (brief: "Vovk/Shafer").
+% These pages were entered from memory and NOT checked online this pass (web download was blocked) -> check against
+% IEEE Xplore / PMLR before camera-ready. singletary2020sampled and ledergerber2015robot still lack pages.
 
 @article{lasry2007mean,
   author  = {Lasry, Jean-Michel and Lions, Pierre-Louis},
@@ -39,6 +42,7 @@
   journal = {Bioinspiration \& Biomimetics},
   volume  = {15},
   number  = {1},
+  pages   = {011001},
   year    = {2019}
 }
 
@@ -55,7 +59,8 @@
 @inproceedings{ames2019cbf,
   author    = {Ames, Aaron D. and Coogan, Samuel and Egerstedt, Magnus and Notomista, Gennaro and Sreenath, Koushil and Tabuada, Paulo},
   title     = {Control barrier functions: theory and applications},
-  booktitle = {European Control Conference (ECC)},
+  booktitle = {Proc. European Control Conference (ECC)},
+  pages     = {3420--3431},
   year      = {2019}
 }
 
@@ -73,20 +78,28 @@
   author    = {Borrmann, Urs and Wang, Li and Ames, Aaron D. and Egerstedt, Magnus},
   title     = {Control barrier certificates for safe swarm behavior},
   booktitle = {IFAC Conference on Analysis and Design of Hybrid Systems (ADHS)},
+  series    = {IFAC-PapersOnLine},
+  volume    = {48},
+  number    = {27},
+  pages     = {68--73},
   year      = {2015}
 }
 
 @inproceedings{dean2020guaranteeing,
   author    = {Dean, Sarah and Taylor, Andrew J. and Cosner, Ryan K. and Recht, Benjamin and Ames, Aaron D.},
   title     = {Guaranteeing safety of learned perception modules via measurement-robust control barrier functions},
-  booktitle = {Conference on Robot Learning (CoRL)},
+  booktitle = {Proc. Conference on Robot Learning (CoRL)},
+  series    = {PMLR},
+  volume    = {155},
+  pages     = {654--670},
   year      = {2020}
 }
 
 @inproceedings{cosner2021measurement,
   author    = {Cosner, Ryan K. and Singletary, Andrew W. and Taylor, Andrew J. and Molnar, Tamas G. and Bouman, Katherine L. and Ames, Aaron D.},
   title     = {Measurement-robust control barrier functions: certainty in safety with uncertainty in state},
-  booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  booktitle = {Proc. IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages     = {6286--6291},
   year      = {2021}
 }
 
@@ -102,7 +115,7 @@
 @inproceedings{singletary2020sampled,
   author    = {Singletary, Andrew and Chen, Yuxiao and Ames, Aaron D.},
   title     = {Control barrier functions for sampled-data systems with input delays},
-  booktitle = {IEEE Conference on Decision and Control (CDC)},
+  booktitle = {Proc. IEEE Conference on Decision and Control (CDC)},
   year      = {2020}
 }
 
@@ -121,6 +134,7 @@
   title   = {Control barrier functions for stochastic systems},
   journal = {Automatica},
   volume  = {130},
+  pages   = {109688},
   year    = {2021}
 }
 
@@ -130,13 +144,17 @@
   journal = {IEEE Robotics and Automation Letters},
   volume  = {8},
   number  = {8},
+  pages   = {5116--5123},
   year    = {2023}
 }
 
 @inproceedings{dixit2023adaptive,
   author    = {Dixit, Anushri and Lindemann, Lars and Wei, Skylar X. and Cleaveland, Matthew and Pappas, George J. and Burdick, Joel W.},
   title     = {Adaptive conformal prediction for motion planning among dynamic agents},
-  booktitle = {Learning for Dynamics and Control Conference (L4DC)},
+  booktitle = {Proc. Learning for Dynamics and Control Conference (L4DC)},
+  series    = {PMLR},
+  volume    = {211},
+  pages     = {300--314},
   year      = {2023}
 }
 
@@ -149,7 +167,6 @@
   pages   = {494--591},
   year    = {2023},
   doi     = {10.1561/2200000101}
-}
 }
 
 @book{vovk2005algorithmic,
@@ -172,7 +189,10 @@
 @inproceedings{ross2011reduction,
   author    = {Ross, St{\'e}phane and Gordon, Geoffrey and Bagnell, Drew},
   title     = {A reduction of imitation learning and structured prediction to no-regret online learning},
-  booktitle = {International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  booktitle = {Proc. International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  series    = {PMLR},
+  volume    = {15},
+  pages     = {627--635},
   year      = {2011}
 }
 
@@ -193,4 +213,13 @@
   year    = {2025},
   doi     = {10.1109/TVT.2025.3546857},
   note    = {Preprint arXiv:2402.09382 (2024)}
+}
+
+@article{shafer2008tutorial,
+  author  = {Shafer, Glenn and Vovk, Vladimir},
+  title   = {A tutorial on conformal prediction},
+  journal = {Journal of Machine Learning Research},
+  volume  = {9},
+  pages   = {371--421},
+  year    = {2008}
 }
